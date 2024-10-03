@@ -3,10 +3,10 @@ Api de MasterModels
 """
 from rest_framework import viewsets, permissions
 
-from .models import Persona, Pais, Provincia, CodigoPostal
+from .models import Persona, PersonaRol, Pais, Provincia, CodigoPostal
 from .models import Rol, Modulo, Mascara, FormaDePago, FormaDePagoDetalle, TipoDeCambio
 
-from .serializers import PersonaSerializer, PaisSerializer, ProvinciaSerializer, CodigoPostalSerializer
+from .serializers import PersonaSerializer, PersonaRolSerializer, PaisSerializer, ProvinciaSerializer, CodigoPostalSerializer
 from .serializers import RolSerializer, ModuloSerializer, MascaraSerializer, FormaDePagoSerializer
 from .serializers import FormaDePagoSerializer, FormaDePagoDetalleSerializer, TipoDeCambioSerializer
 
@@ -92,6 +92,16 @@ class PersonaViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = PersonaSerializer
 
+class PersonaRolViewSet(viewsets.ModelViewSet):
+    """
+    ViewSet de Roles por Personas
+    """
+    queryset = PersonaRol.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = PersonaRolSerializer
+
 class PaisViewSet(viewsets.ModelViewSet):
     """ ViewSet de Paises"""
     queryset = Pais.objects.all()
@@ -118,10 +128,10 @@ class CodigoPostalViewSet(viewsets.ModelViewSet):
 
 ### IMPOSITIVO #########################################################
 from .models import TipoDocumento, TipoSujeto, TipoResponsable, ConceptoIncluido, Incoterm, Idioma, UnidadMedida
-from .models import TipoComprobante, Moneda
+from .models import TipoComprobante, Moneda, CuitPais
 from .serializers import TipoDocumentoSerializer, TipoSujetoSerializer, TipoResponsableSerializer
 from .serializers import ConceptoIncluidoSerializer, IncotermSerializer, IdiomaSerializer, UnidadMedidaSerializer
-from .serializers import TipoComprobanteSerializer, MonedaSerializer
+from .serializers import TipoComprobanteSerializer, MonedaSerializer, CuitPaisSerializer
 
 class MonedaViewSet(viewsets.ModelViewSet):
     """ ViewSet de Monedas"""
@@ -194,3 +204,11 @@ class TipoDocumentoViewSet(viewsets.ModelViewSet):
         permissions.AllowAny
     ]
     serializer_class = TipoDocumentoSerializer
+
+class CuitPaisViewSet(viewsets.ModelViewSet):
+    """ ViewSet de CUIT de Paises"""
+    queryset = CuitPais.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = CuitPaisSerializer

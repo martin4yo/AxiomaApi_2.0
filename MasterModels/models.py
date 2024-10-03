@@ -105,7 +105,6 @@ class Pais(AuditModel):
     """ Clase para manejar los datos de paises """
     nombre = models.CharField(max_length=100)
     codigo = models.CharField(max_length=10, unique=True)
-    cuit = models.CharField(max_length=11)
 
     class Meta:
         verbose_name = 'Pais'
@@ -167,6 +166,19 @@ class Persona(models.Model):
 
     def __str__(self):
         return f'{self.nombre}'
+    
+class PersonaRol(AuditModel):
+    """ Clase para manejar los roles """
+    idpersona = models.ForeignKey(Persona, related_name='roles', on_delete=models.CASCADE)
+    idrol = models.ForeignKey('Rol', on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = (("idpersona","idrol"),)
+        verbose_name = 'Persona Roles'
+        verbose_name_plural = 'Personas Roles'
+
+    def __str__(self):
+        return f'{self.idpersona}, {self.idrol}' 
     
 # Impositivo ########################################################################
 
@@ -284,3 +296,20 @@ class TipoDocumento(AuditModel):
 
     def __str__(self):
          return f'{self.nombre}'
+    
+class CuitPais(AuditModel):
+    """ Tipos de documento de CUIT de los paises """
+    
+    idpais = models.ForeignKey(Pais, on_delete=models.CASCADE)
+    idtiposujeto = models.ForeignKey(TipoSujeto, on_delete=models.CASCADE)
+    idmascara = models.ForeignKey(Mascara, on_delete=models.CASCADE)
+    
+    cuit = models.CharField(max_length=10, unique=True)
+
+    class Meta:
+        unique_together = (("idpais","idtiposujeto"),)
+        verbose_name = 'CUIT Pais'
+        verbose_name_plural = 'Paises CUIT'
+
+    def __str__(self):
+         return f'{self.idpais}, {self.idtiposujeto}, {self.cuit}'

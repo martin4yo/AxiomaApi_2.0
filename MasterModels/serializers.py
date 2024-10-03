@@ -2,7 +2,7 @@
 Serializadores
 """
 from rest_framework import serializers
-from .models import Persona, Pais, Provincia, CodigoPostal, TipoDeCambio
+from .models import Persona, PersonaRol, Pais, Provincia, CodigoPostal, TipoDeCambio
 from .models import Rol, Modulo, Mascara, FormaDePago, FormaDePagoDetalle, Moneda
 
 ### Generales ######################################################
@@ -69,6 +69,18 @@ class PersonaSerializer(serializers.ModelSerializer):
         fields = '__all__'  # O especifica los campos que deseas incluir
         read_only_fields = ('created_at', 'updated_at')
 
+class PersonaRolSerializer(serializers.ModelSerializer):
+    """ Serializador """
+
+    idpersona = PersonaSerializer()
+    idrol = RolSerializer()
+
+    class Meta:
+        """ Clase """
+        model = PersonaRol
+        fields = '__all__'  # O especifica los campos que deseas incluir
+        read_only_fields = ('created_at', 'updated_at')
+
 class PaisSerializer(serializers.ModelSerializer):
     """ Serializador """
     class Meta:
@@ -100,7 +112,7 @@ class CodigoPostalSerializer(serializers.ModelSerializer):
 ### IMPOSITIVO ###############################################################
 
 from .models import TipoDocumento, TipoSujeto, TipoResponsable, ConceptoIncluido, Incoterm
-from .models import Idioma, UnidadMedida, TipoComprobante
+from .models import Idioma, UnidadMedida, TipoComprobante, CuitPais
 
 class MonedaSerializer(serializers.ModelSerializer):
     """ Serializador """
@@ -177,3 +189,15 @@ class TipoDocumentoSerializer(serializers.ModelSerializer):
         fields = '__all__'  # O especifica los campos que deseas incluir
         read_only_fields = ('created_at', 'updated_at')
 
+class CuitPaisSerializer(serializers.ModelSerializer):
+    """ Serializador """
+    
+    idpais = PaisSerializer()
+    idtiposujeto = TipoSujetoSerializer()
+    idmascara = MascaraSerializer()
+
+    class Meta:
+        """ Clase """
+        model = CuitPais
+        fields = '__all__'  # O especifica los campos que deseas incluir
+        read_only_fields = ('created_at', 'updated_at')

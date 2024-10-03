@@ -4,7 +4,7 @@ Urls
 from django.urls import path, include
 from rest_framework import routers
 
-from .api import PersonaViewSet, PaisViewSet, ProvinciaViewSet, CodigoPostalViewSet, TipoDeCambioViewSet
+from .api import PersonaViewSet, PersonaRolViewSet, PaisViewSet, ProvinciaViewSet, CodigoPostalViewSet, TipoDeCambioViewSet
 from .api import RolViewSet, ModuloViewSet, MascaraViewSet, FormaDePagoViewSet, FormaDePagoDetalleViewSet
 
 from .api import TipoDocumentoViewSet, TipoSujetoViewSet, TipoResponsableViewSet, ConceptoIncluidoViewSet
@@ -30,6 +30,7 @@ router.register('api/general/mascara', MascaraViewSet, 'mascaras')
 router.register('api/general/formadepago', FormaDePagoViewSet, 'formasdepago')
 router.register('api/general/formadepagodetalle', FormaDePagoDetalleViewSet, 'formasdepagodetalle')
 router.register('api/general/tipodecambio', TipoDeCambioViewSet, 'tiposdecambio')
+router.register('api/general/personarol', PersonaRolViewSet, 'personasroles')
 
 router.register('api/taxes/tipodocumento', TipoDocumentoViewSet, 'tiposdocumento')
 router.register('api/taxes/tiposujeto', TipoSujetoViewSet, 'tipossujeto')
@@ -40,6 +41,7 @@ router.register('api/taxes/idioma', IdiomaViewSet, 'idiomas')
 router.register('api/taxes/unidadmedida', UnidadMedidaViewSet, 'unidadesmedida')
 router.register('api/taxes/tipocomprobante', TipoComprobanteViewSet, 'tiposcomprobante')
 router.register('api/taxes/moneda', MonedaViewSet, 'monedas')
+router.register('api/taxes/cuitpais', MonedaViewSet, 'cuitpaises')
 
 urlpatterns = [
     path('', include(router.urls)),
