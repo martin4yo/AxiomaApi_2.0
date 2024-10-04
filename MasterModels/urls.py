@@ -12,7 +12,7 @@ from .api import TipoAjusteViewSet, PlanDeCuentasViewSet
 from .api import TipoDocumentoViewSet, TipoSujetoViewSet, TipoResponsableViewSet, ConceptoIncluidoViewSet
 from .api import IncotermViewSet, IdiomaViewSet, UnidadMedidaViewSet, TipoComprobanteViewSet
 from .api import MonedaViewSet, TipoIndiceViewSet, AlicuotaImpuestoViewSet, PadronImpuestoViewSet
-from .api import TipoFrecuenciaViewSet, TipoValorViewSet, TipoCalculoViewSet, JurisdiccionViewSet
+from .api import TipoFrecuenciaViewSet, TipoValorViewSet, TipoCalculoViewSet, JurisdiccionViewSet, IndiceViewSet
 
 
 class Router(routers.DefaultRouter):
@@ -35,6 +35,7 @@ router.register('api/general/formadepagodetalle', FormaDePagoDetalleViewSet, 'fo
 router.register('api/general/tipodecambio', TipoDeCambioViewSet, 'tiposdecambio')
 router.register('api/general/personarol', PersonaRolViewSet, 'personasroles')
 router.register('api/general/tipoindice', TipoIndiceViewSet, 'tiposindice')
+router.register('api/general/indice', IndiceViewSet, 'indices')
 
 router.register('api/taxes/tipodocumento', TipoDocumentoViewSet, 'tiposdocumento')
 router.register('api/taxes/tiposujeto', TipoSujetoViewSet, 'tipossujeto')
