@@ -313,3 +313,57 @@ class CuitPais(AuditModel):
 
     def __str__(self):
          return f'{self.idpais}, {self.idtiposujeto}, {self.cuit}'
+    
+class TipoIndice(AuditModel):
+    """ Tipos de Indice """
+    
+    nombre = models.CharField(max_length=100)
+    codigo = models.CharField(max_length=10, unique=True)
+    idmoneda = models.ForeignKey(Moneda, on_delete=models.CASCADE)
+    
+    class Meta:
+        unique_together = (("codigo"),)
+        verbose_name = 'Tipo de Indice'
+        verbose_name_plural = 'Tipos de Indice'
+
+    def __str__(self):
+         return f'{self.nombre}, {self.codigo}, {self.idmoneda}'
+    
+
+# Contabilidad ########################################################################
+
+""" Modelos para el modulo contable """
+
+class TipoAjuste(AuditModel):
+    """ Clase para manejar los tipos de sujeto """
+    nombre = models.CharField(max_length=100)
+    codigo = models.CharField(max_length=1, default='', unique=True)
+
+    class Meta:
+        verbose_name = 'Tipo de Ajuste'
+        verbose_name_plural = 'Tipos de Ajuste Contable'
+
+    def __str__(self):
+        return f'{self.nombre}'
+
+class PlanDeCuentas(AuditModel):
+    """ Plan de Cuentas """
+    
+    nombre = models.CharField(max_length=256)
+    codigo = models.CharField(max_length=20, unique=True)
+    imputable = models.BooleanField(default=False)
+    bimonetaria = models.BooleanField(default=False)
+    ajustable = models.ForeignKey('TipoAjuste', on_delete=models.CASCADE, blank=True, null=True)
+    nivel = models.IntegerField()
+    idpadre = models.ForeignKey('self', 
+                                related_name="parents", 
+                                on_delete=models.CASCADE, 
+                                blank=True, null=True)
+    
+    class Meta:
+        unique_together = (("codigo"),)
+        verbose_name = 'Cuenta Contable'
+        verbose_name_plural = 'Plan de Cuentas'
+
+    def __str__(self):
+         return f'{self.nombre}, {self.codigo}, {self.idpadre}'

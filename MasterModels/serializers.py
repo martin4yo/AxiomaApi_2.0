@@ -112,7 +112,7 @@ class CodigoPostalSerializer(serializers.ModelSerializer):
 ### IMPOSITIVO ###############################################################
 
 from .models import TipoDocumento, TipoSujeto, TipoResponsable, ConceptoIncluido, Incoterm
-from .models import Idioma, UnidadMedida, TipoComprobante, CuitPais
+from .models import Idioma, UnidadMedida, TipoComprobante, CuitPais, TipoIndice
 
 class MonedaSerializer(serializers.ModelSerializer):
     """ Serializador """
@@ -199,5 +199,38 @@ class CuitPaisSerializer(serializers.ModelSerializer):
     class Meta:
         """ Clase """
         model = CuitPais
+        fields = '__all__'  # O especifica los campos que deseas incluir
+        read_only_fields = ('created_at', 'updated_at')
+
+class TipoIndiceSerializer(serializers.ModelSerializer):
+    """ Serializador """
+    
+    idmoneda = MonedaSerializer()
+
+    class Meta:
+        """ Clase """
+        model = TipoIndice
+        fields = '__all__'  # O especifica los campos que deseas incluir
+        read_only_fields = ('created_at', 'updated_at')
+
+### IMPOSITIVO ###############################################################
+
+from .models import TipoAjuste, PlanDeCuentas
+
+class TipoaAjusteSerializer(serializers.ModelSerializer):
+    """ Serializador """
+    
+    class Meta:
+        """ Clase """
+        model = TipoAjuste
+        fields = '__all__'  # O especifica los campos que deseas incluir
+        read_only_fields = ('created_at', 'updated_at')
+
+class PlanDeCuentasSerializer(serializers.ModelSerializer):
+    """ Serializador """
+    
+    class Meta:
+        """ Clase """
+        model = PlanDeCuentas
         fields = '__all__'  # O especifica los campos que deseas incluir
         read_only_fields = ('created_at', 'updated_at')

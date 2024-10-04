@@ -7,9 +7,11 @@ from rest_framework import routers
 from .api import PersonaViewSet, PersonaRolViewSet, PaisViewSet, ProvinciaViewSet, CodigoPostalViewSet, TipoDeCambioViewSet
 from .api import RolViewSet, ModuloViewSet, MascaraViewSet, FormaDePagoViewSet, FormaDePagoDetalleViewSet
 
+from .api import TipoAjusteViewSet, PlanDeCuentasViewSet
+
 from .api import TipoDocumentoViewSet, TipoSujetoViewSet, TipoResponsableViewSet, ConceptoIncluidoViewSet
 from .api import IncotermViewSet, IdiomaViewSet, UnidadMedidaViewSet, TipoComprobanteViewSet
-from .api import MonedaViewSet
+from .api import MonedaViewSet, TipoIndiceViewSet
 
 
 class Router(routers.DefaultRouter):
@@ -31,6 +33,7 @@ router.register('api/general/formadepago', FormaDePagoViewSet, 'formasdepago')
 router.register('api/general/formadepagodetalle', FormaDePagoDetalleViewSet, 'formasdepagodetalle')
 router.register('api/general/tipodecambio', TipoDeCambioViewSet, 'tiposdecambio')
 router.register('api/general/personarol', PersonaRolViewSet, 'personasroles')
+router.register('api/general/tipoindice', TipoIndiceViewSet, 'tiposindice')
 
 router.register('api/taxes/tipodocumento', TipoDocumentoViewSet, 'tiposdocumento')
 router.register('api/taxes/tiposujeto', TipoSujetoViewSet, 'tipossujeto')
@@ -42,6 +45,10 @@ router.register('api/taxes/unidadmedida', UnidadMedidaViewSet, 'unidadesmedida')
 router.register('api/taxes/tipocomprobante', TipoComprobanteViewSet, 'tiposcomprobante')
 router.register('api/taxes/moneda', MonedaViewSet, 'monedas')
 router.register('api/taxes/cuitpais', MonedaViewSet, 'cuitpaises')
+
+router.register('api/contabilidad/tipoajuste', TipoAjusteViewSet, 'tiposajuste')
+router.register('api/contabilidad/plandecuentas', PlanDeCuentasViewSet, 'plandecuentas')
+
 
 urlpatterns = [
     path('', include(router.urls)),
