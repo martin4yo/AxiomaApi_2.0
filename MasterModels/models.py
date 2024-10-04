@@ -329,6 +329,80 @@ class TipoIndice(AuditModel):
     def __str__(self):
          return f'{self.nombre}, {self.codigo}, {self.idmoneda}'
     
+class AlicuotaImpuesto(AuditModel):
+    """ Alicuotas de AFIP """
+    nombre = models.CharField(max_length=100)
+    codigo = models.CharField(max_length=10, unique=True)
+    porcentaje = models.DecimalField(max_digits=5, decimal_places=2)
+
+    class Meta:
+        verbose_name = 'Alicuota'
+        verbose_name_plural = 'Alicuotas Impuestos'
+
+    def __str__(self):
+         return f'{self.nombre}, {self.porcentaje}'
+    
+class PadronImpuesto(AuditModel):
+    """ Padrones de Impuesto """
+    nombre = models.CharField(max_length=100)
+    codigo = models.CharField(max_length=10, unique=True)
+    porcentajedefecto = models.DecimalField(max_digits=5, decimal_places=2)
+    tipocalculo = models.CharField(max_length=100, default='A DEFINIR...')
+
+    class Meta:
+        verbose_name = 'Padron'
+        verbose_name_plural = 'Padrones Impuesto'
+
+    def __str__(self):
+         return f'{self.nombre}, {self.codigo}, {self.porcentaje}'
+    
+class TipoFrecuencia(AuditModel):
+    """ Clase para manejar los tipos de frecuencia """
+    nombre = models.CharField(max_length=100)
+    codigo = models.CharField(max_length=10, default='', unique=True)
+
+    class Meta:
+        verbose_name = 'Tipo de Frecuencia'
+        verbose_name_plural = 'Tipos de Frecuencia'
+
+    def __str__(self):
+        return f'{self.nombre}' 
+    
+class TipoValor(AuditModel):
+    """ Clase para manejar los tipos de valor """
+    nombre = models.CharField(max_length=100)
+    codigo = models.CharField(max_length=10, default='', unique=True)
+
+    class Meta:
+        verbose_name = 'Tipo de Valor'
+        verbose_name_plural = 'Tipos de Valor'
+
+    def __str__(self):
+        return f'{self.nombre}' 
+    
+class TipoCalculo(AuditModel):
+    """ Clase para manejar los tipos de calculo """
+    nombre = models.CharField(max_length=100)
+    codigo = models.CharField(max_length=10, default='', unique=True)
+
+    class Meta:
+        verbose_name = 'Tipo de Calculo'
+        verbose_name_plural = 'Tipos de Calculo'
+
+    def __str__(self):
+        return f'{self.nombre}' 
+    
+class Jurisdiccion(AuditModel):
+    """ Clase para manejar la lista de jurisdicciones """
+    nombre = models.CharField(max_length=100)
+    codigo = models.CharField(max_length=10, default='', unique=True)
+
+    class Meta:
+        verbose_name = 'Jurisdiccion'
+        verbose_name_plural = 'Jurisdicciones'
+
+    def __str__(self):
+        return f'{self.nombre}' 
 
 # Contabilidad ########################################################################
 
@@ -353,7 +427,7 @@ class PlanDeCuentas(AuditModel):
     codigo = models.CharField(max_length=20, unique=True)
     imputable = models.BooleanField(default=False)
     bimonetaria = models.BooleanField(default=False)
-    ajustable = models.ForeignKey('TipoAjuste', on_delete=models.CASCADE, blank=True, null=True)
+    idajustable = models.ForeignKey('TipoAjuste', on_delete=models.CASCADE, blank=True, null=True)
     nivel = models.IntegerField()
     idpadre = models.ForeignKey('self', 
                                 related_name="parents", 

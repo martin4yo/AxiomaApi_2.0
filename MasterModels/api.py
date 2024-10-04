@@ -128,10 +128,46 @@ class CodigoPostalViewSet(viewsets.ModelViewSet):
 
 ### IMPOSITIVO #########################################################
 from .models import TipoDocumento, TipoSujeto, TipoResponsable, ConceptoIncluido, Incoterm, Idioma, UnidadMedida
-from .models import TipoComprobante, Moneda, CuitPais, TipoIndice
+from .models import TipoComprobante, Moneda, CuitPais, TipoIndice, AlicuotaImpuesto, PadronImpuesto
+from .models import TipoFrecuencia, TipoValor, TipoCalculo, Jurisdiccion
+
 from .serializers import TipoDocumentoSerializer, TipoSujetoSerializer, TipoResponsableSerializer
 from .serializers import ConceptoIncluidoSerializer, IncotermSerializer, IdiomaSerializer, UnidadMedidaSerializer
 from .serializers import TipoComprobanteSerializer, MonedaSerializer, CuitPaisSerializer, TipoIndiceSerializer
+from .serializers import AlicuotaImpuestoSerializer, PadronImpuestoSerializer, TipoValorSerializer, TipoFrecuenciaSerializer
+from .serializers import TipoCalculoSerializer, JurisdiccionSerializer
+
+class TipoCalculoViewSet(viewsets.ModelViewSet):
+    """ ViewSet de Tipos de Frecuencia"""
+    queryset = TipoCalculo.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = TipoCalculoSerializer
+
+class JurisdiccionViewSet(viewsets.ModelViewSet):
+    """ ViewSet de Tipos de Frecuencia"""
+    queryset = Jurisdiccion.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = JurisdiccionSerializer
+
+class TipoFrecuenciaViewSet(viewsets.ModelViewSet):
+    """ ViewSet de Tipos de Frecuencia"""
+    queryset = TipoFrecuencia.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = TipoFrecuenciaSerializer
+
+class TipoValorViewSet(viewsets.ModelViewSet):
+    """ ViewSet de Tipos de Valor"""
+    queryset = TipoValor.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = TipoValorSerializer
 
 class MonedaViewSet(viewsets.ModelViewSet):
     """ ViewSet de Monedas"""
@@ -220,6 +256,22 @@ class TipoIndiceViewSet(viewsets.ModelViewSet):
         permissions.AllowAny
     ]
     serializer_class = TipoIndiceSerializer
+
+class AlicuotaImpuestoViewSet(viewsets.ModelViewSet):
+    """ ViewSet de Alicuotas"""
+    queryset = AlicuotaImpuesto.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = AlicuotaImpuestoSerializer
+
+class PadronImpuestoViewSet(viewsets.ModelViewSet):
+    """ ViewSet de Padrones"""
+    queryset = PadronImpuesto.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = PadronImpuestoSerializer
 
 ### CONTABLE #########################################################
 from .models import TipoAjuste, PlanDeCuentas

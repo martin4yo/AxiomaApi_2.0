@@ -112,7 +112,24 @@ class CodigoPostalSerializer(serializers.ModelSerializer):
 ### IMPOSITIVO ###############################################################
 
 from .models import TipoDocumento, TipoSujeto, TipoResponsable, ConceptoIncluido, Incoterm
-from .models import Idioma, UnidadMedida, TipoComprobante, CuitPais, TipoIndice
+from .models import Idioma, UnidadMedida, TipoComprobante, CuitPais, TipoIndice, AlicuotaImpuesto
+from .models import PadronImpuesto, TipoFrecuencia, TipoValor, TipoCalculo, Jurisdiccion
+
+class TipoCalculoSerializer(serializers.ModelSerializer):
+    """ Serializador """
+    class Meta:
+        """ Clase """
+        model = TipoCalculo   
+        fields = '__all__'  # O especifica los campos que deseas incluir
+        read_only_fields = ('created_at', 'updated_at')
+
+class JurisdiccionSerializer(serializers.ModelSerializer):
+    """ Serializador """
+    class Meta:
+        """ Clase """
+        model = Jurisdiccion   
+        fields = '__all__'  # O especifica los campos que deseas incluir
+        read_only_fields = ('created_at', 'updated_at')
 
 class MonedaSerializer(serializers.ModelSerializer):
     """ Serializador """
@@ -212,6 +229,44 @@ class TipoIndiceSerializer(serializers.ModelSerializer):
         model = TipoIndice
         fields = '__all__'  # O especifica los campos que deseas incluir
         read_only_fields = ('created_at', 'updated_at')
+
+class AlicuotaImpuestoSerializer(serializers.ModelSerializer):
+    """ Serializador """
+    
+    class Meta:
+        """ Clase """
+        model = AlicuotaImpuesto
+        fields = '__all__'  # O especifica los campos que deseas incluir
+        read_only_fields = ('created_at', 'updated_at')
+
+class PadronImpuestoSerializer(serializers.ModelSerializer):
+    """ Serializador """
+    
+    class Meta:
+        """ Clase """
+        model = PadronImpuesto
+        fields = '__all__'  # O especifica los campos que deseas incluir
+        read_only_fields = ('created_at', 'updated_at')
+
+class TipoFrecuenciaSerializer(serializers.ModelSerializer):
+    """ Serializador """
+    
+    class Meta:
+        """ Clase """
+        model = TipoFrecuencia
+        fields = '__all__'  # O especifica los campos que deseas incluir
+        read_only_fields = ('created_at', 'updated_at')
+
+
+class TipoValorSerializer(serializers.ModelSerializer):
+    """ Serializador """
+    
+    class Meta:
+        """ Clase """
+        model = TipoValor
+        fields = '__all__'  # O especifica los campos que deseas incluir
+        read_only_fields = ('created_at', 'updated_at')
+
 
 ### IMPOSITIVO ###############################################################
 

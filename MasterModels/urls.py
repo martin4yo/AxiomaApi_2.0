@@ -11,7 +11,8 @@ from .api import TipoAjusteViewSet, PlanDeCuentasViewSet
 
 from .api import TipoDocumentoViewSet, TipoSujetoViewSet, TipoResponsableViewSet, ConceptoIncluidoViewSet
 from .api import IncotermViewSet, IdiomaViewSet, UnidadMedidaViewSet, TipoComprobanteViewSet
-from .api import MonedaViewSet, TipoIndiceViewSet
+from .api import MonedaViewSet, TipoIndiceViewSet, AlicuotaImpuestoViewSet, PadronImpuestoViewSet
+from .api import TipoFrecuenciaViewSet, TipoValorViewSet, TipoCalculoViewSet, JurisdiccionViewSet
 
 
 class Router(routers.DefaultRouter):
@@ -45,6 +46,12 @@ router.register('api/taxes/unidadmedida', UnidadMedidaViewSet, 'unidadesmedida')
 router.register('api/taxes/tipocomprobante', TipoComprobanteViewSet, 'tiposcomprobante')
 router.register('api/taxes/moneda', MonedaViewSet, 'monedas')
 router.register('api/taxes/cuitpais', MonedaViewSet, 'cuitpaises')
+router.register('api/taxes/alicuotaimpuesto', AlicuotaImpuestoViewSet, 'alicuotasimpuestos')
+router.register('api/taxes/padronimpuesto', PadronImpuestoViewSet, 'padronesimpuesto')
+router.register('api/taxes/tipofrecuencia', TipoFrecuenciaViewSet, 'tiposfrecuencia')
+router.register('api/taxes/tipovalor', TipoValorViewSet, 'tiposvalor')
+router.register('api/taxes/tipocalculo', TipoCalculoViewSet, 'tiposcalculo')
+router.register('api/taxes/jurisdiccion', JurisdiccionViewSet, 'jurisdicciones')
 
 router.register('api/contabilidad/tipoajuste', TipoAjusteViewSet, 'tiposajuste')
 router.register('api/contabilidad/plandecuentas', PlanDeCuentasViewSet, 'plandecuentas')
