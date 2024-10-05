@@ -4,11 +4,11 @@ Api de MasterModels
 from rest_framework import viewsets, permissions
 
 from .models import Persona, PersonaRol, Pais, Provincia, CodigoPostal
-from .models import Rol, Modulo, Mascara, FormaDePago, FormaDePagoDetalle, TipoDeCambio
+from .models import Rol, Modulo, Mascara, FormaDePago, FormaDePagoDetalle, TipoDeCambio, Partido
 
 from .serializers import PersonaSerializer, PersonaRolSerializer, PaisSerializer, ProvinciaSerializer, CodigoPostalSerializer
 from .serializers import RolSerializer, ModuloSerializer, MascaraSerializer, FormaDePagoSerializer
-from .serializers import FormaDePagoSerializer, FormaDePagoDetalleSerializer, TipoDeCambioSerializer
+from .serializers import FormaDePagoSerializer, FormaDePagoDetalleSerializer, TipoDeCambioSerializer, PartidoSerializer
 
 ### GENERALES ##########################################
 
@@ -126,16 +126,42 @@ class CodigoPostalViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = CodigoPostalSerializer
 
+class PartidoViewSet(viewsets.ModelViewSet):
+    """ ViewSet de CodigoPostal"""
+    queryset = Partido.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = CodigoPostalSerializer
+
 ### IMPOSITIVO #########################################################
 from .models import TipoDocumento, TipoSujeto, TipoResponsable, ConceptoIncluido, Incoterm, Idioma, UnidadMedida
 from .models import TipoComprobante, Moneda, CuitPais, TipoIndice, AlicuotaImpuesto, PadronImpuesto
-from .models import TipoFrecuencia, TipoValor, TipoCalculo, Jurisdiccion, Indice
+from .models import TipoFrecuencia, TipoValor, TipoCalculo, Indice, ClasificacionImpuesto, TipoImpuesto
+from .models import Impuesto
 
 from .serializers import TipoDocumentoSerializer, TipoSujetoSerializer, TipoResponsableSerializer
 from .serializers import ConceptoIncluidoSerializer, IncotermSerializer, IdiomaSerializer, UnidadMedidaSerializer
 from .serializers import TipoComprobanteSerializer, MonedaSerializer, CuitPaisSerializer, TipoIndiceSerializer
 from .serializers import AlicuotaImpuestoSerializer, PadronImpuestoSerializer, TipoValorSerializer, TipoFrecuenciaSerializer
-from .serializers import TipoCalculoSerializer, JurisdiccionSerializer, IndiceSerializer
+from .serializers import TipoCalculoSerializer, IndiceSerializer, ClasificacionImpuestoSerializer, TipoImpuestoSerializer
+from .serializers import ImpuestoSerializer
+
+class ImpuestoViewSet(viewsets.ModelViewSet):
+    """ ViewSet de  Impuesto"""
+    queryset = Impuesto.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = ImpuestoSerializer
+
+class TipoImpuestoViewSet(viewsets.ModelViewSet):
+    """ ViewSet de Tipos de Impuesto"""
+    queryset = TipoImpuesto.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = TipoImpuestoSerializer
 
 class TipoCalculoViewSet(viewsets.ModelViewSet):
     """ ViewSet de Tipos de Frecuencia"""
@@ -144,14 +170,6 @@ class TipoCalculoViewSet(viewsets.ModelViewSet):
         permissions.AllowAny
     ]
     serializer_class = TipoCalculoSerializer
-
-class JurisdiccionViewSet(viewsets.ModelViewSet):
-    """ ViewSet de Tipos de Frecuencia"""
-    queryset = Jurisdiccion.objects.all()
-    permission_classes = [
-        permissions.AllowAny
-    ]
-    serializer_class = JurisdiccionSerializer
 
 class TipoFrecuenciaViewSet(viewsets.ModelViewSet):
     """ ViewSet de Tipos de Frecuencia"""
@@ -280,6 +298,14 @@ class PadronImpuestoViewSet(viewsets.ModelViewSet):
         permissions.AllowAny
     ]
     serializer_class = PadronImpuestoSerializer
+
+class ClasificacionImpuestoViewSet(viewsets.ModelViewSet):
+    """ ViewSet de Padrones"""
+    queryset = ClasificacionImpuesto.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = ClasificacionImpuestoSerializer
 
 ### CONTABLE #########################################################
 from .models import TipoAjuste, PlanDeCuentas

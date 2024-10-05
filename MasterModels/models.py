@@ -45,6 +45,7 @@ class FormaDePago(AuditModel):
     """ Clase para manejar los roles """
     nombre = models.CharField(max_length=100)
     codigo = models.CharField(max_length=10, default='', unique=True)
+    habiles = models.BooleanField()
 
     class Meta:
         verbose_name = 'Forma de Pago'
@@ -55,7 +56,9 @@ class FormaDePago(AuditModel):
 
 class FormaDePagoDetalle(AuditModel):
     """ Clase para manejar los datos de paises """
+    cuota = models.IntegerField()
     dias = models.IntegerField()
+    nombre = models.CharField(max_length=100)
     porcentaje = models.DecimalField(max_digits=5, decimal_places=2)
     idformadepago = models.ForeignKey('FormaDePago', on_delete=models.CASCADE)
 
@@ -135,6 +138,19 @@ class CodigoPostal(AuditModel):
     class Meta:
         verbose_name = 'Codigo Postal'
         verbose_name_plural = 'Codigos Postales'
+
+    def __str__(self):
+        return f'{self.nombre}'
+    
+class Partido(AuditModel):
+    """ Clase para manejar los datos de partidos """
+    nombre = models.CharField(max_length=100)
+    codigo = models.CharField(max_length=10, unique=True)
+    idprovincia = models.ForeignKey('Provincia', on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = 'Partido'
+        verbose_name_plural = 'Partidos'
 
     def __str__(self):
         return f'{self.nombre}'
@@ -340,7 +356,7 @@ class Indice(AuditModel):
     importe = models.DecimalField(max_digits=18, decimal_places=6, default=0)
 
     class Meta:
-        unique_together = (("idtipoindice"),("idtipoindice"),)
+        unique_together = (("idtipoindice"),)
         verbose_name = 'Indice'
         verbose_name_plural = 'Indices'
 
@@ -410,18 +426,54 @@ class TipoCalculo(AuditModel):
     def __str__(self):
         return f'{self.nombre}' 
     
-class Jurisdiccion(AuditModel):
-    """ Clase para manejar la lista de jurisdicciones """
+class ClasificacionImpuesto(AuditModel):
+    """ Clase para manejar los tipos de calculo """
     nombre = models.CharField(max_length=100)
     codigo = models.CharField(max_length=10, default='', unique=True)
 
     class Meta:
-        verbose_name = 'Jurisdiccion'
-        verbose_name_plural = 'Jurisdicciones'
+        verbose_name = 'Clasificacion Impuesto'
+        verbose_name_plural = 'Clasificaciones de Impuestos'
 
     def __str__(self):
         return f'{self.nombre}' 
+    
+class TipoImpuesto(AuditModel):
+    """ Tipos de Impuestos """
+    
+    nombre = models.CharField(max_length=100)
+    codigo = models.CharField(max_length=10, default='', unique=True)
+    idclasificacionimpuesto = models.ForeignKey(ClasificacionImpuesto, on_delete=models.CASCADE)
+    
+    class Meta:
+        unique_together = (("codigo"),)
+        verbose_name = 'Tipo de Impuesto'
+        verbose_name_plural = 'Tipos de Impuesto'
 
+    def __str__(self):
+         return f'{self.nombre}, {self.codigo}, {self.idclasificacionimpuesto}'
+    
+class Impuesto(AuditModel):
+    """ Impuestos """
+    
+    nombre = models.CharField(max_length=100)
+    codigo = models.CharField(max_length=10, default='', unique=True)
+    calculapadron = models.BooleanField()
+    idtipoimpuesto = models.ForeignKey(TipoImpuesto, on_delete=models.CASCADE)
+    idalicuota = models.ForeignKey(AlicuotaImpuesto, on_delete=models.CASCADE)
+    idplandecuenta = models.ForeignKey('PlanDeCuentas', on_delete=models.CASCADE)
+    idpadron = models.ForeignKey(PadronImpuesto, on_delete=models.CASCADE, blank=True, null=True)
+    idprovincia = models.ForeignKey(Provincia, on_delete=models.CASCADE, blank=True, null=True)
+    idpartido = models.ForeignKey(Partido, on_delete=models.CASCADE, blank=True, null=True)
+    
+    class Meta:
+        unique_together = (("codigo"),)
+        verbose_name = 'Impuesto'
+        verbose_name_plural = 'Impuestos'
+
+    def __str__(self):
+         return f'{self.nombre}, {self.codigo}, {self.idtipoimpuesto}'
+    
 # Contabilidad ########################################################################
 
 """ Modelos para el modulo contable """
