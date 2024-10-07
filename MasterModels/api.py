@@ -4,11 +4,11 @@ Api de MasterModels
 from rest_framework import viewsets, permissions
 
 from .models import Persona, PersonaRol, Pais, Provincia, CodigoPostal
-from .models import Rol, Modulo, Mascara, FormaDePago, FormaDePagoDetalle, TipoDeCambio, Partido, Sector
+from .models import Rol, Modulo, Mascara, FormaPago, FormaPagoDetalle, TipoDeCambio, Partido, Sector
 
 from .serializers import PersonaSerializer, PersonaRolSerializer, PaisSerializer, ProvinciaSerializer, CodigoPostalSerializer
-from .serializers import RolSerializer, ModuloSerializer, MascaraSerializer, FormaDePagoSerializer
-from .serializers import FormaDePagoSerializer, FormaDePagoDetalleSerializer, TipoDeCambioSerializer, PartidoSerializer
+from .serializers import RolSerializer, ModuloSerializer, MascaraSerializer, FormaPagoSerializer
+from .serializers import FormaPagoSerializer, FormaPagoDetalleSerializer, TipoDeCambioSerializer, PartidoSerializer
 from .serializers import SectorSerializer
 
 ### GENERALES ##########################################
@@ -33,25 +33,25 @@ class TipoDeCambioViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = TipoDeCambioSerializer
 
-class FormaDePagoViewSet(viewsets.ModelViewSet):
+class FormaPagoViewSet(viewsets.ModelViewSet):
     """
     ViewSet de Formas de Pago
     """
-    queryset = FormaDePago.objects.all()
+    queryset = FormaPago.objects.all()
     permission_classes = [
         permissions.AllowAny
     ]
-    serializer_class = FormaDePagoSerializer
+    serializer_class = FormaPagoSerializer
 
-class FormaDePagoDetalleViewSet(viewsets.ModelViewSet):
+class FormaPagoDetalleViewSet(viewsets.ModelViewSet):
     """
     ViewSet de Formas de Pago
     """
-    queryset = FormaDePagoDetalle.objects.all()
+    queryset = FormaPagoDetalle.objects.all()
     permission_classes = [
         permissions.AllowAny
     ]
-    serializer_class = FormaDePagoDetalleSerializer
+    serializer_class = FormaPagoDetalleSerializer
 
 class MascaraViewSet(viewsets.ModelViewSet):
     """
@@ -319,8 +319,8 @@ class ClasificacionImpuestoViewSet(viewsets.ModelViewSet):
     serializer_class = ClasificacionImpuestoSerializer
 
 ### CONTABLE #########################################################
-from .models import TipoAjuste, PlanDeCuentas
-from .serializers import TipoaAjusteSerializer, PlanDeCuentasSerializer
+from .models import TipoAjuste, PlanCuentas
+from .serializers import TipoaAjusteSerializer, PlanCuentasSerializer
 
 class TipoAjusteViewSet(viewsets.ModelViewSet):
     """ ViewSet de Tipos de Ajustes Contables"""
@@ -330,20 +330,105 @@ class TipoAjusteViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = TipoaAjusteSerializer
 
-class PlanDeCuentasViewSet(viewsets.ModelViewSet):
+class PlanCuentasViewSet(viewsets.ModelViewSet):
     """ ViewSet de Plan De Cuentas"""
-    queryset = PlanDeCuentas.objects.all()
+    queryset = PlanCuentas.objects.all()
     permission_classes = [
         permissions.AllowAny
     ]
-    serializer_class = PlanDeCuentasSerializer
+    serializer_class = PlanCuentasSerializer
 
 
 ### ENTIDADES #########################################################
 
-from .models import Entidad, Zona, ListaPrecioEntidad, CondicionCrediticia
+from .models import Entidad, Zona, ListaPrecioEntidad, CondicionCrediticia, ImpuestoEntidad, Ejecutivo
+from .models import DatosFiscalesEntidad, ContactoEntidad, TipoSede, TipoDomicilio, DireccionEntidad
+from .models import ModuloEntidad, SectorEntidad, FormaPagoEntidad
 
 from .serializers import EntidadSerializer, ZonaSerializer, ListaPrecioEntidadSerializer, CondicionCrediticiaSerializer
+from .serializers import ImpuestoEntidadSerializer, EjecutivoSerializer, DatosFiscalesEntidadSerializer
+from .serializers import ContactoEntidadSerializer, TipoSedeSerializer, TipoDomicilioSerializer, DireccionEntidadSerializer
+from .serializers import ModuloEntidadSerializer, SectorEntidadSerializer, FormaPagoEntidadSerializer
+
+class ModuloEntidadViewSet(viewsets.ModelViewSet):
+    """ ViewSet de Direcciones de Modulo Entidades"""
+    queryset = ModuloEntidad.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = ModuloEntidadSerializer
+
+class SectorEntidadViewSet(viewsets.ModelViewSet):
+    """ ViewSet de Direcciones de Sector Entidades"""
+    queryset = SectorEntidad.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = SectorEntidadSerializer
+
+class FormaPagoEntidadViewSet(viewsets.ModelViewSet):
+    """ ViewSet de Direcciones de Forma Pago Entidades"""
+    queryset = FormaPagoEntidad.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = FormaPagoEntidadSerializer
+
+class DireccionEntidadViewSet(viewsets.ModelViewSet):
+    """ ViewSet de Direcciones de Entidades"""
+    queryset = DireccionEntidad.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = DireccionEntidadSerializer
+
+class TipoSedeViewSet(viewsets.ModelViewSet):
+    """ ViewSet de Ejecutivos"""
+    queryset = TipoSede.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = TipoSedeSerializer
+
+class TipoDomicilioViewSet(viewsets.ModelViewSet):
+    """ ViewSet de Ejecutivos"""
+    queryset = TipoDomicilio.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = TipoDomicilioSerializer
+
+class ContactoEntidadViewSet(viewsets.ModelViewSet):
+    """ ViewSet de Ejecutivos"""
+    queryset = ContactoEntidad.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = ContactoEntidadSerializer
+
+class DatosFiscalesEntidadViewSet(viewsets.ModelViewSet):
+    """ ViewSet de Ejecutivos"""
+    queryset = DatosFiscalesEntidad.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = DatosFiscalesEntidadSerializer
+
+class EjecutivoViewSet(viewsets.ModelViewSet):
+    """ ViewSet de Ejecutivos"""
+    queryset = Ejecutivo.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = EjecutivoSerializer
+
+class ImpuestoEntidadViewSet(viewsets.ModelViewSet):
+    """ ViewSet de Impuestos por Entidad"""
+    queryset = ImpuestoEntidad.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = ImpuestoEntidadSerializer
 
 class EntidadViewSet(viewsets.ModelViewSet):
     """ ViewSet de Entidades"""

@@ -3,7 +3,7 @@ Serializadores
 """
 from rest_framework import serializers
 from .models import Persona, PersonaRol, Pais, Provincia, CodigoPostal, TipoDeCambio
-from .models import Rol, Modulo, Mascara, FormaDePago, FormaDePagoDetalle, Moneda
+from .models import Rol, Modulo, Mascara, FormaPago, FormaPagoDetalle, Moneda
 from .models import Partido, Sector
 
 ### Generales ######################################################
@@ -20,7 +20,7 @@ class SectorSerializer(serializers.ModelSerializer):
 class TipoDeCambioSerializer(serializers.ModelSerializer):
     """ Serializador """
 
-    idformadepago = Moneda
+    idmoneda = Moneda
 
     class Meta:
         """ Clase """
@@ -28,22 +28,22 @@ class TipoDeCambioSerializer(serializers.ModelSerializer):
         fields = '__all__'  # O especifica los campos que deseas incluir
         read_only_fields = ('created_at', 'updated_at')
 
-class FormaDePagoSerializer(serializers.ModelSerializer):
+class FormaPagoSerializer(serializers.ModelSerializer):
     """ Serializador """
     class Meta:
         """ Clase """
-        model = FormaDePago
+        model = FormaPago
         fields = '__all__'  # O especifica los campos que deseas incluir
         read_only_fields = ('created_at', 'updated_at')
 
-class FormaDePagoDetalleSerializer(serializers.ModelSerializer):
+class FormaPagoDetalleSerializer(serializers.ModelSerializer):
     """ Serializador """
 
-    idformadepago = FormaDePagoSerializer
+    idformapago = FormaPagoSerializer
 
     class Meta:
         """ Clase """
-        model = FormaDePagoDetalle
+        model = FormaPagoDetalle
         fields = '__all__'  # O especifica los campos que deseas incluir
         read_only_fields = ('created_at', 'updated_at')
 
@@ -316,7 +316,7 @@ class TipoImpuestoSerializer(serializers.ModelSerializer):
 
 ### CONTABLE ###############################################################
 
-from .models import TipoAjuste, PlanDeCuentas
+from .models import TipoAjuste, PlanCuentas
 
 class TipoaAjusteSerializer(serializers.ModelSerializer):
     """ Serializador """
@@ -327,12 +327,12 @@ class TipoaAjusteSerializer(serializers.ModelSerializer):
         fields = '__all__'  # O especifica los campos que deseas incluir
         read_only_fields = ('created_at', 'updated_at')
 
-class PlanDeCuentasSerializer(serializers.ModelSerializer):
+class PlanCuentasSerializer(serializers.ModelSerializer):
     """ Serializador """
     
     class Meta:
         """ Clase """
-        model = PlanDeCuentas
+        model = PlanCuentas
         fields = '__all__'  # O especifica los campos que deseas incluir
         read_only_fields = ('created_at', 'updated_at')
 
@@ -344,7 +344,7 @@ class ImpuestoSerializer(serializers.ModelSerializer):
 
     idtipoimpuesto = TipoImpuestoSerializer()
     idalicuota = AlicuotaImpuestoSerializer()
-    idplandecuenta = PlanDeCuentasSerializer()
+    idplancuenta = PlanCuentasSerializer()
     idpadron = PadronImpuestoSerializer()
     idprovincia = ProvinciaSerializer()
     idpartido = PartidoSerializer()
@@ -371,7 +371,9 @@ class ListaPreciosSerializer(serializers.ModelSerializer):
 
 ## ENTIDADES ##################################
 
-from .models import Entidad, Zona, ListaPrecioEntidad, CondicionCrediticia
+from .models import Entidad, Zona, ListaPrecioEntidad, CondicionCrediticia, ImpuestoEntidad, Ejecutivo
+from .models import DatosFiscalesEntidad, ContactoEntidad, TipoSede, TipoDomicilio, DireccionEntidad
+from .models import ModuloEntidad, FormaPagoEntidad, SectorEntidad
 
 class EntidadSerializer(serializers.ModelSerializer):
     """ Serializador """
@@ -384,12 +386,92 @@ class EntidadSerializer(serializers.ModelSerializer):
         fields = '__all__'  # O especifica los campos que deseas incluir
         read_only_fields = ('created_at', 'updated_at')
 
+class DatosFiscalesEntidadSerializer(serializers.ModelSerializer):
+    """ Serializador """
+    
+    identidad = EntidadSerializer()
+    idtipodocumento = TipoDocumentoSerializer()
+    idtiposujeto = TipoSujetoSerializer()
+
+    class Meta:
+        """ Clase """
+        model = DatosFiscalesEntidad
+        fields = '__all__'  # O especifica los campos que deseas incluir
+        read_only_fields = ('created_at', 'updated_at')
+
+class EjecutivoSerializer(serializers.ModelSerializer):
+    """ Serializador """
+    
+    identidad = EntidadSerializer()
+    idpersona = PersonaSerializer()
+    idrol = RolSerializer()
+
+    class Meta:
+        """ Clase """
+        model = Ejecutivo
+        fields = '__all__'  # O especifica los campos que deseas incluir
+        read_only_fields = ('created_at', 'updated_at')
+
 class ZonaSerializer(serializers.ModelSerializer):
     """ Serializador """
     
     class Meta:
         """ Clase """
         model = Zona
+        fields = '__all__'  # O especifica los campos que deseas incluir
+        read_only_fields = ('created_at', 'updated_at')
+
+class ModuloEntidadSerializer(serializers.ModelSerializer):
+    """ Serializador """
+    
+    class Meta:
+        """ Clase """
+        model = ModuloEntidad
+        fields = '__all__'  # O especifica los campos que deseas incluir
+        read_only_fields = ('created_at', 'updated_at')
+
+class FormaPagoEntidadSerializer(serializers.ModelSerializer):
+    """ Serializador """
+    
+    class Meta:
+        """ Clase """
+        model = FormaPagoEntidad
+        fields = '__all__'  # O especifica los campos que deseas incluir
+        read_only_fields = ('created_at', 'updated_at')
+
+class SectorEntidadSerializer(serializers.ModelSerializer):
+    """ Serializador """
+    
+    class Meta:
+        """ Clase """
+        model = SectorEntidad
+        fields = '__all__'  # O especifica los campos que deseas incluir
+        read_only_fields = ('created_at', 'updated_at')
+
+class ContactoEntidadSerializer(serializers.ModelSerializer):
+    """ Serializador """
+    
+    class Meta:
+        """ Clase """
+        model = ContactoEntidad
+        fields = '__all__'  # O especifica los campos que deseas incluir
+        read_only_fields = ('created_at', 'updated_at')
+
+class TipoSedeSerializer(serializers.ModelSerializer):
+    """ Serializador """
+    
+    class Meta:
+        """ Clase """
+        model = TipoSede
+        fields = '__all__'  # O especifica los campos que deseas incluir
+        read_only_fields = ('created_at', 'updated_at')
+
+class TipoDomicilioSerializer(serializers.ModelSerializer):
+    """ Serializador """
+    
+    class Meta:
+        """ Clase """
+        model = TipoDomicilio
         fields = '__all__'  # O especifica los campos que deseas incluir
         read_only_fields = ('created_at', 'updated_at')
 
@@ -415,5 +497,36 @@ class CondicionCrediticiaSerializer(serializers.ModelSerializer):
     class Meta:
         """ Clase """
         model = CondicionCrediticia
+        fields = '__all__'  # O especifica los campos que deseas incluir
+        read_only_fields = ('created_at', 'updated_at')
+
+class ImpuestoEntidadSerializer(serializers.ModelSerializer):
+    """ Serializador """
+    
+    identidad = EntidadSerializer()
+    idmodulo = ModuloSerializer()
+    idimpuesto = ImpuestoSerializer()
+
+    class Meta:
+        """ Clase """
+        model = ImpuestoEntidad
+        fields = '__all__'  # O especifica los campos que deseas incluir
+        read_only_fields = ('created_at', 'updated_at')
+
+class DireccionEntidadSerializer(serializers.ModelSerializer):
+    """ Serializador """
+    
+    identidad = EntidadSerializer()
+    idtiposede = TipoSedeSerializer()
+    idtipodomicilio = TipoDomicilioSerializer()
+    idpais = PaisSerializer()
+    idprovincia = ProvinciaSerializer()
+    idpartido = PartidoSerializer()
+    idcodigopostal = CodigoPostalSerializer()
+    idzona = ZonaSerializer()
+
+    class Meta:
+        """ Clase """
+        model = DireccionEntidad
         fields = '__all__'  # O especifica los campos que deseas incluir
         read_only_fields = ('created_at', 'updated_at')

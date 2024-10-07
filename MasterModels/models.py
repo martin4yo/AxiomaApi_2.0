@@ -41,7 +41,7 @@ class TipoDeCambio(AuditModel):
     def __str__(self):
         return f'{self.idmoneda}, {self.fecha}, {self.importe}, {self.vendedor}, {self.comprador}' 
 
-class FormaDePago(AuditModel):
+class FormaPago(AuditModel):
     """ Clase para manejar los roles """
     nombre = models.CharField(max_length=100)
     codigo = models.CharField(max_length=10, default='', unique=True)
@@ -54,20 +54,20 @@ class FormaDePago(AuditModel):
     def __str__(self):
         return f'{self.nombre}' 
 
-class FormaDePagoDetalle(AuditModel):
+class FormaPagoDetalle(AuditModel):
     """ Clase para manejar los datos de paises """
     cuota = models.IntegerField()
     dias = models.IntegerField()
     nombre = models.CharField(max_length=100)
     porcentaje = models.DecimalField(max_digits=5, decimal_places=2)
-    idformadepago = models.ForeignKey('FormaDePago', on_delete=models.CASCADE)
+    idformapago = models.ForeignKey('FormaPago', on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Forma de Pago - Detalle'
         verbose_name_plural = 'GRAL - Formas de Pago - Detalle'
 
     def __str__(self):
-        return f'{self.idformadepago} - {self.dias}, {self.porcentaje}'
+        return f'{self.idformapago} - {self.dias}, {self.porcentaje}'
 
 class Mascara(AuditModel):
     """ Clase para manejar los roles """
@@ -207,7 +207,7 @@ class PersonaRol(AuditModel):
 
     def __str__(self):
         return f'{self.idpersona}, {self.idrol}' 
-    
+       
 # Impositivo ########################################################################
 
 """ Modelos para el modulo impositivo """
@@ -473,7 +473,7 @@ class Impuesto(AuditModel):
     calculapadron = models.BooleanField()
     idtipoimpuesto = models.ForeignKey(TipoImpuesto, on_delete=models.CASCADE)
     idalicuota = models.ForeignKey(AlicuotaImpuesto, on_delete=models.CASCADE)
-    idplandecuenta = models.ForeignKey('PlanDeCuentas', on_delete=models.CASCADE)
+    idplancuenta = models.ForeignKey('PlanCuentas', on_delete=models.CASCADE)
     idpadron = models.ForeignKey(PadronImpuesto, on_delete=models.CASCADE, blank=True, null=True)
     idprovincia = models.ForeignKey(Provincia, on_delete=models.CASCADE, blank=True, null=True)
     idpartido = models.ForeignKey(Partido, on_delete=models.CASCADE, blank=True, null=True)
@@ -502,7 +502,7 @@ class TipoAjuste(AuditModel):
     def __str__(self):
         return f'{self.nombre}'
 
-class PlanDeCuentas(AuditModel):
+class PlanCuentas(AuditModel):
     """ Plan de Cuentas """
     
     nombre = models.CharField(max_length=256)
@@ -578,10 +578,30 @@ class CondicionCrediticia(AuditModel):
     def __str__(self):
          return f'{self.identidad}, {self.idmodulo}, {self.vigenciadesde}, {self.limitedesde}'
     
+class ImpuestoEntidad(AuditModel):
+    """ Padrones de Impuesto por entidad """
+
+    identidad = models.ForeignKey('Entidad', on_delete=models.CASCADE)
+    idmodulo = models.ForeignKey('Modulo', on_delete=models.CASCADE)
+    idimpuesto = models.ForeignKey('Impuesto', on_delete=models.CASCADE)
+    aplica = models.BooleanField()
+    porcentajexencion = models.DecimalField(max_digits=5, decimal_places=2, blank=True,null=True)
+    resolucion = models.CharField(max_length=100, blank=True, null=True)
+    vigenciadesde = models.DateField(blank=True,null=True)
+    vigenciahasta = models.DateField(blank=True,null=True)
+
+    class Meta:
+        unique_together = (("identidad", "idmodulo", "idimpuesto"),)
+        verbose_name = 'Impuesto por Entidad'
+        verbose_name_plural = 'ENTI - Impuestos por Entidad'
+
+    def __str__(self):
+         return f'{self.identidad}, {self.idmodulo}, {self.idimpuesto}'
+    
 class Zona(AuditModel):
     """ Clase para manejar las zonas """
     nombre = models.CharField(max_length=100)
-    codigo = models.CharField(max_length=1, default='', unique=True)
+    codigo = models.CharField(max_length=10, default='', unique=True)
 
     class Meta:
         verbose_name = 'Zona'
@@ -589,6 +609,151 @@ class Zona(AuditModel):
 
     def __str__(self):
         return f'{self.nombre}'
+
+class Ejecutivo(AuditModel):
+    """ Plan de Cuentas """
+    
+    identidad = models.ForeignKey('Entidad', on_delete=models.CASCADE)
+    idpersona = models.ForeignKey('Persona', related_name='ejecutivos', on_delete=models.CASCADE)
+    idrol = models.ForeignKey('Rol', on_delete=models.CASCADE)
+               
+    class Meta:
+        unique_together = (("identidad", "idpersona", "idrol"),)
+        verbose_name = 'Ejecutivo'
+        verbose_name_plural = 'ENTI - Ejecutivos'
+
+    def __str__(self):
+         return f'{self.identidad}, {self.idpersona}, {self.idrol}'
+    
+class DatosFiscalesEntidad(AuditModel):
+    """ Plan de Cuentas """
+    
+    identidad = models.ForeignKey('Entidad', on_delete=models.CASCADE)
+    idtipodocumento = models.ForeignKey('TipoDocumento', on_delete=models.CASCADE)
+    numerodocumento = models.CharField(max_length=100)
+    idtiposujeto = models.ForeignKey('TipoSujeto', on_delete=models.CASCADE)
+               
+    class Meta:
+        unique_together = (("identidad", "idtipodocumento", "numerodocumento"),)
+        verbose_name = 'Datos Fiscales'
+        verbose_name_plural = 'ENTI - Datos Fiscales por Entidad'
+
+    def __str__(self):
+         return f'{self.identidad}, {self.idtipodocumento}, {self.numerodocumento}'
+    
+class ContactoEntidad(AuditModel):
+    """ Plan de Cuentas """
+    
+    identidad = models.ForeignKey('Entidad', on_delete=models.CASCADE)
+    nombre = models.CharField(max_length=200)
+    rol = models.CharField(max_length=200)
+    telefono = models.CharField(max_length=200)
+    sector = models.CharField(max_length=200)
+               
+    class Meta:
+        unique_together = (("identidad", "nombre"),)
+        verbose_name = 'Contacto Entidad'
+        verbose_name_plural = 'ENTI - Contactos Entidad'
+
+    def __str__(self):
+         return f'{self.identidad}, {self.nombre}, {self.rol}'
+    
+class DireccionEntidad(AuditModel):
+    """ Plan de Cuentas """
+    
+    identidad = models.ForeignKey('Entidad', on_delete=models.CASCADE)
+    nombre = models.CharField(max_length=200, unique=True)
+    idtiposede = models.ForeignKey('TipoSede', on_delete=models.CASCADE)
+    idtipodomicilio = models.ForeignKey('TipoDomicilio', on_delete=models.CASCADE)
+    calle = models.CharField(max_length=200)
+    numero = models.CharField(max_length=50)
+    piso = models.CharField(max_length=50)
+    departamento = models.CharField(max_length=50)
+    idpais = models.ForeignKey('Pais', on_delete=models.CASCADE)
+    idprovincia = models.ForeignKey('Provincia', on_delete=models.CASCADE)
+    idpartido = models.ForeignKey('Partido', on_delete=models.CASCADE)
+    idcodigopostal = models.ForeignKey('CodigoPostal', on_delete=models.CASCADE)
+    idzona = models.ForeignKey('Zona', on_delete=models.CASCADE)
+    diasentrega = models.CharField(max_length=200)
+    diasretiro = models.CharField(max_length=200)
+               
+    class Meta:
+        unique_together = (("identidad", "nombre"),)
+        verbose_name = 'Direccion Entidad'
+        verbose_name_plural = 'ENTI - Direcciones de Entidad'
+
+    def __str__(self):
+         return f'{self.identidad}, {self.nombre}, {self.idtiposede}'
+    
+class TipoSede(AuditModel):
+    """ Clase para manejar los tipos de sedes """
+    nombre = models.CharField(max_length=100)
+    codigo = models.CharField(max_length=10, unique=True)
+
+    class Meta:
+        verbose_name = 'Tipo de Sede'
+        verbose_name_plural = 'ENTI - Tipos de Sede'
+
+    def __str__(self):
+        return f'{self.nombre}'
+    
+class TipoDomicilio(AuditModel):
+    """ Clase para manejar los tipos de domicilio """
+
+    nombre = models.CharField(max_length=100)
+    codigo = models.CharField(max_length=10, unique=True)
+
+    class Meta:
+        verbose_name = 'Tipo de Domicilio'
+        verbose_name_plural = 'ENTI - Tipos de Domicilio'
+
+    def __str__(self):
+        return f'{self.nombre}'
+    
+class ModuloEntidad(AuditModel):
+    """ Modulos por Entidad """
+    
+    identidad = models.ForeignKey('Entidad', on_delete=models.CASCADE)
+    idmodulo = models.ForeignKey('Modulo', on_delete=models.CASCADE)
+               
+    class Meta:
+        unique_together = (("identidad", "idmodulo"),)
+        verbose_name = 'Modulo por Entidad'
+        verbose_name_plural = 'ENTI - Modulos por Entidad'
+
+    def __str__(self):
+         return f'{self.identidad}, {self.idmodulo}'
+    
+class SectorEntidad(AuditModel):
+    """ Sectores por Entidad """
+    
+    identidad = models.ForeignKey('Entidad', on_delete=models.CASCADE)
+    idmodulo = models.ForeignKey('Modulo', on_delete=models.CASCADE)
+    idsector = models.ForeignKey('Sector', on_delete=models.CASCADE)
+               
+    class Meta:
+        unique_together = (("identidad", "idmodulo", "idsector"),)
+        verbose_name = 'Sector por Entidad'
+        verbose_name_plural = 'ENTI - Sectores por Entidad'
+
+    def __str__(self):
+         return f'{self.identidad}, {self.idmodulo}, {self.idsector}'
+    
+class FormaPagoEntidad(AuditModel):
+    """ Forma de Pago por Entidad """
+    
+    identidad = models.ForeignKey('Entidad', on_delete=models.CASCADE)
+    idmodulo = models.ForeignKey('Modulo', on_delete=models.CASCADE)
+    idformapago = models.ForeignKey('FormaPago', on_delete=models.CASCADE)
+               
+    class Meta:
+        unique_together = (("identidad", "idmodulo", "idformapago"),)
+        verbose_name = 'Forma de Pago por Entidad'
+        verbose_name_plural = 'ENTI - Forma de Pago por Entidad'
+
+    def __str__(self):
+         return f'{self.identidad}, {self.idmodulo}, {self.idformapago}'
+    
        
 # PRODUCTOS ########################################################################
 
@@ -596,6 +761,7 @@ class Zona(AuditModel):
 
 class ListaPrecios(AuditModel):
     """ Clase para manejar los tipos de sujeto """
+
     nombre = models.CharField(max_length=100)
     codigo = models.CharField(max_length=10, default='', unique=True)
 
