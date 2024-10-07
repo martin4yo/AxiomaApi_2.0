@@ -4,13 +4,24 @@ Api de MasterModels
 from rest_framework import viewsets, permissions
 
 from .models import Persona, PersonaRol, Pais, Provincia, CodigoPostal
-from .models import Rol, Modulo, Mascara, FormaDePago, FormaDePagoDetalle, TipoDeCambio, Partido
+from .models import Rol, Modulo, Mascara, FormaDePago, FormaDePagoDetalle, TipoDeCambio, Partido, Sector
 
 from .serializers import PersonaSerializer, PersonaRolSerializer, PaisSerializer, ProvinciaSerializer, CodigoPostalSerializer
 from .serializers import RolSerializer, ModuloSerializer, MascaraSerializer, FormaDePagoSerializer
 from .serializers import FormaDePagoSerializer, FormaDePagoDetalleSerializer, TipoDeCambioSerializer, PartidoSerializer
+from .serializers import SectorSerializer
 
 ### GENERALES ##########################################
+
+class SectorViewSet(viewsets.ModelViewSet):
+    """
+    ViewSet de Formas de Pago
+    """
+    queryset = Sector.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = SectorSerializer
 
 class TipoDeCambioViewSet(viewsets.ModelViewSet):
     """
@@ -326,3 +337,57 @@ class PlanDeCuentasViewSet(viewsets.ModelViewSet):
         permissions.AllowAny
     ]
     serializer_class = PlanDeCuentasSerializer
+
+
+### ENTIDADES #########################################################
+
+from .models import Entidad, Zona, ListaPrecioEntidad, CondicionCrediticia
+
+from .serializers import EntidadSerializer, ZonaSerializer, ListaPrecioEntidadSerializer, CondicionCrediticiaSerializer
+
+class EntidadViewSet(viewsets.ModelViewSet):
+    """ ViewSet de Entidades"""
+    queryset = Entidad.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = EntidadSerializer
+
+class ZonaViewSet(viewsets.ModelViewSet):
+    """ ViewSet de Zonas"""
+    queryset = Zona.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = ZonaSerializer
+
+class ListaPrecioEntidadViewSet(viewsets.ModelViewSet):
+    """ ViewSet de Zonas"""
+    queryset = ListaPrecioEntidad.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = ListaPrecioEntidadSerializer
+
+class CondicionCrediticiaViewSet(viewsets.ModelViewSet):
+    """ ViewSet de Condiciones Crediticias"""
+    queryset = CondicionCrediticia.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = CondicionCrediticiaSerializer
+
+### PRODUCTOS ##########################################
+
+
+from .models import ListaPrecios
+
+from .serializers import ListaPreciosSerializer
+
+class ListaPreciosViewSet(viewsets.ModelViewSet):
+    """ ViewSet de Entidades"""
+    queryset = ListaPrecios.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = ListaPreciosSerializer

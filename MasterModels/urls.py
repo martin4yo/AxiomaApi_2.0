@@ -6,6 +6,7 @@ from rest_framework import routers
 
 from .api import PersonaViewSet, PersonaRolViewSet, PaisViewSet, ProvinciaViewSet, CodigoPostalViewSet, TipoDeCambioViewSet
 from .api import RolViewSet, ModuloViewSet, MascaraViewSet, FormaDePagoViewSet, FormaDePagoDetalleViewSet
+from .api import SectorViewSet
 
 from .api import TipoAjusteViewSet, PlanDeCuentasViewSet
 
@@ -15,6 +16,9 @@ from .api import MonedaViewSet, TipoIndiceViewSet, AlicuotaImpuestoViewSet, Padr
 from .api import TipoFrecuenciaViewSet, TipoValorViewSet, TipoCalculoViewSet, IndiceViewSet, ClasificacionImpuestoViewSet
 from .api import TipoImpuestoViewSet
 
+from .api import ListaPreciosViewSet
+
+from .api import EntidadViewSet, ZonaViewSet, ListaPrecioEntidadViewSet, CondicionCrediticiaViewSet
 
 class Router(routers.DefaultRouter):
     """
@@ -39,6 +43,7 @@ router.register('api/general/personarol', PersonaRolViewSet, 'personasroles')
 router.register('api/general/tipoindice', TipoIndiceViewSet, 'tiposindice')
 router.register('api/general/indice', IndiceViewSet, 'indices')
 router.register('api/general/partido', IndiceViewSet, 'partidos')
+router.register('api/general/sector', SectorViewSet, 'sectores')
 
 # URLS DE IMPUESTOS
 router.register('api/taxes/tipodocumento', TipoDocumentoViewSet, 'tiposdocumento')
@@ -64,6 +69,14 @@ router.register('api/taxes/impuesto', TipoImpuestoViewSet, 'impuestos')
 router.register('api/contabilidad/tipoajuste', TipoAjusteViewSet, 'tiposajuste')
 router.register('api/contabilidad/plandecuentas', PlanDeCuentasViewSet, 'plandecuentas')
 
+# URLS DE ENTIDADES 
+router.register('api/entidades/entidad', EntidadViewSet, 'entidades')
+router.register('api/entidades/zona', ZonaViewSet, 'zonas')
+router.register('api/entidades/listaprecioentidad', ListaPrecioEntidadViewSet, 'listasprecioentidad')
+router.register('api/entidades/condicioncrediticia', CondicionCrediticiaViewSet, 'condicionescrediticias')
+
+# URLS DE PRODUCTOS 
+router.register('api/productos/listaprecios', ListaPreciosViewSet, 'listasprecios')
 
 urlpatterns = [
     path('', include(router.urls)),
