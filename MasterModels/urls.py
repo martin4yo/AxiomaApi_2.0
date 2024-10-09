@@ -37,7 +37,7 @@ router.register('api/general/sector', SectorViewSet, 'sectores')
 # URLS DE IMPUESTOS
 
 from .api import TipoDocumentoViewSet, TipoSujetoViewSet, TipoResponsableViewSet, ConceptoIncluidoViewSet
-from .api import IncotermViewSet, IdiomaViewSet, UnidadMedidaViewSet, TipoComprobanteViewSet
+from .api import IncotermsViewSet, IdiomaViewSet, UnidadMedidaViewSet, TipoComprobanteViewSet
 from .api import MonedaViewSet, AlicuotaImpuestoViewSet, PadronImpuestoViewSet
 from .api import TipoFrecuenciaViewSet, TipoValorViewSet, TipoCalculoViewSet,  ClasificacionImpuestoViewSet
 from .api import TipoImpuestoViewSet
@@ -46,7 +46,7 @@ router.register('api/taxes/tipodocumento', TipoDocumentoViewSet, 'tiposdocumento
 router.register('api/taxes/tiposujeto', TipoSujetoViewSet, 'tipossujeto')
 router.register('api/taxes/tiporesponsable', TipoResponsableViewSet, 'tiposresponsable')
 router.register('api/taxes/conceptoincluido', ConceptoIncluidoViewSet, 'conceptosincluidos')
-router.register('api/taxes/incoterm', IncotermViewSet, 'incoterms')
+router.register('api/taxes/incoterm', IncotermsViewSet, 'incoterms')
 router.register('api/taxes/idioma', IdiomaViewSet, 'idiomas')
 router.register('api/taxes/unidadmedida', UnidadMedidaViewSet, 'unidadesmedida')
 router.register('api/taxes/tipocomprobante', TipoComprobanteViewSet, 'tiposcomprobante')

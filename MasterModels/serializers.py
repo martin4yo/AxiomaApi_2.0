@@ -131,7 +131,7 @@ class PartidoSerializer(serializers.ModelSerializer):
 
 ### IMPOSITIVO ###############################################################
 
-from .models import TipoDocumento, TipoSujeto, TipoResponsable, ConceptoIncluido, Incoterm
+from .models import TipoDocumento, TipoSujeto, TipoResponsable, ConceptoIncluido, Incoterms
 from .models import Idioma, UnidadMedida, TipoComprobante, CuitPais, TipoIndice, AlicuotaImpuesto
 from .models import PadronImpuesto, TipoFrecuencia, TipoValor, TipoCalculo, Indice, ClasificacionImpuesto
 from .models import TipoImpuesto, Impuesto
@@ -176,11 +176,11 @@ class IdiomaSerializer(serializers.ModelSerializer):
         fields = '__all__'  # O especifica los campos que deseas incluir
         read_only_fields = ('created_at', 'updated_at')
 
-class IncotermSerializer(serializers.ModelSerializer):
+class IncotermsSerializer(serializers.ModelSerializer):
     """ Serializador """
     class Meta:
         """ Clase """
-        model = Incoterm   
+        model = Incoterms   
         fields = '__all__'  # O especifica los campos que deseas incluir
         read_only_fields = ('created_at', 'updated_at')
 

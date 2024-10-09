@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'MasterModels',
-    'rest_framework'
+    'rest_framework',
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
@@ -75,13 +76,40 @@ WSGI_APPLICATION = 'AxiomaConnect.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+"""
+"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'sql_server.pyodbc',
+        'NAME': 'AxiomaConnect',
+        'USER': 'sa',
+        'PASSWORD': 'Q27G4B98',
+        'HOST': 'localhost',  # o la dirección de tu servidor SQL
+        'PORT': '1433',  # el puerto por defecto de SQL Server
+        'OPTIONS': {
+            'driver': 'ODBC Driver 17 for SQL Server',  # Asegúrate de tener este controlador instalado
+        },
+    }
+}
+"""
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'axiomaconnect',
+        'USER': 'root',
+        'PASSWORD': 'Axioma2024!',
+        'HOST': 'localhost',  # o la dirección de tu servidor MySQL
+        'PORT': '3306',       # El puerto por defecto de MySQL
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -123,3 +151,16 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# VALIDACIONES
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
+
+

@@ -120,7 +120,7 @@ class Pais(AuditModel):
     """ Clase para manejar los datos de paises """
     nombre = models.CharField(max_length=100)
     codigo = models.CharField(max_length=10, unique=True)
-
+    codigoafip = models.CharField(max_length=10, unique=True)
     class Meta:
         verbose_name = 'Pais'
         verbose_name_plural = 'GRAL - Paises'
@@ -207,6 +207,165 @@ class PersonaRol(AuditModel):
 
     def __str__(self):
         return f'{self.idpersona}, {self.idrol}' 
+    
+class TipoSede(AuditModel):
+    """ Clase para manejar los tipos de sedes """
+    nombre = models.CharField(max_length=100)
+    codigo = models.CharField(max_length=10, unique=True)
+
+    class Meta:
+        verbose_name = 'Tipo de Sede'
+        verbose_name_plural = 'GRAL - Tipos de Sede'
+
+    def __str__(self):
+        return f'{self.nombre}'
+    
+class TipoDomicilio(AuditModel):
+    """ Clase para manejar los tipos de domicilio """
+
+    nombre = models.CharField(max_length=100)
+    codigo = models.CharField(max_length=10, unique=True)
+
+    class Meta:
+        verbose_name = 'Tipo de Domicilio'
+        verbose_name_plural = 'GRAL - Tipos de Domicilio'
+
+    def __str__(self):
+        return f'{self.nombre}'
+    
+class Idioma(AuditModel):
+    """ Clase para manejar codigos de Idioma  """
+    nombre = models.CharField(max_length=100)
+    codigo = models.CharField(max_length=10, default='', unique=True)
+
+    class Meta:
+        verbose_name = 'Idioma'
+        verbose_name_plural = 'GRAL - Idioma'
+
+    def __str__(self):
+        return f'{self.nombre}' 
+    
+class Indice(AuditModel):
+    """ Valores de Indice """
+    
+    idtipoindice = models.ForeignKey('TipoIndice', on_delete=models.CASCADE)
+    desde = models.DateField()
+    hasta = models.DateField()
+    importe = models.DecimalField(max_digits=18, decimal_places=6, default=0)
+
+    class Meta:
+        unique_together = (("idtipoindice"),)
+        verbose_name = 'Indice'
+        verbose_name_plural = 'GRAL - Indices'
+
+    def __str__(self):
+         return f'{self.nombre}, {self.codigo}, {self.idmoneda}'
+    
+class Moneda(AuditModel):
+    """ Clase para manejar monedas """
+    nombre = models.CharField(max_length=100)
+    codigo = models.CharField(max_length=10, default='', unique=True)
+    sigla = models.CharField(max_length=10, default='', unique=True)
+
+    class Meta:
+        verbose_name = 'Moneda'
+        verbose_name_plural = 'GRAL - Monedas'
+
+    def __str__(self):
+        return f'{self.nombre}' 
+    
+class TipoDocumento(AuditModel):
+    """ Tipos de documento de AFIP """
+    nombre = models.CharField(max_length=100)
+    codigo = models.CharField(max_length=10, unique=True)
+    codigoafip = models.CharField(max_length=10, unique=True)
+    idmascara = models.ForeignKey(Mascara, on_delete=models.CASCADE)
+    scriptvalidacion = models.TextField(default='')  # Valor por defecto como cadena vacía
+
+    class Meta:
+        verbose_name = 'Tipo de Documento'
+        verbose_name_plural = 'GRAL - Tipos de Documento'
+
+    def __str__(self):
+         return f'{self.nombre}'
+    
+class TipoFrecuencia(AuditModel):
+    """ Clase para manejar los tipos de frecuencia """
+    nombre = models.CharField(max_length=100)
+    codigo = models.CharField(max_length=10, default='', unique=True)
+
+    class Meta:
+        verbose_name = 'Tipo de Frecuencia'
+        verbose_name_plural = 'GRAL - Tipos de Frecuencia'
+
+    def __str__(self):
+        return f'{self.nombre}' 
+    
+class TipoIndice(AuditModel):
+    """ Tipos de Indice """
+    
+    nombre = models.CharField(max_length=100)
+    codigo = models.CharField(max_length=10, unique=True)
+    idmoneda = models.ForeignKey(Moneda, on_delete=models.CASCADE)
+    idtipofrecuencia = models.ForeignKey('TipoFrecuencia', on_delete=models.CASCADE)
+    idtipovalor = models.ForeignKey('TipoValor', on_delete=models.CASCADE)
+                                    
+    class Meta:
+        unique_together = (("codigo"),)
+        verbose_name = 'Tipo de Indice'
+        verbose_name_plural = 'GRAL - Tipos de Indice'
+
+    def __str__(self):
+         return f'{self.nombre}, {self.codigo}, {self.idmoneda}'
+    
+class TipoValor(AuditModel):
+    """ Clase para manejar los tipos de valor """
+    nombre = models.CharField(max_length=100)
+    codigo = models.CharField(max_length=10, default='', unique=True)
+
+    class Meta:
+        verbose_name = 'Tipo de Valor'
+        verbose_name_plural = 'GRAL - Tipos de Valor'
+
+    def __str__(self):
+        return f'{self.nombre}' 
+    
+class UnidadMedida(AuditModel):
+    """ Clase para manejar unidades de medida  """
+    nombre = models.CharField(max_length=100)
+    codigo = models.CharField(max_length=10, default='', unique=True)
+
+    class Meta:
+        verbose_name = 'Unidad de Medida'
+        verbose_name_plural = 'GRAL - Unidades de Medida'
+
+    def __str__(self):
+        return f'{self.nombre}' 
+    
+class Incoterms(AuditModel):
+    """ Clase para manejar incoterms """
+    nombre = models.CharField(max_length=100)
+    codigo = models.CharField(max_length=10, default='', unique=True)
+
+    class Meta:
+        verbose_name = 'Incoterm'
+        verbose_name_plural = 'GRAL - Incoterms'
+
+    def __str__(self):
+        return f'{self.codigo}' 
+    
+class TipoResponsable(AuditModel):
+    """ Clase para manejar los tipos de responsable """
+    nombre = models.CharField(max_length=100)
+    codigo = models.CharField(max_length=10, default='', unique=True)
+    sigla = models.CharField(max_length=10, default='', unique=True)
+
+    class Meta:
+        verbose_name = 'Tipo de Responsable'
+        verbose_name_plural = 'GRAL - Tipos de Responsable'
+
+    def __str__(self):
+        return f'{self.nombre}' 
        
 # Impositivo ########################################################################
 
@@ -225,54 +384,6 @@ class TipoComprobante(AuditModel):
     def __str__(self):
         return f'{self.nombre}' 
 
-class Moneda(AuditModel):
-    """ Clase para manejar monedas """
-    nombre = models.CharField(max_length=100)
-    codigo = models.CharField(max_length=10, default='', unique=True)
-    sigla = models.CharField(max_length=10, default='', unique=True)
-
-    class Meta:
-        verbose_name = 'Moneda'
-        verbose_name_plural = 'IMPU - Monedas'
-
-    def __str__(self):
-        return f'{self.nombre}' 
-
-class UnidadMedida(AuditModel):
-    """ Clase para manejar unidades de medida  """
-    nombre = models.CharField(max_length=100)
-    codigo = models.CharField(max_length=10, default='', unique=True)
-
-    class Meta:
-        verbose_name = 'Unidad de Medida'
-        verbose_name_plural = 'IMPU - Unidades de Medida'
-
-    def __str__(self):
-        return f'{self.nombre}' 
-
-class Idioma(AuditModel):
-    """ Clase para manejar codigos de Idioma  """
-    nombre = models.CharField(max_length=100)
-    codigo = models.CharField(max_length=10, default='', unique=True)
-
-    class Meta:
-        verbose_name = 'Idioma'
-        verbose_name_plural = 'IMPU - Idioma'
-
-    def __str__(self):
-        return f'{self.nombre}' 
-
-class Incoterm(AuditModel):
-    """ Clase para manejar incoterms """
-    codigo = models.CharField(max_length=10, default='', unique=True)
-
-    class Meta:
-        verbose_name = 'Incoterm'
-        verbose_name_plural = 'IMPU -Incoterms'
-
-    def __str__(self):
-        return f'{self.codigo}' 
-
 class ConceptoIncluido(AuditModel):
     """ Clase para manejar los conceptos a facturar segun AFIP """
     nombre = models.CharField(max_length=100)
@@ -280,20 +391,7 @@ class ConceptoIncluido(AuditModel):
 
     class Meta:
         verbose_name = 'Concepto Incluido'
-        verbose_name_plural = 'IMPU -Conceptos Incluidos'
-
-    def __str__(self):
-        return f'{self.nombre}' 
-
-class TipoResponsable(AuditModel):
-    """ Clase para manejar los tipos de responsable """
-    nombre = models.CharField(max_length=100)
-    codigo = models.CharField(max_length=10, default='', unique=True)
-    sigla = models.CharField(max_length=10, default='', unique=True)
-
-    class Meta:
-        verbose_name = 'Tipo de Responsable'
-        verbose_name_plural = 'IMPU -Tipos de Responsable'
+        verbose_name_plural = 'IMPU - Conceptos Incluidos'
 
     def __str__(self):
         return f'{self.nombre}' 
@@ -305,25 +403,10 @@ class TipoSujeto(AuditModel):
 
     class Meta:
         verbose_name = 'Tipo de Sujeto'
-        verbose_name_plural = 'IMPU -Tipos de Sujeto'
+        verbose_name_plural = 'IMPU - Tipos de Sujeto'
 
     def __str__(self):
         return f'{self.nombre}' 
-
-class TipoDocumento(AuditModel):
-    """ Tipos de documento de AFIP """
-    nombre = models.CharField(max_length=100)
-    codigo = models.CharField(max_length=10, unique=True)
-    codigoafip = models.CharField(max_length=10, unique=True)
-    idmascara = models.ForeignKey(Mascara, on_delete=models.CASCADE)
-    scriptvalidacion = models.TextField(default='')  # Valor por defecto como cadena vacía
-
-    class Meta:
-        verbose_name = 'Tipo de Documento'
-        verbose_name_plural = 'IMPU - Tipos de Documento'
-
-    def __str__(self):
-         return f'{self.nombre}'
     
 class CuitPais(AuditModel):
     """ Tipos de documento de CUIT de los paises """
@@ -341,40 +424,7 @@ class CuitPais(AuditModel):
 
     def __str__(self):
          return f'{self.idpais}, {self.idtiposujeto}, {self.cuit}'
-    
-class TipoIndice(AuditModel):
-    """ Tipos de Indice """
-    
-    nombre = models.CharField(max_length=100)
-    codigo = models.CharField(max_length=10, unique=True)
-    idmoneda = models.ForeignKey(Moneda, on_delete=models.CASCADE)
-    idtipofrecuencia = models.ForeignKey('TipoFrecuencia', on_delete=models.CASCADE)
-    idtipovalor = models.ForeignKey('TipoValor', on_delete=models.CASCADE)
-                                    
-    class Meta:
-        unique_together = (("codigo"),)
-        verbose_name = 'Tipo de Indice'
-        verbose_name_plural = 'IMPU - Tipos de Indice'
-
-    def __str__(self):
-         return f'{self.nombre}, {self.codigo}, {self.idmoneda}'
-    
-class Indice(AuditModel):
-    """ Valores de Indice """
-    
-    idtipoindice = models.ForeignKey(TipoIndice, on_delete=models.CASCADE)
-    desde = models.DateField()
-    hasta = models.DateField()
-    importe = models.DecimalField(max_digits=18, decimal_places=6, default=0)
-
-    class Meta:
-        unique_together = (("idtipoindice"),)
-        verbose_name = 'Indice'
-        verbose_name_plural = 'IMPU - Indices'
-
-    def __str__(self):
-         return f'{self.nombre}, {self.codigo}, {self.idmoneda}'
-    
+      
 class AlicuotaImpuesto(AuditModel):
     """ Alicuotas de AFIP """
     nombre = models.CharField(max_length=100)
@@ -401,31 +451,7 @@ class PadronImpuesto(AuditModel):
 
     def __str__(self):
          return f'{self.nombre}, {self.codigo}, {self.porcentaje}'
-    
-class TipoFrecuencia(AuditModel):
-    """ Clase para manejar los tipos de frecuencia """
-    nombre = models.CharField(max_length=100)
-    codigo = models.CharField(max_length=10, default='', unique=True)
-
-    class Meta:
-        verbose_name = 'Tipo de Frecuencia'
-        verbose_name_plural = 'IMPU - Tipos de Frecuencia'
-
-    def __str__(self):
-        return f'{self.nombre}' 
-    
-class TipoValor(AuditModel):
-    """ Clase para manejar los tipos de valor """
-    nombre = models.CharField(max_length=100)
-    codigo = models.CharField(max_length=10, default='', unique=True)
-
-    class Meta:
-        verbose_name = 'Tipo de Valor'
-        verbose_name_plural = 'IMPU - Tipos de Valor'
-
-    def __str__(self):
-        return f'{self.nombre}' 
-    
+      
 class TipoCalculo(AuditModel):
     """ Clase para manejar los tipos de calculo """
     nombre = models.CharField(max_length=100)
@@ -545,18 +571,6 @@ class Entidad(AuditModel):
 
     def __str__(self):
          return f'{self.codigo}, {self.nombrefantasia}, {self.nombre}'
-
-class ListaPrecioEntidad(AuditModel):
-    """ Plan de Cuentas """
-    
-    identidad = models.ForeignKey('Entidad', on_delete=models.CASCADE)
-    idmodulo = models.ForeignKey('Modulo', on_delete=models.CASCADE)
-    idlistaprecio = models.ForeignKey('ListaPrecios', on_delete=models.CASCADE)
-               
-    class Meta:
-        unique_together = (("identidad", "idmodulo", "idlistaprecio"),)
-        verbose_name = 'Listas de Precio'
-        verbose_name_plural = 'ENTI - Listas de Precio por Entidad'
 
     def __str__(self):
          return f'{self.identidad}, {self.idmodulo}, {self.idlistaprecio}'
@@ -684,32 +698,7 @@ class DireccionEntidad(AuditModel):
 
     def __str__(self):
          return f'{self.identidad}, {self.nombre}, {self.idtiposede}'
-    
-class TipoSede(AuditModel):
-    """ Clase para manejar los tipos de sedes """
-    nombre = models.CharField(max_length=100)
-    codigo = models.CharField(max_length=10, unique=True)
-
-    class Meta:
-        verbose_name = 'Tipo de Sede'
-        verbose_name_plural = 'ENTI - Tipos de Sede'
-
-    def __str__(self):
-        return f'{self.nombre}'
-    
-class TipoDomicilio(AuditModel):
-    """ Clase para manejar los tipos de domicilio """
-
-    nombre = models.CharField(max_length=100)
-    codigo = models.CharField(max_length=10, unique=True)
-
-    class Meta:
-        verbose_name = 'Tipo de Domicilio'
-        verbose_name_plural = 'ENTI - Tipos de Domicilio'
-
-    def __str__(self):
-        return f'{self.nombre}'
-    
+       
 class ModuloEntidad(AuditModel):
     """ Modulos por Entidad """
     
@@ -771,3 +760,15 @@ class ListaPrecios(AuditModel):
 
     def __str__(self):
         return f'{self.nombre}'
+    
+class ListaPrecioEntidad(AuditModel):
+    """ Plan de Cuentas """
+    
+    identidad = models.ForeignKey('Entidad', on_delete=models.CASCADE)
+    idmodulo = models.ForeignKey('Modulo', on_delete=models.CASCADE)
+    idlistaprecio = models.ForeignKey('ListaPrecios', on_delete=models.CASCADE)
+               
+    class Meta:
+        unique_together = (("identidad", "idmodulo", "idlistaprecio"),)
+        verbose_name = 'Listas de Precio'
+        verbose_name_plural = 'ARTI - Listas de Precio por Entidad'
