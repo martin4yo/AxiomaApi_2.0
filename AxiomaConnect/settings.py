@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,13 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-qt#q5bj25-!+52ai*0kc$wkac$^^*jb!@n%9yoo2ret0^8w&ln'
+SECRET_KEY = config('SECRET_KEY', default='django-insecure-qt#q5bj25-!+52ai*0kc$wkac$^^*jb!@n%9yoo2ret0^8w&ln')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -84,30 +84,15 @@ DATABASES = {
     }
 }
 """
-"""
-DATABASES = {
-    'default': {
-        'ENGINE': 'sql_server.pyodbc',
-        'NAME': 'AxiomaConnect',
-        'USER': 'sa',
-        'PASSWORD': 'Q27G4B98',
-        'HOST': 'localhost',  # o la dirección de tu servidor SQL
-        'PORT': '1433',  # el puerto por defecto de SQL Server
-        'OPTIONS': {
-            'driver': 'ODBC Driver 17 for SQL Server',  # Asegúrate de tener este controlador instalado
-        },
-    }
-}
-"""
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'axiomaconnect',
-        'USER': 'root',
-        'PASSWORD': 'Axioma2024!',
-        'HOST': 'localhost',  # o la dirección de tu servidor MySQL
-        'PORT': '3306',       # El puerto por defecto de MySQL
+        'NAME': config('DB_NAME', default='axiomaconnect'),
+        'USER': config('DB_USER', default='root'),
+        'PASSWORD': config('DB_PASSWORD', default='Axioma2024!'),
+        'HOST': config('DB_HOST', default='localhost'),  # o la dirección de tu servidor MySQL
+        'PORT': config('DB_PORT', default='3306'),       # El puerto por defecto de MySQL
     }
 }
 
@@ -145,7 +130,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = config('STATIC_URL', default='static/')
+STATIC_ROOT = config('STATIC_ROOT', default='static/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
