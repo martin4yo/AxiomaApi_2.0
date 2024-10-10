@@ -15,7 +15,7 @@ router = Router()
 # URLS GENERALES
 
 from .api import PersonaViewSet, PersonaRolViewSet, PaisViewSet, ProvinciaViewSet, CodigoPostalViewSet, TipoDeCambioViewSet
-from .api import RolViewSet, ModuloViewSet, MascaraViewSet, FormaPagoViewSet, FormaPagoDetalleViewSet
+from .api import RolViewSet, ModuloViewSet, MascaraViewSet, FormaPagoViewSet, FormaPagoDetalleViewSet, IdiomaViewSet
 from .api import SectorViewSet, IndiceViewSet, PartidoViewSet, TipoIndiceViewSet, MonedaViewSet, TipoDocumentoViewSet
 from .api import TipoFrecuenciaViewSet, TipoValorViewSet, UnidadMedidaViewSet, IncotermsViewSet, TipoResponsableViewSet
 
@@ -46,7 +46,7 @@ router.register('api/general/tiporesponsable', TipoResponsableViewSet, 'tiposres
 # URLS DE IMPUESTOS
 
 from .api import TipoSujetoViewSet, ConceptoIncluidoViewSet
-from .api import IdiomaViewSet, TipoComprobanteViewSet
+from .api import TipoComprobanteViewSet
 from .api import AlicuotaImpuestoViewSet, PadronImpuestoViewSet
 from .api import TipoCalculoViewSet,  ClasificacionImpuestoViewSet
 from .api import TipoImpuestoViewSet, CuitPaisViewSet, ImpuestoViewSet
