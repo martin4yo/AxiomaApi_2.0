@@ -16,7 +16,8 @@ router = Router()
 
 from .api import PersonaViewSet, PersonaRolViewSet, PaisViewSet, ProvinciaViewSet, CodigoPostalViewSet, TipoDeCambioViewSet
 from .api import RolViewSet, ModuloViewSet, MascaraViewSet, FormaPagoViewSet, FormaPagoDetalleViewSet
-from .api import SectorViewSet, IndiceViewSet, PartidoViewSet, TipoIndiceViewSet
+from .api import SectorViewSet, IndiceViewSet, PartidoViewSet, TipoIndiceViewSet, MonedaViewSet, TipoDocumentoViewSet
+from .api import TipoFrecuenciaViewSet, TipoValorViewSet, UnidadMedidaViewSet, IncotermsViewSet, TipoResponsableViewSet
 
 router.register('api/general/persona', PersonaViewSet, 'personas')
 router.register('api/general/pais', PaisViewSet, 'paises')
@@ -33,33 +34,33 @@ router.register('api/general/tipoindice', TipoIndiceViewSet, 'tiposindice')
 router.register('api/general/indice', IndiceViewSet, 'indices')
 router.register('api/general/partido', PartidoViewSet, 'partidos')
 router.register('api/general/sector', SectorViewSet, 'sectores')
+router.register('api/general/idioma', IdiomaViewSet, 'idiomas')
+router.register('api/general/moneda', MonedaViewSet, 'monedas')
+router.register('api/general/tipodocumento', TipoDocumentoViewSet, 'tiposdocumento')
+router.register('api/general/tipofrecuencia', TipoFrecuenciaViewSet, 'tiposfrecuencia')
+router.register('api/general/tipovalor', TipoValorViewSet, 'tiposvalor')
+router.register('api/general/unidadmedida', UnidadMedidaViewSet, 'unidadesmedida')
+router.register('api/general/incoterms', IncotermsViewSet, 'incoterms')
+router.register('api/general/tiporesponsable', TipoResponsableViewSet, 'tiposresponsable')
 
 # URLS DE IMPUESTOS
 
-from .api import TipoDocumentoViewSet, TipoSujetoViewSet, TipoResponsableViewSet, ConceptoIncluidoViewSet
-from .api import IncotermsViewSet, IdiomaViewSet, UnidadMedidaViewSet, TipoComprobanteViewSet
-from .api import MonedaViewSet, AlicuotaImpuestoViewSet, PadronImpuestoViewSet
-from .api import TipoFrecuenciaViewSet, TipoValorViewSet, TipoCalculoViewSet,  ClasificacionImpuestoViewSet
-from .api import TipoImpuestoViewSet
+from .api import TipoSujetoViewSet, ConceptoIncluidoViewSet
+from .api import IdiomaViewSet, TipoComprobanteViewSet
+from .api import AlicuotaImpuestoViewSet, PadronImpuestoViewSet
+from .api import TipoCalculoViewSet,  ClasificacionImpuestoViewSet
+from .api import TipoImpuestoViewSet, CuitPaisViewSet, ImpuestoViewSet
 
-router.register('api/taxes/tipodocumento', TipoDocumentoViewSet, 'tiposdocumento')
-router.register('api/taxes/tiposujeto', TipoSujetoViewSet, 'tipossujeto')
-router.register('api/taxes/tiporesponsable', TipoResponsableViewSet, 'tiposresponsable')
-router.register('api/taxes/conceptoincluido', ConceptoIncluidoViewSet, 'conceptosincluidos')
-router.register('api/taxes/incoterm', IncotermsViewSet, 'incoterms')
-router.register('api/taxes/idioma', IdiomaViewSet, 'idiomas')
-router.register('api/taxes/unidadmedida', UnidadMedidaViewSet, 'unidadesmedida')
-router.register('api/taxes/tipocomprobante', TipoComprobanteViewSet, 'tiposcomprobante')
-router.register('api/taxes/moneda', MonedaViewSet, 'monedas')
-router.register('api/taxes/cuitpais', MonedaViewSet, 'cuitpaises')
-router.register('api/taxes/alicuotaimpuesto', AlicuotaImpuestoViewSet, 'alicuotasimpuestos')
-router.register('api/taxes/padronimpuesto', PadronImpuestoViewSet, 'padronesimpuesto')
-router.register('api/taxes/tipofrecuencia', TipoFrecuenciaViewSet, 'tiposfrecuencia')
-router.register('api/taxes/tipovalor', TipoValorViewSet, 'tiposvalor')
-router.register('api/taxes/tipocalculo', TipoCalculoViewSet, 'tiposcalculo')
-router.register('api/taxes/clasificacionimpuesto', ClasificacionImpuestoViewSet, 'clasificacionesimpuestos')
-router.register('api/taxes/tipoimpuesto', TipoImpuestoViewSet, 'tiposimpuestos')
-router.register('api/taxes/impuesto', TipoImpuestoViewSet, 'impuestos')
+router.register('api/impuestos/tiposujeto', TipoSujetoViewSet, 'tipossujeto')
+router.register('api/impuestos/conceptoincluido', ConceptoIncluidoViewSet, 'conceptosincluidos')
+router.register('api/impuestos/tipocomprobante', TipoComprobanteViewSet, 'tiposcomprobante')
+router.register('api/impuestos/cuitpais', CuitPaisViewSet, 'cuitpaises')
+router.register('api/impuestos/alicuotaimpuesto', AlicuotaImpuestoViewSet, 'alicuotasimpuestos')
+router.register('api/impuestos/padronimpuesto', PadronImpuestoViewSet, 'padronesimpuesto')
+router.register('api/impuestos/tipocalculo', TipoCalculoViewSet, 'tiposcalculo')
+router.register('api/impuestos/clasificacionimpuesto', ClasificacionImpuestoViewSet, 'clasificacionesimpuestos')
+router.register('api/impuestos/tipoimpuesto', TipoImpuestoViewSet, 'tiposimpuestos')
+router.register('api/impuestos/impuesto', ImpuestoViewSet, 'impuestos')
 
 # URLS DE CONTABILIDAD
 
@@ -70,14 +71,13 @@ router.register('api/contabilidad/plandecuentas', PlanCuentasViewSet, 'plandecue
 
 # URLS DE ENTIDADES 
 
-from .api import EntidadViewSet, ZonaViewSet, ListaPrecioEntidadViewSet, CondicionCrediticiaViewSet
+from .api import EntidadViewSet, ZonaViewSet, CondicionCrediticiaViewSet
 from .api import ImpuestoEntidadViewSet, EjecutivoViewSet, ContactoEntidadViewSet, TipoSedeViewSet
 from .api import TipoDomicilioViewSet, DireccionEntidadViewSet, ModuloEntidadViewSet, SectorEntidadViewSet
 from .api import FormaPagoEntidadViewSet
 
 router.register('api/entidades/entidad', EntidadViewSet, 'entidades')
 router.register('api/entidades/zona', ZonaViewSet, 'zonas')
-router.register('api/entidades/listaprecioentidad', ListaPrecioEntidadViewSet, 'listasprecioentidad')
 router.register('api/entidades/condicioncrediticia', CondicionCrediticiaViewSet, 'condicionescrediticias')
 router.register('api/entidades/impuestoentidad', ImpuestoEntidadViewSet, 'impuestosentidad')
 router.register('api/entidades/ejecutivo', EjecutivoViewSet, 'ejecutivos')
@@ -87,13 +87,14 @@ router.register('api/entidades/tipodomicilio', TipoDomicilioViewSet, 'tiposdomic
 router.register('api/entidades/direccionentidad', DireccionEntidadViewSet, 'direccionesentidades')
 router.register('api/entidades/moduloentidad', ModuloEntidadViewSet, 'modulosentidades')
 router.register('api/entidades/sectorentidad', SectorEntidadViewSet, 'sectoresentidades')
-router.register('api/entidades/formapagoentidad', FormaPagoViewSet, 'formaspagoentidades')
+router.register('api/entidades/formapagoentidad', FormaPagoEntidadViewSet, 'formaspagoentidades')
 
 # URLS DE PRODUCTOS 
 
-from .api import ListaPreciosViewSet
+from .api import ListaPreciosViewSet, ListaPrecioEntidadViewSet
 
 router.register('api/productos/listaprecios', ListaPreciosViewSet, 'listasprecios')
+router.register('api/productos/listaprecioentidad', ListaPrecioEntidadViewSet, 'listasprecioentidad')
 
 urlpatterns = [
     path('', include(router.urls)),
