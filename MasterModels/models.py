@@ -133,6 +133,7 @@ class Provincia(AuditModel):
     nombre = models.CharField(max_length=100)
     codigo = models.CharField(max_length=10)
     idpais = models.ForeignKey('Pais', on_delete=models.CASCADE)
+    jurisdiccion = models.CharField(max_length=10, blank=True, null=True)
 
     class Meta:
         verbose_name = 'Provincia'
@@ -145,7 +146,7 @@ class CodigoPostal(AuditModel):
     """ Clase para manejar los datos de paises """
     nombre = models.CharField(max_length=100)
     codigo = models.CharField(max_length=10, unique=True)
-    idprovincia = models.ForeignKey('Provincia', on_delete=models.CASCADE)
+    idpartido = models.ForeignKey('Partido', on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Codigo Postal'
@@ -159,6 +160,7 @@ class Partido(AuditModel):
     nombre = models.CharField(max_length=100)
     codigo = models.CharField(max_length=10, unique=True)
     idprovincia = models.ForeignKey('Provincia', on_delete=models.CASCADE)
+    jurisdiccion = models.CharField(max_length=10, blank=True, null=True)
 
     class Meta:
         verbose_name = 'Partido'
@@ -265,7 +267,7 @@ class Moneda(AuditModel):
     """ Clase para manejar monedas """
     nombre = models.CharField(max_length=100)
     codigo = models.CharField(max_length=10, default='', unique=True)
-    sigla = models.CharField(max_length=10, default='', unique=True)
+    afip = models.CharField(max_length=10, default='', unique=True)
 
     class Meta:
         verbose_name = 'Moneda'
@@ -334,6 +336,8 @@ class UnidadMedida(AuditModel):
     """ Clase para manejar unidades de medida  """
     nombre = models.CharField(max_length=100)
     codigo = models.CharField(max_length=10, default='', unique=True)
+    si = models.CharField(max_length=10, default='', unique=True)
+    decimales = models.IntegerField(default=0)
 
     class Meta:
         verbose_name = 'Unidad de Medida'
@@ -430,6 +434,7 @@ class AlicuotaImpuesto(AuditModel):
     nombre = models.CharField(max_length=100)
     codigo = models.CharField(max_length=10, unique=True)
     porcentaje = models.DecimalField(max_digits=5, decimal_places=2)
+    codigofiscal = models.CharField(max_length=10, blank=True, null=True)
 
     class Meta:
         verbose_name = 'Alicuota'

@@ -109,16 +109,6 @@ class ProvinciaSerializer(serializers.ModelSerializer):
         fields = '__all__'  # O especifica los campos que deseas incluir
         read_only_fields = ('created_at', 'updated_at')
 
-class CodigoPostalSerializer(serializers.ModelSerializer):
-    """ Serializadores """
-    idprovincia = ProvinciaSerializer()
-
-    class Meta:
-        """ Clase """
-        model = CodigoPostal
-        fields = '__all__'  # O especifica los campos que deseas incluir
-        read_only_fields = ('created_at', 'updated_at')
-
 class PartidoSerializer(serializers.ModelSerializer):
     """ Serializadores """
     idprovincia = ProvinciaSerializer()
@@ -126,6 +116,16 @@ class PartidoSerializer(serializers.ModelSerializer):
     class Meta:
         """ Clase """
         model = Partido
+        fields = '__all__'  # O especifica los campos que deseas incluir
+        read_only_fields = ('created_at', 'updated_at')
+
+class CodigoPostalSerializer(serializers.ModelSerializer):
+    """ Serializadores """
+    idprovincia = ProvinciaSerializer()
+    idpartido = PartidoSerializer()
+    class Meta:
+        """ Clase """
+        model = CodigoPostal
         fields = '__all__'  # O especifica los campos que deseas incluir
         read_only_fields = ('created_at', 'updated_at')
 
