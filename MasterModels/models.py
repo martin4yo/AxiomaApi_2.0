@@ -580,7 +580,7 @@ class Entidad(AuditModel):
 class CondicionCrediticia(AuditModel):
     """ Padrones de Impuesto """
 
-    identidad = models.ForeignKey('Entidad', on_delete=models.CASCADE)
+    identidad = models.ForeignKey('Entidad', related_name='condicionescrediticias', on_delete=models.CASCADE)
     idmodulo = models.ForeignKey('Modulo', on_delete=models.CASCADE)
     vigenciadesde = models.DateField(null=False)
     vigenciahasta = models.DateField(null=False)
@@ -597,7 +597,7 @@ class CondicionCrediticia(AuditModel):
 class ImpuestoEntidad(AuditModel):
     """ Padrones de Impuesto por entidad """
 
-    identidad = models.ForeignKey('Entidad', on_delete=models.CASCADE)
+    identidad = models.ForeignKey('Entidad', related_name = 'impuestos', on_delete=models.CASCADE)
     idmodulo = models.ForeignKey('Modulo', on_delete=models.CASCADE)
     idimpuesto = models.ForeignKey('Impuesto', on_delete=models.CASCADE)
     aplica = models.BooleanField()
@@ -629,9 +629,9 @@ class Zona(AuditModel):
 class Ejecutivo(AuditModel):
     """ Plan de Cuentas """
     
-    identidad = models.ForeignKey('Entidad', on_delete=models.CASCADE)
-    idpersona = models.ForeignKey('Persona', related_name='ejecutivos', on_delete=models.CASCADE)
-    idrol = models.ForeignKey('Rol', on_delete=models.CASCADE)
+    identidad = models.ForeignKey('Entidad', related_name='ejecutivos', on_delete=models.CASCADE)
+    idpersona = models.ForeignKey('Persona', related_name='personas', on_delete=models.CASCADE)
+    idrol = models.ForeignKey('Rol', related_name='roles', on_delete=models.CASCADE)
                
     class Meta:
         unique_together = (("identidad", "idpersona", "idrol"),)
@@ -644,7 +644,7 @@ class Ejecutivo(AuditModel):
 class DatosFiscalesEntidad(AuditModel):
     """ Plan de Cuentas """
     
-    identidad = models.ForeignKey('Entidad', on_delete=models.CASCADE)
+    identidad = models.ForeignKey('Entidad', related_name = 'datosfiscales', on_delete=models.CASCADE)
     idtipodocumento = models.ForeignKey('TipoDocumento', on_delete=models.CASCADE)
     numerodocumento = models.CharField(max_length=100)
     idtiposujeto = models.ForeignKey('TipoSujeto', on_delete=models.CASCADE)
@@ -660,7 +660,7 @@ class DatosFiscalesEntidad(AuditModel):
 class ContactoEntidad(AuditModel):
     """ Plan de Cuentas """
     
-    identidad = models.ForeignKey('Entidad', on_delete=models.CASCADE)
+    identidad = models.ForeignKey('Entidad', related_name='contactos', on_delete=models.CASCADE)
     nombre = models.CharField(max_length=200)
     rol = models.CharField(max_length=200)
     telefono = models.CharField(max_length=200)
@@ -677,7 +677,7 @@ class ContactoEntidad(AuditModel):
 class DireccionEntidad(AuditModel):
     """ Plan de Cuentas """
     
-    identidad = models.ForeignKey('Entidad', on_delete=models.CASCADE)
+    identidad = models.ForeignKey('Entidad', related_name='direcciones', on_delete=models.CASCADE)
     nombre = models.CharField(max_length=200, unique=True)
     idtiposede = models.ForeignKey('TipoSede', on_delete=models.CASCADE)
     idtipodomicilio = models.ForeignKey('TipoDomicilio', on_delete=models.CASCADE)
@@ -704,7 +704,7 @@ class DireccionEntidad(AuditModel):
 class ModuloEntidad(AuditModel):
     """ Modulos por Entidad """
     
-    identidad = models.ForeignKey('Entidad', on_delete=models.CASCADE)
+    identidad = models.ForeignKey('Entidad', related_name='modulos', on_delete=models.CASCADE)
     idmodulo = models.ForeignKey('Modulo', on_delete=models.CASCADE)
                
     class Meta:
@@ -718,7 +718,7 @@ class ModuloEntidad(AuditModel):
 class SectorEntidad(AuditModel):
     """ Sectores por Entidad """
     
-    identidad = models.ForeignKey('Entidad', on_delete=models.CASCADE)
+    identidad = models.ForeignKey('Entidad', related_name='sectores', on_delete=models.CASCADE)
     idmodulo = models.ForeignKey('Modulo', on_delete=models.CASCADE)
     idsector = models.ForeignKey('Sector', on_delete=models.CASCADE)
                
@@ -733,7 +733,7 @@ class SectorEntidad(AuditModel):
 class FormaPagoEntidad(AuditModel):
     """ Forma de Pago por Entidad """
     
-    identidad = models.ForeignKey('Entidad', on_delete=models.CASCADE)
+    identidad = models.ForeignKey('Entidad', related_name='formaspago', on_delete=models.CASCADE)
     idmodulo = models.ForeignKey('Modulo', on_delete=models.CASCADE)
     idformapago = models.ForeignKey('FormaPago', on_delete=models.CASCADE)
                
