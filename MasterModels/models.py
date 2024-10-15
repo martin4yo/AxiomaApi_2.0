@@ -577,9 +577,6 @@ class Entidad(AuditModel):
     def __str__(self):
          return f'{self.codigo}, {self.nombrefantasia}, {self.nombre}'
 
-    def __str__(self):
-         return f'{self.identidad}, {self.idmodulo}, {self.idlistaprecio}'
-
 class CondicionCrediticia(AuditModel):
     """ Padrones de Impuesto """
 
