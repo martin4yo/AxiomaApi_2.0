@@ -249,19 +249,18 @@ class Idioma(AuditModel):
     
 class Indice(AuditModel):
     """ Valores de Indice """
-    
     idtipoindice = models.ForeignKey('TipoIndice', on_delete=models.CASCADE)
     desde = models.DateField()
     hasta = models.DateField()
     importe = models.DecimalField(max_digits=18, decimal_places=6, default=0)
 
     class Meta:
-        unique_together = (("idtipoindice"),)
+        unique_together = (("idtipoindice"),("desde"),("hasta"),)
         verbose_name = 'Indice'
         verbose_name_plural = 'GRAL - Indices'
 
     def __str__(self):
-         return f'{self.nombre}, {self.codigo}, {self.idmoneda}'
+         return f'{self.idtipoindice}, {self.desde}, {self.hasta}, {self.importe}'
     
 class Moneda(AuditModel):
     """ Clase para manejar monedas """
@@ -306,7 +305,7 @@ class TipoFrecuencia(AuditModel):
 class TipoIndice(AuditModel):
     """ Tipos de Indice """
     
-    nombre = models.CharField(max_length=100)
+    nombre = models.CharField(max_length=100, default='a definir')
     codigo = models.CharField(max_length=10, unique=True)
     idmoneda = models.ForeignKey(Moneda, on_delete=models.CASCADE)
     idtipofrecuencia = models.ForeignKey('TipoFrecuencia', on_delete=models.CASCADE)

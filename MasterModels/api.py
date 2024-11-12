@@ -2,6 +2,7 @@
 Api de MasterModels
 """
 from rest_framework import viewsets, permissions
+from django_filters.rest_framework import DjangoFilterBackend
 
 from .models import Persona, PersonaRol, Pais, Provincia, CodigoPostal
 from .models import Rol, Modulo, Mascara, FormaPago, FormaPagoDetalle, TipoDeCambio, Partido, Sector
@@ -10,6 +11,45 @@ from .serializers import PersonaSerializer, PersonaRolSerializer, PaisSerializer
 from .serializers import RolSerializer, ModuloSerializer, MascaraSerializer, FormaPagoSerializer
 from .serializers import FormaPagoSerializer, FormaPagoDetalleSerializer, TipoDeCambioSerializer, PartidoSerializer
 from .serializers import SectorSerializer
+
+from .filters import PersonaFilter, GenericDynamicFilter, DynamicModelFilter
+
+### VIEWSET BASE #######################################
+
+# class GenericModelViewSet(viewsets.ModelViewSet):
+#     filter_backends = [DjangoFilterBackend]
+    
+#     def get_queryset(self):
+#         # Obtener el modelo del serializer asignado
+#         if self.serializer_class.Meta.model is None:
+#             raise ValueError("El modelo no se ha pasado al filtro.")
+        
+#         model = self.serializer_class.Meta.model
+#         return model.objects.all()
+    
+#     def get_filterset(self, request, queryset, view):
+#         # Obtiene el modelo del serializer y pasa como argumento al filtro
+#         if self.serializer_class.Meta.model is None:
+#             raise ValueError("El modelo no se ha pasado al filtro.")
+        
+#         model = self.serializer_class.Meta.model
+#         return GenericDynamicFilter(data=request.GET, queryset=queryset, model=model)
+
+class GenericModelViewSet(viewsets.ModelViewSet):
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = DynamicModelFilter
+
+    def get_queryset(self):
+        # Obtener el modelo desde el serializer para definir el queryset
+        model = self.serializer_class.Meta.model
+        return model.objects.all()
+
+    def get_filterset_class(self):
+        # Establece el modelo en el Meta de DynamicModelFilter
+        class CustomFilter(DynamicModelFilter):
+            class Meta(DynamicModelFilter.Meta):
+                model = self.serializer_class.Meta.model
+        return CustomFilter
 
 ### GENERALES ##########################################
 
@@ -23,6 +63,14 @@ class SectorViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = SectorSerializer
 
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = Sector
+    
+    filterset_class = FilterClass
+
 class TipoDeCambioViewSet(viewsets.ModelViewSet):
     """
     ViewSet de Formas de Pago
@@ -33,6 +81,14 @@ class TipoDeCambioViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = TipoDeCambioSerializer
 
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = TipoDeCambio
+    
+    filterset_class = FilterClass
+
 class FormaPagoViewSet(viewsets.ModelViewSet):
     """
     ViewSet de Formas de Pago
@@ -42,6 +98,14 @@ class FormaPagoViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticated
     ]
     serializer_class = FormaPagoSerializer
+    
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = FormaPago
+    
+    filterset_class = FilterClass
 
 class FormaPagoDetalleViewSet(viewsets.ModelViewSet):
     """
@@ -52,6 +116,14 @@ class FormaPagoDetalleViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticated
     ]
     serializer_class = FormaPagoDetalleSerializer
+    
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = FormaPagoDetalle
+    
+    filterset_class = FilterClass
 
 class MascaraViewSet(viewsets.ModelViewSet):
     """
@@ -63,15 +135,13 @@ class MascaraViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = MascaraSerializer
 
-class MascaraViewSet(viewsets.ModelViewSet):
-    """
-    ViewSet de Mascaras
-    """
-    queryset = Mascara.objects.all()
-    permission_classes = [
-        permissions.IsAuthenticated
-    ]
-    serializer_class = MascaraSerializer
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = Mascara
+    
+    filterset_class = FilterClass
 
 class ModuloViewSet(viewsets.ModelViewSet):
     """
@@ -83,6 +153,14 @@ class ModuloViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = ModuloSerializer
 
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = Modulo
+    
+    filterset_class = FilterClass
+
 class RolViewSet(viewsets.ModelViewSet):
     """
     ViewSet de Personas
@@ -93,15 +171,34 @@ class RolViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = RolSerializer
 
-class PersonaViewSet(viewsets.ModelViewSet):
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = Rol
+    
+    filterset_class = FilterClass
+
+
+class PersonaViewSet(GenericModelViewSet):
     """
     ViewSet de Personas
     """
+    serializer_class = PersonaSerializer
+    
     queryset = Persona.objects.all()
     permission_classes = [
         permissions.IsAuthenticated
     ]
-    serializer_class = PersonaSerializer
+
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = Persona
+    
+    filterset_class = FilterClass
+
 
 class PersonaRolViewSet(viewsets.ModelViewSet):
     """
@@ -113,13 +210,31 @@ class PersonaRolViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = PersonaRolSerializer
 
-class PaisViewSet(viewsets.ModelViewSet):
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = PersonaRol
+    
+    filterset_class = FilterClass
+
+
+class PaisViewSet(GenericModelViewSet):
     """ ViewSet de Paises"""
-    queryset = Pais.objects.all()
+   ### queryset = Pais.objects.all()
     permission_classes = [
         permissions.IsAuthenticated
     ]
     serializer_class = PaisSerializer
+
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = Pais
+    
+    filterset_class = FilterClass
+
 
 class ProvinciaViewSet(viewsets.ModelViewSet):
     """ ViewSet de Provincia"""
@@ -129,6 +244,15 @@ class ProvinciaViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = ProvinciaSerializer
 
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = Provincia
+    
+    filterset_class = FilterClass
+
+
 class CodigoPostalViewSet(viewsets.ModelViewSet):
     """ ViewSet de CodigoPostal"""
     queryset = CodigoPostal.objects.all()
@@ -137,6 +261,15 @@ class CodigoPostalViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = CodigoPostalSerializer
 
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = CodigoPostal
+    
+    filterset_class = FilterClass
+
+
 class PartidoViewSet(viewsets.ModelViewSet):
     """ ViewSet de CodigoPostal"""
     queryset = Partido.objects.all()
@@ -144,6 +277,14 @@ class PartidoViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticated
     ]
     serializer_class = PartidoSerializer
+
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = Partido
+    
+    filterset_class = FilterClass
 
 ### IMPOSITIVO #########################################################
 from .models import TipoDocumento, TipoSujeto, TipoResponsable, ConceptoIncluido, Incoterms, Idioma, UnidadMedida
@@ -166,6 +307,15 @@ class ImpuestoViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = ImpuestoSerializer
 
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = FormaPagoDetalle
+    
+    filterset_class = Impuesto
+
+
 class TipoImpuestoViewSet(viewsets.ModelViewSet):
     """ ViewSet de Tipos de Impuesto"""
     queryset = TipoImpuesto.objects.all()
@@ -173,6 +323,15 @@ class TipoImpuestoViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticated
     ]
     serializer_class = TipoImpuestoSerializer
+
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = TipoImpuesto
+    
+    filterset_class = FilterClass
+
 
 class TipoCalculoViewSet(viewsets.ModelViewSet):
     """ ViewSet de Tipos de Frecuencia"""
@@ -182,6 +341,15 @@ class TipoCalculoViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = TipoCalculoSerializer
 
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = TipoCalculo
+    
+    filterset_class = FilterClass
+
+
 class TipoFrecuenciaViewSet(viewsets.ModelViewSet):
     """ ViewSet de Tipos de Frecuencia"""
     queryset = TipoFrecuencia.objects.all()
@@ -189,6 +357,15 @@ class TipoFrecuenciaViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticated
     ]
     serializer_class = TipoFrecuenciaSerializer
+
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = TipoFrecuencia
+    
+    filterset_class = FilterClass
+
 
 class TipoValorViewSet(viewsets.ModelViewSet):
     """ ViewSet de Tipos de Valor"""
@@ -198,6 +375,15 @@ class TipoValorViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = TipoValorSerializer
 
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = TipoValor
+    
+    filterset_class = FilterClass
+
+
 class MonedaViewSet(viewsets.ModelViewSet):
     """ ViewSet de Monedas"""
     queryset = Moneda.objects.all()
@@ -205,6 +391,15 @@ class MonedaViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticated
     ]
     serializer_class = MonedaSerializer
+
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = Moneda
+    
+    filterset_class = FilterClass
+
 
 class TipoComprobanteViewSet(viewsets.ModelViewSet):
     """ ViewSet de Tipos de Comprobante"""
@@ -214,6 +409,15 @@ class TipoComprobanteViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = TipoComprobanteSerializer
 
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = TipoComprobante
+    
+    filterset_class = FilterClass
+
+
 class UnidadMedidaViewSet(viewsets.ModelViewSet):
     """ ViewSet de Tipos de Conceptos de AFIP"""
     queryset = UnidadMedida.objects.all()
@@ -221,6 +425,15 @@ class UnidadMedidaViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticated
     ]
     serializer_class = UnidadMedidaSerializer
+
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = UnidadMedida
+    
+    filterset_class = FilterClass
+
 
 class IdiomaViewSet(viewsets.ModelViewSet):
     """ ViewSet de Tipos de Conceptos de AFIP"""
@@ -230,6 +443,15 @@ class IdiomaViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = IdiomaSerializer
 
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = Idioma
+    
+    filterset_class = FilterClass
+
+
 class IncotermsViewSet(viewsets.ModelViewSet):
     """ ViewSet de Tipos de Conceptos de AFIP"""
     queryset = Incoterms.objects.all()
@@ -237,6 +459,15 @@ class IncotermsViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticated
     ]
     serializer_class = IncotermsSerializer
+
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = Incoterms
+    
+    filterset_class = FilterClass
+
 
 class ConceptoIncluidoViewSet(viewsets.ModelViewSet):
     """ ViewSet de Tipos de Conceptos de AFIP"""
@@ -246,6 +477,15 @@ class ConceptoIncluidoViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = ConceptoIncluidoSerializer
 
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = ConceptoIncluido
+    
+    filterset_class = FilterClass
+
+
 class TipoResponsableViewSet(viewsets.ModelViewSet):
     """ ViewSet de Tipos de Responsable"""
     queryset = TipoResponsable.objects.all()
@@ -253,6 +493,15 @@ class TipoResponsableViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticated
     ]
     serializer_class = TipoResponsableSerializer
+
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = TipoResponsable
+    
+    filterset_class = FilterClass
+
 
 class TipoSujetoViewSet(viewsets.ModelViewSet):
     """ ViewSet de Tipos de Sujeto"""
@@ -262,6 +511,15 @@ class TipoSujetoViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = TipoSujetoSerializer
 
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = TipoSujeto
+    
+    filterset_class = FilterClass
+
+
 class TipoDocumentoViewSet(viewsets.ModelViewSet):
     """ ViewSet de Tipos de Documento"""
     queryset = TipoDocumento.objects.all()
@@ -269,6 +527,15 @@ class TipoDocumentoViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticated
     ]
     serializer_class = TipoDocumentoSerializer
+
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = TipoDocumento
+    
+    filterset_class = FilterClass
+
 
 class CuitPaisViewSet(viewsets.ModelViewSet):
     """ ViewSet de CUIT de Paises"""
@@ -278,6 +545,15 @@ class CuitPaisViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = CuitPaisSerializer
 
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = CuitPais
+    
+    filterset_class = FilterClass
+
+
 class TipoIndiceViewSet(viewsets.ModelViewSet):
     """ ViewSet de CUIT de Paises"""
     queryset = TipoIndice.objects.all()
@@ -285,6 +561,15 @@ class TipoIndiceViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticated
     ]
     serializer_class = TipoIndiceSerializer
+
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = TipoIndice
+    
+    filterset_class = FilterClass
+
 
 class IndiceViewSet(viewsets.ModelViewSet):
     """ ViewSet de Indices"""
@@ -294,6 +579,15 @@ class IndiceViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = IndiceSerializer
 
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = Indice
+    
+    filterset_class = FilterClass
+
+
 class AlicuotaImpuestoViewSet(viewsets.ModelViewSet):
     """ ViewSet de Alicuotas"""
     queryset = AlicuotaImpuesto.objects.all()
@@ -301,6 +595,15 @@ class AlicuotaImpuestoViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticated
     ]
     serializer_class = AlicuotaImpuestoSerializer
+
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = AlicuotaImpuesto
+    
+    filterset_class = FilterClass
+
 
 class PadronImpuestoViewSet(viewsets.ModelViewSet):
     """ ViewSet de Padrones"""
@@ -310,6 +613,15 @@ class PadronImpuestoViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = PadronImpuestoSerializer
 
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = PadronImpuesto
+    
+    filterset_class = FilterClass
+
+
 class ClasificacionImpuestoViewSet(viewsets.ModelViewSet):
     """ ViewSet de Padrones"""
     queryset = ClasificacionImpuesto.objects.all()
@@ -317,6 +629,15 @@ class ClasificacionImpuestoViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticated
     ]
     serializer_class = ClasificacionImpuestoSerializer
+
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = ClasificacionImpuesto
+    
+    filterset_class = FilterClass
+
 
 ### CONTABLE #########################################################
 from .models import TipoAjuste, PlanCuentas
@@ -330,6 +651,15 @@ class TipoAjusteViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = TipoaAjusteSerializer
 
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = TipoAjuste
+    
+    filterset_class = FilterClass
+
+
 class PlanCuentasViewSet(viewsets.ModelViewSet):
     """ ViewSet de Plan De Cuentas"""
     queryset = PlanCuentas.objects.all()
@@ -337,6 +667,15 @@ class PlanCuentasViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticated
     ]
     serializer_class = PlanCuentasSerializer
+
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = PlanCuentas
+    
+    filterset_class = FilterClass
+
 
 
 ### ENTIDADES #########################################################
@@ -358,6 +697,15 @@ class ModuloEntidadViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = ModuloEntidadSerializer
 
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = ModuloEntidad
+    
+    filterset_class = FilterClass
+
+
 class SectorEntidadViewSet(viewsets.ModelViewSet):
     """ ViewSet de Direcciones de Sector Entidades"""
     queryset = SectorEntidad.objects.all()
@@ -365,6 +713,15 @@ class SectorEntidadViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticated
     ]
     serializer_class = SectorEntidadSerializer
+
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = SectorEntidad
+    
+    filterset_class = FilterClass
+
 
 class FormaPagoEntidadViewSet(viewsets.ModelViewSet):
     """ ViewSet de Direcciones de Forma Pago Entidades"""
@@ -374,6 +731,15 @@ class FormaPagoEntidadViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = FormaPagoEntidadSerializer
 
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = FormaPagoEntidad
+    
+    filterset_class = FilterClass
+
+
 class DireccionEntidadViewSet(viewsets.ModelViewSet):
     """ ViewSet de Direcciones de Entidades"""
     queryset = DireccionEntidad.objects.all()
@@ -381,6 +747,14 @@ class DireccionEntidadViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticated
     ]
     serializer_class = DireccionEntidadSerializer
+
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = DireccionEntidad
+    
+    filterset_class = FilterClass
 
 class TipoSedeViewSet(viewsets.ModelViewSet):
     """ ViewSet de Ejecutivos"""
@@ -390,6 +764,15 @@ class TipoSedeViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = TipoSedeSerializer
 
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = TipoSede
+    
+    filterset_class = FilterClass
+
+
 class TipoDomicilioViewSet(viewsets.ModelViewSet):
     """ ViewSet de Ejecutivos"""
     queryset = TipoDomicilio.objects.all()
@@ -397,6 +780,15 @@ class TipoDomicilioViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticated
     ]
     serializer_class = TipoDomicilioSerializer
+
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = TipoDomicilio
+    
+    filterset_class = FilterClass
+
 
 class ContactoEntidadViewSet(viewsets.ModelViewSet):
     """ ViewSet de Ejecutivos"""
@@ -406,6 +798,15 @@ class ContactoEntidadViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = ContactoEntidadSerializer
 
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = ContactoEntidad
+    
+    filterset_class = FilterClass
+
+
 class DatosFiscalesEntidadViewSet(viewsets.ModelViewSet):
     """ ViewSet de Ejecutivos"""
     queryset = DatosFiscalesEntidad.objects.all()
@@ -413,6 +814,15 @@ class DatosFiscalesEntidadViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticated
     ]
     serializer_class = DatosFiscalesEntidadSerializer
+
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = DatosFiscalesEntidad
+    
+    filterset_class = FilterClass
+
 
 class EjecutivoViewSet(viewsets.ModelViewSet):
     """ ViewSet de Ejecutivos"""
@@ -422,6 +832,15 @@ class EjecutivoViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = EjecutivoSerializer
 
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = Ejecutivo
+    
+    filterset_class = FilterClass
+
+
 class ImpuestoEntidadViewSet(viewsets.ModelViewSet):
     """ ViewSet de Impuestos por Entidad"""
     queryset = ImpuestoEntidad.objects.all()
@@ -429,6 +848,15 @@ class ImpuestoEntidadViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticated
     ]
     serializer_class = ImpuestoEntidadSerializer
+
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = ImpuestoEntidad
+    
+    filterset_class = FilterClass
+
 
 class EntidadViewSet(viewsets.ModelViewSet):
     """ ViewSet de Entidades"""
@@ -438,6 +866,15 @@ class EntidadViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = EntidadSerializer
 
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = Entidad
+    
+    filterset_class = FilterClass
+
+
 class ZonaViewSet(viewsets.ModelViewSet):
     """ ViewSet de Zonas"""
     queryset = Zona.objects.all()
@@ -445,6 +882,15 @@ class ZonaViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticated
     ]
     serializer_class = ZonaSerializer
+
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = Zona
+    
+    filterset_class = FilterClass
+
 
 class ListaPrecioEntidadViewSet(viewsets.ModelViewSet):
     """ ViewSet de Zonas"""
@@ -454,6 +900,15 @@ class ListaPrecioEntidadViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = ListaPrecioEntidadSerializer
 
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = ListaPrecioEntidad
+    
+    filterset_class = FilterClass
+
+
 class CondicionCrediticiaViewSet(viewsets.ModelViewSet):
     """ ViewSet de Condiciones Crediticias"""
     queryset = CondicionCrediticia.objects.all()
@@ -462,8 +917,16 @@ class CondicionCrediticiaViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = CondicionCrediticiaSerializer
 
-### PRODUCTOS ##########################################
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = CondicionCrediticia
+    
+    filterset_class = FilterClass
 
+
+### PRODUCTOS ##########################################
 
 from .models import ListaPrecios
 
@@ -476,3 +939,11 @@ class ListaPreciosViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticated
     ]
     serializer_class = ListaPreciosSerializer
+
+    filter_backends = [DjangoFilterBackend]
+    
+    class FilterClass(DynamicModelFilter):
+        class Meta(DynamicModelFilter.Meta):
+            model = ListaPrecios
+    
+    filterset_class = FilterClass
