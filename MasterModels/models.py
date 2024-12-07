@@ -18,14 +18,21 @@ class AuditModel(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     disabled = models.BooleanField(default=False)
     user_id = models.ForeignKey('Persona', on_delete=models.CASCADE)
+    
 
     class Meta:
         """ Seteo de clase abstracta """
         abstract = True
 
+class TenantModel(models.Model):
+    tenant_id = models.CharField(max_length=50, default='')
+
+    class Meta:
+        abstract = True
+
 # Generales ########################################################################
 
-class TipoDeCambio(AuditModel):
+class TipoDeCambio(AuditModel, TenantModel):
     """ Clase para manejar los roles """
     fecha = models.DateField()
     idmoneda = models.ForeignKey('Moneda', on_delete=models.CASCADE)
@@ -41,7 +48,7 @@ class TipoDeCambio(AuditModel):
     def __str__(self):
         return f'{self.idmoneda}, {self.fecha}, {self.importe}, {self.vendedor}, {self.comprador}' 
 
-class FormaPago(AuditModel):
+class FormaPago(AuditModel, TenantModel):
     """ Clase para manejar los roles """
     nombre = models.CharField(max_length=100)
     codigo = models.CharField(max_length=10, default='', unique=True)
@@ -54,7 +61,7 @@ class FormaPago(AuditModel):
     def __str__(self):
         return f'{self.nombre}' 
 
-class FormaPagoDetalle(AuditModel):
+class FormaPagoDetalle(AuditModel, TenantModel):
     """ Clase para manejar los datos de paises """
     cuota = models.IntegerField()
     dias = models.IntegerField()
@@ -69,7 +76,7 @@ class FormaPagoDetalle(AuditModel):
     def __str__(self):
         return f'{self.idformapago} - {self.dias}, {self.porcentaje}'
 
-class Mascara(AuditModel):
+class Mascara(AuditModel, TenantModel):
     """ Clase para manejar los roles """
     nombre = models.CharField(max_length=100)
     estructura = models.CharField(max_length=256, default='')
@@ -93,7 +100,7 @@ class Modulo(AuditModel):
     def __str__(self):
         return f'{self.nombre}' 
     
-class Rol(AuditModel):
+class Rol(AuditModel, TenantModel):
     """ Clase para manejar los roles """
     nombre = models.CharField(max_length=100)
 
@@ -104,7 +111,7 @@ class Rol(AuditModel):
     def __str__(self):
         return f'{self.nombre}'  
     
-class Sector(AuditModel):
+class Sector(AuditModel, TenantModel):
     """ Clase para manejar los datos de paises """
     nombre = models.CharField(max_length=100)
     codigo = models.CharField(max_length=10, unique=True)
@@ -197,7 +204,7 @@ class Persona(models.Model):
     def __str__(self):
         return f'{self.nombre}'
     
-class PersonaRol(AuditModel):
+class PersonaRol(AuditModel, TenantModel):
     """ Clase para manejar los roles """
     idpersona = models.ForeignKey(Persona, related_name='roles', on_delete=models.CASCADE)
     idrol = models.ForeignKey('Rol', on_delete=models.CASCADE)
@@ -210,7 +217,7 @@ class PersonaRol(AuditModel):
     def __str__(self):
         return f'{self.idpersona}, {self.idrol}' 
     
-class TipoSede(AuditModel):
+class TipoSede(AuditModel, TenantModel):
     """ Clase para manejar los tipos de sedes """
     nombre = models.CharField(max_length=100)
     codigo = models.CharField(max_length=10, unique=True)
@@ -222,7 +229,7 @@ class TipoSede(AuditModel):
     def __str__(self):
         return f'{self.nombre}'
     
-class TipoDomicilio(AuditModel):
+class TipoDomicilio(AuditModel, TenantModel):
     """ Clase para manejar los tipos de domicilio """
 
     nombre = models.CharField(max_length=100)
@@ -247,7 +254,7 @@ class Idioma(AuditModel):
     def __str__(self):
         return f'{self.nombre}' 
     
-class Indice(AuditModel):
+class Indice(AuditModel, TenantModel):
     """ Valores de Indice """
     idtipoindice = models.ForeignKey('TipoIndice', on_delete=models.CASCADE)
     desde = models.DateField()
@@ -520,7 +527,7 @@ class Impuesto(AuditModel):
 
 """ Modelos para el modulo contable """
 
-class TipoAjuste(AuditModel):
+class TipoAjuste(AuditModel, TenantModel):
     """ Clase para manejar los tipos de sujeto """
     nombre = models.CharField(max_length=100)
     codigo = models.CharField(max_length=1, default='', unique=True)
@@ -532,7 +539,7 @@ class TipoAjuste(AuditModel):
     def __str__(self):
         return f'{self.nombre}'
 
-class PlanCuentas(AuditModel):
+class PlanCuentas(AuditModel, TenantModel):
     """ Plan de Cuentas """
     
     nombre = models.CharField(max_length=256)
@@ -559,7 +566,7 @@ class PlanCuentas(AuditModel):
 
 """ Modelos para el modulo de entidades """
 
-class Entidad(AuditModel):
+class Entidad(AuditModel, TenantModel):
     """ Plan de Cuentas """
     
     nombrefantasia = models.CharField(max_length=256)
@@ -576,7 +583,7 @@ class Entidad(AuditModel):
     def __str__(self):
          return f'{self.codigo}, {self.nombrefantasia}, {self.nombre}'
 
-class CondicionCrediticia(AuditModel):
+class CondicionCrediticia(AuditModel, TenantModel):
     """ Padrones de Impuesto """
 
     identidad = models.ForeignKey('Entidad', related_name='condicionescrediticias', on_delete=models.CASCADE)
@@ -593,7 +600,7 @@ class CondicionCrediticia(AuditModel):
     def __str__(self):
          return f'{self.identidad}, {self.idmodulo}, {self.vigenciadesde}, {self.limitedesde}'
     
-class ImpuestoEntidad(AuditModel):
+class ImpuestoEntidad(AuditModel, TenantModel):
     """ Padrones de Impuesto por entidad """
 
     identidad = models.ForeignKey('Entidad', related_name = 'impuestos', on_delete=models.CASCADE)
@@ -613,7 +620,7 @@ class ImpuestoEntidad(AuditModel):
     def __str__(self):
          return f'{self.identidad}, {self.idmodulo}, {self.idimpuesto}'
     
-class Zona(AuditModel):
+class Zona(AuditModel, TenantModel):
     """ Clase para manejar las zonas """
     nombre = models.CharField(max_length=100)
     codigo = models.CharField(max_length=10, default='', unique=True)
@@ -625,7 +632,7 @@ class Zona(AuditModel):
     def __str__(self):
         return f'{self.nombre}'
 
-class Ejecutivo(AuditModel):
+class Ejecutivo(AuditModel, TenantModel):
     """ Plan de Cuentas """
     
     identidad = models.ForeignKey('Entidad', related_name='ejecutivos', on_delete=models.CASCADE)
@@ -640,7 +647,7 @@ class Ejecutivo(AuditModel):
     def __str__(self):
          return f'{self.identidad}, {self.idpersona}, {self.idrol}'
     
-class DatosFiscalesEntidad(AuditModel):
+class DatosFiscalesEntidad(AuditModel, TenantModel):
     """ Plan de Cuentas """
     
     identidad = models.ForeignKey('Entidad', related_name = 'datosfiscales', on_delete=models.CASCADE)
@@ -656,7 +663,7 @@ class DatosFiscalesEntidad(AuditModel):
     def __str__(self):
          return f'{self.identidad}, {self.idtipodocumento}, {self.numerodocumento}'
     
-class ContactoEntidad(AuditModel):
+class ContactoEntidad(AuditModel, TenantModel):
     """ Plan de Cuentas """
     
     identidad = models.ForeignKey('Entidad', related_name='contactos', on_delete=models.CASCADE)
@@ -673,7 +680,7 @@ class ContactoEntidad(AuditModel):
     def __str__(self):
          return f'{self.identidad}, {self.nombre}, {self.rol}'
     
-class DireccionEntidad(AuditModel):
+class DireccionEntidad(AuditModel, TenantModel):
     """ Plan de Cuentas """
     
     identidad = models.ForeignKey('Entidad', related_name='direcciones', on_delete=models.CASCADE)
@@ -700,7 +707,7 @@ class DireccionEntidad(AuditModel):
     def __str__(self):
          return f'{self.identidad}, {self.nombre}, {self.idtiposede}'
        
-class ModuloEntidad(AuditModel):
+class ModuloEntidad(AuditModel, TenantModel):
     """ Modulos por Entidad """
     
     identidad = models.ForeignKey('Entidad', related_name='modulos', on_delete=models.CASCADE)
@@ -714,7 +721,7 @@ class ModuloEntidad(AuditModel):
     def __str__(self):
          return f'{self.identidad}, {self.idmodulo}'
     
-class SectorEntidad(AuditModel):
+class SectorEntidad(AuditModel, TenantModel):
     """ Sectores por Entidad """
     
     identidad = models.ForeignKey('Entidad', related_name='sectores', on_delete=models.CASCADE)
@@ -729,7 +736,7 @@ class SectorEntidad(AuditModel):
     def __str__(self):
          return f'{self.identidad}, {self.idmodulo}, {self.idsector}'
     
-class FormaPagoEntidad(AuditModel):
+class FormaPagoEntidad(AuditModel, TenantModel):
     """ Forma de Pago por Entidad """
     
     identidad = models.ForeignKey('Entidad', related_name='formaspago', on_delete=models.CASCADE)
@@ -749,7 +756,7 @@ class FormaPagoEntidad(AuditModel):
 
 """ Modelos para el modulo de productos """
 
-class ListaPrecios(AuditModel):
+class ListaPrecios(AuditModel, TenantModel):
     """ Clase para manejar los tipos de sujeto """
 
     nombre = models.CharField(max_length=100)
@@ -762,7 +769,7 @@ class ListaPrecios(AuditModel):
     def __str__(self):
         return f'{self.nombre}'
     
-class ListaPrecioEntidad(AuditModel):
+class ListaPrecioEntidad(AuditModel, TenantModel):
     """ Plan de Cuentas """
     
     identidad = models.ForeignKey('Entidad', on_delete=models.CASCADE)
