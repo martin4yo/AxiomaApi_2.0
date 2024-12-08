@@ -2,7 +2,9 @@
 Api de MasterModels
 """
 from rest_framework import viewsets, permissions
+from rest_framework.filters import OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
+from .paginators import CustomPagination
 
 from .models import Persona, PersonaRol, Pais, Provincia, CodigoPostal
 from .models import Rol, Modulo, Mascara, FormaPago, FormaPagoDetalle, TipoDeCambio, Partido, Sector
@@ -16,7 +18,7 @@ from .filters import PersonaFilter, GenericDynamicFilter, DynamicModelFilter
 
 ### VIEWSET BASE #######################################
 
-# class GenericModelViewSet(viewsets.ModelViewSet):
+# class GenericModelViewSet(GenericModelViewSet):
 #     filter_backends = [DjangoFilterBackend]
     
 #     def get_queryset(self):
@@ -53,7 +55,7 @@ class GenericModelViewSet(viewsets.ModelViewSet):
 
 ### GENERALES ##########################################
 
-class SectorViewSet(viewsets.ModelViewSet):
+class SectorViewSet(GenericModelViewSet):
     """
     ViewSet de Formas de Pago
     """
@@ -63,7 +65,12 @@ class SectorViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = SectorSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in Sector._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -71,7 +78,7 @@ class SectorViewSet(viewsets.ModelViewSet):
     
     filterset_class = FilterClass
 
-class TipoDeCambioViewSet(viewsets.ModelViewSet):
+class TipoDeCambioViewSet(GenericModelViewSet):
     """
     ViewSet de Formas de Pago
     """
@@ -81,7 +88,12 @@ class TipoDeCambioViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = TipoDeCambioSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in TipoDeCambio._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -89,7 +101,7 @@ class TipoDeCambioViewSet(viewsets.ModelViewSet):
     
     filterset_class = FilterClass
 
-class FormaPagoViewSet(viewsets.ModelViewSet):
+class FormaPagoViewSet(GenericModelViewSet):
     """
     ViewSet de Formas de Pago
     """
@@ -99,7 +111,12 @@ class FormaPagoViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = FormaPagoSerializer
     
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in FormaPago._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -107,7 +124,7 @@ class FormaPagoViewSet(viewsets.ModelViewSet):
     
     filterset_class = FilterClass
 
-class FormaPagoDetalleViewSet(viewsets.ModelViewSet):
+class FormaPagoDetalleViewSet(GenericModelViewSet):
     """
     ViewSet de Formas de Pago
     """
@@ -117,7 +134,12 @@ class FormaPagoDetalleViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = FormaPagoDetalleSerializer
     
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in FormaPagoDetalle._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -125,7 +147,7 @@ class FormaPagoDetalleViewSet(viewsets.ModelViewSet):
     
     filterset_class = FilterClass
 
-class MascaraViewSet(viewsets.ModelViewSet):
+class MascaraViewSet(GenericModelViewSet):
     """
     ViewSet de Mascaras
     """
@@ -135,7 +157,12 @@ class MascaraViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = MascaraSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in Mascara._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -143,7 +170,7 @@ class MascaraViewSet(viewsets.ModelViewSet):
     
     filterset_class = FilterClass
 
-class ModuloViewSet(viewsets.ModelViewSet):
+class ModuloViewSet(GenericModelViewSet):
     """
     ViewSet de Modulos
     """
@@ -153,7 +180,12 @@ class ModuloViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = ModuloSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in Modulo._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -161,7 +193,7 @@ class ModuloViewSet(viewsets.ModelViewSet):
     
     filterset_class = FilterClass
 
-class RolViewSet(viewsets.ModelViewSet):
+class RolViewSet(GenericModelViewSet):
     """
     ViewSet de Personas
     """
@@ -171,7 +203,12 @@ class RolViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = RolSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in Rol._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -191,7 +228,12 @@ class PersonaViewSet(GenericModelViewSet):
         permissions.IsAuthenticated
     ]
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in Persona._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -200,7 +242,7 @@ class PersonaViewSet(GenericModelViewSet):
     filterset_class = FilterClass
 
 
-class PersonaRolViewSet(viewsets.ModelViewSet):
+class PersonaRolViewSet(GenericModelViewSet):
     """
     ViewSet de Roles por Personas
     """
@@ -210,7 +252,12 @@ class PersonaRolViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = PersonaRolSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in PersonaRol._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -221,13 +268,18 @@ class PersonaRolViewSet(viewsets.ModelViewSet):
 
 class PaisViewSet(GenericModelViewSet):
     """ ViewSet de Paises"""
-   ### queryset = Pais.objects.all()
+    queryset = Pais.objects.all()
+
     permission_classes = [
         permissions.IsAuthenticated
     ]
     serializer_class = PaisSerializer
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
 
-    filter_backends = [DjangoFilterBackend]
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in Pais._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -236,7 +288,7 @@ class PaisViewSet(GenericModelViewSet):
     filterset_class = FilterClass
 
 
-class ProvinciaViewSet(viewsets.ModelViewSet):
+class ProvinciaViewSet(GenericModelViewSet):
     """ ViewSet de Provincia"""
     queryset = Provincia.objects.all()
     permission_classes = [
@@ -244,7 +296,12 @@ class ProvinciaViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = ProvinciaSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in Provincia._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -253,7 +310,7 @@ class ProvinciaViewSet(viewsets.ModelViewSet):
     filterset_class = FilterClass
 
 
-class CodigoPostalViewSet(viewsets.ModelViewSet):
+class CodigoPostalViewSet(GenericModelViewSet):
     """ ViewSet de CodigoPostal"""
     queryset = CodigoPostal.objects.all()
     permission_classes = [
@@ -261,7 +318,12 @@ class CodigoPostalViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = CodigoPostalSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in CodigoPostal._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -270,7 +332,7 @@ class CodigoPostalViewSet(viewsets.ModelViewSet):
     filterset_class = FilterClass
 
 
-class PartidoViewSet(viewsets.ModelViewSet):
+class PartidoViewSet(GenericModelViewSet):
     """ ViewSet de CodigoPostal"""
     queryset = Partido.objects.all()
     permission_classes = [
@@ -278,7 +340,12 @@ class PartidoViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = PartidoSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in Partido._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -299,7 +366,7 @@ from .serializers import AlicuotaImpuestoSerializer, PadronImpuestoSerializer, T
 from .serializers import TipoCalculoSerializer, IndiceSerializer, ClasificacionImpuestoSerializer, TipoImpuestoSerializer
 from .serializers import ImpuestoSerializer
 
-class ImpuestoViewSet(viewsets.ModelViewSet):
+class ImpuestoViewSet(GenericModelViewSet):
     """ ViewSet de  Impuesto"""
     queryset = Impuesto.objects.all()
     permission_classes = [
@@ -307,7 +374,12 @@ class ImpuestoViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = ImpuestoSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in Impuesto._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -316,7 +388,7 @@ class ImpuestoViewSet(viewsets.ModelViewSet):
     filterset_class = Impuesto
 
 
-class TipoImpuestoViewSet(viewsets.ModelViewSet):
+class TipoImpuestoViewSet(GenericModelViewSet):
     """ ViewSet de Tipos de Impuesto"""
     queryset = TipoImpuesto.objects.all()
     permission_classes = [
@@ -324,7 +396,12 @@ class TipoImpuestoViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = TipoImpuestoSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in TipoImpuesto._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -333,7 +410,7 @@ class TipoImpuestoViewSet(viewsets.ModelViewSet):
     filterset_class = FilterClass
 
 
-class TipoCalculoViewSet(viewsets.ModelViewSet):
+class TipoCalculoViewSet(GenericModelViewSet):
     """ ViewSet de Tipos de Frecuencia"""
     queryset = TipoCalculo.objects.all()
     permission_classes = [
@@ -341,7 +418,12 @@ class TipoCalculoViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = TipoCalculoSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in TipoCalculo._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -350,7 +432,7 @@ class TipoCalculoViewSet(viewsets.ModelViewSet):
     filterset_class = FilterClass
 
 
-class TipoFrecuenciaViewSet(viewsets.ModelViewSet):
+class TipoFrecuenciaViewSet(GenericModelViewSet):
     """ ViewSet de Tipos de Frecuencia"""
     queryset = TipoFrecuencia.objects.all()
     permission_classes = [
@@ -358,7 +440,12 @@ class TipoFrecuenciaViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = TipoFrecuenciaSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in TipoFrecuencia._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -367,7 +454,7 @@ class TipoFrecuenciaViewSet(viewsets.ModelViewSet):
     filterset_class = FilterClass
 
 
-class TipoValorViewSet(viewsets.ModelViewSet):
+class TipoValorViewSet(GenericModelViewSet):
     """ ViewSet de Tipos de Valor"""
     queryset = TipoValor.objects.all()
     permission_classes = [
@@ -375,7 +462,12 @@ class TipoValorViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = TipoValorSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in TipoValor._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -384,7 +476,7 @@ class TipoValorViewSet(viewsets.ModelViewSet):
     filterset_class = FilterClass
 
 
-class MonedaViewSet(viewsets.ModelViewSet):
+class MonedaViewSet(GenericModelViewSet):
     """ ViewSet de Monedas"""
     queryset = Moneda.objects.all()
     permission_classes = [
@@ -392,7 +484,12 @@ class MonedaViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = MonedaSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in Moneda._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -401,7 +498,7 @@ class MonedaViewSet(viewsets.ModelViewSet):
     filterset_class = FilterClass
 
 
-class TipoComprobanteViewSet(viewsets.ModelViewSet):
+class TipoComprobanteViewSet(GenericModelViewSet):
     """ ViewSet de Tipos de Comprobante"""
     queryset = TipoComprobante.objects.all()
     permission_classes = [
@@ -409,7 +506,12 @@ class TipoComprobanteViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = TipoComprobanteSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in TipoComprobante._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -418,7 +520,7 @@ class TipoComprobanteViewSet(viewsets.ModelViewSet):
     filterset_class = FilterClass
 
 
-class UnidadMedidaViewSet(viewsets.ModelViewSet):
+class UnidadMedidaViewSet(GenericModelViewSet):
     """ ViewSet de Tipos de Conceptos de AFIP"""
     queryset = UnidadMedida.objects.all()
     permission_classes = [
@@ -426,7 +528,12 @@ class UnidadMedidaViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = UnidadMedidaSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in UnidadMedida._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -435,7 +542,7 @@ class UnidadMedidaViewSet(viewsets.ModelViewSet):
     filterset_class = FilterClass
 
 
-class IdiomaViewSet(viewsets.ModelViewSet):
+class IdiomaViewSet(GenericModelViewSet):
     """ ViewSet de Tipos de Conceptos de AFIP"""
     queryset = Idioma.objects.all()
     permission_classes = [
@@ -443,7 +550,12 @@ class IdiomaViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = IdiomaSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in Idioma._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -452,7 +564,7 @@ class IdiomaViewSet(viewsets.ModelViewSet):
     filterset_class = FilterClass
 
 
-class IncotermsViewSet(viewsets.ModelViewSet):
+class IncotermsViewSet(GenericModelViewSet):
     """ ViewSet de Tipos de Conceptos de AFIP"""
     queryset = Incoterms.objects.all()
     permission_classes = [
@@ -460,7 +572,12 @@ class IncotermsViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = IncotermsSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in Incoterms._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -469,7 +586,7 @@ class IncotermsViewSet(viewsets.ModelViewSet):
     filterset_class = FilterClass
 
 
-class ConceptoIncluidoViewSet(viewsets.ModelViewSet):
+class ConceptoIncluidoViewSet(GenericModelViewSet):
     """ ViewSet de Tipos de Conceptos de AFIP"""
     queryset = ConceptoIncluido.objects.all()
     permission_classes = [
@@ -477,7 +594,12 @@ class ConceptoIncluidoViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = ConceptoIncluidoSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in ConceptoIncluido._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -486,7 +608,7 @@ class ConceptoIncluidoViewSet(viewsets.ModelViewSet):
     filterset_class = FilterClass
 
 
-class TipoResponsableViewSet(viewsets.ModelViewSet):
+class TipoResponsableViewSet(GenericModelViewSet):
     """ ViewSet de Tipos de Responsable"""
     queryset = TipoResponsable.objects.all()
     permission_classes = [
@@ -494,7 +616,12 @@ class TipoResponsableViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = TipoResponsableSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in TipoResponsable._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -503,7 +630,7 @@ class TipoResponsableViewSet(viewsets.ModelViewSet):
     filterset_class = FilterClass
 
 
-class TipoSujetoViewSet(viewsets.ModelViewSet):
+class TipoSujetoViewSet(GenericModelViewSet):
     """ ViewSet de Tipos de Sujeto"""
     queryset = TipoSujeto.objects.all()
     permission_classes = [
@@ -511,7 +638,12 @@ class TipoSujetoViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = TipoSujetoSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in TipoSujeto._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -520,7 +652,7 @@ class TipoSujetoViewSet(viewsets.ModelViewSet):
     filterset_class = FilterClass
 
 
-class TipoDocumentoViewSet(viewsets.ModelViewSet):
+class TipoDocumentoViewSet(GenericModelViewSet):
     """ ViewSet de Tipos de Documento"""
     queryset = TipoDocumento.objects.all()
     permission_classes = [
@@ -528,7 +660,12 @@ class TipoDocumentoViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = TipoDocumentoSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in TipoDocumento._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -537,7 +674,7 @@ class TipoDocumentoViewSet(viewsets.ModelViewSet):
     filterset_class = FilterClass
 
 
-class CuitPaisViewSet(viewsets.ModelViewSet):
+class CuitPaisViewSet(GenericModelViewSet):
     """ ViewSet de CUIT de Paises"""
     queryset = CuitPais.objects.all()
     permission_classes = [
@@ -545,7 +682,12 @@ class CuitPaisViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = CuitPaisSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in CuitPais._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -554,7 +696,7 @@ class CuitPaisViewSet(viewsets.ModelViewSet):
     filterset_class = FilterClass
 
 
-class TipoIndiceViewSet(viewsets.ModelViewSet):
+class TipoIndiceViewSet(GenericModelViewSet):
     """ ViewSet de CUIT de Paises"""
     queryset = TipoIndice.objects.all()
     permission_classes = [
@@ -562,7 +704,12 @@ class TipoIndiceViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = TipoIndiceSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in TipoIndice._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -571,7 +718,7 @@ class TipoIndiceViewSet(viewsets.ModelViewSet):
     filterset_class = FilterClass
 
 
-class IndiceViewSet(viewsets.ModelViewSet):
+class IndiceViewSet(GenericModelViewSet):
     """ ViewSet de Indices"""
     queryset = Indice.objects.all()
     permission_classes = [
@@ -579,7 +726,12 @@ class IndiceViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = IndiceSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in Indice._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -588,7 +740,7 @@ class IndiceViewSet(viewsets.ModelViewSet):
     filterset_class = FilterClass
 
 
-class AlicuotaImpuestoViewSet(viewsets.ModelViewSet):
+class AlicuotaImpuestoViewSet(GenericModelViewSet):
     """ ViewSet de Alicuotas"""
     queryset = AlicuotaImpuesto.objects.all()
     permission_classes = [
@@ -596,7 +748,12 @@ class AlicuotaImpuestoViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = AlicuotaImpuestoSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in AlicuotaImpuesto._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -605,7 +762,7 @@ class AlicuotaImpuestoViewSet(viewsets.ModelViewSet):
     filterset_class = FilterClass
 
 
-class PadronImpuestoViewSet(viewsets.ModelViewSet):
+class PadronImpuestoViewSet(GenericModelViewSet):
     """ ViewSet de Padrones"""
     queryset = PadronImpuesto.objects.all()
     permission_classes = [
@@ -613,7 +770,12 @@ class PadronImpuestoViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = PadronImpuestoSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in PadronImpuesto._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -622,7 +784,7 @@ class PadronImpuestoViewSet(viewsets.ModelViewSet):
     filterset_class = FilterClass
 
 
-class ClasificacionImpuestoViewSet(viewsets.ModelViewSet):
+class ClasificacionImpuestoViewSet(GenericModelViewSet):
     """ ViewSet de Padrones"""
     queryset = ClasificacionImpuesto.objects.all()
     permission_classes = [
@@ -630,7 +792,12 @@ class ClasificacionImpuestoViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = ClasificacionImpuestoSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in ClasificacionImpuesto._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -643,7 +810,7 @@ class ClasificacionImpuestoViewSet(viewsets.ModelViewSet):
 from .models import TipoAjuste, PlanCuentas
 from .serializers import TipoaAjusteSerializer, PlanCuentasSerializer
 
-class TipoAjusteViewSet(viewsets.ModelViewSet):
+class TipoAjusteViewSet(GenericModelViewSet):
     """ ViewSet de Tipos de Ajustes Contables"""
     queryset = TipoAjuste.objects.all()
     permission_classes = [
@@ -651,7 +818,12 @@ class TipoAjusteViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = TipoaAjusteSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in TipoAjuste._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -660,7 +832,7 @@ class TipoAjusteViewSet(viewsets.ModelViewSet):
     filterset_class = FilterClass
 
 
-class PlanCuentasViewSet(viewsets.ModelViewSet):
+class PlanCuentasViewSet(GenericModelViewSet):
     """ ViewSet de Plan De Cuentas"""
     queryset = PlanCuentas.objects.all()
     permission_classes = [
@@ -668,7 +840,12 @@ class PlanCuentasViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = PlanCuentasSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in PlanCuentas._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -689,7 +866,7 @@ from .serializers import ImpuestoEntidadSerializer, EjecutivoSerializer, DatosFi
 from .serializers import ContactoEntidadSerializer, TipoSedeSerializer, TipoDomicilioSerializer, DireccionEntidadSerializer
 from .serializers import ModuloEntidadSerializer, SectorEntidadSerializer, FormaPagoEntidadSerializer
 
-class ModuloEntidadViewSet(viewsets.ModelViewSet):
+class ModuloEntidadViewSet(GenericModelViewSet):
     """ ViewSet de Direcciones de Modulo Entidades"""
     queryset = ModuloEntidad.objects.all()
     permission_classes = [
@@ -697,7 +874,12 @@ class ModuloEntidadViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = ModuloEntidadSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in ModuloEntidad._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -706,7 +888,7 @@ class ModuloEntidadViewSet(viewsets.ModelViewSet):
     filterset_class = FilterClass
 
 
-class SectorEntidadViewSet(viewsets.ModelViewSet):
+class SectorEntidadViewSet(GenericModelViewSet):
     """ ViewSet de Direcciones de Sector Entidades"""
     queryset = SectorEntidad.objects.all()
     permission_classes = [
@@ -714,7 +896,12 @@ class SectorEntidadViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = SectorEntidadSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in SectorEntidad._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -723,7 +910,7 @@ class SectorEntidadViewSet(viewsets.ModelViewSet):
     filterset_class = FilterClass
 
 
-class FormaPagoEntidadViewSet(viewsets.ModelViewSet):
+class FormaPagoEntidadViewSet(GenericModelViewSet):
     """ ViewSet de Direcciones de Forma Pago Entidades"""
     queryset = FormaPagoEntidad.objects.all()
     permission_classes = [
@@ -731,7 +918,12 @@ class FormaPagoEntidadViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = FormaPagoEntidadSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in FormaPagoEntidad._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -740,7 +932,7 @@ class FormaPagoEntidadViewSet(viewsets.ModelViewSet):
     filterset_class = FilterClass
 
 
-class DireccionEntidadViewSet(viewsets.ModelViewSet):
+class DireccionEntidadViewSet(GenericModelViewSet):
     """ ViewSet de Direcciones de Entidades"""
     queryset = DireccionEntidad.objects.all()
     permission_classes = [
@@ -748,7 +940,12 @@ class DireccionEntidadViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = DireccionEntidadSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in DireccionEntidad._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -756,7 +953,7 @@ class DireccionEntidadViewSet(viewsets.ModelViewSet):
     
     filterset_class = FilterClass
 
-class TipoSedeViewSet(viewsets.ModelViewSet):
+class TipoSedeViewSet(GenericModelViewSet):
     """ ViewSet de Ejecutivos"""
     queryset = TipoSede.objects.all()
     permission_classes = [
@@ -764,7 +961,12 @@ class TipoSedeViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = TipoSedeSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in TipoSede._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -773,7 +975,7 @@ class TipoSedeViewSet(viewsets.ModelViewSet):
     filterset_class = FilterClass
 
 
-class TipoDomicilioViewSet(viewsets.ModelViewSet):
+class TipoDomicilioViewSet(GenericModelViewSet):
     """ ViewSet de Ejecutivos"""
     queryset = TipoDomicilio.objects.all()
     permission_classes = [
@@ -781,7 +983,12 @@ class TipoDomicilioViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = TipoDomicilioSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in TipoDomicilio._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -790,7 +997,7 @@ class TipoDomicilioViewSet(viewsets.ModelViewSet):
     filterset_class = FilterClass
 
 
-class ContactoEntidadViewSet(viewsets.ModelViewSet):
+class ContactoEntidadViewSet(GenericModelViewSet):
     """ ViewSet de Ejecutivos"""
     queryset = ContactoEntidad.objects.all()
     permission_classes = [
@@ -798,7 +1005,12 @@ class ContactoEntidadViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = ContactoEntidadSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in ContactoEntidad._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -807,7 +1019,7 @@ class ContactoEntidadViewSet(viewsets.ModelViewSet):
     filterset_class = FilterClass
 
 
-class DatosFiscalesEntidadViewSet(viewsets.ModelViewSet):
+class DatosFiscalesEntidadViewSet(GenericModelViewSet):
     """ ViewSet de Ejecutivos"""
     queryset = DatosFiscalesEntidad.objects.all()
     permission_classes = [
@@ -815,7 +1027,12 @@ class DatosFiscalesEntidadViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = DatosFiscalesEntidadSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in DatosFiscalesEntidad._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -824,7 +1041,7 @@ class DatosFiscalesEntidadViewSet(viewsets.ModelViewSet):
     filterset_class = FilterClass
 
 
-class EjecutivoViewSet(viewsets.ModelViewSet):
+class EjecutivoViewSet(GenericModelViewSet):
     """ ViewSet de Ejecutivos"""
     queryset = Ejecutivo.objects.all()
     permission_classes = [
@@ -832,7 +1049,12 @@ class EjecutivoViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = EjecutivoSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in Ejecutivo._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -841,7 +1063,7 @@ class EjecutivoViewSet(viewsets.ModelViewSet):
     filterset_class = FilterClass
 
 
-class ImpuestoEntidadViewSet(viewsets.ModelViewSet):
+class ImpuestoEntidadViewSet(GenericModelViewSet):
     """ ViewSet de Impuestos por Entidad"""
     queryset = ImpuestoEntidad.objects.all()
     permission_classes = [
@@ -849,7 +1071,12 @@ class ImpuestoEntidadViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = ImpuestoEntidadSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in ImpuestoEntidad._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -858,7 +1085,7 @@ class ImpuestoEntidadViewSet(viewsets.ModelViewSet):
     filterset_class = FilterClass
 
 
-class EntidadViewSet(viewsets.ModelViewSet):
+class EntidadViewSet(GenericModelViewSet):
     """ ViewSet de Entidades"""
     queryset = Entidad.objects.all()
     permission_classes = [
@@ -866,7 +1093,12 @@ class EntidadViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = EntidadSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in Entidad._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -875,7 +1107,7 @@ class EntidadViewSet(viewsets.ModelViewSet):
     filterset_class = FilterClass
 
 
-class ZonaViewSet(viewsets.ModelViewSet):
+class ZonaViewSet(GenericModelViewSet):
     """ ViewSet de Zonas"""
     queryset = Zona.objects.all()
     permission_classes = [
@@ -883,7 +1115,12 @@ class ZonaViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = ZonaSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in Zona._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -892,7 +1129,7 @@ class ZonaViewSet(viewsets.ModelViewSet):
     filterset_class = FilterClass
 
 
-class ListaPrecioEntidadViewSet(viewsets.ModelViewSet):
+class ListaPrecioEntidadViewSet(GenericModelViewSet):
     """ ViewSet de Zonas"""
     queryset = ListaPrecioEntidad.objects.all()
     permission_classes = [
@@ -900,7 +1137,12 @@ class ListaPrecioEntidadViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = ListaPrecioEntidadSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in ListaPrecioEntidad._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -909,7 +1151,7 @@ class ListaPrecioEntidadViewSet(viewsets.ModelViewSet):
     filterset_class = FilterClass
 
 
-class CondicionCrediticiaViewSet(viewsets.ModelViewSet):
+class CondicionCrediticiaViewSet(GenericModelViewSet):
     """ ViewSet de Condiciones Crediticias"""
     queryset = CondicionCrediticia.objects.all()
     permission_classes = [
@@ -917,7 +1159,12 @@ class CondicionCrediticiaViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = CondicionCrediticiaSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in CondicionCrediticia._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
@@ -929,10 +1176,9 @@ class CondicionCrediticiaViewSet(viewsets.ModelViewSet):
 ### PRODUCTOS ##########################################
 
 from .models import ListaPrecios
-
 from .serializers import ListaPreciosSerializer
 
-class ListaPreciosViewSet(viewsets.ModelViewSet):
+class ListaPreciosViewSet(GenericModelViewSet):
     """ ViewSet de Entidades"""
     queryset = ListaPrecios.objects.all()
     permission_classes = [
@@ -940,7 +1186,12 @@ class ListaPreciosViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = ListaPreciosSerializer
 
-    filter_backends = [DjangoFilterBackend]
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+     # Habilitar todos los campos para ordenamiento
+    ordering_fields = [field.name for field in ListaPrecios._meta.fields]
+    ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
