@@ -523,13 +523,12 @@ class EntidadSerializer(serializers.ModelSerializer):
     contactos = ContactoEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
     direcciones = DireccionEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
     sectores = SectorEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
-    formaspago = FormaPagoSerializer(many=True, read_only=True)
+    formaspago = FormaPagoEntidadSerializer(many=True, read_only=True)
 
     idtiporesponsable = TipoResponsableSerializer()
 
     class Meta:
         """ Clase """
         model = Entidad
-        fields = ['id', 'nombre', 'nombrefantasia', 'idtiporesponsable', 'modulos', 'condicionescrediticias',
-                  'impuestos','ejecutivos','datosfiscales','contactos','direcciones','sectores','formaspago']  # O especifica los campos que deseas incluir
+        fields = '__all__'  # O especifica los campos que deseas incluir
         read_only_fields = ('created_at', 'updated_at')
