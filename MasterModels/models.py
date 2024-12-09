@@ -421,19 +421,19 @@ class TipoSujeto(AuditModel):
 class CuitPais(AuditModel):
     """ Tipos de documento de CUIT de los paises """
     
-    idpais = models.ForeignKey(Pais, on_delete=models.CASCADE)
     idtiposujeto = models.ForeignKey(TipoSujeto, on_delete=models.CASCADE)
+    nombre = models.CharField(max_length=256, default='')
     idmascara = models.ForeignKey(Mascara, on_delete=models.CASCADE)
     
-    cuit = models.CharField(max_length=10, unique=True)
+    cuit = models.CharField(max_length=11, unique=True)
 
     class Meta:
-        unique_together = (("idpais","idtiposujeto"),)
+        unique_together = (("cuit","idtiposujeto"),)
         verbose_name = 'CUIT Pais'
         verbose_name_plural = 'IMPU - Paises CUIT'
 
     def __str__(self):
-         return f'{self.idpais}, {self.idtiposujeto}, {self.cuit}'
+         return f'{self.cuit},  {self.nombre}, {self.idtiposujeto}'
       
 class AlicuotaImpuesto(AuditModel):
     """ Alicuotas de AFIP """

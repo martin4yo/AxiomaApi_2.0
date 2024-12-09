@@ -222,7 +222,6 @@ class TipoDocumentoSerializer(serializers.ModelSerializer):
 class CuitPaisSerializer(serializers.ModelSerializer):
     """ Serializador """
     
-    idpais = PaisSerializer()
     idtiposujeto = TipoSujetoSerializer()
     idmascara = MascaraSerializer()
 
