@@ -795,6 +795,8 @@ class CondicionCrediticiaSerializer(serializers.ModelSerializer):
             'identidad': {'write_only': True},  # Asegura que se use en el POST
         }
         read_only_fields = ('created_at', 'updated_at')
+        print('CondCred')
+        depth = 1
 
     def get_identidad_detail(self, obj):
         EntidadSerializer = self.__class__.EntidadSerializer
@@ -909,15 +911,15 @@ class DireccionEntidadSerializer(serializers.ModelSerializer):
 
 class EntidadSerializer(serializers.ModelSerializer):
     """ Serializador """
-    entidad_moduloentidad = ModuloEntidadSerializer(source='modulos_asignados', many=True, read_only=True)  # Anidar el serializador
-    entidad_condicionecrediticia = CondicionCrediticiaSerializer(many=True, read_only=True)  # Anidar el serializador
-    entidad_impuestoentidad = ImpuestoEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
-    entidad_ejecutivo = EjecutivoSerializer(many=True, read_only=True)  # Anidar el serializador
-    entidad_datosfiscalesentidad = DatosFiscalesEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
-    entidad_contacto = ContactoEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
-    entidad_direcciones = DireccionEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
-    entidad_sectorentidad = SectorEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
-    entidad_formapagoentidad = FormaPagoEntidadSerializer(many=True, read_only=True)
+    # entidad_moduloentidad = ModuloEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
+    # entidad_condicionecrediticia = CondicionCrediticiaSerializer(many=True, read_only=True)  # Anidar el serializador
+    # entidad_impuestoentidad = ImpuestoEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
+    # entidad_ejecutivo = EjecutivoSerializer(many=True, read_only=True)  # Anidar el serializador
+    # entidad_datosfiscalesentidad = DatosFiscalesEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
+    # entidad_contacto = ContactoEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
+    # entidad_direcciones = DireccionEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
+    # entidad_sectorentidad = SectorEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
+    # entidad_formapagoentidad = FormaPagoEntidadSerializer(many=True, read_only=True)
 
     idtiporesponsable = serializers.PrimaryKeyRelatedField(
         queryset=TipoResponsable.objects.all(),
@@ -930,6 +932,7 @@ class EntidadSerializer(serializers.ModelSerializer):
         model = Entidad
         fields = '__all__'  # O especifica los campos que deseas incluir
         read_only_fields = ('created_at', 'updated_at')
+        depth = 1
 
 # Agrega una referencia circular para ZonaSerializer en EntidadSerializer
 ModuloEntidadSerializer.EntidadSerializer = EntidadSerializer
