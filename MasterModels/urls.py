@@ -26,9 +26,9 @@ router.register('api/general/codigopostal', CodigoPostalViewSet, 'codigospostale
 router.register('api/general/rol', RolViewSet, 'roles')
 router.register('api/general/modulo', ModuloViewSet, 'modulos')
 router.register('api/general/mascara', MascaraViewSet, 'mascaras')
-router.register('api/general/formadepago', FormaPagoViewSet, 'formasdepago')
-router.register('api/general/formadepagodetalle', FormaPagoDetalleViewSet, 'formasdepagodetalle')
-router.register('api/general/tipodecambio', TipoDeCambioViewSet, 'tiposdecambio')
+router.register('api/general/formapago', FormaPagoViewSet, 'formaspago')
+router.register('api/general/formapagodetalle', FormaPagoDetalleViewSet, 'formaspagodetalle')
+router.register('api/general/tipocambio', TipoDeCambioViewSet, 'tiposcambio')
 router.register('api/general/personarol', PersonaRolViewSet, 'personasroles')
 router.register('api/general/tipoindice', TipoIndiceViewSet, 'tiposindice')
 router.register('api/general/indice', IndiceViewSet, 'indices')
@@ -67,7 +67,7 @@ router.register('api/impuestos/impuesto', ImpuestoViewSet, 'impuestos')
 from .api import TipoAjusteViewSet, PlanCuentasViewSet
 
 router.register('api/contabilidad/tipoajuste', TipoAjusteViewSet, 'tiposajuste')
-router.register('api/contabilidad/plandecuentas', PlanCuentasViewSet, 'plandecuentas')
+router.register('api/contabilidad/plancuentas', PlanCuentasViewSet, 'plancuentas')
 
 # URLS DE ENTIDADES 
 
