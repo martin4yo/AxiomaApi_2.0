@@ -20,7 +20,6 @@ from django.utils.deprecation import MiddlewareMixin
 class DynamicCORSHeadersMiddleware(MiddlewareMixin):
     def process_response(self, request, response):
         origin = request.headers.get("Origin")
-        print(origin)
         allowed_pattern = re.compile(r"^http://localhost(:\d+)?$")
         
         if origin and allowed_pattern.match(origin):
