@@ -939,15 +939,15 @@ class DireccionEntidadSerializer(serializers.ModelSerializer):
 
 class EntidadSerializer(serializers.ModelSerializer):
     """ Serializador """
-    entidad_moduloentidad = ModuloEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
+    entidad_modulo = ModuloEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
     entidad_condicionecrediticia = CondicionCrediticiaEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
-    entidad_impuestoentidad = ImpuestoEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
+    entidad_impuesto = ImpuestoEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
     entidad_ejecutivo = EjecutivoEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
-    entidad_datosfiscalesentidad = DatosFiscalesEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
+    entidad_datosfiscales = DatosFiscalesEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
     entidad_contacto = ContactoEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
-    entidad_direcciones = DireccionEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
-    entidad_sectorentidad = SectorEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
-    entidad_formapagoentidad = FormaPagoEntidadSerializer(many=True, read_only=True)
+    entidad_direccion = DireccionEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
+    entidad_sector = SectorEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
+    entidad_formapago = FormaPagoEntidadSerializer(many=True, read_only=True)
 
     idtiporesponsable = serializers.PrimaryKeyRelatedField(
         queryset=TipoResponsable.objects.all(),
