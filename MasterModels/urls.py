@@ -71,23 +71,23 @@ router.register('api/contabilidad/plancuentas', PlanCuentasViewSet, 'plancuentas
 
 # URLS DE ENTIDADES 
 
-from .api import EntidadViewSet, ZonaViewSet, CondicionCrediticiaViewSet
-from .api import ImpuestoEntidadViewSet, EjecutivoViewSet, ContactoEntidadViewSet, TipoSedeViewSet
+from .api import EntidadViewSet, ZonaViewSet, CondicionCrediticiaEntidadViewSet
+from .api import ImpuestoEntidadViewSet, EjecutivoEntidadViewSet, ContactoEntidadViewSet, TipoSedeViewSet
 from .api import TipoDomicilioViewSet, DireccionEntidadViewSet, ModuloEntidadViewSet, SectorEntidadViewSet
 from .api import FormaPagoEntidadViewSet
 
 router.register('api/entidades/entidad', EntidadViewSet, 'entidades')
 router.register('api/entidades/zona', ZonaViewSet, 'zonas')
-router.register('api/entidades/condicioncrediticia', CondicionCrediticiaViewSet, 'condicionescrediticias')
+router.register('api/entidades/condicioncrediticiaentidad', CondicionCrediticiaEntidadViewSet, 'condicionescrediticiasentidad')
 router.register('api/entidades/impuestoentidad', ImpuestoEntidadViewSet, 'impuestosentidad')
-router.register('api/entidades/ejecutivo', EjecutivoViewSet, 'ejecutivos')
+router.register('api/entidades/ejecutivoentidad', EjecutivoEntidadViewSet, 'ejecutivosentidad')
 router.register('api/entidades/contactoentidad', ContactoEntidadViewSet, 'contactosentidad')
 router.register('api/entidades/tiposede', TipoSedeViewSet, 'tipossede')
 router.register('api/entidades/tipodomicilio', TipoDomicilioViewSet, 'tiposdomicilio')
-router.register('api/entidades/direccionentidad', DireccionEntidadViewSet, 'direccionesentidades')
-router.register('api/entidades/moduloentidad', ModuloEntidadViewSet, 'modulosentidades')
-router.register('api/entidades/sectorentidad', SectorEntidadViewSet, 'sectoresentidades')
-router.register('api/entidades/formapagoentidad', FormaPagoEntidadViewSet, 'formaspagoentidades')
+router.register('api/entidades/direccionentidad', DireccionEntidadViewSet, 'direccionesentidade')
+router.register('api/entidades/moduloentidad', ModuloEntidadViewSet, 'modulosentidade')
+router.register('api/entidades/sectorentidad', SectorEntidadViewSet, 'sectoresentidade')
+router.register('api/entidades/formapagoentidad', FormaPagoEntidadViewSet, 'formaspagoentidade')
 
 # URLS DE PRODUCTOS 
 

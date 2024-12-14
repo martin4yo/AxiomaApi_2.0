@@ -583,7 +583,7 @@ class Entidad(AuditModel, TenantModel):
     def __str__(self):
          return f'{self.codigo}, {self.nombrefantasia}, {self.nombre}'
 
-class CondicionCrediticia(AuditModel, TenantModel):
+class CondicionCrediticiaEntidad(AuditModel, TenantModel):
     """ Padrones de Impuesto """
 
     identidad = models.ForeignKey('Entidad', related_name='entidad_condicionecrediticia', on_delete=models.CASCADE)
@@ -632,7 +632,7 @@ class Zona(AuditModel, TenantModel):
     def __str__(self):
         return f'{self.nombre}'
 
-class Ejecutivo(AuditModel, TenantModel):
+class EjecutivoEntidad(AuditModel, TenantModel):
     """ Plan de Cuentas """
     
     identidad = models.ForeignKey('Entidad', related_name='entidad_ejecutivo', on_delete=models.CASCADE)

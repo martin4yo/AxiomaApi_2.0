@@ -520,7 +520,7 @@ class ListaPreciosSerializer(serializers.ModelSerializer):
 
 ## ENTIDADES ##################################
 
-from .models import Entidad, Zona, ListaPrecioEntidad, CondicionCrediticia, ImpuestoEntidad, Ejecutivo
+from .models import Entidad, Zona, ListaPrecioEntidad, CondicionCrediticiaEntidad, ImpuestoEntidad, EjecutivoEntidad
 from .models import DatosFiscalesEntidad, ContactoEntidad, TipoSede, TipoDomicilio, DireccionEntidad
 from .models import ModuloEntidad, FormaPagoEntidad, SectorEntidad
 
@@ -550,9 +550,10 @@ class ModuloEntidadSerializer(serializers.ModelSerializer):
         read_only_fields = ('created_at', 'updated_at')
 
     def get_identidad_detail(self, obj):
-        EntidadSerializer = self.__class__.EntidadSerializer
-        return EntidadSerializer(obj.identidad).data
-
+        """
+        Retorna los detalles de la entidad asociada.
+        """
+        return entidad_to_dict(obj.identidad)
 
 class DatosFiscalesEntidadSerializer(serializers.ModelSerializer):
     """ Serializador """
@@ -587,11 +588,19 @@ class DatosFiscalesEntidadSerializer(serializers.ModelSerializer):
         read_only_fields = ('created_at', 'updated_at')
 
     def get_identidad_detail(self, obj):
-        EntidadSerializer = self.__class__.EntidadSerializer
-        return EntidadSerializer(obj.identidad).data
+        """
+        Retorna los detalles de la entidad asociada.
+        """
+        return entidad_to_dict(obj.identidad)
 
-class EjecutivoSerializer(serializers.ModelSerializer):
+class EjecutivoEntidadSerializer(serializers.ModelSerializer):
     """ Serializador """
+
+    identidad = serializers.PrimaryKeyRelatedField(
+        queryset=Entidad.objects.all(),
+        write_only=True
+    )
+    identidad_detail = serializers.SerializerMethodField()
     
     idpersona = serializers.PrimaryKeyRelatedField(
         queryset=Persona.objects.all(),
@@ -607,13 +616,19 @@ class EjecutivoSerializer(serializers.ModelSerializer):
 
     class Meta:
         """ Clase """
-        model = Ejecutivo
+        model = EjecutivoEntidad
         fields = '__all__'  # O especifica los campos que deseas incluir
         extra_kwargs = {
             'idpersona': {'write_only': True},  # Asegura que se use en el POST
             'idrol': {'write_only': True},  # Asegura que se use en el POST
         }
         read_only_fields = ('created_at', 'updated_at')
+    
+    def get_identidad_detail(self, obj):
+        """
+        Retorna los detalles de la entidad asociada.
+        """
+        return entidad_to_dict(obj.identidad)
 
 class ZonaSerializer(serializers.ModelSerializer):
     """ Serializador """
@@ -657,8 +672,10 @@ class FormaPagoEntidadSerializer(serializers.ModelSerializer):
         read_only_fields = ('created_at', 'updated_at')
 
     def get_identidad_detail(self, obj):
-        EntidadSerializer = self.__class__.EntidadSerializer
-        return EntidadSerializer(obj.identidad).data
+        """
+        Retorna los detalles de la entidad asociada.
+        """
+        return entidad_to_dict(obj.identidad)
 
 class SectorEntidadSerializer(serializers.ModelSerializer):
     """ Serializador """
@@ -693,8 +710,10 @@ class SectorEntidadSerializer(serializers.ModelSerializer):
         read_only_fields = ('created_at', 'updated_at')
 
     def get_identidad_detail(self, obj):
-        EntidadSerializer = self.__class__.EntidadSerializer
-        return EntidadSerializer(obj.identidad).data
+        """
+        Retorna los detalles de la entidad asociada.
+        """
+        return entidad_to_dict(obj.identidad)
 
 class ContactoEntidadSerializer(serializers.ModelSerializer):
     """ Serializador """
@@ -714,8 +733,10 @@ class ContactoEntidadSerializer(serializers.ModelSerializer):
         read_only_fields = ('created_at', 'updated_at')
 
     def get_identidad_detail(self, obj):
-        EntidadSerializer = self.__class__.EntidadSerializer
-        return EntidadSerializer(obj.identidad).data
+        """
+        Retorna los detalles de la entidad asociada.
+        """
+        return entidad_to_dict(obj.identidad)
 
 class TipoSedeSerializer(serializers.ModelSerializer):
     """ Serializador """
@@ -768,10 +789,12 @@ class ListaPrecioEntidadSerializer(serializers.ModelSerializer):
         read_only_fields = ('created_at', 'updated_at')
 
     def get_identidad_detail(self, obj):
-            EntidadSerializer = self.__class__.EntidadSerializer
-            return EntidadSerializer(obj.identidad).data
+        """
+        Retorna los detalles de la entidad asociada.
+        """
+        return entidad_to_dict(obj.identidad)
 
-class CondicionCrediticiaSerializer(serializers.ModelSerializer):
+class CondicionCrediticiaEntidadSerializer(serializers.ModelSerializer):
     """ Serializador """
 
     identidad = serializers.PrimaryKeyRelatedField(
@@ -788,19 +811,20 @@ class CondicionCrediticiaSerializer(serializers.ModelSerializer):
 
     class Meta:
         """ Clase """
-        model = CondicionCrediticia
+        model = CondicionCrediticiaEntidad
         fields = '__all__'  # O especifica los campos que deseas incluir
         extra_kwargs = {
             'idmodulo': {'write_only': True},  # Asegura que se use en el POST
             'identidad': {'write_only': True},  # Asegura que se use en el POST
         }
         read_only_fields = ('created_at', 'updated_at')
-        print('CondCred')
         depth = 1
 
     def get_identidad_detail(self, obj):
-        EntidadSerializer = self.__class__.EntidadSerializer
-        return EntidadSerializer(obj.identidad).data
+        """
+        Retorna los detalles de la entidad asociada.
+        """
+        return entidad_to_dict(obj.identidad)
 
 class ImpuestoEntidadSerializer(serializers.ModelSerializer):
     """ Serializador """
@@ -835,8 +859,10 @@ class ImpuestoEntidadSerializer(serializers.ModelSerializer):
         read_only_fields = ('created_at', 'updated_at')
 
     def get_identidad_detail(self, obj):
-            EntidadSerializer = self.__class__.EntidadSerializer
-            return EntidadSerializer(obj.identidad).data
+        """
+        Retorna los detalles de la entidad asociada.
+        """
+        return entidad_to_dict(obj.identidad)
 
 class DireccionEntidadSerializer(serializers.ModelSerializer):
     """ Serializador """
@@ -906,20 +932,22 @@ class DireccionEntidadSerializer(serializers.ModelSerializer):
         read_only_fields = ('created_at', 'updated_at')
 
     def get_identidad_detail(self, obj):
-            EntidadSerializer = self.__class__.EntidadSerializer
-            return EntidadSerializer(obj.identidad).data
+        """
+        Retorna los detalles de la entidad asociada.
+        """
+        return entidad_to_dict(obj.identidad)
 
 class EntidadSerializer(serializers.ModelSerializer):
     """ Serializador """
-    # entidad_moduloentidad = ModuloEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
-    # entidad_condicionecrediticia = CondicionCrediticiaSerializer(many=True, read_only=True)  # Anidar el serializador
-    # entidad_impuestoentidad = ImpuestoEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
-    # entidad_ejecutivo = EjecutivoSerializer(many=True, read_only=True)  # Anidar el serializador
-    # entidad_datosfiscalesentidad = DatosFiscalesEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
-    # entidad_contacto = ContactoEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
-    # entidad_direcciones = DireccionEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
-    # entidad_sectorentidad = SectorEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
-    # entidad_formapagoentidad = FormaPagoEntidadSerializer(many=True, read_only=True)
+    entidad_moduloentidad = ModuloEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
+    entidad_condicionecrediticia = CondicionCrediticiaEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
+    entidad_impuestoentidad = ImpuestoEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
+    entidad_ejecutivo = EjecutivoEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
+    entidad_datosfiscalesentidad = DatosFiscalesEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
+    entidad_contacto = ContactoEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
+    entidad_direcciones = DireccionEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
+    entidad_sectorentidad = SectorEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
+    entidad_formapagoentidad = FormaPagoEntidadSerializer(many=True, read_only=True)
 
     idtiporesponsable = serializers.PrimaryKeyRelatedField(
         queryset=TipoResponsable.objects.all(),
@@ -931,16 +959,27 @@ class EntidadSerializer(serializers.ModelSerializer):
         """ Clase """
         model = Entidad
         fields = '__all__'  # O especifica los campos que deseas incluir
+        extra_kwargs = {
+            'idtiporesponsable': {'write_only': True},  # Asegura que se use en el POST
+        }
         read_only_fields = ('created_at', 'updated_at')
-        depth = 1
 
-# Agrega una referencia circular para ZonaSerializer en EntidadSerializer
-ModuloEntidadSerializer.EntidadSerializer = EntidadSerializer
-DatosFiscalesEntidadSerializer.EntidadSerializer = EntidadSerializer
-FormaPagoEntidadSerializer.EntidadSerializer = EntidadSerializer
-SectorEntidadSerializer.EntidadSerializer = EntidadSerializer
-ContactoEntidadSerializer.EntidadSerializer = EntidadSerializer
-ListaPrecioEntidadSerializer.EntidadSerializer = EntidadSerializer
-CondicionCrediticiaSerializer.EntidadSerializer = EntidadSerializer
-ImpuestoEntidadSerializer.EntidadSerializer = EntidadSerializer
-DireccionEntidadSerializer.EntidadSerializer = EntidadSerializer
+    def get_entidad_moduloentidad(self, obj):
+        """ Serializa los módulos asociados a la entidad """
+        modulos = ModuloEntidad.objects.filter(identidad=obj)
+        return ModuloEntidadSerializer(modulos, many=True).data
+    
+# Funcion para devolver la lista de campos de Entidad
+
+def entidad_to_dict(entidad):
+    """
+    Convierte una instancia de Entidad en un diccionario.
+    """
+    return {
+        'id': entidad.id,
+        'nombre': entidad.nombre,  # Ajusta según los campos que tengas en Entidad
+        'nombrefantasia': entidad.nombrefantasia,  # Ajusta según los campos que tengas en Entidad
+        'codigo': entidad.codigo,  # Ajusta según los campos que tengas en Entidad
+        'intercompany': entidad.intercompany,  # Ajusta según los campos que tengas en Entidad
+        
+    }

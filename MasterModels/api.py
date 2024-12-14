@@ -857,12 +857,12 @@ class PlanCuentasViewSet(GenericModelViewSet):
 
 ### ENTIDADES #########################################################
 
-from .models import Entidad, Zona, ListaPrecioEntidad, CondicionCrediticia, ImpuestoEntidad, Ejecutivo
+from .models import Entidad, Zona, ListaPrecioEntidad, CondicionCrediticiaEntidad, ImpuestoEntidad, EjecutivoEntidad
 from .models import DatosFiscalesEntidad, ContactoEntidad, TipoSede, TipoDomicilio, DireccionEntidad
 from .models import ModuloEntidad, SectorEntidad, FormaPagoEntidad
 
-from .serializers import EntidadSerializer, ZonaSerializer, ListaPrecioEntidadSerializer, CondicionCrediticiaSerializer
-from .serializers import ImpuestoEntidadSerializer, EjecutivoSerializer, DatosFiscalesEntidadSerializer
+from .serializers import EntidadSerializer, ZonaSerializer, ListaPrecioEntidadSerializer, CondicionCrediticiaEntidadSerializer
+from .serializers import ImpuestoEntidadSerializer, EjecutivoEntidadSerializer, DatosFiscalesEntidadSerializer
 from .serializers import ContactoEntidadSerializer, TipoSedeSerializer, TipoDomicilioSerializer, DireccionEntidadSerializer
 from .serializers import ModuloEntidadSerializer, SectorEntidadSerializer, FormaPagoEntidadSerializer
 
@@ -1041,24 +1041,24 @@ class DatosFiscalesEntidadViewSet(GenericModelViewSet):
     filterset_class = FilterClass
 
 
-class EjecutivoViewSet(GenericModelViewSet):
+class EjecutivoEntidadViewSet(GenericModelViewSet):
     """ ViewSet de Ejecutivos"""
-    queryset = Ejecutivo.objects.all()
+    queryset = EjecutivoEntidad.objects.all()
     permission_classes = [
         permissions.IsAuthenticated
     ]
-    serializer_class = EjecutivoSerializer
+    serializer_class = EjecutivoEntidadSerializer
 
     pagination_class = CustomPagination
     filter_backends = [DjangoFilterBackend, OrderingFilter]
 
      # Habilitar todos los campos para ordenamiento
-    ordering_fields = [field.name for field in Ejecutivo._meta.fields]
+    ordering_fields = [field.name for field in EjecutivoEntidad._meta.fields]
     ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
-            model = Ejecutivo
+            model = EjecutivoEntidad
     
     filterset_class = FilterClass
 
@@ -1161,24 +1161,24 @@ class ListaPrecioEntidadViewSet(GenericModelViewSet):
     filterset_class = FilterClass
 
 
-class CondicionCrediticiaViewSet(GenericModelViewSet):
+class CondicionCrediticiaEntidadViewSet(GenericModelViewSet):
     """ ViewSet de Condiciones Crediticias"""
-    queryset = CondicionCrediticia.objects.all()
+    queryset = CondicionCrediticiaEntidad.objects.all()
     permission_classes = [
         permissions.IsAuthenticated
     ]
-    serializer_class = CondicionCrediticiaSerializer
+    serializer_class = CondicionCrediticiaEntidadSerializer
 
     pagination_class = CustomPagination
     filter_backends = [DjangoFilterBackend, OrderingFilter]
 
      # Habilitar todos los campos para ordenamiento
-    ordering_fields = [field.name for field in CondicionCrediticia._meta.fields]
+    ordering_fields = [field.name for field in CondicionCrediticiaEntidad._meta.fields]
     ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
-            model = CondicionCrediticia
+            model = CondicionCrediticiaEntidad
     
     filterset_class = FilterClass
 
