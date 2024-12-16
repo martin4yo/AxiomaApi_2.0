@@ -574,7 +574,7 @@ class DatosFiscalesEntidadSerializer(serializers.ModelSerializer):
         queryset=TipoSujeto.objects.all(),
         write_only=True
     )
-    idtipodocumento_detail = TipoSujetoSerializer(source='idtiposujeto', read_only=True)
+    idtiposujeto_detail = TipoSujetoSerializer(source='idtiposujeto', read_only=True)
 
     class Meta:
         """ Clase """
