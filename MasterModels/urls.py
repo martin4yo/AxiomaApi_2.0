@@ -74,7 +74,7 @@ router.register('api/contabilidad/plancuentas', PlanCuentasViewSet, 'plancuentas
 from .api import EntidadViewSet, ZonaViewSet, CondicionCrediticiaEntidadViewSet
 from .api import ImpuestoEntidadViewSet, EjecutivoEntidadViewSet, ContactoEntidadViewSet, TipoSedeViewSet
 from .api import TipoDomicilioViewSet, DireccionEntidadViewSet, ModuloEntidadViewSet, SectorEntidadViewSet
-from .api import FormaPagoEntidadViewSet
+from .api import FormaPagoEntidadViewSet, DatosFiscalesEntidadViewSet
 
 router.register('api/entidades/entidad', EntidadViewSet, 'entidades')
 router.register('api/entidades/zona', ZonaViewSet, 'zonas')
@@ -84,10 +84,11 @@ router.register('api/entidades/ejecutivoentidad', EjecutivoEntidadViewSet, 'ejec
 router.register('api/entidades/contactoentidad', ContactoEntidadViewSet, 'contactosentidad')
 router.register('api/entidades/tiposede', TipoSedeViewSet, 'tipossede')
 router.register('api/entidades/tipodomicilio', TipoDomicilioViewSet, 'tiposdomicilio')
-router.register('api/entidades/direccionentidad', DireccionEntidadViewSet, 'direccionesentidade')
-router.register('api/entidades/moduloentidad', ModuloEntidadViewSet, 'modulosentidade')
-router.register('api/entidades/sectorentidad', SectorEntidadViewSet, 'sectoresentidade')
-router.register('api/entidades/formapagoentidad', FormaPagoEntidadViewSet, 'formaspagoentidade')
+router.register('api/entidades/direccionentidad', DireccionEntidadViewSet, 'direccionesentidad')
+router.register('api/entidades/moduloentidad', ModuloEntidadViewSet, 'modulosentidad')
+router.register('api/entidades/sectorentidad', SectorEntidadViewSet, 'sectoresentidad')
+router.register('api/entidades/formapagoentidad', FormaPagoEntidadViewSet, 'formaspagoentidad')
+router.register('api/entidades/datosfiscalesentidad', DatosFiscalesEntidadViewSet, 'datosfiscalesentidad')
 
 # URLS DE PRODUCTOS 
 
