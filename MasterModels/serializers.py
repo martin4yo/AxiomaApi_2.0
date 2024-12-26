@@ -940,7 +940,7 @@ class DireccionEntidadSerializer(serializers.ModelSerializer):
 class EntidadSerializer(serializers.ModelSerializer):
     """ Serializador """
     entidad_modulo = ModuloEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
-    entidad_condicionecrediticia = CondicionCrediticiaEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
+    entidad_condicioncrediticia = CondicionCrediticiaEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
     entidad_impuesto = ImpuestoEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
     entidad_ejecutivo = EjecutivoEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
     entidad_datosfiscales = DatosFiscalesEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
@@ -964,10 +964,10 @@ class EntidadSerializer(serializers.ModelSerializer):
         }
         read_only_fields = ('created_at', 'updated_at')
 
-    def get_entidad_moduloentidad(self, obj):
-        """ Serializa los módulos asociados a la entidad """
-        modulos = ModuloEntidad.objects.filter(identidad=obj)
-        return ModuloEntidadSerializer(modulos, many=True).data
+    # def get_entidad_moduloentidad(self, obj):
+    #     """ Serializa los módulos asociados a la entidad """
+    #     modulos = ModuloEntidad.objects.filter(identidad=obj)
+    #     return ModuloEntidadSerializer(modulos, many=True).data
     
 # Funcion para devolver la lista de campos de Entidad
 

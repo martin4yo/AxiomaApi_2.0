@@ -1088,15 +1088,15 @@ class ImpuestoEntidadViewSet(GenericModelViewSet):
 class EntidadViewSet(GenericModelViewSet):
     """ ViewSet de Entidades"""
     queryset = Entidad.objects.all().prefetch_related(
-        'entidad_moduloentidad',  
-        'entidad_condicionecrediticia',     
-        'entidad_impuestoentidad',     
+        'entidad_modulo',  
+        'entidad_condicioncrediticia',     
+        'entidad_impuesto',     
         'entidad_ejecutivo',     
-        'entidad_datosfiscalesentidad',     
+        'entidad_datosfiscales',     
         'entidad_contacto',     
         'entidad_direcciones',     
-        'entidad_sectorentidad',     
-        'entidad_formapagoentidad',     
+        'entidad_sector',     
+        'entidad_formapago',     
     )
     permission_classes = [
         permissions.IsAuthenticated
