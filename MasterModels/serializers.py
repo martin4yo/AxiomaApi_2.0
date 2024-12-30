@@ -1006,7 +1006,8 @@ class EntidadSerializer(serializers.ModelSerializer):
                     ModuloEntidad.objects.create(
                         identidad=entidad, 
                         idmodulo=modulo_data['idmodulo'],
-                        user_id=entidad.user_id
+                        user_id=entidad.user_id,
+                        tenant_id=entidad.tenant_id
                         )
             
                 # Crear registros en CondicionCrediticiaEntidad
