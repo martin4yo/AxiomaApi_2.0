@@ -575,7 +575,7 @@ class Entidad(AuditModel, TenantModel):
     idtiporesponsable = models.ForeignKey('TipoResponsable', on_delete=models.CASCADE, blank=True, null=True, related_name='tiporesponsable_entidad')
         
     class Meta:
-        unique_together = (("id", "codigo"),)
+        unique_together = (("tenant_id", "codigo"),)
         verbose_name = 'Entidad'
         verbose_name_plural = 'ENTI - Entidades'
 
