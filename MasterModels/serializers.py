@@ -5,6 +5,7 @@ from rest_framework import serializers
 from .models import Persona, PersonaRol, Pais, Provincia, CodigoPostal, TipoDeCambio
 from .models import Rol, Modulo, Mascara, FormaPago, FormaPagoDetalle, Moneda
 from .models import Partido, Sector
+from django.db import transaction
 
 ### Generales ######################################################
 
@@ -529,6 +530,8 @@ class ModuloEntidadSerializer(serializers.ModelSerializer):
 
     identidad = serializers.PrimaryKeyRelatedField(
         queryset=Entidad.objects.all(),
+        required=False,
+        allow_null=True,
         write_only=True
     )
     identidad_detail = serializers.SerializerMethodField()
@@ -544,7 +547,7 @@ class ModuloEntidadSerializer(serializers.ModelSerializer):
         model = ModuloEntidad
         fields = '__all__'  # O especifica los campos que deseas incluir
         extra_kwargs = {
-            'identidad': {'write_only': True},  # Asegura que se use en el POST
+            'identidad': {'write_only': True, 'required': False},  # Asegura que se use en el POST
             'idmodulo': {'write_only': True},  # Asegura que se use en el POST
         }
         read_only_fields = ('created_at', 'updated_at')
@@ -560,6 +563,8 @@ class DatosFiscalesEntidadSerializer(serializers.ModelSerializer):
     
     identidad = serializers.PrimaryKeyRelatedField(
         queryset=Entidad.objects.all(),
+        required=False,
+        allow_null=True,
         write_only=True
     )
     identidad_detail = serializers.SerializerMethodField()
@@ -598,6 +603,8 @@ class EjecutivoEntidadSerializer(serializers.ModelSerializer):
 
     identidad = serializers.PrimaryKeyRelatedField(
         queryset=Entidad.objects.all(),
+        required=False,
+        allow_null=True,
         write_only=True
     )
     identidad_detail = serializers.SerializerMethodField()
@@ -644,6 +651,8 @@ class FormaPagoEntidadSerializer(serializers.ModelSerializer):
 
     identidad = serializers.PrimaryKeyRelatedField(
         queryset=Entidad.objects.all(),
+        required=False,
+        allow_null=True,
         write_only=True
     )
     identidad_detail = serializers.SerializerMethodField()
@@ -682,6 +691,8 @@ class SectorEntidadSerializer(serializers.ModelSerializer):
     
     identidad = serializers.PrimaryKeyRelatedField(
         queryset=Entidad.objects.all(),
+        required=False,
+        allow_null=True,
         write_only=True
     )
     identidad_detail = serializers.SerializerMethodField()
@@ -719,6 +730,8 @@ class ContactoEntidadSerializer(serializers.ModelSerializer):
     """ Serializador """
     identidad = serializers.PrimaryKeyRelatedField(
         queryset=Entidad.objects.all(),
+        required=False,
+        allow_null=True,
         write_only=True
     )
     identidad_detail = serializers.SerializerMethodField()
@@ -799,6 +812,8 @@ class CondicionCrediticiaEntidadSerializer(serializers.ModelSerializer):
 
     identidad = serializers.PrimaryKeyRelatedField(
         queryset=Entidad.objects.all(),
+        required=False,
+        allow_null=True,
         write_only=True
     )
     identidad_detail = serializers.SerializerMethodField()
@@ -831,6 +846,8 @@ class ImpuestoEntidadSerializer(serializers.ModelSerializer):
 
     identidad = serializers.PrimaryKeyRelatedField(
         queryset=Entidad.objects.all(),
+        required=False,
+        allow_null=True,
         write_only=True
     )
     identidad_detail = serializers.SerializerMethodField()
@@ -869,6 +886,8 @@ class DireccionEntidadSerializer(serializers.ModelSerializer):
 
     identidad = serializers.PrimaryKeyRelatedField(
         queryset=Entidad.objects.all(),
+        required=False,
+        allow_null=True,
         write_only=True
     )
     identidad_detail = serializers.SerializerMethodField()
@@ -939,21 +958,23 @@ class DireccionEntidadSerializer(serializers.ModelSerializer):
 
 class EntidadSerializer(serializers.ModelSerializer):
     """ Serializador """
-    entidad_modulo = ModuloEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
-    entidad_condicioncrediticia = CondicionCrediticiaEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
-    entidad_impuesto = ImpuestoEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
-    entidad_ejecutivo = EjecutivoEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
-    entidad_datosfiscales = DatosFiscalesEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
-    entidad_contacto = ContactoEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
-    entidad_direccion = DireccionEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
-    entidad_sector = SectorEntidadSerializer(many=True, read_only=True)  # Anidar el serializador
-    entidad_formapago = FormaPagoEntidadSerializer(many=True, read_only=True)
+    entidad_modulo = ModuloEntidadSerializer(many=True, required=False)  # Anidar el serializador
+    entidad_condicioncrediticia = CondicionCrediticiaEntidadSerializer(many=True, required=False)  # Anidar el serializador
+    entidad_impuesto = ImpuestoEntidadSerializer(many=True, required=False)  # Anidar el serializador
+    entidad_ejecutivo = EjecutivoEntidadSerializer(many=True, required=False)  # Anidar el serializador
+    entidad_datosfiscales = DatosFiscalesEntidadSerializer(many=True, required=False)  # Anidar el serializador
+    entidad_contacto = ContactoEntidadSerializer(many=True, required=False)  # Anidar el serializador
+    entidad_direccion = DireccionEntidadSerializer(many=True, required=False)  # Anidar el serializador
+    entidad_sector = SectorEntidadSerializer(many=True, required=False)  # Anidar el serializador
+    entidad_formapago = FormaPagoEntidadSerializer(many=True, required=False)
 
     idtiporesponsable = serializers.PrimaryKeyRelatedField(
         queryset=TipoResponsable.objects.all(),
+        required=False,
+        allow_null=True,
         write_only=True
     )
-    idtiporesponsable_detail = TipoResponsableSerializer(source='idtiporesponsable', read_only=True)
+    idtiporesponsable_detail = TipoResponsableSerializer(source='idtiporesponsable', read_only=True, required=False)
 
     class Meta:
         """ Clase """
@@ -964,10 +985,130 @@ class EntidadSerializer(serializers.ModelSerializer):
         }
         read_only_fields = ('created_at', 'updated_at')
 
-    # def get_entidad_moduloentidad(self, obj):
-    #     """ Serializa los módulos asociados a la entidad """
-    #     modulos = ModuloEntidad.objects.filter(identidad=obj)
-    #     return ModuloEntidadSerializer(modulos, many=True).data
+    def create(self, validated_data):
+        try:
+            entidad_modulo = validated_data.pop('entidad_modulo', [])
+            entidad_condicioncrediticia = validated_data.pop('entidad_condicioncrediticia', [])
+            entidad_impuesto = validated_data.pop('entidad_impuesto', [])
+            entidad_ejecutivo = validated_data.pop('entidad_ejecutivo', [])
+            entidad_datosfiscales = validated_data.pop('entidad_datosfiscales', [])
+            entidad_contacto = validated_data.pop('entidad_contacto', [])
+            entidad_direccion = validated_data.pop('entidad_direccion', [])
+            entidad_sector = validated_data.pop('entidad_sector', [])
+            entidad_formapago = validated_data.pop('entidad_formapago', [])
+
+            with transaction.atomic():
+
+                entidad = Entidad.objects.create(**validated_data)
+            
+                # Crear registros en ModulosPorEntidad
+                for modulo_data in entidad_modulo:       
+                    ModuloEntidad.objects.create(identidad=entidad, 
+                        idmodulo=modulo_data['idmodulo'])
+            
+                # Crear registros en CondicionCrediticiaEntidad
+                for condicioncrediticia_data in entidad_condicioncrediticia:       
+                    CondicionCrediticiaEntidad.objects.create(
+                        identidad=entidad, 
+                        idmodulo=condicioncrediticia_data['idmodulo'],
+                        vigenciadesde=condicioncrediticia_data['vigenciadesde'],
+                        vigenciahasta=condicioncrediticia_data['vigenciahasta'],
+                        limitedesde=condicioncrediticia_data['limitedesde'],
+                        limitehasta=condicioncrediticia_data['limitehasta']
+                        )
+            
+                # Crear registros en ImpuestoPorEntidad
+                for impuesto_data in entidad_impuesto:       
+                    ImpuestoEntidad.objects.create(
+                        identidad=entidad, 
+                        idmodulo=impuesto_data['idmodulo'],
+                        idimpuesto=impuesto_data['idimpuesto'],
+                        aplica=impuesto_data['aplica']
+                        )
+            
+                # Crear registros en EjecutivoPorEntidad
+                for ejecutivo_data in entidad_ejecutivo:       
+                    EjecutivoEntidad.objects.create(
+                        identidad=entidad, 
+                        idpersona=ejecutivo_data['idpersona'],
+                        idrol=ejecutivo_data['idrol']
+                        )
+            
+                # Crear registros en DatosFiscalesEntidad
+                for datosfiscales_data in entidad_datosfiscales:       
+                    DatosFiscalesEntidad.objects.create(
+                        identidad=entidad, 
+                        idtipodocumento=datosfiscales_data['idtipodocumento'],
+                        idtiposujeto=datosfiscales_data['idtiposujeto'],
+                        numerodocumento=datosfiscales_data['numerodocumento']
+                        )
+            
+                # Crear registros en ContactoEntidad
+                for contacto_data in entidad_contacto:       
+                    ContactoEntidad.objects.create(
+                        identidad=entidad, 
+                        nombre=contacto_data['nombre'],
+                        rol=contacto_data['rol'],
+                        telefono=contacto_data['telefono'],
+                        sector=contacto_data['sector']
+                        )
+            
+                # Crear registros en DireccionEntidad
+                for direccion_data in entidad_direccion:       
+                    DireccionEntidad.objects.create(
+                        identidad=entidad, 
+                        nombre=direccion_data['nombre'],
+                        idtiposede=direccion_data['idtiposede'],
+                        idtipodomicilio=direccion_data['idtipodomicilio'],
+                        calle=direccion_data['calle'],
+                        numero=direccion_data['numero'],
+                        piso=direccion_data['piso'],
+                        departamento=direccion_data['departamento'],
+                        idpais=direccion_data['idpais'],
+                        idprovincia=direccion_data['idprovincia'],
+                        idpartido=direccion_data['idpartido'],
+                        idcodigopostal=direccion_data['idcodigopostal'],
+                        idzona=direccion_data['idzona'],
+                        diasentrega=direccion_data['diasentrega'],
+                        diasretiro=direccion_data['diasretiro']
+                        )
+                   
+                # Crear registros en SectorEntidad
+                for sector_data in entidad_sector:       
+                    SectorEntidad.objects.create(
+                        identidad=entidad, 
+                        idmodulo=sector_data['idmodulo'],
+                        idsector=sector_data['idsector']
+                        )
+            
+                # Crear registros en FormaPagoEntidad
+                for formapago_data in entidad_formapago:       
+                    FormaPagoEntidad.objects.create(
+                        identidad=entidad, 
+                        idmodulo=sector_data['idmodulo'],
+                        idformapago=formapago_data['idformapago']
+                        )
+
+            return entidad
+        
+        except serializers.ValidationError as e:
+            print(f"Validation errors: {e}")
+            raise
+
+    # def validate(self, attrs):
+    #     request = self.context.get('request')  # Obtenemos el tipo de solicitud
+    #     if request and request.method == 'POST':
+    #         # En POST, aseguramos que 'nombre' esté presente y no sea vacío
+    #         if 'codigo' not in attrs or not attrs['codigo'].strip():
+    #             raise serializers.ValidationError({
+    #                 'codigo': 'Este campo es obligatorio para crear una entidad.'
+    #             })
+    #         # En POST, aseguramos que 'nombre' esté presente y no sea vacío
+    #         if 'idtiporesponsable' not in attrs or not attrs['idtiporesponsable'].strip():
+    #             raise serializers.ValidationError({
+    #                 'idtiporesponsable': 'Este campo es obligatorio para crear una entidad.'
+    #             })
+    #     return attrs
     
 # Funcion para devolver la lista de campos de Entidad
 
