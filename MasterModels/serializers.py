@@ -1003,8 +1003,11 @@ class EntidadSerializer(serializers.ModelSerializer):
             
                 # Crear registros en ModulosPorEntidad
                 for modulo_data in entidad_modulo:       
-                    ModuloEntidad.objects.create(identidad=entidad, 
-                        idmodulo=modulo_data['idmodulo'])
+                    ModuloEntidad.objects.create(
+                        identidad=entidad, 
+                        idmodulo=modulo_data['idmodulo'],
+                        user_id=entidad.user_id
+                        )
             
                 # Crear registros en CondicionCrediticiaEntidad
                 for condicioncrediticia_data in entidad_condicioncrediticia:       
