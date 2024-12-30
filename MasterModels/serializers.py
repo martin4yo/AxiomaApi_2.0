@@ -1018,7 +1018,9 @@ class EntidadSerializer(serializers.ModelSerializer):
                         vigenciadesde=condicioncrediticia_data['vigenciadesde'],
                         vigenciahasta=condicioncrediticia_data['vigenciahasta'],
                         limitedesde=condicioncrediticia_data['limitedesde'],
-                        limitehasta=condicioncrediticia_data['limitehasta']
+                        limitehasta=condicioncrediticia_data['limitehasta'],
+                        user_id=entidad.user_id,
+                        tenant_id=entidad.tenant_id
                         )
             
                 # Crear registros en ImpuestoPorEntidad
@@ -1027,7 +1029,9 @@ class EntidadSerializer(serializers.ModelSerializer):
                         identidad=entidad, 
                         idmodulo=impuesto_data['idmodulo'],
                         idimpuesto=impuesto_data['idimpuesto'],
-                        aplica=impuesto_data['aplica']
+                        aplica=impuesto_data['aplica'],
+                        user_id=entidad.user_id,
+                        tenant_id=entidad.tenant_id
                         )
             
                 # Crear registros en EjecutivoPorEntidad
@@ -1035,7 +1039,9 @@ class EntidadSerializer(serializers.ModelSerializer):
                     EjecutivoEntidad.objects.create(
                         identidad=entidad, 
                         idpersona=ejecutivo_data['idpersona'],
-                        idrol=ejecutivo_data['idrol']
+                        idrol=ejecutivo_data['idrol'],
+                        user_id=entidad.user_id,
+                        tenant_id=entidad.tenant_id
                         )
             
                 # Crear registros en DatosFiscalesEntidad
@@ -1044,7 +1050,9 @@ class EntidadSerializer(serializers.ModelSerializer):
                         identidad=entidad, 
                         idtipodocumento=datosfiscales_data['idtipodocumento'],
                         idtiposujeto=datosfiscales_data['idtiposujeto'],
-                        numerodocumento=datosfiscales_data['numerodocumento']
+                        numerodocumento=datosfiscales_data['numerodocumento'],
+                        user_id=entidad.user_id,
+                        tenant_id=entidad.tenant_id
                         )
             
                 # Crear registros en ContactoEntidad
@@ -1054,7 +1062,9 @@ class EntidadSerializer(serializers.ModelSerializer):
                         nombre=contacto_data['nombre'],
                         rol=contacto_data['rol'],
                         telefono=contacto_data['telefono'],
-                        sector=contacto_data['sector']
+                        sector=contacto_data['sector'],
+                        user_id=entidad.user_id,
+                        tenant_id=entidad.tenant_id
                         )
             
                 # Crear registros en DireccionEntidad
@@ -1074,7 +1084,9 @@ class EntidadSerializer(serializers.ModelSerializer):
                         idcodigopostal=direccion_data['idcodigopostal'],
                         idzona=direccion_data['idzona'],
                         diasentrega=direccion_data['diasentrega'],
-                        diasretiro=direccion_data['diasretiro']
+                        diasretiro=direccion_data['diasretiro'],
+                        user_id=entidad.user_id,
+                        tenant_id=entidad.tenant_id
                         )
                    
                 # Crear registros en SectorEntidad
@@ -1082,7 +1094,9 @@ class EntidadSerializer(serializers.ModelSerializer):
                     SectorEntidad.objects.create(
                         identidad=entidad, 
                         idmodulo=sector_data['idmodulo'],
-                        idsector=sector_data['idsector']
+                        idsector=sector_data['idsector'],
+                        user_id=entidad.user_id,
+                        tenant_id=entidad.tenant_id
                         )
             
                 # Crear registros en FormaPagoEntidad
@@ -1090,7 +1104,9 @@ class EntidadSerializer(serializers.ModelSerializer):
                     FormaPagoEntidad.objects.create(
                         identidad=entidad, 
                         idmodulo=sector_data['idmodulo'],
-                        idformapago=formapago_data['idformapago']
+                        idformapago=formapago_data['idformapago'],
+                        user_id=entidad.user_id,
+                        tenant_id=entidad.tenant_id
                         )
 
             return entidad
