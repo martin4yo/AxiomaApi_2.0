@@ -48,6 +48,7 @@ class CuitPais(AuditModel):
     idtiposujeto = models.ForeignKey(TipoSujeto, on_delete=models.CASCADE, related_name='tiposujeto_cuitpais')
     nombre = models.CharField(max_length=256, default='')
     idmascara = models.ForeignKey('Mascara', on_delete=models.CASCADE, related_name='mascara_cuitpais')
+    idpais = models.ForeignKey('Pais', on_delete=models.CASCADE, related_name='pais_cuitpais')
     
     cuit = models.CharField(max_length=11, unique=True)
 

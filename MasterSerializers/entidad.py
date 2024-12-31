@@ -40,6 +40,8 @@ class EntidadSerializer(serializers.ModelSerializer):
         }
         read_only_fields = ('created_at', 'updated_at')
 
+    # Creacion de la entidad
+
     def create(self, validated_data):
         try:
             entidad_modulo = validated_data.pop('entidad_modulo', [])
@@ -169,6 +171,27 @@ class EntidadSerializer(serializers.ModelSerializer):
         except serializers.ValidationError as e:
             print(f"Validation errors: {e}")
             raise
+
+    # Update de la entidad
+    # 
+    # def update(self, instance, validated_data):
+    #     modulos_data = validated_data.pop('modulos', [])
+    #     instance.nombre = validated_data.get('nombre', instance.nombre)
+    #     instance.save()
+
+    #     # Actualizar registros en ModulosPorEntidad
+    #     modulo_ids = [modulo_data['modulo_id'] for modulo_data in modulos_data]
+
+    #     # Eliminar módulos que ya no están en la lista
+    #     ModulosPorEntidad.objects.filter(entidad=instance).exclude(modulo_id__in=modulo_ids).delete()
+
+    #     # Agregar los nuevos módulos
+    #     existing_modulo_ids = ModulosPorEntidad.objects.filter(entidad=instance).values_list('modulo_id', flat=True)
+    #     for modulo_id in modulo_ids:
+    #         if modulo_id not in existing_modulo_ids:
+    #             ModulosPorEntidad.objects.create(entidad=instance, modulo_id=modulo_id)
+
+    #     return instance    
 
     # def validate(self, attrs):
     #     request = self.context.get('request')  # Obtenemos el tipo de solicitud
