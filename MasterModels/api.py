@@ -6,15 +6,16 @@ from rest_framework.filters import OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from .paginators import CustomPagination
 
-from .models import Persona, PersonaRol, Pais, Provincia, CodigoPostal
-from .models import Rol, Modulo, Mascara, FormaPago, FormaPagoDetalle, TipoDeCambio, Partido, Sector
+from .general import Persona, PersonaRol, Pais, Provincia, CodigoPostal
+from .general import Rol, Modulo, Mascara, FormaPago, FormaPagoDetalle, TipoDeCambio, Partido, Sector
 
-from .serializers import PersonaSerializer, PersonaRolSerializer, PaisSerializer, ProvinciaSerializer, CodigoPostalSerializer
-from .serializers import RolSerializer, ModuloSerializer, MascaraSerializer, FormaPagoSerializer
-from .serializers import FormaPagoSerializer, FormaPagoDetalleSerializer, TipoDeCambioSerializer, PartidoSerializer
-from .serializers import SectorSerializer
+from MasterSerializers.general import PersonaSerializer, PersonaRolSerializer, PaisSerializer, ProvinciaSerializer, CodigoPostalSerializer
+from MasterSerializers.general import RolSerializer, ModuloSerializer, MascaraSerializer, FormaPagoSerializer
+from MasterSerializers.general import FormaPagoSerializer, FormaPagoDetalleSerializer, PartidoSerializer
+from MasterSerializers.general import SectorSerializer
+from MasterSerializers.impuestos import TipoDeCambioSerializer
 
-from .filters import PersonaFilter, GenericDynamicFilter, DynamicModelFilter
+from MasterModels.filters import PersonaFilter, GenericDynamicFilter, DynamicModelFilter
 
 ### VIEWSET BASE #######################################
 
@@ -354,17 +355,18 @@ class PartidoViewSet(GenericModelViewSet):
     filterset_class = FilterClass
 
 ### IMPOSITIVO #########################################################
-from .models import TipoDocumento, TipoSujeto, TipoResponsable, ConceptoIncluido, Incoterms, Idioma, UnidadMedida
-from .models import TipoComprobante, Moneda, CuitPais, TipoIndice, AlicuotaImpuesto, PadronImpuesto
-from .models import TipoFrecuencia, TipoValor, TipoCalculo, Indice, ClasificacionImpuesto, TipoImpuesto
-from .models import Impuesto
+from .impuestos import  TipoSujeto,  ConceptoIncluido
+from .general import TipoDocumento,TipoResponsable, Incoterms, Idioma, UnidadMedida, Moneda, TipoIndice, Indice, TipoFrecuencia, TipoValor
+from .impuestos import TipoComprobante, CuitPais, AlicuotaImpuesto, PadronImpuesto
+from .impuestos import  TipoCalculo, ClasificacionImpuesto, TipoImpuesto
+from .impuestos import Impuesto
 
-from .serializers import TipoDocumentoSerializer, TipoSujetoSerializer, TipoResponsableSerializer
-from .serializers import ConceptoIncluidoSerializer, IncotermsSerializer, IdiomaSerializer, UnidadMedidaSerializer
-from .serializers import TipoComprobanteSerializer, MonedaSerializer, CuitPaisSerializer, TipoIndiceSerializer
-from .serializers import AlicuotaImpuestoSerializer, PadronImpuestoSerializer, TipoValorSerializer, TipoFrecuenciaSerializer
-from .serializers import TipoCalculoSerializer, IndiceSerializer, ClasificacionImpuestoSerializer, TipoImpuestoSerializer
-from .serializers import ImpuestoSerializer
+from MasterSerializers.impuestos import TipoDocumentoSerializer, TipoSujetoSerializer, TipoResponsableSerializer
+from MasterSerializers.impuestos import ConceptoIncluidoSerializer, IncotermsSerializer, IdiomaSerializer, UnidadMedidaSerializer
+from MasterSerializers.impuestos import TipoComprobanteSerializer, MonedaSerializer, CuitPaisSerializer, TipoIndiceSerializer
+from MasterSerializers.impuestos import AlicuotaImpuestoSerializer, PadronImpuestoSerializer, TipoValorSerializer, TipoFrecuenciaSerializer
+from MasterSerializers.impuestos import TipoCalculoSerializer, IndiceSerializer, ClasificacionImpuestoSerializer, TipoImpuestoSerializer
+from MasterSerializers.impuestos import ImpuestoSerializer
 
 class ImpuestoViewSet(GenericModelViewSet):
     """ ViewSet de  Impuesto"""
@@ -807,8 +809,8 @@ class ClasificacionImpuestoViewSet(GenericModelViewSet):
 
 
 ### CONTABLE #########################################################
-from .models import TipoAjuste, PlanCuentas
-from .serializers import TipoaAjusteSerializer, PlanCuentasSerializer
+from MasterModels.contabilidad import TipoAjuste, PlanCuentas
+from MasterSerializers.contabilidad import TipoaAjusteSerializer, PlanCuentasSerializer
 
 class TipoAjusteViewSet(GenericModelViewSet):
     """ ViewSet de Tipos de Ajustes Contables"""
@@ -857,14 +859,17 @@ class PlanCuentasViewSet(GenericModelViewSet):
 
 ### ENTIDADES #########################################################
 
-from .models import Entidad, Zona, ListaPrecioEntidad, CondicionCrediticiaEntidad, ImpuestoEntidad, EjecutivoEntidad
-from .models import DatosFiscalesEntidad, ContactoEntidad, TipoSede, TipoDomicilio, DireccionEntidad
-from .models import ModuloEntidad, SectorEntidad, FormaPagoEntidad
+from MasterModels.entidad import Entidad, Zona, CondicionCrediticiaEntidad, ImpuestoEntidad, EjecutivoEntidad
+from MasterModels.entidad import DatosFiscalesEntidad, ContactoEntidad,  DireccionEntidad
+from MasterModels.entidad import ModuloEntidad, SectorEntidad, FormaPagoEntidad
+from MasterModels.general import TipoSede, TipoDomicilio
+from MasterModels.producto import ListaPrecioEntidad
 
-from .serializers import EntidadSerializer, ZonaSerializer, ListaPrecioEntidadSerializer, CondicionCrediticiaEntidadSerializer
-from .serializers import ImpuestoEntidadSerializer, EjecutivoEntidadSerializer, DatosFiscalesEntidadSerializer
-from .serializers import ContactoEntidadSerializer, TipoSedeSerializer, TipoDomicilioSerializer, DireccionEntidadSerializer
-from .serializers import ModuloEntidadSerializer, SectorEntidadSerializer, FormaPagoEntidadSerializer
+from MasterSerializers.entidad import EntidadSerializer
+from MasterSerializers.entidad_tablas import ZonaSerializer, ListaPrecioEntidadSerializer, CondicionCrediticiaEntidadSerializer
+from MasterSerializers.entidad_tablas import ImpuestoEntidadSerializer, EjecutivoEntidadSerializer, DatosFiscalesEntidadSerializer
+from MasterSerializers.entidad_tablas import ContactoEntidadSerializer, TipoSedeSerializer, TipoDomicilioSerializer, DireccionEntidadSerializer
+from MasterSerializers.entidad_tablas import ModuloEntidadSerializer, SectorEntidadSerializer, FormaPagoEntidadSerializer
 
 class ModuloEntidadViewSet(GenericModelViewSet):
     """ ViewSet de Direcciones de Modulo Entidades"""
@@ -1185,8 +1190,8 @@ class CondicionCrediticiaEntidadViewSet(GenericModelViewSet):
 
 ### PRODUCTOS ##########################################
 
-from .models import ListaPrecios
-from .serializers import ListaPreciosSerializer
+from MasterModels.producto import ListaPrecios
+from MasterSerializers.producto import ListaPreciosSerializer
 
 class ListaPreciosViewSet(GenericModelViewSet):
     """ ViewSet de Entidades"""

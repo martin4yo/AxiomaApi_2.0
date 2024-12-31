@@ -2,6 +2,12 @@
 from django.contrib import admin
 from django.apps import apps
 
+from MasterModels import general 
+from MasterModels import contabilidad
+from MasterModels import entidad
+from MasterModels import impuestos
+from MasterModels import producto
+
 # Register your models here.
 
 # class PersonaAdmin(admin.ModelAdmin):

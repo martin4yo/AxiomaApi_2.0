@@ -1,5 +1,6 @@
 from django_filters import rest_framework as filters
-from .models import Persona
+
+from MasterModels.general import Persona
 
 class PersonaFilter(filters.FilterSet):
 
