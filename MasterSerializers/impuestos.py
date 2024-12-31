@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 ### IMPOSITIVO ###############################################################
 
-from MasterModels.general import TipoDocumento, TipoResponsable,  Incoterms, Moneda, TipoDeCambio, Mascara
+from MasterModels.general import TipoDocumento, TipoResponsable,  Incoterms, Moneda, TipoDeCambio, Mascara, Pais
 from MasterModels.general import Idioma, UnidadMedida,  TipoIndice, TipoFrecuencia, TipoValor, Indice, Provincia, Partido
 from MasterModels.contabilidad import PlanCuentas
 from MasterModels.impuestos import TipoSujeto, ConceptoIncluido, TipoComprobante, CuitPais, AlicuotaImpuesto
@@ -132,11 +132,18 @@ class CuitPaisSerializer(serializers.ModelSerializer):
 
     idtiposujeto_detail = TipoSujetoSerializer(source='idtiposujeto', read_only=True)
 
-    idmascara = serializers.PrimaryKeyRelatedField(
-        queryset=Mascara.objects.all(),
+    idpais = serializers.PrimaryKeyRelatedField(
+        queryset=Pais.objects.all(),
         write_only=True
     )
-    idmascara_detail = MascaraSerializer(source='idmascara', read_only=True)
+    idpais_detail = MascaraSerializer(source='idpais', read_only=True)
+
+    idtipodocumento = serializers.PrimaryKeyRelatedField(
+        queryset=TipoDocumento.objects.all(),
+        write_only=True
+    )
+    idtipodocumento_detail = TipoDocumentoSerializer(source='idtipodocumento', read_only=True)
+
 
     class Meta:
         """ Clase """
