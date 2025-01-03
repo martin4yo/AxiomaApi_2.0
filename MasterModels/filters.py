@@ -1,43 +1,43 @@
 from django_filters import rest_framework as filters
 
-from MasterModels.general import Persona
+from MasterModels.modelos_general.persona import Persona
 
-class PersonaFilter(filters.FilterSet):
+# class PersonaFilter(filters.FilterSet):
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
         
-        # Recorre todos los campos del modelo y asigna el tipo de filtro en función de su tipo de dato
-        for field in self.Meta.model._meta.get_fields():
-            # Evitar campos que no son de base de datos (relaciones inversas, etc.)
-            if not hasattr(field, 'get_internal_type'):
-                continue
+#         # Recorre todos los campos del modelo y asigna el tipo de filtro en función de su tipo de dato
+#         for field in self.Meta.model._meta.get_fields():
+#             # Evitar campos que no son de base de datos (relaciones inversas, etc.)
+#             if not hasattr(field, 'get_internal_type'):
+#                 continue
             
-            field_type = field.get_internal_type()
+#             field_type = field.get_internal_type()
             
-            if field_type in ['CharField', 'TextField']:
-                # Para campos de texto, agregar filtro exacto y búsqueda parcial
-                self.filters[field.name] = filters.CharFilter(field_name=field.name, lookup_expr='icontains')
+#             if field_type in ['CharField', 'TextField']:
+#                 # Para campos de texto, agregar filtro exacto y búsqueda parcial
+#                 self.filters[field.name] = filters.CharFilter(field_name=field.name, lookup_expr='icontains')
             
-            elif field_type in ['IntegerField', 'FloatField', 'DecimalField']:
-                # Para campos numéricos, agregar filtros de rangos
-                self.filters[field.name] = filters.RangeFilter(field_name=field.name)
+#             elif field_type in ['IntegerField', 'FloatField', 'DecimalField']:
+#                 # Para campos numéricos, agregar filtros de rangos
+#                 self.filters[field.name] = filters.RangeFilter(field_name=field.name)
             
-            elif field_type in ['DateField', 'DateTimeField']:
-                # Para campos de fecha, agregar filtros de rango
-                self.filters[field.name] = filters.DateFromToRangeFilter(field_name=field.name)
+#             elif field_type in ['DateField', 'DateTimeField']:
+#                 # Para campos de fecha, agregar filtros de rango
+#                 self.filters[field.name] = filters.DateFromToRangeFilter(field_name=field.name)
             
-            elif field_type == 'BooleanField':
-                # Para campos booleanos, agregar filtro exacto
-                self.filters[field.name] = filters.BooleanFilter(field_name=field.name)
+#             elif field_type == 'BooleanField':
+#                 # Para campos booleanos, agregar filtro exacto
+#                 self.filters[field.name] = filters.BooleanFilter(field_name=field.name)
             
-            elif field_type == 'ForeignKey':
-                # Para claves foráneas, agregar filtro exacto por ID
-                self.filters[field.name] = filters.NumberFilter(field_name=field.name, lookup_expr='exact')
+#             elif field_type == 'ForeignKey':
+#                 # Para claves foráneas, agregar filtro exacto por ID
+#                 self.filters[field.name] = filters.NumberFilter(field_name=field.name, lookup_expr='exact')
 
-    class Meta:
-        model = Persona
-        fields = '__all__'  # Esto permite que todos los campos del modelo estén disponibles para el filtrado
+#     class Meta:
+#         model = Persona
+#         fields = '__all__'  # Esto permite que todos los campos del modelo estén disponibles para el filtrado
 
 
 class GenericDynamicFilter(filters.FilterSet):

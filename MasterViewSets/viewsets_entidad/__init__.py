@@ -1,0 +1,13 @@
+# Importar todos los modulos
+from .condicioncrediticiaentidad import CondicionCrediticiaEntidadViewSet
+from .contactoentidad import ContactoEntidadViewSet
+from .datosfiscalesentidad import DatosFiscalesEntidadViewSet
+from .direccionentidad import DireccionEntidadViewSet
+from .ejecutivoentidad import EjecutivoEntidadViewSet
+from .entidad import EntidadViewSet
+from .formapagoentidad import FormaPagoEntidadViewSet
+from .impuestoentidad import ImpuestoEntidadViewSet
+from .listaprecioentidad import ListaPrecioEntidadViewSet
+from .moduloentidad import ModuloEntidadViewSet
+from .sectorentidad import SectorEntidadViewSet
+from .zona import ZonaViewSet

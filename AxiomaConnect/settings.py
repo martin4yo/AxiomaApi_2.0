@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_filters',
     'MasterModels',
+    'MasterViewSets',
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',

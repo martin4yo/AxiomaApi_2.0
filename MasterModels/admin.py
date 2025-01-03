@@ -2,11 +2,11 @@
 from django.contrib import admin
 from django.apps import apps
 
-from MasterModels import general 
-from MasterModels import contabilidad
-from MasterModels import entidad
-from MasterModels import impuestos
-from MasterModels import producto
+from MasterModels.modelos_general import * 
+from MasterModels.modelos_contabilidad import *
+from MasterModels.modelos_entidad import *
+from MasterModels.modelos_impuestos import *
+from MasterModels.modelos_producto import *
 
 # Register your models here.
 
