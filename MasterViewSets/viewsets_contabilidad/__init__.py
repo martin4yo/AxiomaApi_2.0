@@ -1,3 +1,3 @@
 # Importar todos los modulos
-from .plancuentas import PlanCuentasViewSet
+from .plancuenta import PlanCuentasViewSet
 from .tipoajuste import TipoAjusteViewSet

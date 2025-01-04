@@ -1,13 +1,13 @@
 from rest_framework import serializers
 from MasterModels.modelos_impuestos import TipoImpuesto, AlicuotaImpuesto, PadronImpuesto, Impuesto
 from MasterModels.modelos_general import Provincia, Partido
-from MasterModels.modelos_contabilidad import PlanCuentas 
+from MasterModels.modelos_contabilidad import PlanCuenta
 
 from MasterSerializers.serializers_general import ProvinciaSerializer, PartidoSerializer
 from MasterSerializers.serializers_impuestos.tipoimpuesto import TipoImpuestoSerializer
 from MasterSerializers.serializers_impuestos.alicuotaimpuesto import AlicuotaImpuestoSerializer
 from MasterSerializers.serializers_impuestos.padronimpuesto import PadronImpuestoSerializer
-from MasterSerializers.serializers_contabilidad import PlanCuentasSerializer 
+from MasterSerializers.serializers_contabilidad import PlanCuentaSerializer 
 
 class ImpuestoSerializer(serializers.ModelSerializer):
     """ Serializador """
@@ -25,10 +25,10 @@ class ImpuestoSerializer(serializers.ModelSerializer):
     idalicuota_detail = AlicuotaImpuestoSerializer(source='idalicuota', read_only=True)
 
     idplancuenta = serializers.PrimaryKeyRelatedField(
-        queryset = PlanCuentas.objects.all(),
+        queryset = PlanCuenta.objects.all(),
         write_only=True
     )
-    idplancuenta_detail = PlanCuentasSerializer(source='idplancuenta', read_only=True)
+    idplancuenta_detail = PlanCuentaSerializer(source='idplancuenta', read_only=True)
 
     idpadron = serializers.PrimaryKeyRelatedField(
         queryset=PadronImpuesto.objects.all(),

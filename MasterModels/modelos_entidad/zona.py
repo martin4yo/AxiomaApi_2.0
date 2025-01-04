@@ -3,10 +3,11 @@ from ..universal import AuditModel, TenantModel
     
 class Zona(AuditModel, TenantModel):
     """ Clase para manejar las zonas """
+    codigo = models.CharField(max_length=10)
     nombre = models.CharField(max_length=100)
-    codigo = models.CharField(max_length=10, default='', unique=True)
 
     class Meta:
+        unique_together = (("codigo",),)
         verbose_name = 'Zona'
         verbose_name_plural = 'GRAL - Zonas'
 

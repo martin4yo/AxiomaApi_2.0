@@ -13,4 +13,4 @@ class UnidadMedida(AuditModel):
         verbose_name_plural = 'GRAL - Unidades de Medida'
 
     def __str__(self):
-        return f'{self.nombre}' 
+        return f'{self.codigo}, {self.nombre}' 

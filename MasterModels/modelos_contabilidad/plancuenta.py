@@ -1,7 +1,7 @@
 from django.db import models
 from ..universal import AuditModel, TenantModel
 
-class PlanCuentas(AuditModel, TenantModel):
+class PlanCuenta(AuditModel, TenantModel):
     """ Plan de Cuentas """
     
     nombre = models.CharField(max_length=256)

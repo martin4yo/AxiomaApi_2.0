@@ -74,7 +74,7 @@ router.register('api/contabilidad/plancuentas', PlanCuentasViewSet, 'plancuentas
 from MasterViewSets.viewsets_entidad import EntidadViewSet, ZonaViewSet, CondicionCrediticiaEntidadViewSet
 from MasterViewSets.viewsets_entidad import ImpuestoEntidadViewSet, EjecutivoEntidadViewSet, ContactoEntidadViewSet
 from MasterViewSets.viewsets_entidad import DireccionEntidadViewSet, ModuloEntidadViewSet, SectorEntidadViewSet
-from MasterViewSets.viewsets_entidad import FormaPagoEntidadViewSet, DatosFiscalesEntidadViewSet
+from MasterViewSets.viewsets_entidad import FormaPagoEntidadViewSet, DatosFiscalesEntidadViewSet, ListaPrecioEntidadViewSet
 
 from MasterViewSets.viewsets_general import TipoSedeViewSet, TipoDomicilioViewSet
 
@@ -91,14 +91,27 @@ router.register('api/entidades/moduloentidad', ModuloEntidadViewSet, 'modulosent
 router.register('api/entidades/sectorentidad', SectorEntidadViewSet, 'sectoresentidad')
 router.register('api/entidades/formapagoentidad', FormaPagoEntidadViewSet, 'formaspagoentidad')
 router.register('api/entidades/datosfiscalesentidad', DatosFiscalesEntidadViewSet, 'datosfiscalesentidad')
+router.register('api/productos/listaprecioentidad', ListaPrecioEntidadViewSet, 'listasprecioentidad')
 
 # URLS DE PRODUCTOS 
 
-from MasterViewSets.viewsets_entidad import ListaPrecioEntidadViewSet
-from MasterViewSets.viewsets_producto import ListaPreciosViewSet
+from MasterViewSets.viewsets_producto import ListaPreciosViewSet, AtributoViewSet, AtributoProductoViewSet, AtributoValorViewSet, AtributoTipoViewSet
+from MasterViewSets.viewsets_producto import ClaseProductoViewSet, ContabilidadProductoViewSet, ConversionProductoViewSet
+from MasterViewSets.viewsets_producto import ProductoViewSet, TipoProductoViewSet, ListaTipoViewSet, PrecioViewSet
+
 
 router.register('api/productos/listaprecios', ListaPreciosViewSet, 'listasprecios')
-router.register('api/productos/listaprecioentidad', ListaPrecioEntidadViewSet, 'listasprecioentidad')
+router.register('api/productos/atributo', AtributoViewSet, 'atributos')
+router.register('api/productos/atributoproducto', AtributoProductoViewSet, 'atributosproducto')
+router.register('api/productos/atributotipo', AtributoTipoViewSet, 'atributostipo')
+router.register('api/productos/atributovalor', AtributoValorViewSet, 'atributosvalor')
+router.register('api/productos/claseproducto', ClaseProductoViewSet, 'clasesproducto')
+router.register('api/productos/contabilidadproducto', ContabilidadProductoViewSet, 'contabilidadproductos')
+router.register('api/productos/conversionproducto', ConversionProductoViewSet, 'conversionesproductos')
+router.register('api/productos/producto', ProductoViewSet, 'productos')
+router.register('api/productos/tipoproducto', TipoProductoViewSet, 'tiposproducto')
+router.register('api/productos/listatipo', ListaTipoViewSet, 'listatipos')
+router.register('api/productos/precio', PrecioViewSet, 'precios')
 
 urlpatterns = [
     path('', include(router.urls)),
