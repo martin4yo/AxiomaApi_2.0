@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .funciones import entidad_to_dict 
+from .funciones import entidad_to_dict
 
 from MasterModels.modelos_entidad import Entidad, ImpuestoEntidad
 from MasterModels.modelos_general import Modulo
@@ -36,11 +36,11 @@ class ImpuestoEntidadSerializer(serializers.ModelSerializer):
         """ Clase """
         model = ImpuestoEntidad
         fields = '__all__'  # O especifica los campos que deseas incluir
-        extra_kwargs = {
-            'idmodulo': {'write_only': True},  # Asegura que se use en el POST
-            'idimpuesto': {'write_only': True},  # Asegura que se use en el POST
-            'identidad': {'write_only': True},  # Asegura que se use en el POST
-        }
+        # extra_kwargs = {
+        #     'idmodulo': {'write_only': True},  # Asegura que se use en el POST
+        #     'idimpuesto': {'write_only': True},  # Asegura que se use en el POST
+        #     'identidad': {'write_only': True},  # Asegura que se use en el POST
+        # }
         read_only_fields = ('created_at', 'updated_at')
 
     def get_identidad_detail(self, obj):

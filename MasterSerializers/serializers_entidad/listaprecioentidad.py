@@ -13,6 +13,8 @@ class ListaPrecioEntidadSerializer(serializers.ModelSerializer):
 
     identidad = serializers.PrimaryKeyRelatedField(
         queryset=Entidad.objects.all(),
+        required=False,
+        allow_null=True,
         write_only=True
     )
     identidad_detail = serializers.SerializerMethodField()

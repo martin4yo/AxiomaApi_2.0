@@ -4,8 +4,8 @@ from ..universal import AuditModel, TenantModel
 class ModuloEntidad(AuditModel, TenantModel):
     """ Modulos por Entidad """
     
-    identidad = models.ForeignKey('Entidad', related_name='entidad_modulo', on_delete=models.CASCADE, null=True, blank=True)
-    idmodulo = models.ForeignKey('Modulo', on_delete=models.CASCADE, related_name='modulo_entidadmodulo', null=True, blank=True)
+    identidad = models.ForeignKey('Entidad', related_name='entidad_modulo', on_delete=models.CASCADE)
+    idmodulo = models.ForeignKey('Modulo', on_delete=models.CASCADE, related_name='modulo_entidadmodulo')
                
     class Meta:
         unique_together = (("identidad", "idmodulo"),)

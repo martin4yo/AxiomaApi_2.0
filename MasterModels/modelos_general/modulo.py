@@ -11,5 +11,5 @@ class Modulo(AuditModel):
         verbose_name_plural = 'GRAL - Modulos'
 
     def __str__(self):
-        return f'{self.nombre}' 
+        return f'{self.codigo}, {self.nombre}' 
     

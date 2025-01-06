@@ -6,7 +6,8 @@ class ModuloSerializer(serializers.ModelSerializer):
     class Meta:
         """ Clase """
         model = Modulo
-        fields = '__all__'  # O especifica los campos que deseas incluir
+        #fields = '__all__'  # O especifica los campos que deseas incluir
+        fields = ['id','codigo','nombre']
         read_only_fields = ('created_at', 'updated_at')
 
 

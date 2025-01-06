@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from django.db import transaction
+from django.db.models import Q
+from .funciones import insert_tabla_asociada
 
 from MasterSerializers.serializers_entidad.moduloentidad import ModuloEntidadSerializer
 from MasterSerializers.serializers_entidad.condicioncrediticiaentidad import CondicionCrediticiaEntidadSerializer
@@ -11,8 +13,9 @@ from MasterSerializers.serializers_entidad.direccionentidad import DireccionEnti
 from MasterSerializers.serializers_entidad.sectorentidad import SectorEntidadSerializer
 from MasterSerializers.serializers_entidad.formapagoentidad import FormaPagoEntidadSerializer
 from MasterSerializers.serializers_general.tiporesponsable import TipoResponsableSerializer 
+from MasterSerializers.serializers_entidad.listaprecioentidad import ListaPrecioEntidadSerializer 
 
-from MasterModels.modelos_entidad import Entidad, ModuloEntidad, CondicionCrediticiaEntidad, ImpuestoEntidad
+from MasterModels.modelos_entidad import Entidad, ModuloEntidad, CondicionCrediticiaEntidad, ImpuestoEntidad, ListaPrecioEntidad
 from MasterModels.modelos_entidad import EjecutivoEntidad, ContactoEntidad, SectorEntidad, DatosFiscalesEntidad, DireccionEntidad, FormaPagoEntidad
 
 from MasterModels.modelos_general.tiporesponsable import TipoResponsable
@@ -28,6 +31,7 @@ class EntidadSerializer(serializers.ModelSerializer):
     entidad_direccion = DireccionEntidadSerializer(many=True, required=False)  # Anidar el serializador
     entidad_sector = SectorEntidadSerializer(many=True, required=False)  # Anidar el serializador
     entidad_formapago = FormaPagoEntidadSerializer(many=True, required=False)
+    entidad_lista = ListaPrecioEntidadSerializer(many=True, required=False)
 
     idtiporesponsable = serializers.PrimaryKeyRelatedField(
         queryset=TipoResponsable.objects.all(),
@@ -50,127 +54,51 @@ class EntidadSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         try:
-            entidad_modulo = validated_data.pop('entidad_modulo', [])
-            entidad_condicioncrediticia = validated_data.pop('entidad_condicioncrediticia', [])
-            entidad_impuesto = validated_data.pop('entidad_impuesto', [])
-            entidad_ejecutivo = validated_data.pop('entidad_ejecutivo', [])
-            entidad_datosfiscales = validated_data.pop('entidad_datosfiscales', [])
-            entidad_contacto = validated_data.pop('entidad_contacto', [])
-            entidad_direccion = validated_data.pop('entidad_direccion', [])
-            entidad_sector = validated_data.pop('entidad_sector', [])
-            entidad_formapago = validated_data.pop('entidad_formapago', [])
 
+            #entidad_modulo = validated_data.pop('entidad_modulo', [])
+            # entidad_condicioncrediticia = validated_data.pop('entidad_condicioncrediticia', [])
+            # entidad_impuesto = validated_data.pop('entidad_impuesto', [])
+            # entidad_ejecutivo = validated_data.pop('entidad_ejecutivo', [])
+            # entidad_datosfiscales = validated_data.pop('entidad_datosfiscales', [])
+            # entidad_contacto = validated_data.pop('entidad_contacto', [])
+            # entidad_direccion = validated_data.pop('entidad_direccion', [])
+            # entidad_sector = validated_data.pop('entidad_sector', [])
+            # entidad_formapago = validated_data.pop('entidad_formapago', [])
+            # entidad_lista = validated_data.pop('entidad_lista', [])
+            
             with transaction.atomic():
 
                 entidad = Entidad.objects.create(**validated_data)
-            
-                # Crear registros en ModulosPorEntidad
-                for modulo_data in entidad_modulo:       
-                    ModuloEntidad.objects.create(
-                        identidad=entidad, 
-                        idmodulo=modulo_data['idmodulo'],
-                        user_id=entidad.user_id,
-                        tenant_id=entidad.tenant_id
-                        )
-            
-                # Crear registros en CondicionCrediticiaEntidad
-                for condicioncrediticia_data in entidad_condicioncrediticia:       
-                    CondicionCrediticiaEntidad.objects.create(
-                        identidad=entidad, 
-                        idmodulo=condicioncrediticia_data['idmodulo'],
-                        vigenciadesde=condicioncrediticia_data['vigenciadesde'],
-                        vigenciahasta=condicioncrediticia_data['vigenciahasta'],
-                        limitedesde=condicioncrediticia_data['limitedesde'],
-                        limitehasta=condicioncrediticia_data['limitehasta'],
-                        user_id=entidad.user_id,
-                        tenant_id=entidad.tenant_id
-                        )
-            
-                # Crear registros en ImpuestoPorEntidad
-                for impuesto_data in entidad_impuesto:       
-                    ImpuestoEntidad.objects.create(
-                        identidad=entidad, 
-                        idmodulo=impuesto_data['idmodulo'],
-                        idimpuesto=impuesto_data['idimpuesto'],
-                        aplica=impuesto_data['aplica'],
-                        user_id=entidad.user_id,
-                        tenant_id=entidad.tenant_id
-                        )
-            
-                # Crear registros en EjecutivoPorEntidad
-                for ejecutivo_data in entidad_ejecutivo:       
-                    EjecutivoEntidad.objects.create(
-                        identidad=entidad, 
-                        idpersona=ejecutivo_data['idpersona'],
-                        idrol=ejecutivo_data['idrol'],
-                        user_id=entidad.user_id,
-                        tenant_id=entidad.tenant_id
-                        )
-            
-                # Crear registros en DatosFiscalesEntidad
-                for datosfiscales_data in entidad_datosfiscales:       
-                    DatosFiscalesEntidad.objects.create(
-                        identidad=entidad, 
-                        idtipodocumento=datosfiscales_data['idtipodocumento'],
-                        idtiposujeto=datosfiscales_data['idtiposujeto'],
-                        numerodocumento=datosfiscales_data['numerodocumento'],
-                        user_id=entidad.user_id,
-                        tenant_id=entidad.tenant_id
-                        )
-            
-                # Crear registros en ContactoEntidad
-                for contacto_data in entidad_contacto:       
-                    ContactoEntidad.objects.create(
-                        identidad=entidad, 
-                        nombre=contacto_data['nombre'],
-                        rol=contacto_data['rol'],
-                        telefono=contacto_data['telefono'],
-                        sector=contacto_data['sector'],
-                        user_id=entidad.user_id,
-                        tenant_id=entidad.tenant_id
-                        )
-            
-                # Crear registros en DireccionEntidad
-                for direccion_data in entidad_direccion:       
-                    DireccionEntidad.objects.create(
-                        identidad=entidad, 
-                        nombre=direccion_data['nombre'],
-                        idtiposede=direccion_data['idtiposede'],
-                        idtipodomicilio=direccion_data['idtipodomicilio'],
-                        calle=direccion_data['calle'],
-                        numero=direccion_data['numero'],
-                        piso=direccion_data['piso'],
-                        departamento=direccion_data['departamento'],
-                        idpais=direccion_data['idpais'],
-                        idprovincia=direccion_data['idprovincia'],
-                        idpartido=direccion_data['idpartido'],
-                        idcodigopostal=direccion_data['idcodigopostal'],
-                        idzona=direccion_data['idzona'],
-                        diasentrega=direccion_data['diasentrega'],
-                        diasretiro=direccion_data['diasretiro'],
-                        user_id=entidad.user_id,
-                        tenant_id=entidad.tenant_id
-                        )
-                   
-                # Crear registros en SectorEntidad
-                for sector_data in entidad_sector:       
-                    SectorEntidad.objects.create(
-                        identidad=entidad, 
-                        idmodulo=sector_data['idmodulo'],
-                        idsector=sector_data['idsector'],
-                        user_id=entidad.user_id,
-                        tenant_id=entidad.tenant_id
-                        )
-            
-                # Crear registros en FormaPagoEntidad
-                for formapago_data in entidad_formapago:       
-                    FormaPagoEntidad.objects.create(
-                        identidad=entidad, 
-                        idmodulo=sector_data['idmodulo'],
-                        idformapago=formapago_data['idformapago'],
-                        user_id=entidad.user_id,
-                        tenant_id=entidad.tenant_id
-                        )
+
+                if 'entidad_modulo' in validated_data:
+                    insert_tabla_asociada(self, entidad, ModuloEntidad, validated_data.pop('entidad_modulo', []))
+
+                if 'entidad_condicioncrediticia' in validated_data:
+                    insert_tabla_asociada(self, entidad, CondicionCrediticiaEntidad, validated_data.pop('entidad_condicioncrediticia', []))
+
+                if 'entidad_impuesto' in validated_data:
+                    insert_tabla_asociada(self, entidad, ImpuestoEntidad, validated_data.pop('entidad_impuesto', []))
+
+                if 'entidad_ejecutivo' in validated_data:
+                    insert_tabla_asociada(self, entidad, EjecutivoEntidad, validated_data.pop('entidad_ejecutivo', []))
+
+                if 'entidad_datosfiscales' in validated_data:
+                    insert_tabla_asociada(self, entidad, DatosFiscalesEntidad, validated_data.pop('entidad_datosfiscales', []))
+
+                if 'entidad_contacto' in validated_data:
+                    insert_tabla_asociada(self, entidad, ContactoEntidad, validated_data.pop('entidad_contacto', []))
+
+                if 'entidad_direccion' in validated_data:
+                    insert_tabla_asociada(self, entidad, DireccionEntidad, validated_data.pop('entidad_direccion', []))
+
+                if 'entidad_sector' in validated_data:
+                    insert_tabla_asociada(self, entidad, SectorEntidad, validated_data.pop('entidad_sector', []))
+
+                if 'entidad_formapago' in validated_data:
+                    insert_tabla_asociada(self, entidad, FormaPagoEntidad, validated_data.pop('entidad_formapago', []))
+
+                if 'entidad_lista' in validated_data:
+                    insert_tabla_asociada(self, entidad, ListaPrecioEntidad, validated_data.pop('entidad_lista', []))
 
             return entidad
         
@@ -179,26 +107,52 @@ class EntidadSerializer(serializers.ModelSerializer):
             raise
 
     # Update de la entidad
-    # 
-    # def update(self, instance, validated_data):
-    #     modulos_data = validated_data.pop('modulos', [])
-    #     instance.nombre = validated_data.get('nombre', instance.nombre)
-    #     instance.save()
+    
+    def update(self, instance, validated_data):
 
-    #     # Actualizar registros en ModulosPorEntidad
-    #     modulo_ids = [modulo_data['modulo_id'] for modulo_data in modulos_data]
+        instance.nombre = validated_data.get('nombre', instance.nombre)
+        instance.nombrefantasia = validated_data.get('nombrefantasia', instance.nombrefantasia)
+        instance.codigo = validated_data.get('codigo', instance.codigo)
+        instance.intercompany = validated_data.get('intercompany', instance.intercompany)
+        instance.idtiporesponsable = validated_data.get('idtiporesponsable', instance.idtiporesponsable)
 
-    #     # Eliminar módulos que ya no están en la lista
-    #     ModulosPorEntidad.objects.filter(entidad=instance).exclude(modulo_id__in=modulo_ids).delete()
+        instance.save()
 
-    #     # Agregar los nuevos módulos
-    #     existing_modulo_ids = ModulosPorEntidad.objects.filter(entidad=instance).values_list('modulo_id', flat=True)
-    #     for modulo_id in modulo_ids:
-    #         if modulo_id not in existing_modulo_ids:
-    #             ModulosPorEntidad.objects.create(entidad=instance, modulo_id=modulo_id)
+        # Actualizar tablas asociadas ############################################################################################
 
-    #     return instance    
+        if 'entidad_modulo' in validated_data:
+            insert_tabla_asociada(self, instance, ModuloEntidad, validated_data.pop('entidad_modulo', []))
 
+        if 'entidad_condicioncrediticia' in validated_data:
+            insert_tabla_asociada(self, instance, CondicionCrediticiaEntidad, validated_data.pop('entidad_condicioncrediticia', []))
+
+        if 'entidad_impuesto' in validated_data:
+            insert_tabla_asociada(self, instance, ImpuestoEntidad, validated_data.pop('entidad_impuesto', []))
+
+        if 'entidad_ejecutivo' in validated_data:
+            insert_tabla_asociada(self, instance, EjecutivoEntidad, validated_data.pop('entidad_ejecutivo', []))
+
+        if 'entidad_datosfiscales' in validated_data:
+            insert_tabla_asociada(self, instance, DatosFiscalesEntidad, validated_data.pop('entidad_datosfiscales', []))
+
+        if 'entidad_contacto' in validated_data:
+            insert_tabla_asociada(self, instance, ContactoEntidad, validated_data.pop('entidad_contacto', []))
+
+        if 'entidad_direccion' in validated_data:
+            insert_tabla_asociada(self, instance, DireccionEntidad, validated_data.pop('entidad_direccion', []))
+
+        if 'entidad_sector' in validated_data:
+            insert_tabla_asociada(self, instance, SectorEntidad, validated_data.pop('entidad_sector', []))
+
+        if 'entidad_formapago' in validated_data:
+            insert_tabla_asociada(self, instance, FormaPagoEntidad, validated_data.pop('entidad_formapago', []))
+            
+        if 'entidad_lista' in validated_data:
+            insert_tabla_asociada(self, instance, ListaPrecioEntidad, validated_data.pop('entidad_lista', []))
+
+        return instance    
+    
+    
     # def validate(self, attrs):
     #     request = self.context.get('request')  # Obtenemos el tipo de solicitud
     #     if request and request.method == 'POST':
