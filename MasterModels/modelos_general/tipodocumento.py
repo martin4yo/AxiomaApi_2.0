@@ -5,7 +5,7 @@ class TipoDocumento(AuditModel):
     """ Tipos de documento de AFIP """
     nombre = models.CharField(max_length=100)
     codigo = models.CharField(max_length=10, unique=True)
-    codigoafip = models.CharField(max_length=10, unique=True)
+    codigoISO = models.CharField(max_length=10, unique=True)
     idmascara = models.ForeignKey('Mascara', on_delete=models.CASCADE, related_name='mascara_tipodocumento')
     scriptvalidacion = models.TextField(default='')  # Valor por defecto como cadena vacía
 
