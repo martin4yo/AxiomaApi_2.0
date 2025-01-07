@@ -29,8 +29,10 @@ def insert_tabla_asociada(self, entidad, model_class, data_list, unique_fields=N
     # Crear nuevos registros 
     for data in data_list:
         if 'identidad' in data:
-            del data['identidad']
+             del data['identidad']
+        # data['identidad'] = entidad
         model_class.objects.create(identidad=entidad, **data)
+        #model_class.objects.create(**data)
 
    
 

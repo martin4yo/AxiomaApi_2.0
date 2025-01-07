@@ -55,50 +55,31 @@ class EntidadSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         try:
 
-            #entidad_modulo = validated_data.pop('entidad_modulo', [])
-            # entidad_condicioncrediticia = validated_data.pop('entidad_condicioncrediticia', [])
-            # entidad_impuesto = validated_data.pop('entidad_impuesto', [])
-            # entidad_ejecutivo = validated_data.pop('entidad_ejecutivo', [])
-            # entidad_datosfiscales = validated_data.pop('entidad_datosfiscales', [])
-            # entidad_contacto = validated_data.pop('entidad_contacto', [])
-            # entidad_direccion = validated_data.pop('entidad_direccion', [])
-            # entidad_sector = validated_data.pop('entidad_sector', [])
-            # entidad_formapago = validated_data.pop('entidad_formapago', [])
-            # entidad_lista = validated_data.pop('entidad_lista', [])
+            entidad_modulo = validated_data.pop('entidad_modulo', [])
+            entidad_condicioncrediticia = validated_data.pop('entidad_condicioncrediticia', [])
+            entidad_impuesto = validated_data.pop('entidad_impuesto', [])
+            entidad_ejecutivo = validated_data.pop('entidad_ejecutivo', [])
+            entidad_datosfiscales = validated_data.pop('entidad_datosfiscales', [])
+            entidad_contacto = validated_data.pop('entidad_contacto', [])
+            entidad_direccion = validated_data.pop('entidad_direccion', [])
+            entidad_sector = validated_data.pop('entidad_sector', [])
+            entidad_formapago = validated_data.pop('entidad_formapago', [])
+            entidad_lista = validated_data.pop('entidad_lista', [])
             
             with transaction.atomic():
 
                 entidad = Entidad.objects.create(**validated_data)
 
-                if 'entidad_modulo' in validated_data:
-                    insert_tabla_asociada(self, entidad, ModuloEntidad, validated_data.pop('entidad_modulo', []))
-
-                if 'entidad_condicioncrediticia' in validated_data:
-                    insert_tabla_asociada(self, entidad, CondicionCrediticiaEntidad, validated_data.pop('entidad_condicioncrediticia', []))
-
-                if 'entidad_impuesto' in validated_data:
-                    insert_tabla_asociada(self, entidad, ImpuestoEntidad, validated_data.pop('entidad_impuesto', []))
-
-                if 'entidad_ejecutivo' in validated_data:
-                    insert_tabla_asociada(self, entidad, EjecutivoEntidad, validated_data.pop('entidad_ejecutivo', []))
-
-                if 'entidad_datosfiscales' in validated_data:
-                    insert_tabla_asociada(self, entidad, DatosFiscalesEntidad, validated_data.pop('entidad_datosfiscales', []))
-
-                if 'entidad_contacto' in validated_data:
-                    insert_tabla_asociada(self, entidad, ContactoEntidad, validated_data.pop('entidad_contacto', []))
-
-                if 'entidad_direccion' in validated_data:
-                    insert_tabla_asociada(self, entidad, DireccionEntidad, validated_data.pop('entidad_direccion', []))
-
-                if 'entidad_sector' in validated_data:
-                    insert_tabla_asociada(self, entidad, SectorEntidad, validated_data.pop('entidad_sector', []))
-
-                if 'entidad_formapago' in validated_data:
-                    insert_tabla_asociada(self, entidad, FormaPagoEntidad, validated_data.pop('entidad_formapago', []))
-
-                if 'entidad_lista' in validated_data:
-                    insert_tabla_asociada(self, entidad, ListaPrecioEntidad, validated_data.pop('entidad_lista', []))
+                insert_tabla_asociada(self, entidad, ModuloEntidad, entidad_modulo)
+                insert_tabla_asociada(self, entidad, CondicionCrediticiaEntidad, entidad_condicioncrediticia)
+                insert_tabla_asociada(self, entidad, ImpuestoEntidad, entidad_impuesto)
+                insert_tabla_asociada(self, entidad, EjecutivoEntidad, entidad_ejecutivo)
+                insert_tabla_asociada(self, entidad, DatosFiscalesEntidad, entidad_datosfiscales)
+                insert_tabla_asociada(self, entidad, ContactoEntidad, entidad_contacto)
+                insert_tabla_asociada(self, entidad, DireccionEntidad, entidad_direccion)
+                insert_tabla_asociada(self, entidad, SectorEntidad, entidad_sector)
+                insert_tabla_asociada(self, entidad, FormaPagoEntidad, entidad_formapago)
+                insert_tabla_asociada(self, entidad, ListaPrecioEntidad, entidad_lista)
 
             return entidad
         
