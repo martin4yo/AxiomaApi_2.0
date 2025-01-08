@@ -31,7 +31,7 @@ def insert_tabla_asociada(self, entidad, model_class, data_list, unique_fields=N
         if 'identidad' in data:
              del data['identidad']
         # data['identidad'] = entidad
-        model_class.objects.create(identidad=entidad, **data)
+        model_class.objects.create(identidad=entidad, user_id = entidad.user_id, tenant_id = entidad.tenant_id, **data)
         #model_class.objects.create(**data)
 
    
