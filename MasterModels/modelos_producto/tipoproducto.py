@@ -6,7 +6,9 @@ class TipoProducto(AuditModel, TenantModel):
     
     codigo = models.CharField(max_length=10)
     nombre = models.CharField(max_length=100)
-
+    stockeable = models.BooleanField(default=False)
+    bienuso = models.BooleanField(default=False)
+    
     class Meta:
         unique_together = (("tenant_id", "codigo"),)
         verbose_name = 'Tipo de Producto'
