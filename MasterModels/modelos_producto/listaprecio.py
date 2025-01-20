@@ -1,7 +1,7 @@
 from django.db import models
 from ..universal import AuditModel, TenantModel
 
-class ListaPrecios(AuditModel, TenantModel):
+class ListaPrecio(AuditModel, TenantModel):
     """ Clase para manejar las listas de precio"""
 
     nombre = models.CharField(max_length=100)

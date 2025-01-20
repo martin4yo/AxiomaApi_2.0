@@ -6,7 +6,7 @@ from .atributotipo import AtributoTipo
 from .claseproducto import ClaseProducto
 from .contabilidadproducto import ContabilidadProducto
 from .conversionproducto import ConversionProducto
-from .listaprecios import ListaPrecios
+from .listaprecio import ListaPrecio
 from .producto import Producto
 from .precio import Precio
 from .listatipo import ListaTipo

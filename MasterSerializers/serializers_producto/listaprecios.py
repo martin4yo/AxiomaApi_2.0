@@ -1,11 +1,11 @@
 from rest_framework import serializers
 
 from MasterModels.modelos_producto.listatipo import ListaTipo
-from MasterModels.modelos_producto.listaprecios import ListaPrecios
+from MasterModels.modelos_producto.listaprecio import ListaPrecio
 
 from MasterSerializers.serializers_producto.listatipo import ListaTipoSerializer
 
-class ListaPreciosSerializer(serializers.ModelSerializer):
+class ListaPrecioSerializer(serializers.ModelSerializer):
     
     """ Serializadores """
     idtipolista = serializers.PrimaryKeyRelatedField(
@@ -16,6 +16,6 @@ class ListaPreciosSerializer(serializers.ModelSerializer):
     
     class Meta:
         """ Clase """
-        model = ListaPrecios
+        model = ListaPrecio
         fields = '__all__'  # O especifica los campos que deseas incluir
         read_only_fields = ('created_at', 'updated_at')

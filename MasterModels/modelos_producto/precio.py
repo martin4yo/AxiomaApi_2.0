@@ -4,7 +4,7 @@ from ..universal import AuditModel, TenantModel
 class Precio(AuditModel, TenantModel):
     """ Clase para manejar las listas de precio"""
 
-    idlista = models.ForeignKey('ListaPrecios', related_name='precio_lista', on_delete=models.CASCADE, blank=True)
+    idlista = models.ForeignKey('ListaPrecio', related_name='precio_lista', on_delete=models.CASCADE, blank=True)
     idproducto = models.ForeignKey('Producto', related_name='precio_producto', on_delete=models.CASCADE, blank=True)
     costo = models.DecimalField(max_digits=18, decimal_places=4, default=0)
     margen = models.DecimalField(max_digits=5, decimal_places=2, default=0)

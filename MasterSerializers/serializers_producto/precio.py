@@ -2,18 +2,18 @@ from rest_framework import serializers
 from .funciones import producto_to_dict
 
 from MasterModels.modelos_producto.precio import Precio
-from MasterModels.modelos_producto.listaprecios import ListaPrecios
+from MasterModels.modelos_producto.listaprecio import ListaPrecio
 from MasterModels.modelos_producto.producto import Producto
 
-from MasterSerializers.serializers_producto import ListaPreciosSerializer
+from MasterSerializers.serializers_producto import ListaPrecioSerializer
 
 class PrecioSerializer(serializers.ModelSerializer):
 
     idlistaprecio = serializers.PrimaryKeyRelatedField(
-        queryset=ListaPrecios.objects.all(),
+        queryset=ListaPrecio.objects.all(),
         write_only=True
     )
-    idlistaprecio_detail = ListaPreciosSerializer(source='idlistaprecio', read_only=True)
+    idlistaprecio_detail = ListaPrecioSerializer(source='idlistaprecio', read_only=True)
 
     idproducto = serializers.PrimaryKeyRelatedField(
         queryset=Producto.objects.all(),

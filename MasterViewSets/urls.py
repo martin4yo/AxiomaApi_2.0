@@ -18,6 +18,7 @@ from MasterViewSets.viewsets_general import PersonaViewSet, PersonaRolViewSet, P
 from MasterViewSets.viewsets_general import RolViewSet, ModuloViewSet, MascaraViewSet, FormaPagoViewSet, FormaPagoDetalleViewSet, IdiomaViewSet
 from MasterViewSets.viewsets_general import SectorViewSet, IndiceViewSet, PartidoViewSet, TipoIndiceViewSet, MonedaViewSet, TipoDocumentoViewSet
 from MasterViewSets.viewsets_general import TipoFrecuenciaViewSet, TipoValorViewSet, UnidadMedidaViewSet, IncotermsViewSet, TipoResponsableViewSet
+from MasterViewSets.viewsets_general import TablasViewSet, TablasConCodigoViewSet
 
 router.register('api/general/persona', PersonaViewSet, 'personas')
 router.register('api/general/pais', PaisViewSet, 'paises')
@@ -42,6 +43,8 @@ router.register('api/general/tipovalor', TipoValorViewSet, 'tiposvalor')
 router.register('api/general/unidadmedida', UnidadMedidaViewSet, 'unidadesmedida')
 router.register('api/general/incoterms', IncotermsViewSet, 'incoterms')
 router.register('api/general/tiporesponsable', TipoResponsableViewSet, 'tiposresponsable')
+router.register('api/general/tablas', TablasViewSet, 'tablas')
+router.register('api/general/tablasconcodigo', TablasConCodigoViewSet, 'tablasconcodigo')
 
 # URLS DE IMPUESTOS
 
@@ -95,12 +98,12 @@ router.register('api/productos/listaprecioentidad', ListaPrecioEntidadViewSet, '
 
 # URLS DE PRODUCTOS 
 
-from MasterViewSets.viewsets_producto import ListaPreciosViewSet, AtributoViewSet, AtributoProductoViewSet, AtributoValorViewSet, AtributoTipoViewSet
+from MasterViewSets.viewsets_producto import ListaPrecioViewSet, AtributoViewSet, AtributoProductoViewSet, AtributoValorViewSet, AtributoTipoViewSet
 from MasterViewSets.viewsets_producto import ClaseProductoViewSet, ContabilidadProductoViewSet, ConversionProductoViewSet
 from MasterViewSets.viewsets_producto import ProductoViewSet, TipoProductoViewSet, ListaTipoViewSet, PrecioViewSet
 
 
-router.register('api/productos/listaprecios', ListaPreciosViewSet, 'listasprecios')
+router.register('api/productos/listaprecios', ListaPrecioViewSet, 'listasprecios')
 router.register('api/productos/atributo', AtributoViewSet, 'atributos')
 router.register('api/productos/atributoproducto', AtributoProductoViewSet, 'atributosproducto')
 router.register('api/productos/atributotipo', AtributoTipoViewSet, 'atributostipo')

@@ -6,7 +6,7 @@ class ListaPrecioEntidad(AuditModel, TenantModel):
     
     identidad = models.ForeignKey('Entidad', on_delete=models.CASCADE, related_name='entidad_lista')
     idmodulo = models.ForeignKey('Modulo', on_delete=models.CASCADE, related_name='modulo_listaprecioentidad')
-    idlistaprecio = models.ForeignKey('ListaPrecios', on_delete=models.CASCADE, related_name='listaprecios_listaprecioentidad')
+    idlistaprecio = models.ForeignKey('ListaPrecio', on_delete=models.CASCADE, related_name='listaprecios_listaprecioentidad')
                
     class Meta:
         unique_together = (("identidad", "idmodulo", "idlistaprecio"),)

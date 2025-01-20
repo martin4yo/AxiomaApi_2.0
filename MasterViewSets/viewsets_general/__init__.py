@@ -24,3 +24,5 @@ from .tiporesponsable import TipoResponsableViewSet
 from .tiposede import TipoSedeViewSet 
 from .tipovalor import TipoValorViewSet 
 from .unidadmedida import UnidadMedidaViewSet 
+from .tablas import TablasViewSet
+from .tablas import TablasConCodigoViewSet

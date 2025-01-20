@@ -6,7 +6,7 @@ from .atributovalor import AtributoValorViewSet
 from .claseproducto import ClaseProductoViewSet
 from .contabilidadproducto import ContabilidadProductoViewSet
 from .conversionproducto import ConversionProductoViewSet
-from .listaprecios import ListaPreciosViewSet
+from .listaprecio import ListaPrecioViewSet
 from .listatipo import ListaTipoViewSet 
 from .precio import PrecioViewSet 
 from .producto import ProductoViewSet

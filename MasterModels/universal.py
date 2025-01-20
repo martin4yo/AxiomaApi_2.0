@@ -22,3 +22,9 @@ class TenantModel(models.Model):
 
     class Meta:
         abstract = True
+
+from django.apps import apps
+
+def listar_tablas_modelos():
+    modelos = apps.get_models()
+    return [model._meta.db_table for model in modelos]

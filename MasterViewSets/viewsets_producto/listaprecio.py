@@ -1,26 +1,26 @@
 from MasterViewSets.universal import *
 
-from MasterModels.modelos_producto import ListaPrecios
+from MasterModels.modelos_producto import ListaPrecio
 
-from MasterSerializers.serializers_producto import ListaPreciosSerializer
+from MasterSerializers.serializers_producto import ListaPrecioSerializer
 
-class ListaPreciosViewSet(GenericModelViewSet):
+class ListaPrecioViewSet(GenericModelViewSet):
     """ ViewSet de Entidades"""
-    queryset = ListaPrecios.objects.all()
+    queryset = ListaPrecio.objects.all()
     permission_classes = [
         permissions.IsAuthenticated
     ]
-    serializer_class = ListaPreciosSerializer
+    serializer_class = ListaPrecioSerializer
 
     pagination_class = CustomPagination
     filter_backends = [DjangoFilterBackend, OrderingFilter]
 
      # Habilitar todos los campos para ordenamiento
-    ordering_fields = [field.name for field in ListaPrecios._meta.fields]
+    ordering_fields = [field.name for field in ListaPrecio._meta.fields]
     ordering = ['id']  # Orden por defecto (clave primaria)
     
     class FilterClass(DynamicModelFilter):
         class Meta(DynamicModelFilter.Meta):
-            model = ListaPrecios
+            model = ListaPrecio
     
     filterset_class = FilterClass

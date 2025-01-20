@@ -3,10 +3,10 @@ from .funciones import entidad_to_dict
 
 from MasterModels.modelos_entidad import Entidad, ListaPrecioEntidad
 from MasterModels.modelos_general import Modulo
-from MasterModels.modelos_producto import ListaPrecios
+from MasterModels.modelos_producto import ListaPrecio
 
 from MasterSerializers.serializers_general import ModuloSerializer
-from MasterSerializers.serializers_producto import ListaPreciosSerializer
+from MasterSerializers.serializers_producto import ListaPrecioSerializer
 
 class ListaPrecioEntidadSerializer(serializers.ModelSerializer):
     """ Serializador """
@@ -26,10 +26,10 @@ class ListaPrecioEntidadSerializer(serializers.ModelSerializer):
     idmodulo_detail = ModuloSerializer(source='idmodulo', read_only=True)
 
     idlistaprecio = serializers.PrimaryKeyRelatedField(
-        queryset=ListaPrecios.objects.all(),
+        queryset=ListaPrecio.objects.all(),
         write_only=True
     )
-    idlistaprecio_detail = ListaPreciosSerializer(source='idlistaprecio', read_only=True)
+    idlistaprecio_detail = ListaPrecioSerializer(source='idlistaprecio', read_only=True)
 
     class Meta:
         """ Clase """
