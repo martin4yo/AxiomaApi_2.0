@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.timezone import now
 from ..universal import AuditModel, TenantModel
 
 class ListaPrecio(AuditModel, TenantModel):
