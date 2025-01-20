@@ -7,10 +7,10 @@ class ListaPrecio(AuditModel, TenantModel):
 
     nombre = models.CharField(max_length=100)
     codigo = models.CharField(max_length=10)
-    #incluyeimpuestos = models.BooleanField(default=False)
-    #vigenciadesde = models.DateField(null=False, blank=False)
-    #vigenciahasta = models.DateField(null=False, blank=False)
-    #idtipolista = models.ForeignKey('ListaTipo', related_name='lista_tipo', on_delete=models.CASCADE)
+    incluyeimpuestos = models.BooleanField(default=False)
+    vigenciadesde = models.DateField(null=False, blank=False)
+    vigenciahasta = models.DateField(null=False, blank=False)
+    idtipolista = models.ForeignKey('ListaTipo', related_name='lista_tipo', on_delete=models.CASCADE)
 
     class Meta:
         unique_together = (("tenant_id", "codigo"),)
