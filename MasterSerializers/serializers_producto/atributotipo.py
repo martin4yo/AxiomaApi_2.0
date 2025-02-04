@@ -2,9 +2,10 @@ from rest_framework import serializers
 from .funciones import producto_to_dict
 
 from MasterModels.modelos_producto.atributo import Atributo
-from MasterModels.modelos_producto.producto import Producto
-from MasterModels.modelos_producto.atributoproducto import AtributoProducto
+from MasterModels.modelos_producto.tipoproducto import TipoProducto
+from MasterModels.modelos_producto.atributotipo import AtributoTipo
 from MasterSerializers.serializers_producto.atributo import AtributoSerializer
+from MasterSerializers.serializers_producto.tipoproducto import TipoProductoSerializer
 
 class AtributoTipoSerializer(serializers.ModelSerializer):
     """ Serializadores """
@@ -14,17 +15,15 @@ class AtributoTipoSerializer(serializers.ModelSerializer):
     )
     idatributo_detail = AtributoSerializer(source='idatributo', read_only=True)
 
-    idproducto = serializers.PrimaryKeyRelatedField(
-        queryset=Producto.objects.all(),
-        required=True,
-        allow_null=True,
+    idtipoproducto = serializers.PrimaryKeyRelatedField(
+        queryset=TipoProducto.objects.all(),
         write_only=True
     )
-    idproducto_detail = serializers.SerializerMethodField()
+    idtipoproducto_detail = TipoProductoSerializer(source='idtipoproducto', read_only=True)
 
     class Meta:
         """ Clase """
-        model = AtributoProducto
+        model = AtributoTipo
         fields = '__all__'  # O especifica los campos que deseas incluir
         extra_kwargs = {
             'idatributo': {'write_only': True},  # Asegura que se use en el POST

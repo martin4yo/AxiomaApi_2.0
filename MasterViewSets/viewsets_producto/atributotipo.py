@@ -10,7 +10,7 @@ class AtributoTipoViewSet(GenericModelViewSet):
     permission_classes = [
         permissions.IsAuthenticated
     ]
-    serializer_class = AtributoTipo
+    serializer_class = AtributoTipoSerializer
 
     pagination_class = CustomPagination
     filter_backends = [DjangoFilterBackend, OrderingFilter]

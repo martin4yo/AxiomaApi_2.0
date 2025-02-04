@@ -10,7 +10,7 @@ class AtributoProductoViewSet(GenericModelViewSet):
     permission_classes = [
         permissions.IsAuthenticated
     ]
-    serializer_class = AtributoProducto
+    serializer_class = AtributoProductoSerializer
 
     pagination_class = CustomPagination
     filter_backends = [DjangoFilterBackend, OrderingFilter]
