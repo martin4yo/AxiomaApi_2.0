@@ -63,6 +63,7 @@ CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGIN_REGEXES = [
     r"^http://localhost(:\d+)?$",
+    "https://erp.axiomacloud.com",
 ]
 
 CORS_ALLOW_METHODS = [
@@ -160,7 +161,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = config('STATIC_URL', default='/static/')
-STATIC_ROOT = config('STATIC_ROOT', default=os.path.join(BASE_DIR, 'static'))
+STATIC_ROOT = config('STATIC_ROOT', default=os.path.join(BASE_DIR, '/static'))
 
 # Asegurar que las URLs estáticas sean servidas con HTTPS
 ENVIRONMENT = config('DJANGO_ENV', default='development')
