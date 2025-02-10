@@ -62,8 +62,11 @@ MIDDLEWARE = [
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGIN_REGEXES = [
-    r"^http://localhost(:\d+)?$",
-    "https://erp.axiomacloud.com",
+    r"^http://localhost(:\d+)?$"
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "https://erp.axiomacloud.com",  # Dominio desde donde harás las peticiones
 ]
 
 CORS_ALLOW_METHODS = [
