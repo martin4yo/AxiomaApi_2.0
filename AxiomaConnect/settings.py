@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 from decouple import config
+import os 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
+    'sslserver',
 ]
 
 MIDDLEWARE = [
@@ -158,8 +160,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = config('STATIC_URL', default='static/')
-STATIC_ROOT = config('STATIC_ROOT', default='static/')
+STATIC_URL = config('STATIC_URL', default='/static/')
+STATIC_ROOT = config('STATIC_ROOT', default=os.path.join(BASE_DIR, 'static'))
+
+# Asegurar que las URLs estáticas sean servidas con HTTPS
+ENVIRONMENT = config('DJANGO_ENV', default='development')
+
+if ENVIRONMENT == 'production':
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
