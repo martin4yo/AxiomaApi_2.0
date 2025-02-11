@@ -98,7 +98,7 @@ class ProductoSerializer(serializers.ModelSerializer):
         instance.puntopedido = validated_data.get('puntopedido', instance.puntopedido)
         instance.avisapedido = validated_data.get('avisapedido', instance.avisapedido)
         instance.avisaminimo = validated_data.get('avisaminimo', instance.avisaminimo)
-        instance.precicostopromedio = validated_data.get('precicostopromedio', instance.precicostopromedio)
+        instance.preciocostopromedio = validated_data.get('precicostopromedio', instance.preciocostopromedio)
         instance.precioreferencia = validated_data.get('precioreferencia', instance.precioreferencia)
         instance.precioultimacompra = validated_data.get('precioultimacompra', instance.precioultimacompra)
         instance.preciocostostandard = validated_data.get('preciocostostandard', instance.preciocostostandard)
