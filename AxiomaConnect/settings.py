@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'AxiomaConnect.middlewares.DynamicCORSHeadersMiddleware', 
+    'AxiomaConnect.middlewares.LogRequestMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -197,3 +198,39 @@ REST_FRAMEWORK = {
 }
 
 
+import os
+from logging.handlers import TimedRotatingFileHandler
+from datetime import datetime
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'rotating_file': {
+            'level': 'INFO',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': os.path.join('logs', f"{datetime.now().strftime('%Y%m%d')}.log"),  # Nombre del archivo basado en la fecha
+            'when': 'midnight',  # Rotar el archivo a medianoche
+            'backupCount': 7,  # Mantener los logs de los últimos 7 días
+            'formatter': 'verbose',
+        },
+    },
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['rotating_file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        __name__: {
+            'handlers': ['rotating_file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+    },
+}
