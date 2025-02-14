@@ -48,9 +48,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'AxiomaConnect.middlewares.LogRequestMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'AxiomaConnect.middlewares.DynamicCORSHeadersMiddleware', 
-    'AxiomaConnect.middlewares.LogRequestMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -217,7 +217,7 @@ LOGGING = {
     },
     'formatters': {
         'verbose': {
-            'format': '{levelname} {asctime} {module} {message}',
+            'format': '{levelname} - {asctime} - {module} - {message}',
             'style': '{',
         },
     },

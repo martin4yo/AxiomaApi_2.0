@@ -1,7 +1,0 @@
-Watching for file changes with StatReloader
-"GET /api/productos/tipoproducto/ HTTP/1.1" 200 250
-"GET /api/productos/producto/ HTTP/1.1" 200 11043
-"GET /api/productos/producto/?prod=1 HTTP/1.1" 200 11043
-D:\Desarrollos\Python\AxiomaApi_2.0\AxiomaConnect\middlewares.py changed, reloading.
-Watching for file changes with StatReloader
-D:\Desarrollos\Python\AxiomaApi_2.0\AxiomaConnect\settings.py changed, reloading.

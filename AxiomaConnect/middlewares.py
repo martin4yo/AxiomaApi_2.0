@@ -1,4 +1,62 @@
 # middlewares.py
+
+import logging
+from datetime import datetime
+import json
+import io
+
+logger = logging.getLogger("django")
+
+class LogRequestMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        # Obtener los headers de la petición
+        headers = {key: value for key, value in request.META.items() if key.startswith('HTTP_')}
+        
+        # Leer y restaurar el body de la petición
+        body = None
+        if request.method in ['POST', 'PUT', 'PATCH']:
+            try:
+                request_body = request.body
+                request._body = request_body  # Copia para evitar perderlo
+                request._stream = io.BytesIO(request_body)  # Restaurar stream
+            
+                body = json.loads(request_body.decode('utf-8')) if request_body else {}
+              
+            except json.JSONDecodeError:
+                body = request_body.decode('utf-8')  # Si no es JSON, lo guarda como texto
+
+        # Log de la petición
+        try:
+
+            logger.info(f"[{datetime.now()}] {request.method} {request.path} - IP: {request.META.get('REMOTE_ADDR')}")
+            logger.info(f"Headers: {headers}")
+            logger.info(f"Request Body: {body}")
+
+        except Exception as e:
+            logger.error(f"Error en la respuesta: {str(e)}")
+            raise  # Re-lanzamos el error para que Django lo maneje    
+
+
+        # Obtener la respuesta llamando al siguiente middleware o vista
+        response = self.get_response(request)
+
+        # Leer y loguear la respuesta
+        response_body = response.content
+        try:
+            response_data = json.loads(response_body.decode('utf-8'))
+        except (json.JSONDecodeError, UnicodeDecodeError):
+            response_data = response_body.decode('utf-8', errors='ignore')
+
+        logger.info(f"[{datetime.now()}] Respuesta {request.method} {request.path} - Status: {response.status_code}")
+        logger.info(f"Response Body: {response_data}")
+
+        return response
+
+
+
 class AddCOOPHeaderMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
@@ -30,46 +88,3 @@ class DynamicCORSHeadersMiddleware(MiddlewareMixin):
 
         return response
     
-import logging
-from datetime import datetime
-import json
-import os
-
-# Configurar el logger para usar el nombre dinámico del archivo
-logger = logging.getLogger(__name__)
-
-class LogRequestMiddleware:
-    def __init__(self, get_response):
-        self.get_response = get_response
-
-    def __call__(self, request):
-        # Obtener los headers de la petición
-        headers = {key: value for key, value in request.META.items() if key.startswith('HTTP_')}
-
-        # Intentar obtener el body de la petición (solo si es JSON, para evitar problemas con grandes cantidades de datos o cuerpos no JSON)
-        try:
-            body = json.loads(request.body) if request.body else {}
-        except json.JSONDecodeError:
-            body = request.body.decode('utf-8')  # Si no es JSON, se guarda como texto
-
-        # Configuración del archivo de log según la fecha actual
-        log_filename = os.path.join('logs', f"{datetime.now().strftime('%Y%m%d')}.log")
-        file_handler = logging.FileHandler(log_filename)
-        file_handler.setLevel(logging.INFO)
-        formatter = logging.Formatter('%(levelname)s %(asctime)s %(message)s')
-        file_handler.setFormatter(formatter)
-
-        logger.addHandler(file_handler)
-
-        # Loguear la solicitud completa
-        logger.info(f"{datetime.now()} - {request.method} {request.path} - IP: {request.META.get('REMOTE_ADDR')}")
-        logger.info(f"Headers: {headers}")
-        logger.info(f"Body: {body}")
-
-        # Llamar a la siguiente parte del middleware o vista
-        response = self.get_response(request)
-
-        # Eliminar el handler después de que se haya registrado
-        logger.removeHandler(file_handler)
-
-        return response
