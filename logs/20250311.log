@@ -1,0 +1,6445 @@
+INFO - 2025-03-11 20:48:08,999 - middlewares - [2025-03-11 20:48:08.999890] GET / - IP: 127.0.0.1
+INFO - 2025-03-11 20:48:08,999 - middlewares - Headers: {'HTTP_HOST': '127.0.0.1:8000', 'HTTP_CONNECTION': 'keep-alive', 'HTTP_SEC_CH_UA': '"Chromium";v="134", "Not:A-Brand";v="24", "Brave";v="134"', 'HTTP_SEC_CH_UA_MOBILE': '?0', 'HTTP_SEC_CH_UA_PLATFORM': '"Windows"', 'HTTP_UPGRADE_INSECURE_REQUESTS': '1', 'HTTP_USER_AGENT': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', 'HTTP_ACCEPT': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8', 'HTTP_SEC_GPC': '1', 'HTTP_ACCEPT_LANGUAGE': 'es-ES,es;q=0.5', 'HTTP_SEC_FETCH_SITE': 'none', 'HTTP_SEC_FETCH_MODE': 'navigate', 'HTTP_SEC_FETCH_USER': '?1', 'HTTP_SEC_FETCH_DEST': 'document', 'HTTP_ACCEPT_ENCODING': 'gzip, deflate, br, zstd'}
+INFO - 2025-03-11 20:48:09,000 - middlewares - Request Body: None
+INFO - 2025-03-11 20:48:09,208 - middlewares - [2025-03-11 20:48:09.208819] Respuesta GET / - Status: 401
+INFO - 2025-03-11 20:48:09,208 - middlewares - Response Body: 
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+
+      
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta name="robots" content="NONE,NOARCHIVE" />
+      
+
+      <title>Api Root – Django REST framework</title>
+
+      
+        
+          <link rel="stylesheet" type="text/css" href="/static/rest_framework/css/bootstrap.min.css"/>
+          <link rel="stylesheet" type="text/css" href="/static/rest_framework/css/bootstrap-tweaks.css"/>
+        
+
+        <link rel="stylesheet" type="text/css" href="/static/rest_framework/css/prettify.css"/>
+        <link rel="stylesheet" type="text/css" href="/static/rest_framework/css/default.css"/>
+        
+      
+
+    
+  </head>
+
+  
+  <body class="">
+
+    <div class="wrapper">
+      
+        <div class="navbar navbar-static-top navbar-inverse"
+             role="navigation" aria-label="navbar">
+          <div class="container">
+            <span>
+              
+                <a class='navbar-brand' rel="nofollow" href='https://www.django-rest-framework.org/'>
+                    Django REST framework
+                </a>
+              
+            </span>
+            <ul class="nav navbar-nav pull-right">
+              
+                
+                  
+                
+              
+            </ul>
+          </div>
+        </div>
+      
+
+      <div class="container">
+        
+          <ul class="breadcrumb">
+            
+              
+                <li class="active"><a href="/">Api Root</a></li>
+              
+            
+          </ul>
+        
+
+        <!-- Content -->
+        <div id="content" role="main" aria-label="content">
+          
+
+          <div class="region"  aria-label="request form">
+          
+
+          
+            <form id="get-form" class="pull-right">
+              <fieldset>
+                
+                  <div class="btn-group format-selection">
+                    <a class="btn btn-primary js-tooltip" href="/" rel="nofollow" title="Make a GET request on the Api Root resource">GET</a>
+
+                    <button class="btn btn-primary dropdown-toggle js-tooltip" data-toggle="dropdown" title="Specify a format for the GET request">
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      
+                        <li>
+                          <a class="js-tooltip format-option" href="/?format=json" rel="nofollow" title="Make a GET request on the Api Root resource with the format set to `json`">json</a>
+                        </li>
+                      
+                        <li>
+                          <a class="js-tooltip format-option" href="/?format=api" rel="nofollow" title="Make a GET request on the Api Root resource with the format set to `api`">api</a>
+                        </li>
+                      
+                    </ul>
+                  </div>
+                
+              </fieldset>
+            </form>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          </div>
+
+            <div class="content-main" role="main"  aria-label="main content">
+              <div class="page-header">
+                <h1>Api Root</h1>
+              </div>
+              <div class="pull-left">
+                
+                  
+                
+              </div>
+
+              
+
+              <div class="request-info" aria-label="request info">
+                <pre class="prettyprint"><b>GET</b> /</pre>
+              </div>
+
+              <div class="response-info" aria-label="response info">
+                <pre class="prettyprint"><span class="meta nocode"><b>HTTP 401 Unauthorized</b>
+<b>Allow:</b> <span class="lit">GET, HEAD, OPTIONS</span>
+<b>Content-Type:</b> <span class="lit">application/json</span>
+<b>Vary:</b> <span class="lit">Accept</span>
+<b>WWW-Authenticate:</b> <span class="lit">Token</span>
+
+</span>{
+    &quot;detail&quot;: &quot;Authentication credentials were not provided.&quot;
+}</pre>
+              </div>
+            </div>
+
+            
+              
+
+              
+            
+          
+        </div><!-- /.content -->
+      </div><!-- /.container -->
+    </div><!-- ./wrapper -->
+
+    
+
+    
+      <script type="application/json" id="drf_csrf">
+        {
+          "csrfHeaderName": "X-CSRFTOKEN",
+          "csrfToken": "aZdKFxOBUVFWWsRun1xYQJ0YQwgW7W5nPfYUlrjLg4nT3qOz3JgpqPRQ7chgbqTH"
+        }
+      </script>
+      <script src="/static/rest_framework/js/jquery-3.7.1.min.js"></script>
+      <script src="/static/rest_framework/js/ajax-form.js"></script>
+      <script src="/static/rest_framework/js/csrf.js"></script>
+      <script src="/static/rest_framework/js/bootstrap.min.js"></script>
+      <script src="/static/rest_framework/js/prettify-min.js"></script>
+      <script src="/static/rest_framework/js/default.js"></script>
+      <script src="/static/rest_framework/js/load-ajax-form.js"></script>
+    
+
+  </body>
+  
+</html>
+
+WARNING - 2025-03-11 20:48:09,208 - log - Unauthorized: /
+WARNING - 2025-03-11 20:48:09,208 - basehttp - "GET / HTTP/1.1" 401 4966
+INFO - 2025-03-11 20:48:09,530 - basehttp - "GET /static/rest_framework/css/bootstrap-tweaks.css HTTP/1.1" 200 3426
+INFO - 2025-03-11 20:48:09,536 - basehttp - "GET /static/rest_framework/css/bootstrap.min.css HTTP/1.1" 200 121457
+INFO - 2025-03-11 20:48:09,537 - basehttp - "GET /static/rest_framework/css/prettify.css HTTP/1.1" 200 817
+INFO - 2025-03-11 20:48:09,550 - basehttp - "GET /static/rest_framework/css/default.css HTTP/1.1" 200 1152
+INFO - 2025-03-11 20:48:09,555 - basehttp - "GET /static/rest_framework/js/ajax-form.js HTTP/1.1" 200 3796
+INFO - 2025-03-11 20:48:09,570 - basehttp - "GET /static/rest_framework/js/csrf.js HTTP/1.1" 200 1793
+INFO - 2025-03-11 20:48:09,574 - basehttp - "GET /static/rest_framework/img/grid.png HTTP/1.1" 200 1458
+INFO - 2025-03-11 20:48:09,580 - basehttp - "GET /static/rest_framework/js/load-ajax-form.js HTTP/1.1" 200 59
+INFO - 2025-03-11 20:48:09,586 - basehttp - "GET /static/rest_framework/js/default.js HTTP/1.1" 200 1268
+INFO - 2025-03-11 20:48:09,602 - basehttp - "GET /static/rest_framework/js/prettify-min.js HTTP/1.1" 200 13632
+INFO - 2025-03-11 20:48:09,611 - basehttp - "GET /static/rest_framework/js/bootstrap.min.js HTTP/1.1" 200 39680
+INFO - 2025-03-11 20:48:09,653 - basehttp - "GET /static/rest_framework/js/jquery-3.7.1.min.js HTTP/1.1" 200 87533
+INFO - 2025-03-11 20:48:09,735 - middlewares - [2025-03-11 20:48:09.735036] GET /favicon.ico - IP: 127.0.0.1
+INFO - 2025-03-11 20:48:09,735 - middlewares - Headers: {'HTTP_HOST': '127.0.0.1:8000', 'HTTP_CONNECTION': 'keep-alive', 'HTTP_SEC_CH_UA_PLATFORM': '"Windows"', 'HTTP_USER_AGENT': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', 'HTTP_SEC_CH_UA': '"Chromium";v="134", "Not:A-Brand";v="24", "Brave";v="134"', 'HTTP_SEC_CH_UA_MOBILE': '?0', 'HTTP_ACCEPT': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8', 'HTTP_SEC_GPC': '1', 'HTTP_ACCEPT_LANGUAGE': 'es-ES,es;q=0.5', 'HTTP_SEC_FETCH_SITE': 'same-origin', 'HTTP_SEC_FETCH_MODE': 'no-cors', 'HTTP_SEC_FETCH_DEST': 'image', 'HTTP_REFERER': 'http://127.0.0.1:8000/', 'HTTP_ACCEPT_ENCODING': 'gzip, deflate, br, zstd', 'HTTP_COOKIE': 'csrftoken=PqVkQ4FkwjS7h87fQSTBKg12rQbueEYu'}
+INFO - 2025-03-11 20:48:09,735 - middlewares - Request Body: None
+INFO - 2025-03-11 20:48:09,769 - middlewares - [2025-03-11 20:48:09.769914] Respuesta GET /favicon.ico - Status: 404
+INFO - 2025-03-11 20:48:09,769 - middlewares - Response Body: <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Page not found at /favicon.ico</title>
+  <meta name="robots" content="NONE,NOARCHIVE">
+  <style>
+    html * { padding:0; margin:0; }
+    body * { padding:10px 20px; }
+    body * * { padding:0; }
+    body { font-family: sans-serif; background:#eee; color:#000; }
+    body > :where(header, main, footer) { border-bottom:1px solid #ddd; }
+    h1 { font-weight:normal; margin-bottom:.4em; }
+    h1 small { font-size:60%; color:#666; font-weight:normal; }
+    table { border:none; border-collapse: collapse; width:100%; }
+    td, th { vertical-align:top; padding:2px 3px; }
+    th { width:12em; text-align:right; color:#666; padding-right:.5em; }
+    #info { background:#f6f6f6; }
+    #info ol { margin: 0.5em 4em; }
+    #info ol li { font-family: monospace; }
+    #summary { background: #ffc; }
+    #explanation { background:#eee; border-bottom: 0px none; }
+    pre.exception_value { font-family: sans-serif; color: #575757; font-size: 1.5em; margin: 10px 0 10px 0; }
+  </style>
+</head>
+<body>
+  <header id="summary">
+    <h1>Page not found <small>(404)</small></h1>
+    
+    <table class="meta">
+      <tr>
+        <th scope="row">Request Method:</th>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <th scope="row">Request URL:</th>
+        <td>http://127.0.0.1:8000/favicon.ico</td>
+      </tr>
+      
+    </table>
+  </header>
+
+  <main id="info">
+    
+      <p>
+      Using the URLconf defined in <code>AxiomaConnect.urls</code>,
+      Django tried these URL patterns, in this order:
+      </p>
+      <ol>
+        
+          <li>
+            
+              <code>
+                admin/
+                
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/persona/$
+                [name='personas-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/persona\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='personas-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/persona/(?P&lt;pk&gt;[^/.]+)/$
+                [name='personas-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/persona/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='personas-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/pais/$
+                [name='paises-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/pais\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='paises-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/pais/(?P&lt;pk&gt;[^/.]+)/$
+                [name='paises-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/pais/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='paises-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/provincia/$
+                [name='provincias-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/provincia\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='provincias-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/provincia/(?P&lt;pk&gt;[^/.]+)/$
+                [name='provincias-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/provincia/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='provincias-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/codigopostal/$
+                [name='codigospostales-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/codigopostal\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='codigospostales-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/codigopostal/(?P&lt;pk&gt;[^/.]+)/$
+                [name='codigospostales-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/codigopostal/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='codigospostales-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/rol/$
+                [name='roles-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/rol\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='roles-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/rol/(?P&lt;pk&gt;[^/.]+)/$
+                [name='roles-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/rol/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='roles-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/modulo/$
+                [name='modulos-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/modulo\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='modulos-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/modulo/(?P&lt;pk&gt;[^/.]+)/$
+                [name='modulos-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/modulo/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='modulos-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/mascara/$
+                [name='mascaras-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/mascara\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='mascaras-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/mascara/(?P&lt;pk&gt;[^/.]+)/$
+                [name='mascaras-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/mascara/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='mascaras-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/formapago/$
+                [name='formaspago-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/formapago\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='formaspago-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/formapago/(?P&lt;pk&gt;[^/.]+)/$
+                [name='formaspago-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/formapago/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='formaspago-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/formapagodetalle/$
+                [name='formaspagodetalle-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/formapagodetalle\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='formaspagodetalle-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/formapagodetalle/(?P&lt;pk&gt;[^/.]+)/$
+                [name='formaspagodetalle-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/formapagodetalle/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='formaspagodetalle-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/tipocambio/$
+                [name='tiposcambio-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/tipocambio\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='tiposcambio-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/tipocambio/(?P&lt;pk&gt;[^/.]+)/$
+                [name='tiposcambio-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/tipocambio/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='tiposcambio-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/personarol/$
+                [name='personasroles-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/personarol\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='personasroles-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/personarol/(?P&lt;pk&gt;[^/.]+)/$
+                [name='personasroles-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/personarol/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='personasroles-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/tipoindice/$
+                [name='tiposindice-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/tipoindice\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='tiposindice-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/tipoindice/(?P&lt;pk&gt;[^/.]+)/$
+                [name='tiposindice-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/tipoindice/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='tiposindice-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/indice/$
+                [name='indices-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/indice\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='indices-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/indice/(?P&lt;pk&gt;[^/.]+)/$
+                [name='indices-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/indice/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='indices-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/partido/$
+                [name='partidos-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/partido\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='partidos-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/partido/(?P&lt;pk&gt;[^/.]+)/$
+                [name='partidos-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/partido/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='partidos-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/sector/$
+                [name='sectores-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/sector\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='sectores-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/sector/(?P&lt;pk&gt;[^/.]+)/$
+                [name='sectores-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/sector/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='sectores-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/idioma/$
+                [name='idiomas-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/idioma\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='idiomas-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/idioma/(?P&lt;pk&gt;[^/.]+)/$
+                [name='idiomas-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/idioma/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='idiomas-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/moneda/$
+                [name='monedas-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/moneda\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='monedas-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/moneda/(?P&lt;pk&gt;[^/.]+)/$
+                [name='monedas-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/moneda/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='monedas-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/tipodocumento/$
+                [name='tiposdocumento-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/tipodocumento\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='tiposdocumento-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/tipodocumento/(?P&lt;pk&gt;[^/.]+)/$
+                [name='tiposdocumento-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/tipodocumento/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='tiposdocumento-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/tipofrecuencia/$
+                [name='tiposfrecuencia-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/tipofrecuencia\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='tiposfrecuencia-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/tipofrecuencia/(?P&lt;pk&gt;[^/.]+)/$
+                [name='tiposfrecuencia-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/tipofrecuencia/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='tiposfrecuencia-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/tipovalor/$
+                [name='tiposvalor-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/tipovalor\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='tiposvalor-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/tipovalor/(?P&lt;pk&gt;[^/.]+)/$
+                [name='tiposvalor-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/tipovalor/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='tiposvalor-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/unidadmedida/$
+                [name='unidadesmedida-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/unidadmedida\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='unidadesmedida-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/unidadmedida/(?P&lt;pk&gt;[^/.]+)/$
+                [name='unidadesmedida-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/unidadmedida/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='unidadesmedida-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/incoterms/$
+                [name='incoterms-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/incoterms\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='incoterms-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/incoterms/(?P&lt;pk&gt;[^/.]+)/$
+                [name='incoterms-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/incoterms/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='incoterms-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/tiporesponsable/$
+                [name='tiposresponsable-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/tiporesponsable\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='tiposresponsable-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/tiporesponsable/(?P&lt;pk&gt;[^/.]+)/$
+                [name='tiposresponsable-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/tiporesponsable/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='tiposresponsable-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/tablas/$
+                [name='tablas-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/tablas\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='tablas-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/tablasconcodigo/$
+                [name='tablasconcodigo-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/general/tablasconcodigo\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='tablasconcodigo-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/tiposujeto/$
+                [name='tipossujeto-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/tiposujeto\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='tipossujeto-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/tiposujeto/(?P&lt;pk&gt;[^/.]+)/$
+                [name='tipossujeto-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/tiposujeto/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='tipossujeto-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/conceptoincluido/$
+                [name='conceptosincluidos-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/conceptoincluido\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='conceptosincluidos-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/conceptoincluido/(?P&lt;pk&gt;[^/.]+)/$
+                [name='conceptosincluidos-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/conceptoincluido/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='conceptosincluidos-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/tipocomprobante/$
+                [name='tiposcomprobante-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/tipocomprobante\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='tiposcomprobante-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/tipocomprobante/(?P&lt;pk&gt;[^/.]+)/$
+                [name='tiposcomprobante-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/tipocomprobante/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='tiposcomprobante-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/cuitpais/$
+                [name='cuitpaises-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/cuitpais\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='cuitpaises-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/cuitpais/(?P&lt;pk&gt;[^/.]+)/$
+                [name='cuitpaises-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/cuitpais/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='cuitpaises-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/alicuotaimpuesto/$
+                [name='alicuotasimpuestos-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/alicuotaimpuesto\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='alicuotasimpuestos-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/alicuotaimpuesto/(?P&lt;pk&gt;[^/.]+)/$
+                [name='alicuotasimpuestos-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/alicuotaimpuesto/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='alicuotasimpuestos-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/padronimpuesto/$
+                [name='padronesimpuesto-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/padronimpuesto\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='padronesimpuesto-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/padronimpuesto/(?P&lt;pk&gt;[^/.]+)/$
+                [name='padronesimpuesto-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/padronimpuesto/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='padronesimpuesto-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/tipocalculo/$
+                [name='tiposcalculo-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/tipocalculo\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='tiposcalculo-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/tipocalculo/(?P&lt;pk&gt;[^/.]+)/$
+                [name='tiposcalculo-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/tipocalculo/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='tiposcalculo-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/clasificacionimpuesto/$
+                [name='clasificacionesimpuestos-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/clasificacionimpuesto\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='clasificacionesimpuestos-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/clasificacionimpuesto/(?P&lt;pk&gt;[^/.]+)/$
+                [name='clasificacionesimpuestos-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/clasificacionimpuesto/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='clasificacionesimpuestos-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/tipoimpuesto/$
+                [name='tiposimpuestos-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/tipoimpuesto\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='tiposimpuestos-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/tipoimpuesto/(?P&lt;pk&gt;[^/.]+)/$
+                [name='tiposimpuestos-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/tipoimpuesto/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='tiposimpuestos-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/impuesto/$
+                [name='impuestos-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/impuesto\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='impuestos-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/impuesto/(?P&lt;pk&gt;[^/.]+)/$
+                [name='impuestos-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/impuestos/impuesto/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='impuestos-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/contabilidad/tipoajuste/$
+                [name='tiposajuste-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/contabilidad/tipoajuste\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='tiposajuste-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/contabilidad/tipoajuste/(?P&lt;pk&gt;[^/.]+)/$
+                [name='tiposajuste-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/contabilidad/tipoajuste/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='tiposajuste-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/contabilidad/plancuentas/$
+                [name='plancuentas-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/contabilidad/plancuentas\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='plancuentas-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/contabilidad/plancuentas/(?P&lt;pk&gt;[^/.]+)/$
+                [name='plancuentas-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/contabilidad/plancuentas/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='plancuentas-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/entidad/$
+                [name='entidades-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/entidad\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='entidades-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/entidad/(?P&lt;pk&gt;[^/.]+)/$
+                [name='entidades-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/entidad/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='entidades-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/zona/$
+                [name='zonas-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/zona\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='zonas-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/zona/(?P&lt;pk&gt;[^/.]+)/$
+                [name='zonas-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/zona/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='zonas-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/condicioncrediticiaentidad/$
+                [name='condicionescrediticiasentidad-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/condicioncrediticiaentidad\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='condicionescrediticiasentidad-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/condicioncrediticiaentidad/(?P&lt;pk&gt;[^/.]+)/$
+                [name='condicionescrediticiasentidad-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/condicioncrediticiaentidad/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='condicionescrediticiasentidad-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/impuestoentidad/$
+                [name='impuestosentidad-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/impuestoentidad\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='impuestosentidad-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/impuestoentidad/(?P&lt;pk&gt;[^/.]+)/$
+                [name='impuestosentidad-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/impuestoentidad/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='impuestosentidad-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/ejecutivoentidad/$
+                [name='ejecutivosentidad-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/ejecutivoentidad\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='ejecutivosentidad-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/ejecutivoentidad/(?P&lt;pk&gt;[^/.]+)/$
+                [name='ejecutivosentidad-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/ejecutivoentidad/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='ejecutivosentidad-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/contactoentidad/$
+                [name='contactosentidad-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/contactoentidad\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='contactosentidad-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/contactoentidad/(?P&lt;pk&gt;[^/.]+)/$
+                [name='contactosentidad-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/contactoentidad/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='contactosentidad-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/tiposede/$
+                [name='tipossede-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/tiposede\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='tipossede-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/tiposede/(?P&lt;pk&gt;[^/.]+)/$
+                [name='tipossede-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/tiposede/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='tipossede-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/tipodomicilio/$
+                [name='tiposdomicilio-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/tipodomicilio\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='tiposdomicilio-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/tipodomicilio/(?P&lt;pk&gt;[^/.]+)/$
+                [name='tiposdomicilio-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/tipodomicilio/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='tiposdomicilio-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/direccionentidad/$
+                [name='direccionesentidad-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/direccionentidad\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='direccionesentidad-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/direccionentidad/(?P&lt;pk&gt;[^/.]+)/$
+                [name='direccionesentidad-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/direccionentidad/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='direccionesentidad-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/moduloentidad/$
+                [name='modulosentidad-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/moduloentidad\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='modulosentidad-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/moduloentidad/(?P&lt;pk&gt;[^/.]+)/$
+                [name='modulosentidad-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/moduloentidad/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='modulosentidad-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/sectorentidad/$
+                [name='sectoresentidad-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/sectorentidad\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='sectoresentidad-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/sectorentidad/(?P&lt;pk&gt;[^/.]+)/$
+                [name='sectoresentidad-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/sectorentidad/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='sectoresentidad-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/formapagoentidad/$
+                [name='formaspagoentidad-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/formapagoentidad\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='formaspagoentidad-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/formapagoentidad/(?P&lt;pk&gt;[^/.]+)/$
+                [name='formaspagoentidad-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/formapagoentidad/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='formaspagoentidad-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/datosfiscalesentidad/$
+                [name='datosfiscalesentidad-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/datosfiscalesentidad\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='datosfiscalesentidad-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/datosfiscalesentidad/(?P&lt;pk&gt;[^/.]+)/$
+                [name='datosfiscalesentidad-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/entidades/datosfiscalesentidad/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='datosfiscalesentidad-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/listaprecioentidad/$
+                [name='listasprecioentidad-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/listaprecioentidad\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='listasprecioentidad-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/listaprecioentidad/(?P&lt;pk&gt;[^/.]+)/$
+                [name='listasprecioentidad-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/listaprecioentidad/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='listasprecioentidad-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/listaprecios/$
+                [name='listasprecios-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/listaprecios\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='listasprecios-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/listaprecios/(?P&lt;pk&gt;[^/.]+)/$
+                [name='listasprecios-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/listaprecios/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='listasprecios-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/atributo/$
+                [name='atributos-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/atributo\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='atributos-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/atributo/(?P&lt;pk&gt;[^/.]+)/$
+                [name='atributos-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/atributo/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='atributos-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/atributoproducto/$
+                [name='atributosproducto-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/atributoproducto\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='atributosproducto-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/atributoproducto/(?P&lt;pk&gt;[^/.]+)/$
+                [name='atributosproducto-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/atributoproducto/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='atributosproducto-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/atributotipo/$
+                [name='atributostipo-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/atributotipo\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='atributostipo-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/atributotipo/(?P&lt;pk&gt;[^/.]+)/$
+                [name='atributostipo-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/atributotipo/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='atributostipo-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/atributovalor/$
+                [name='atributosvalor-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/atributovalor\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='atributosvalor-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/atributovalor/(?P&lt;pk&gt;[^/.]+)/$
+                [name='atributosvalor-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/atributovalor/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='atributosvalor-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/claseproducto/$
+                [name='clasesproducto-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/claseproducto\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='clasesproducto-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/claseproducto/(?P&lt;pk&gt;[^/.]+)/$
+                [name='clasesproducto-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/claseproducto/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='clasesproducto-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/contabilidadproducto/$
+                [name='contabilidadproductos-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/contabilidadproducto\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='contabilidadproductos-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/contabilidadproducto/(?P&lt;pk&gt;[^/.]+)/$
+                [name='contabilidadproductos-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/contabilidadproducto/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='contabilidadproductos-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/conversionproducto/$
+                [name='conversionesproductos-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/conversionproducto\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='conversionesproductos-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/conversionproducto/(?P&lt;pk&gt;[^/.]+)/$
+                [name='conversionesproductos-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/conversionproducto/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='conversionesproductos-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/producto/$
+                [name='productos-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/producto\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='productos-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/producto/(?P&lt;pk&gt;[^/.]+)/$
+                [name='productos-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/producto/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='productos-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/tipoproducto/$
+                [name='tiposproducto-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/tipoproducto\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='tiposproducto-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/tipoproducto/(?P&lt;pk&gt;[^/.]+)/$
+                [name='tiposproducto-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/tipoproducto/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='tiposproducto-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/listatipo/$
+                [name='listatipos-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/listatipo\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='listatipos-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/listatipo/(?P&lt;pk&gt;[^/.]+)/$
+                [name='listatipos-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/listatipo/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='listatipos-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/precio/$
+                [name='precios-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/precio\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='precios-list']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/precio/(?P&lt;pk&gt;[^/.]+)/$
+                [name='precios-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                ^api/productos/precio/(?P&lt;pk&gt;[^/.]+)\.(?P&lt;format&gt;[a-z0-9]+)/?$
+                [name='precios-detail']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                [name='api-root']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                
+                
+              </code>
+            
+              <code>
+                &lt;drf_format_suffix:format&gt;
+                [name='api-root']
+              </code>
+            
+          </li>
+        
+          <li>
+            
+              <code>
+                api/token/
+                [name='api_token_auth']
+              </code>
+            
+          </li>
+        
+      </ol>
+      <p>
+        
+          The current path, <code>favicon.ico</code>,
+        
+        didn’t match any of these.
+      </p>
+    
+  </main>
+
+  <footer id="explanation">
+    <p>
+      You’re seeing this error because you have <code>DEBUG = True</code> in
+      your Django settings file. Change that to <code>False</code>, and Django
+      will display a standard 404 page.
+    </p>
+  </footer>
+</body>
+</html>
+
+WARNING - 2025-03-11 20:48:09,770 - log - Not Found: /favicon.ico
+WARNING - 2025-03-11 20:48:09,771 - basehttp - "GET /favicon.ico HTTP/1.1" 404 103297
+INFO - 2025-03-11 20:49:42,809 - middlewares - [2025-03-11 20:49:42.809655] GET / - IP: 127.0.0.1
+INFO - 2025-03-11 20:49:42,810 - middlewares - Headers: {'HTTP_HOST': '127.0.0.1:8000', 'HTTP_CONNECTION': 'keep-alive', 'HTTP_SEC_CH_UA': '"Chromium";v="134", "Not:A-Brand";v="24", "Brave";v="134"', 'HTTP_SEC_CH_UA_MOBILE': '?0', 'HTTP_SEC_CH_UA_PLATFORM': '"Windows"', 'HTTP_UPGRADE_INSECURE_REQUESTS': '1', 'HTTP_USER_AGENT': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', 'HTTP_ACCEPT': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8', 'HTTP_SEC_GPC': '1', 'HTTP_ACCEPT_LANGUAGE': 'es-ES,es;q=0.5', 'HTTP_SEC_FETCH_SITE': 'none', 'HTTP_SEC_FETCH_MODE': 'navigate', 'HTTP_SEC_FETCH_USER': '?1', 'HTTP_SEC_FETCH_DEST': 'document', 'HTTP_ACCEPT_ENCODING': 'gzip, deflate, br, zstd', 'HTTP_COOKIE': 'csrftoken=PqVkQ4FkwjS7h87fQSTBKg12rQbueEYu'}
+INFO - 2025-03-11 20:49:42,810 - middlewares - Request Body: None
+INFO - 2025-03-11 20:49:42,818 - middlewares - [2025-03-11 20:49:42.818841] Respuesta GET / - Status: 401
+INFO - 2025-03-11 20:49:42,819 - middlewares - Response Body: 
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+
+      
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta name="robots" content="NONE,NOARCHIVE" />
+      
+
+      <title>Api Root – Django REST framework</title>
+
+      
+        
+          <link rel="stylesheet" type="text/css" href="/static/rest_framework/css/bootstrap.min.css"/>
+          <link rel="stylesheet" type="text/css" href="/static/rest_framework/css/bootstrap-tweaks.css"/>
+        
+
+        <link rel="stylesheet" type="text/css" href="/static/rest_framework/css/prettify.css"/>
+        <link rel="stylesheet" type="text/css" href="/static/rest_framework/css/default.css"/>
+        
+      
+
+    
+  </head>
+
+  
+  <body class="">
+
+    <div class="wrapper">
+      
+        <div class="navbar navbar-static-top navbar-inverse"
+             role="navigation" aria-label="navbar">
+          <div class="container">
+            <span>
+              
+                <a class='navbar-brand' rel="nofollow" href='https://www.django-rest-framework.org/'>
+                    Django REST framework
+                </a>
+              
+            </span>
+            <ul class="nav navbar-nav pull-right">
+              
+                
+                  
+                
+              
+            </ul>
+          </div>
+        </div>
+      
+
+      <div class="container">
+        
+          <ul class="breadcrumb">
+            
+              
+                <li class="active"><a href="/">Api Root</a></li>
+              
+            
+          </ul>
+        
+
+        <!-- Content -->
+        <div id="content" role="main" aria-label="content">
+          
+
+          <div class="region"  aria-label="request form">
+          
+
+          
+            <form id="get-form" class="pull-right">
+              <fieldset>
+                
+                  <div class="btn-group format-selection">
+                    <a class="btn btn-primary js-tooltip" href="/" rel="nofollow" title="Make a GET request on the Api Root resource">GET</a>
+
+                    <button class="btn btn-primary dropdown-toggle js-tooltip" data-toggle="dropdown" title="Specify a format for the GET request">
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      
+                        <li>
+                          <a class="js-tooltip format-option" href="/?format=json" rel="nofollow" title="Make a GET request on the Api Root resource with the format set to `json`">json</a>
+                        </li>
+                      
+                        <li>
+                          <a class="js-tooltip format-option" href="/?format=api" rel="nofollow" title="Make a GET request on the Api Root resource with the format set to `api`">api</a>
+                        </li>
+                      
+                    </ul>
+                  </div>
+                
+              </fieldset>
+            </form>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          </div>
+
+            <div class="content-main" role="main"  aria-label="main content">
+              <div class="page-header">
+                <h1>Api Root</h1>
+              </div>
+              <div class="pull-left">
+                
+                  
+                
+              </div>
+
+              
+
+              <div class="request-info" aria-label="request info">
+                <pre class="prettyprint"><b>GET</b> /</pre>
+              </div>
+
+              <div class="response-info" aria-label="response info">
+                <pre class="prettyprint"><span class="meta nocode"><b>HTTP 401 Unauthorized</b>
+<b>Allow:</b> <span class="lit">GET, HEAD, OPTIONS</span>
+<b>Content-Type:</b> <span class="lit">application/json</span>
+<b>Vary:</b> <span class="lit">Accept</span>
+<b>WWW-Authenticate:</b> <span class="lit">Token</span>
+
+</span>{
+    &quot;detail&quot;: &quot;Authentication credentials were not provided.&quot;
+}</pre>
+              </div>
+            </div>
+
+            
+              
+
+              
+            
+          
+        </div><!-- /.content -->
+      </div><!-- /.container -->
+    </div><!-- ./wrapper -->
+
+    
+
+    
+      <script type="application/json" id="drf_csrf">
+        {
+          "csrfHeaderName": "X-CSRFTOKEN",
+          "csrfToken": "1xiPIZOFsaoRPXN8DoajeU04hvBYogy5GN3ZoTjPOj6OWVKdj6TKO0RWybCisKmp"
+        }
+      </script>
+      <script src="/static/rest_framework/js/jquery-3.7.1.min.js"></script>
+      <script src="/static/rest_framework/js/ajax-form.js"></script>
+      <script src="/static/rest_framework/js/csrf.js"></script>
+      <script src="/static/rest_framework/js/bootstrap.min.js"></script>
+      <script src="/static/rest_framework/js/prettify-min.js"></script>
+      <script src="/static/rest_framework/js/default.js"></script>
+      <script src="/static/rest_framework/js/load-ajax-form.js"></script>
+    
+
+  </body>
+  
+</html>
+
+WARNING - 2025-03-11 20:49:42,819 - log - Unauthorized: /
+WARNING - 2025-03-11 20:49:42,819 - basehttp - "GET / HTTP/1.1" 401 4966
+INFO - 2025-03-11 20:50:39,934 - middlewares - [2025-03-11 20:50:39.934105] GET /admin - IP: 127.0.0.1
+INFO - 2025-03-11 20:50:39,934 - middlewares - Headers: {'HTTP_HOST': '127.0.0.1:8000', 'HTTP_CONNECTION': 'keep-alive', 'HTTP_SEC_CH_UA': '"Chromium";v="134", "Not:A-Brand";v="24", "Brave";v="134"', 'HTTP_SEC_CH_UA_MOBILE': '?0', 'HTTP_SEC_CH_UA_PLATFORM': '"Windows"', 'HTTP_UPGRADE_INSECURE_REQUESTS': '1', 'HTTP_USER_AGENT': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', 'HTTP_ACCEPT': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8', 'HTTP_SEC_GPC': '1', 'HTTP_ACCEPT_LANGUAGE': 'es-ES,es;q=0.5', 'HTTP_SEC_FETCH_SITE': 'none', 'HTTP_SEC_FETCH_MODE': 'navigate', 'HTTP_SEC_FETCH_USER': '?1', 'HTTP_SEC_FETCH_DEST': 'document', 'HTTP_ACCEPT_ENCODING': 'gzip, deflate, br, zstd', 'HTTP_COOKIE': 'csrftoken=PqVkQ4FkwjS7h87fQSTBKg12rQbueEYu'}
+INFO - 2025-03-11 20:50:39,934 - middlewares - Request Body: None
+INFO - 2025-03-11 20:50:39,952 - middlewares - [2025-03-11 20:50:39.952105] Respuesta GET /admin - Status: 301
+INFO - 2025-03-11 20:50:39,952 - middlewares - Response Body: 
+INFO - 2025-03-11 20:50:39,952 - basehttp - "GET /admin HTTP/1.1" 301 0
+INFO - 2025-03-11 20:50:39,954 - middlewares - [2025-03-11 20:50:39.954132] GET /admin/ - IP: 127.0.0.1
+INFO - 2025-03-11 20:50:39,954 - middlewares - Headers: {'HTTP_HOST': '127.0.0.1:8000', 'HTTP_CONNECTION': 'keep-alive', 'HTTP_UPGRADE_INSECURE_REQUESTS': '1', 'HTTP_USER_AGENT': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', 'HTTP_ACCEPT': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8', 'HTTP_SEC_GPC': '1', 'HTTP_ACCEPT_LANGUAGE': 'es-ES,es;q=0.5', 'HTTP_SEC_FETCH_SITE': 'none', 'HTTP_SEC_FETCH_MODE': 'navigate', 'HTTP_SEC_FETCH_USER': '?1', 'HTTP_SEC_FETCH_DEST': 'document', 'HTTP_SEC_CH_UA': '"Chromium";v="134", "Not:A-Brand";v="24", "Brave";v="134"', 'HTTP_SEC_CH_UA_MOBILE': '?0', 'HTTP_SEC_CH_UA_PLATFORM': '"Windows"', 'HTTP_ACCEPT_ENCODING': 'gzip, deflate, br, zstd', 'HTTP_COOKIE': 'csrftoken=PqVkQ4FkwjS7h87fQSTBKg12rQbueEYu'}
+INFO - 2025-03-11 20:50:39,954 - middlewares - Request Body: None
+INFO - 2025-03-11 20:50:39,974 - middlewares - [2025-03-11 20:50:39.974779] Respuesta GET /admin/ - Status: 302
+INFO - 2025-03-11 20:50:39,974 - middlewares - Response Body: 
+INFO - 2025-03-11 20:50:39,974 - basehttp - "GET /admin/ HTTP/1.1" 302 0
+INFO - 2025-03-11 20:50:39,977 - middlewares - [2025-03-11 20:50:39.977704] GET /admin/login/ - IP: 127.0.0.1
+INFO - 2025-03-11 20:50:39,977 - middlewares - Headers: {'HTTP_HOST': '127.0.0.1:8000', 'HTTP_CONNECTION': 'keep-alive', 'HTTP_UPGRADE_INSECURE_REQUESTS': '1', 'HTTP_USER_AGENT': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', 'HTTP_ACCEPT': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8', 'HTTP_SEC_GPC': '1', 'HTTP_ACCEPT_LANGUAGE': 'es-ES,es;q=0.5', 'HTTP_SEC_FETCH_SITE': 'none', 'HTTP_SEC_FETCH_MODE': 'navigate', 'HTTP_SEC_FETCH_USER': '?1', 'HTTP_SEC_FETCH_DEST': 'document', 'HTTP_SEC_CH_UA': '"Chromium";v="134", "Not:A-Brand";v="24", "Brave";v="134"', 'HTTP_SEC_CH_UA_MOBILE': '?0', 'HTTP_SEC_CH_UA_PLATFORM': '"Windows"', 'HTTP_ACCEPT_ENCODING': 'gzip, deflate, br, zstd', 'HTTP_COOKIE': 'csrftoken=PqVkQ4FkwjS7h87fQSTBKg12rQbueEYu'}
+INFO - 2025-03-11 20:50:39,977 - middlewares - Request Body: None
+INFO - 2025-03-11 20:50:40,093 - middlewares - [2025-03-11 20:50:40.093639] Respuesta GET /admin/login/ - Status: 200
+INFO - 2025-03-11 20:50:40,093 - middlewares - Response Body: <!DOCTYPE html>
+
+<html lang="en-us" dir="ltr">
+<head>
+<title>Log in | Django site admin</title>
+<link rel="stylesheet" href="/static/admin/css/base.css">
+
+  <link rel="stylesheet" href="/static/admin/css/dark_mode.css">
+  <script src="/static/admin/js/theme.js"></script>
+
+
+  <link rel="stylesheet" href="/static/admin/css/nav_sidebar.css">
+  <script src="/static/admin/js/nav_sidebar.js" defer></script>
+
+<link rel="stylesheet" href="/static/admin/css/login.css">
+
+
+
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/admin/css/responsive.css">
+    
+
+<meta name="robots" content="NONE,NOARCHIVE">
+</head>
+
+<body class=" login"
+  data-admin-utc-offset="0">
+<a href="#content-start" class="skip-to-content-link">Skip to main content</a>
+<!-- Container -->
+<div id="container">
+
+    
+    <!-- Header -->
+    
+      <header id="header">
+        <div id="branding">
+        
+<div id="site-name"><a href="/admin/">Django administration</a></div>
+
+  
+<button class="theme-toggle">
+  <span class="visually-hidden theme-label-when-auto">Toggle theme (current theme: auto)</span>
+  <span class="visually-hidden theme-label-when-light">Toggle theme (current theme: light)</span>
+  <span class="visually-hidden theme-label-when-dark">Toggle theme (current theme: dark)</span>
+  <svg aria-hidden="true" class="theme-icon-when-auto">
+    <use xlink:href="#icon-auto" />
+  </svg>
+  <svg aria-hidden="true" class="theme-icon-when-dark">
+    <use xlink:href="#icon-moon" />
+  </svg>
+  <svg aria-hidden="true" class="theme-icon-when-light">
+    <use xlink:href="#icon-sun" />
+  </svg>
+</button>
+
+
+
+        </div>
+        
+        
+      </header>
+    
+    <!-- END Header -->
+    
+    
+
+    <div class="main" id="main">
+      
+        
+      
+      <main id="content-start" class="content" tabindex="-1">
+        
+          
+        
+        <!-- Content -->
+        <div id="content" class="colM">
+          
+          
+          
+          
+
+
+
+
+<div id="content-main">
+
+
+
+<form action="/admin/login/?next=/admin/" method="post" id="login-form"><input type="hidden" name="csrfmiddlewaretoken" value="Eg2yht6rotk9QmubKNLWtG76d3UtBzr6jwNIXnBBKC26Xkrgqvun3MYYuJVNF3fq">
+  <div class="form-row">
+    
+    <label for="id_username" class="required">Username:</label> <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username">
+  </div>
+  <div class="form-row">
+    
+    <label for="id_password" class="required">Password:</label> <input type="password" name="password" autocomplete="current-password" required id="id_password">
+    <input type="hidden" name="next" value="/admin/">
+  </div>
+  
+  
+  <div class="submit-row">
+    <input type="submit" value="Log in">
+  </div>
+</form>
+
+</div>
+
+          
+          <br class="clear">
+        </div>
+        <!-- END Content -->
+      </main>
+    </div>
+    <footer id="footer"></footer>
+</div>
+<!-- END Container -->
+
+<!-- SVGs -->
+<svg xmlns="http://www.w3.org/2000/svg" class="base-svgs">
+  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"/></symbol>
+  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"/></symbol>
+  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"/></symbol>
+</svg>
+<!-- END SVGs -->
+</body>
+</html>
+
+INFO - 2025-03-11 20:50:40,093 - basehttp - "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4160
+INFO - 2025-03-11 20:50:40,123 - basehttp - "GET /static/admin/css/base.css HTTP/1.1" 200 22092
+INFO - 2025-03-11 20:50:40,132 - basehttp - "GET /static/admin/css/login.css HTTP/1.1" 200 951
+INFO - 2025-03-11 20:50:40,133 - basehttp - "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2804
+INFO - 2025-03-11 20:50:40,135 - basehttp - "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810
+INFO - 2025-03-11 20:50:40,135 - basehttp - "GET /static/admin/css/responsive.css HTTP/1.1" 200 17972
+INFO - 2025-03-11 20:50:40,141 - basehttp - "GET /static/admin/js/theme.js HTTP/1.1" 200 1653
+INFO - 2025-03-11 20:50:40,154 - basehttp - "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+INFO - 2025-03-11 20:50:45,053 - middlewares - [2025-03-11 20:50:45.053669] POST /admin/login/ - IP: 127.0.0.1
+INFO - 2025-03-11 20:50:45,053 - middlewares - Headers: {'HTTP_HOST': '127.0.0.1:8000', 'HTTP_CONNECTION': 'keep-alive', 'HTTP_CACHE_CONTROL': 'max-age=0', 'HTTP_SEC_CH_UA': '"Chromium";v="134", "Not:A-Brand";v="24", "Brave";v="134"', 'HTTP_SEC_CH_UA_MOBILE': '?0', 'HTTP_SEC_CH_UA_PLATFORM': '"Windows"', 'HTTP_ORIGIN': 'http://127.0.0.1:8000', 'HTTP_UPGRADE_INSECURE_REQUESTS': '1', 'HTTP_USER_AGENT': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', 'HTTP_ACCEPT': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8', 'HTTP_SEC_GPC': '1', 'HTTP_ACCEPT_LANGUAGE': 'es-ES,es;q=0.5', 'HTTP_SEC_FETCH_SITE': 'same-origin', 'HTTP_SEC_FETCH_MODE': 'navigate', 'HTTP_SEC_FETCH_USER': '?1', 'HTTP_SEC_FETCH_DEST': 'document', 'HTTP_REFERER': 'http://127.0.0.1:8000/admin/login/?next=/admin/', 'HTTP_ACCEPT_ENCODING': 'gzip, deflate, br, zstd', 'HTTP_COOKIE': 'csrftoken=PqVkQ4FkwjS7h87fQSTBKg12rQbueEYu'}
+INFO - 2025-03-11 20:50:45,053 - middlewares - Request Body: csrfmiddlewaretoken=Eg2yht6rotk9QmubKNLWtG76d3UtBzr6jwNIXnBBKC26Xkrgqvun3MYYuJVNF3fq&username=mfourgeaux&password=1234&next=%2Fadmin%2F
+INFO - 2025-03-11 20:50:45,620 - middlewares - [2025-03-11 20:50:45.620400] Respuesta POST /admin/login/ - Status: 302
+INFO - 2025-03-11 20:50:45,621 - middlewares - Response Body: 
+INFO - 2025-03-11 20:50:45,621 - basehttp - "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+INFO - 2025-03-11 20:50:45,623 - middlewares - [2025-03-11 20:50:45.623399] GET /admin/ - IP: 127.0.0.1
+INFO - 2025-03-11 20:50:45,623 - middlewares - Headers: {'HTTP_HOST': '127.0.0.1:8000', 'HTTP_CONNECTION': 'keep-alive', 'HTTP_CACHE_CONTROL': 'max-age=0', 'HTTP_UPGRADE_INSECURE_REQUESTS': '1', 'HTTP_USER_AGENT': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', 'HTTP_ACCEPT': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8', 'HTTP_SEC_GPC': '1', 'HTTP_ACCEPT_LANGUAGE': 'es-ES,es;q=0.5', 'HTTP_SEC_FETCH_SITE': 'same-origin', 'HTTP_SEC_FETCH_MODE': 'navigate', 'HTTP_SEC_FETCH_USER': '?1', 'HTTP_SEC_FETCH_DEST': 'document', 'HTTP_SEC_CH_UA': '"Chromium";v="134", "Not:A-Brand";v="24", "Brave";v="134"', 'HTTP_SEC_CH_UA_MOBILE': '?0', 'HTTP_SEC_CH_UA_PLATFORM': '"Windows"', 'HTTP_REFERER': 'http://127.0.0.1:8000/admin/login/?next=/admin/', 'HTTP_ACCEPT_ENCODING': 'gzip, deflate, br, zstd', 'HTTP_COOKIE': 'csrftoken=msK6oYA4KWOIrUW2EcBuxJkMxoXMhdhI; sessionid=4ekil0r9hw661uuun4bpg5izn980kv58'}
+INFO - 2025-03-11 20:50:45,623 - middlewares - Request Body: None
+INFO - 2025-03-11 20:50:45,685 - middlewares - [2025-03-11 20:50:45.685320] Respuesta GET /admin/ - Status: 200
+INFO - 2025-03-11 20:50:45,685 - middlewares - Response Body: <!DOCTYPE html>
+
+<html lang="en-us" dir="ltr">
+<head>
+<title>Site administration | Django site admin</title>
+<link rel="stylesheet" href="/static/admin/css/base.css">
+
+  <link rel="stylesheet" href="/static/admin/css/dark_mode.css">
+  <script src="/static/admin/js/theme.js"></script>
+
+
+  <link rel="stylesheet" href="/static/admin/css/nav_sidebar.css">
+  <script src="/static/admin/js/nav_sidebar.js" defer></script>
+
+<link rel="stylesheet" href="/static/admin/css/dashboard.css">
+
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/admin/css/responsive.css">
+    
+
+<meta name="robots" content="NONE,NOARCHIVE">
+</head>
+
+<body class=" dashboard"
+  data-admin-utc-offset="0">
+<a href="#content-start" class="skip-to-content-link">Skip to main content</a>
+<!-- Container -->
+<div id="container">
+
+    
+    <!-- Header -->
+    
+      <header id="header">
+        <div id="branding">
+        
+<div id="site-name"><a href="/admin/">Django administration</a></div>
+
+
+        </div>
+        
+        
+        <div id="user-tools">
+            
+                Welcome,
+                <strong>mfourgeaux</strong>.
+            
+            
+                
+                    <a href="/">View site</a> /
+                
+                
+                    
+                    
+                
+                
+                <a href="/admin/password_change/">Change password</a> /
+                
+                <form id="logout-form" method="post" action="/admin/logout/">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="UnOyoOW9DhnaKlZP5cuUgvF8GnHyyBto6FouCCm3d31I15LHzeVeD4PK3BuaFEAW">
+                    <button type="submit">Log out</button>
+                </form>
+                
+<button class="theme-toggle">
+  <span class="visually-hidden theme-label-when-auto">Toggle theme (current theme: auto)</span>
+  <span class="visually-hidden theme-label-when-light">Toggle theme (current theme: light)</span>
+  <span class="visually-hidden theme-label-when-dark">Toggle theme (current theme: dark)</span>
+  <svg aria-hidden="true" class="theme-icon-when-auto">
+    <use xlink:href="#icon-auto" />
+  </svg>
+  <svg aria-hidden="true" class="theme-icon-when-dark">
+    <use xlink:href="#icon-moon" />
+  </svg>
+  <svg aria-hidden="true" class="theme-icon-when-light">
+    <use xlink:href="#icon-sun" />
+  </svg>
+</button>
+
+            
+        </div>
+        
+        
+        
+      </header>
+    
+    <!-- END Header -->
+    
+    
+
+    <div class="main" id="main">
+      
+        
+      
+      <main id="content-start" class="content" tabindex="-1">
+        
+          
+        
+        <!-- Content -->
+        <div id="content" class="colMS">
+          
+          <h1>Site administration</h1>
+          
+          
+<div id="content-main">
+  
+
+
+  
+    <div class="app-authtoken module">
+      <table>
+        <caption>
+          <a href="/admin/authtoken/" class="section" title="Models in the Auth Token application">Auth Token</a>
+        </caption>
+        
+          
+            <tr class="model-tokenproxy">
+              <th scope="row" id="authtoken-tokenproxy">
+                
+                  <a href="/admin/authtoken/tokenproxy/">Tokens</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/authtoken/tokenproxy/add/" class="addlink" aria-describedby="authtoken-tokenproxy">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/authtoken/tokenproxy/" class="changelink" aria-describedby="authtoken-tokenproxy">Change</a></td>
+                
+              
+            </tr>
+          
+        
+      </table>
+    </div>
+  
+    <div class="app-auth module">
+      <table>
+        <caption>
+          <a href="/admin/auth/" class="section" title="Models in the Authentication and Authorization application">Authentication and Authorization</a>
+        </caption>
+        
+          
+            <tr class="model-group">
+              <th scope="row" id="auth-group">
+                
+                  <a href="/admin/auth/group/">Groups</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/auth/group/add/" class="addlink" aria-describedby="auth-group">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/auth/group/" class="changelink" aria-describedby="auth-group">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-user">
+              <th scope="row" id="auth-user">
+                
+                  <a href="/admin/auth/user/">Users</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/auth/user/add/" class="addlink" aria-describedby="auth-user">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/auth/user/" class="changelink" aria-describedby="auth-user">Change</a></td>
+                
+              
+            </tr>
+          
+        
+      </table>
+    </div>
+  
+    <div class="app-MasterModels module">
+      <table>
+        <caption>
+          <a href="/admin/MasterModels/" class="section" title="Models in the Mastermodels application">Mastermodels</a>
+        </caption>
+        
+          
+            <tr class="model-atributo">
+              <th scope="row" id="MasterModels-atributo">
+                
+                  <a href="/admin/MasterModels/atributo/">ARTI - Atributos de Producto</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/atributo/add/" class="addlink" aria-describedby="MasterModels-atributo">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/atributo/" class="changelink" aria-describedby="MasterModels-atributo">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-claseproducto">
+              <th scope="row" id="MasterModels-claseproducto">
+                
+                  <a href="/admin/MasterModels/claseproducto/">ARTI - Clases de Producto</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/claseproducto/add/" class="addlink" aria-describedby="MasterModels-claseproducto">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/claseproducto/" class="changelink" aria-describedby="MasterModels-claseproducto">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-listaprecio">
+              <th scope="row" id="MasterModels-listaprecio">
+                
+                  <a href="/admin/MasterModels/listaprecio/">ARTI - Listas de Precio</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/listaprecio/add/" class="addlink" aria-describedby="MasterModels-listaprecio">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/listaprecio/" class="changelink" aria-describedby="MasterModels-listaprecio">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-producto">
+              <th scope="row" id="MasterModels-producto">
+                
+                  <a href="/admin/MasterModels/producto/">ARTI - Productos</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/producto/add/" class="addlink" aria-describedby="MasterModels-producto">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/producto/" class="changelink" aria-describedby="MasterModels-producto">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-listatipo">
+              <th scope="row" id="MasterModels-listatipo">
+                
+                  <a href="/admin/MasterModels/listatipo/">ARTI - Tipos de Listas de Precio</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/listatipo/add/" class="addlink" aria-describedby="MasterModels-listatipo">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/listatipo/" class="changelink" aria-describedby="MasterModels-listatipo">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-tipoproducto">
+              <th scope="row" id="MasterModels-tipoproducto">
+                
+                  <a href="/admin/MasterModels/tipoproducto/">ARTI - Tipos de Producto</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/tipoproducto/add/" class="addlink" aria-describedby="MasterModels-tipoproducto">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/tipoproducto/" class="changelink" aria-describedby="MasterModels-tipoproducto">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-atributovalor">
+              <th scope="row" id="MasterModels-atributovalor">
+                
+                  <a href="/admin/MasterModels/atributovalor/">ARTI - Valores de Atributos</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/atributovalor/add/" class="addlink" aria-describedby="MasterModels-atributovalor">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/atributovalor/" class="changelink" aria-describedby="MasterModels-atributovalor">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-plancuenta">
+              <th scope="row" id="MasterModels-plancuenta">
+                
+                  <a href="/admin/MasterModels/plancuenta/">CONT - Plan de Cuentas</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/plancuenta/add/" class="addlink" aria-describedby="MasterModels-plancuenta">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/plancuenta/" class="changelink" aria-describedby="MasterModels-plancuenta">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-tipoajuste">
+              <th scope="row" id="MasterModels-tipoajuste">
+                
+                  <a href="/admin/MasterModels/tipoajuste/">CONT - Tipos de Ajuste Contable</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/tipoajuste/add/" class="addlink" aria-describedby="MasterModels-tipoajuste">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/tipoajuste/" class="changelink" aria-describedby="MasterModels-tipoajuste">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-entidad">
+              <th scope="row" id="MasterModels-entidad">
+                
+                  <a href="/admin/MasterModels/entidad/">ENTI - Entidades</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/entidad/add/" class="addlink" aria-describedby="MasterModels-entidad">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/entidad/" class="changelink" aria-describedby="MasterModels-entidad">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-codigopostal">
+              <th scope="row" id="MasterModels-codigopostal">
+                
+                  <a href="/admin/MasterModels/codigopostal/">GRAL - Codigos Postales</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/codigopostal/add/" class="addlink" aria-describedby="MasterModels-codigopostal">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/codigopostal/" class="changelink" aria-describedby="MasterModels-codigopostal">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-formapago">
+              <th scope="row" id="MasterModels-formapago">
+                
+                  <a href="/admin/MasterModels/formapago/">GRAL - Formas de Pago</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/formapago/add/" class="addlink" aria-describedby="MasterModels-formapago">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/formapago/" class="changelink" aria-describedby="MasterModels-formapago">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-mascara">
+              <th scope="row" id="MasterModels-mascara">
+                
+                  <a href="/admin/MasterModels/mascara/">GRAL - Mascaras</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/mascara/add/" class="addlink" aria-describedby="MasterModels-mascara">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/mascara/" class="changelink" aria-describedby="MasterModels-mascara">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-modulo">
+              <th scope="row" id="MasterModels-modulo">
+                
+                  <a href="/admin/MasterModels/modulo/">GRAL - Modulos</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/modulo/add/" class="addlink" aria-describedby="MasterModels-modulo">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/modulo/" class="changelink" aria-describedby="MasterModels-modulo">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-moneda">
+              <th scope="row" id="MasterModels-moneda">
+                
+                  <a href="/admin/MasterModels/moneda/">GRAL - Monedas</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/moneda/add/" class="addlink" aria-describedby="MasterModels-moneda">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/moneda/" class="changelink" aria-describedby="MasterModels-moneda">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-pais">
+              <th scope="row" id="MasterModels-pais">
+                
+                  <a href="/admin/MasterModels/pais/">GRAL - Paises</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/pais/add/" class="addlink" aria-describedby="MasterModels-pais">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/pais/" class="changelink" aria-describedby="MasterModels-pais">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-partido">
+              <th scope="row" id="MasterModels-partido">
+                
+                  <a href="/admin/MasterModels/partido/">GRAL - Partidos</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/partido/add/" class="addlink" aria-describedby="MasterModels-partido">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/partido/" class="changelink" aria-describedby="MasterModels-partido">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-persona">
+              <th scope="row" id="MasterModels-persona">
+                
+                  <a href="/admin/MasterModels/persona/">GRAL - Personas</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/persona/add/" class="addlink" aria-describedby="MasterModels-persona">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/persona/" class="changelink" aria-describedby="MasterModels-persona">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-provincia">
+              <th scope="row" id="MasterModels-provincia">
+                
+                  <a href="/admin/MasterModels/provincia/">GRAL - Provincias</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/provincia/add/" class="addlink" aria-describedby="MasterModels-provincia">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/provincia/" class="changelink" aria-describedby="MasterModels-provincia">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-rol">
+              <th scope="row" id="MasterModels-rol">
+                
+                  <a href="/admin/MasterModels/rol/">GRAL - Roles</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/rol/add/" class="addlink" aria-describedby="MasterModels-rol">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/rol/" class="changelink" aria-describedby="MasterModels-rol">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-sector">
+              <th scope="row" id="MasterModels-sector">
+                
+                  <a href="/admin/MasterModels/sector/">GRAL - Sectores</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/sector/add/" class="addlink" aria-describedby="MasterModels-sector">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/sector/" class="changelink" aria-describedby="MasterModels-sector">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-tipodocumento">
+              <th scope="row" id="MasterModels-tipodocumento">
+                
+                  <a href="/admin/MasterModels/tipodocumento/">GRAL - Tipos de Documento</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/tipodocumento/add/" class="addlink" aria-describedby="MasterModels-tipodocumento">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/tipodocumento/" class="changelink" aria-describedby="MasterModels-tipodocumento">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-tipodomicilio">
+              <th scope="row" id="MasterModels-tipodomicilio">
+                
+                  <a href="/admin/MasterModels/tipodomicilio/">GRAL - Tipos de Domicilio</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/tipodomicilio/add/" class="addlink" aria-describedby="MasterModels-tipodomicilio">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/tipodomicilio/" class="changelink" aria-describedby="MasterModels-tipodomicilio">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-tipofrecuencia">
+              <th scope="row" id="MasterModels-tipofrecuencia">
+                
+                  <a href="/admin/MasterModels/tipofrecuencia/">GRAL - Tipos de Frecuencia</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/tipofrecuencia/add/" class="addlink" aria-describedby="MasterModels-tipofrecuencia">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/tipofrecuencia/" class="changelink" aria-describedby="MasterModels-tipofrecuencia">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-tipoindice">
+              <th scope="row" id="MasterModels-tipoindice">
+                
+                  <a href="/admin/MasterModels/tipoindice/">GRAL - Tipos de Indice</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/tipoindice/add/" class="addlink" aria-describedby="MasterModels-tipoindice">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/tipoindice/" class="changelink" aria-describedby="MasterModels-tipoindice">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-tiporesponsable">
+              <th scope="row" id="MasterModels-tiporesponsable">
+                
+                  <a href="/admin/MasterModels/tiporesponsable/">GRAL - Tipos de Responsable</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/tiporesponsable/add/" class="addlink" aria-describedby="MasterModels-tiporesponsable">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/tiporesponsable/" class="changelink" aria-describedby="MasterModels-tiporesponsable">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-tiposede">
+              <th scope="row" id="MasterModels-tiposede">
+                
+                  <a href="/admin/MasterModels/tiposede/">GRAL - Tipos de Sede</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/tiposede/add/" class="addlink" aria-describedby="MasterModels-tiposede">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/tiposede/" class="changelink" aria-describedby="MasterModels-tiposede">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-tipovalor">
+              <th scope="row" id="MasterModels-tipovalor">
+                
+                  <a href="/admin/MasterModels/tipovalor/">GRAL - Tipos de Valor</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/tipovalor/add/" class="addlink" aria-describedby="MasterModels-tipovalor">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/tipovalor/" class="changelink" aria-describedby="MasterModels-tipovalor">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-unidadmedida">
+              <th scope="row" id="MasterModels-unidadmedida">
+                
+                  <a href="/admin/MasterModels/unidadmedida/">GRAL - Unidades de Medida</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/unidadmedida/add/" class="addlink" aria-describedby="MasterModels-unidadmedida">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/unidadmedida/" class="changelink" aria-describedby="MasterModels-unidadmedida">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-zona">
+              <th scope="row" id="MasterModels-zona">
+                
+                  <a href="/admin/MasterModels/zona/">GRAL - Zonas</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/zona/add/" class="addlink" aria-describedby="MasterModels-zona">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/zona/" class="changelink" aria-describedby="MasterModels-zona">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-alicuotaimpuesto">
+              <th scope="row" id="MasterModels-alicuotaimpuesto">
+                
+                  <a href="/admin/MasterModels/alicuotaimpuesto/">IMPU - Alicuotas Impuestos</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/alicuotaimpuesto/add/" class="addlink" aria-describedby="MasterModels-alicuotaimpuesto">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/alicuotaimpuesto/" class="changelink" aria-describedby="MasterModels-alicuotaimpuesto">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-clasificacionimpuesto">
+              <th scope="row" id="MasterModels-clasificacionimpuesto">
+                
+                  <a href="/admin/MasterModels/clasificacionimpuesto/">IMPU - Clasificaciones de Impuestos</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/clasificacionimpuesto/add/" class="addlink" aria-describedby="MasterModels-clasificacionimpuesto">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/clasificacionimpuesto/" class="changelink" aria-describedby="MasterModels-clasificacionimpuesto">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-impuesto">
+              <th scope="row" id="MasterModels-impuesto">
+                
+                  <a href="/admin/MasterModels/impuesto/">IMPU - Impuestos</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/impuesto/add/" class="addlink" aria-describedby="MasterModels-impuesto">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/impuesto/" class="changelink" aria-describedby="MasterModels-impuesto">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-padronimpuesto">
+              <th scope="row" id="MasterModels-padronimpuesto">
+                
+                  <a href="/admin/MasterModels/padronimpuesto/">IMPU - Padrones Impuesto</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/padronimpuesto/add/" class="addlink" aria-describedby="MasterModels-padronimpuesto">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/padronimpuesto/" class="changelink" aria-describedby="MasterModels-padronimpuesto">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-tipoimpuesto">
+              <th scope="row" id="MasterModels-tipoimpuesto">
+                
+                  <a href="/admin/MasterModels/tipoimpuesto/">IMPU - Tipos de Impuesto</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/tipoimpuesto/add/" class="addlink" aria-describedby="MasterModels-tipoimpuesto">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/tipoimpuesto/" class="changelink" aria-describedby="MasterModels-tipoimpuesto">Change</a></td>
+                
+              
+            </tr>
+          
+        
+          
+            <tr class="model-tiposujeto">
+              <th scope="row" id="MasterModels-tiposujeto">
+                
+                  <a href="/admin/MasterModels/tiposujeto/">IMPU - Tipos de Sujeto</a>
+                
+              </th>
+
+              
+                <td><a href="/admin/MasterModels/tiposujeto/add/" class="addlink" aria-describedby="MasterModels-tiposujeto">Add</a></td>
+              
+
+              
+                
+                  <td><a href="/admin/MasterModels/tiposujeto/" class="changelink" aria-describedby="MasterModels-tiposujeto">Change</a></td>
+                
+              
+            </tr>
+          
+        
+      </table>
+    </div>
+  
+
+
+</div>
+
+          
+<div id="content-related">
+    <div class="module" id="recent-actions-module">
+        <h2>Recent actions</h2>
+        <h3>My actions</h3>
+            
+            
+            
+            <ul class="actionlist">
+            
+            <li class="changelink">
+                <span class="visually-hidden">Changed:</span>
+                
+                    <a href="/admin/MasterModels/atributo/2/change/">RUB, Rubro</a>
+                
+                <br>
+                
+                    <span class="mini quiet">Atributo de Producto</span>
+                
+            </li>
+            
+            <li class="changelink">
+                <span class="visually-hidden">Changed:</span>
+                
+                    <a href="/admin/MasterModels/producto/4/change/">1, GA004, Galletitas Vocación</a>
+                
+                <br>
+                
+                    <span class="mini quiet">Producto</span>
+                
+            </li>
+            
+            <li class="addlink">
+                <span class="visually-hidden">Added:</span>
+                
+                    <a href="/admin/MasterModels/unidadmedida/2/change/">CJ, Caja</a>
+                
+                <br>
+                
+                    <span class="mini quiet">Unidad de Medida</span>
+                
+            </li>
+            
+            <li class="changelink">
+                <span class="visually-hidden">Changed:</span>
+                
+                    <a href="/admin/MasterModels/producto/4/change/">1, GA004, Galletitas Vocación</a>
+                
+                <br>
+                
+                    <span class="mini quiet">Producto</span>
+                
+            </li>
+            
+            <li class="addlink">
+                <span class="visually-hidden">Added:</span>
+                
+                    <a href="/admin/MasterModels/plancuenta/1/change/">Producto Terminado, 40101001, None</a>
+                
+                <br>
+                
+                    <span class="mini quiet">Cuenta Contable</span>
+                
+            </li>
+            
+            <li class="addlink">
+                <span class="visually-hidden">Added:</span>
+                
+                    <a href="/admin/MasterModels/atributovalor/4/change/">RUB2, Rubro 2, RUB, Rubro</a>
+                
+                <br>
+                
+                    <span class="mini quiet">Valor de Atributo</span>
+                
+            </li>
+            
+            <li class="addlink">
+                <span class="visually-hidden">Added:</span>
+                
+                    <a href="/admin/MasterModels/atributovalor/3/change/">RUB1, Rubro 1, RUB, Rubro</a>
+                
+                <br>
+                
+                    <span class="mini quiet">Valor de Atributo</span>
+                
+            </li>
+            
+            <li class="addlink">
+                <span class="visually-hidden">Added:</span>
+                
+                    <a href="/admin/MasterModels/atributovalor/2/change/">CAT2, Categoria 2, CAT, Categoria</a>
+                
+                <br>
+                
+                    <span class="mini quiet">Valor de Atributo</span>
+                
+            </li>
+            
+            <li class="addlink">
+                <span class="visually-hidden">Added:</span>
+                
+                    <a href="/admin/MasterModels/atributovalor/1/change/">CAT1, Categoria 1, CAT, Categoria</a>
+                
+                <br>
+                
+                    <span class="mini quiet">Valor de Atributo</span>
+                
+            </li>
+            
+            <li class="addlink">
+                <span class="visually-hidden">Added:</span>
+                
+                    <a href="/admin/MasterModels/atributo/2/change/">RUB, Rubro</a>
+                
+                <br>
+                
+                    <span class="mini quiet">Atributo de Producto</span>
+                
+            </li>
+            
+            </ul>
+            
+    </div>
+</div>
+
+          <br class="clear">
+        </div>
+        <!-- END Content -->
+      </main>
+    </div>
+    <footer id="footer"></footer>
+</div>
+<!-- END Container -->
+
+<!-- SVGs -->
+<svg xmlns="http://www.w3.org/2000/svg" class="base-svgs">
+  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"/></symbol>
+  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"/></symbol>
+  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"/></symbol>
+</svg>
+<!-- END SVGs -->
+</body>
+</html>
+
+INFO - 2025-03-11 20:50:45,685 - basehttp - "GET /admin/ HTTP/1.1" 200 34848
+INFO - 2025-03-11 20:50:45,716 - basehttp - "GET /static/admin/css/dashboard.css HTTP/1.1" 200 441
+INFO - 2025-03-11 20:50:45,729 - basehttp - "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO - 2025-03-11 20:50:45,729 - basehttp - "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
