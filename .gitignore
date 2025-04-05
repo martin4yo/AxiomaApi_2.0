@@ -1,3 +1,6 @@
+# Ignorar archivos de log
+*.log
+
 # Ignorar el archivo .env que contiene variables sensibles
 .env
 

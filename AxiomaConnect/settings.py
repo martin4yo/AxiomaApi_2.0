@@ -166,7 +166,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = config('STATIC_URL', default='/static/')
-STATIC_ROOT = config('STATIC_ROOT', default=os.path.join(BASE_DIR, '/static'))
+STATIC_ROOT = os.getenv('STATIC_ROOT', os.path.join(BASE_DIR, 'staticfiles'))
 
 # Asegurar que las URLs estáticas sean servidas con HTTPS
 ENVIRONMENT = config('DJANGO_ENV', default='development')
