@@ -87,7 +87,7 @@ class ProductoSerializer(serializers.ModelSerializer):
 
         instance.idtipoproducto = validated_data.get('idtipoproducto', instance.idtipoproducto)
         instance.codigo = validated_data.get('codigo', instance.codigo)
-        instance.nombre = validated_data.get('nombre', instance.codigo)
+        instance.nombre = validated_data.get('nombre', instance.nombre)
         instance.modificatexto = validated_data.get('modificatexto', instance.modificatexto)
         instance.ean = validated_data.get('ean', instance.ean)
         instance.idunidadmedida = validated_data.get('idunidadmedida', instance.idunidadmedida)
