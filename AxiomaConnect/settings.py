@@ -69,6 +69,8 @@ CORS_ALLOWED_ORIGIN_REGEXES = [
 
 CORS_ALLOWED_ORIGINS = [
     "https://erp.axiomacloud.com",  # Dominio desde donde harás las peticiones
+    "http://localhost:3000",  # Dominio desde donde harás las peticiones
+    "http://127.0.0.1:3000",  # Dominio desde donde harás las peticiones
 ]
 
 CORS_ALLOW_METHODS = [
@@ -79,11 +81,11 @@ CORS_ALLOW_METHODS = [
     "DELETE",
     "OPTIONS",
 ]
-
 CORS_ALLOW_HEADERS = [
     "Authorization",
     "Content-Type",
     "X-CSRFToken",
+    "x-api-key",  # Para tu API key
 ]
 
 

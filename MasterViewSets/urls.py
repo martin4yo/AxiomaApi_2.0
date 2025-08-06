@@ -116,7 +116,28 @@ router.register('api/productos/tipoproducto', TipoProductoViewSet, 'tiposproduct
 router.register('api/productos/listatipo', ListaTipoViewSet, 'listatipos')
 router.register('api/productos/precio', PrecioViewSet, 'precios')
 
+# urlpatterns = [
+#     path('', include(router.urls)),
+#     # ... otras URLs ...
+# ]
+
+# URLS DE AUTENTICACIÓN Y USUARIOS
+
+# Importar la función de validación de usuario
+from MasterViewSets.viewsets_auth import validate_user  # Ajusta la ruta según tu estructura
+
 urlpatterns = [
     path('', include(router.urls)),
+    
+    # Endpoint para validación de usuario
+    # Soporta tanto GET como POST
+    # GET: /api/auth/validate/?username=test&password=123
+    # POST: /api/auth/validate/ con JSON body
+    path('api/auth/validate/', validate_user, name='validate-user'),
+    
+    # Alternativas de URLs si prefieres nombres diferentes:
+    # path('api/auth/login/', validate_user, name='login'),
+    # path('api/auth/validar-usuario/', validate_user, name='validar-usuario'),
+    
     # ... otras URLs ...
 ]
