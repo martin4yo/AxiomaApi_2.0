@@ -121,23 +121,108 @@ router.register('api/productos/precio', PrecioViewSet, 'precios')
 #     # ... otras URLs ...
 # ]
 
-# URLS DE AUTENTICACIÓN Y USUARIOS
+# VERSIONADO DE API
+from MasterViewSets.versioning import api_version_info
 
-# Importar la función de validación de usuario
-from MasterViewSets.viewsets_auth import validate_user  # Ajusta la ruta según tu estructura
+# V1 Router (versión actual)
+router_v1 = Router()
+
+# Registrar todos los endpoints v1
+# URLS GENERALES V1
+router_v1.register('general/persona', PersonaViewSet, 'persona')
+router_v1.register('general/pais', PaisViewSet, 'pais')
+router_v1.register('general/provincia', ProvinciaViewSet, 'provincia')
+router_v1.register('general/codigopostal', CodigoPostalViewSet, 'codigopostal')
+router_v1.register('general/rol', RolViewSet, 'rol')
+router_v1.register('general/modulo', ModuloViewSet, 'modulo')
+router_v1.register('general/mascara', MascaraViewSet, 'mascara')
+router_v1.register('general/formapago', FormaPagoViewSet, 'formapago')
+router_v1.register('general/formapagodetalle', FormaPagoDetalleViewSet, 'formapagodetalle')
+router_v1.register('general/tipocambio', TipoCambioViewSet, 'tipocambio')
+router_v1.register('general/personarol', PersonaRolViewSet, 'personarol')
+router_v1.register('general/tipoindice', TipoIndiceViewSet, 'tipoindice')
+router_v1.register('general/indice', IndiceViewSet, 'indice')
+router_v1.register('general/partido', PartidoViewSet, 'partido')
+router_v1.register('general/sector', SectorViewSet, 'sector')
+router_v1.register('general/idioma', IdiomaViewSet, 'idioma')
+router_v1.register('general/moneda', MonedaViewSet, 'moneda')
+router_v1.register('general/tipodocumento', TipoDocumentoViewSet, 'tipodocumento')
+router_v1.register('general/tipofrecuencia', TipoFrecuenciaViewSet, 'tipofrecuencia')
+router_v1.register('general/tipovalor', TipoValorViewSet, 'tipovalor')
+router_v1.register('general/unidadmedida', UnidadMedidaViewSet, 'unidadmedida')
+router_v1.register('general/incoterms', IncotermsViewSet, 'incoterms')
+router_v1.register('general/tiporesponsable', TipoResponsableViewSet, 'tiporesponsable')
+router_v1.register('general/tablas', TablasViewSet, 'tablas')
+router_v1.register('general/tablasconcodigo', TablasConCodigoViewSet, 'tablasconcodigo')
+
+# URLS DE IMPUESTOS V1
+router_v1.register('impuestos/tiposujeto', TipoSujetoViewSet, 'tiposujeto')
+router_v1.register('impuestos/conceptoincluido', ConceptoIncluidoViewSet, 'conceptoincluido')
+router_v1.register('impuestos/tipocomprobante', TipoComprobanteViewSet, 'tipocomprobante')
+router_v1.register('impuestos/cuitpais', CuitPaisViewSet, 'cuitpais')
+router_v1.register('impuestos/alicuotaimpuesto', AlicuotaImpuestoViewSet, 'alicuotaimpuesto')
+router_v1.register('impuestos/padronimpuesto', PadronImpuestoViewSet, 'padronimpuesto')
+router_v1.register('impuestos/tipocalculo', TipoCalculoViewSet, 'tipocalculo')
+router_v1.register('impuestos/clasificacionimpuesto', ClasificacionImpuestoViewSet, 'clasificacionimpuesto')
+router_v1.register('impuestos/tipoimpuesto', TipoImpuestoViewSet, 'tipoimpuesto')
+router_v1.register('impuestos/impuesto', ImpuestoViewSet, 'impuesto')
+
+# URLS DE CONTABILIDAD V1
+router_v1.register('contabilidad/tipoajuste', TipoAjusteViewSet, 'tipoajuste')
+router_v1.register('contabilidad/plancuentas', PlanCuentasViewSet, 'plancuentas')
+
+# URLS DE ENTIDADES V1
+router_v1.register('entidades/entidad', EntidadViewSet, 'entidad')
+router_v1.register('entidades/zona', ZonaViewSet, 'zona')
+router_v1.register('entidades/condicioncrediticiaentidad', CondicionCrediticiaEntidadViewSet, 'condicioncrediticiaentidad')
+router_v1.register('entidades/impuestoentidad', ImpuestoEntidadViewSet, 'impuestoentidad')
+router_v1.register('entidades/ejecutivoentidad', EjecutivoEntidadViewSet, 'ejecutivoentidad')
+router_v1.register('entidades/contactoentidad', ContactoEntidadViewSet, 'contactoentidad')
+router_v1.register('entidades/tiposede', TipoSedeViewSet, 'tiposede')
+router_v1.register('entidades/tipodomicilio', TipoDomicilioViewSet, 'tipodomicilio')
+router_v1.register('entidades/direccionentidad', DireccionEntidadViewSet, 'direccionentidad')
+router_v1.register('entidades/moduloentidad', ModuloEntidadViewSet, 'moduloentidad')
+router_v1.register('entidades/sectorentidad', SectorEntidadViewSet, 'sectorentidad')
+router_v1.register('entidades/formapagoentidad', FormaPagoEntidadViewSet, 'formapagoentidad')
+router_v1.register('entidades/datosfiscalesentidad', DatosFiscalesEntidadViewSet, 'datosfiscalesentidad')
+router_v1.register('productos/listaprecioentidad', ListaPrecioEntidadViewSet, 'listaprecioentidad')
+
+# URLS DE PRODUCTOS V1
+router_v1.register('productos/listaprecios', ListaPrecioViewSet, 'listaprecio')
+router_v1.register('productos/atributo', AtributoViewSet, 'atributo')
+router_v1.register('productos/atributoproducto', AtributoProductoViewSet, 'atributoproducto')
+router_v1.register('productos/atributotipo', AtributoTipoViewSet, 'atributotipo')
+router_v1.register('productos/atributovalor', AtributoValorViewSet, 'atributovalor')
+router_v1.register('productos/claseproducto', ClaseProductoViewSet, 'claseproducto')
+router_v1.register('productos/contabilidadproducto', ContabilidadProductoViewSet, 'contabilidadproducto')
+router_v1.register('productos/conversionproducto', ConversionProductoViewSet, 'conversionproducto')
+router_v1.register('productos/producto', ProductoViewSet, 'producto')
+router_v1.register('productos/tipoproducto', TipoProductoViewSet, 'tipoproducto')
+router_v1.register('productos/listatipo', ListaTipoViewSet, 'listatipo')
+router_v1.register('productos/precio', PrecioViewSet, 'precio')
+
+# V2 Router (para futuras versiones)
+router_v2 = Router()
+# Por ahora v2 tiene los mismos endpoints que v1
+# En el futuro se pueden agregar nuevos endpoints o modificar existentes
+router_v2.registry = router_v1.registry.copy()
+
+# URLS DE AUTENTICACIÓN Y USUARIOS
+from MasterViewSets.viewsets_auth import validate_user
 
 urlpatterns = [
+    # Mantener compatibilidad con URLs sin versión (defaultea a v1)
     path('', include(router.urls)),
     
-    # Endpoint para validación de usuario
-    # Soporta tanto GET como POST
-    # GET: /api/auth/validate/?username=test&password=123
-    # POST: /api/auth/validate/ con JSON body
+    # URLs versionadas
+    path('api/v1/', include(router_v1.urls)),
+    path('api/v2/', include(router_v2.urls)),
+    
+    # Información de versión
+    path('api/version/', api_version_info, name='api-version'),
+    
+    # Autenticación (disponible en todas las versiones)
     path('api/auth/validate/', validate_user, name='validate-user'),
-    
-    # Alternativas de URLs si prefieres nombres diferentes:
-    # path('api/auth/login/', validate_user, name='login'),
-    # path('api/auth/validar-usuario/', validate_user, name='validar-usuario'),
-    
-    # ... otras URLs ...
+    path('api/v1/auth/validate/', validate_user, name='v1-validate-user'),
+    path('api/v2/auth/validate/', validate_user, name='v2-validate-user'),
 ]

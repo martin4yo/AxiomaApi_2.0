@@ -1,0 +1,3 @@
+@echo off
+echo Iniciando servidor AxiomaAPI...
+"C:\Users\Marti\AppData\Local\Programs\Python\Python312\python.exe" manage.py runserver --noreload

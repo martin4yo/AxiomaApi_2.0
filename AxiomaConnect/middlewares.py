@@ -74,6 +74,8 @@ class AddCOOPHeaderMiddleware:
 
 import re 
 from django.utils.deprecation import MiddlewareMixin
+from django.http import JsonResponse
+from django.core.exceptions import PermissionDenied
 
 class DynamicCORSHeadersMiddleware(MiddlewareMixin):
     def process_response(self, request, response):
@@ -87,4 +89,91 @@ class DynamicCORSHeadersMiddleware(MiddlewareMixin):
             response["Access-Control-Allow-Headers"] = "Authorization, Content-Type, X-CSRFToken"
 
         return response
+
+
+class TenantValidationMiddleware:
+    """
+    Middleware para validar tenant_id en requests que lo requieran
+    """
+    
+    EXCLUDED_PATHS = [
+        '/admin/',
+        '/api/token/',
+        '/api/auth/validate/',
+    ]
+    
+    def __init__(self, get_response):
+        self.get_response = get_response
+        self.logger = logging.getLogger(__name__)
+    
+    def __call__(self, request):
+        # Verificar si la ruta está excluida
+        if any(request.path.startswith(path) for path in self.EXCLUDED_PATHS):
+            return self.get_response(request)
+        
+        # Solo validar en rutas de API que no sean de autenticación
+        if request.path.startswith('/api/') and request.method in ['POST', 'PUT', 'PATCH']:
+            tenant_id = self._extract_tenant_id(request)
+            
+            if tenant_id is None:
+                self.logger.warning(f"Missing tenant_id in request to {request.path}")
+                return JsonResponse({
+                    'error': 'Missing tenant_id',
+                    'message': 'El campo tenant_id es requerido para esta operación'
+                }, status=400)
+            
+            if not self._validate_tenant_id(tenant_id):
+                self.logger.warning(f"Invalid tenant_id {tenant_id} in request to {request.path}")
+                return JsonResponse({
+                    'error': 'Invalid tenant_id',
+                    'message': 'El tenant_id proporcionado no es válido'
+                }, status=403)
+            
+            # Agregar tenant_id al request para uso posterior
+            request.tenant_id = tenant_id
+        
+        return self.get_response(request)
+    
+    def _extract_tenant_id(self, request):
+        """Extrae tenant_id del cuerpo de la request o headers"""
+        tenant_id = None
+        
+        # Intentar obtener de headers primero
+        tenant_id = request.META.get('HTTP_X_TENANT_ID')
+        if tenant_id:
+            try:
+                return int(tenant_id)
+            except ValueError:
+                pass
+        
+        # Intentar obtener del cuerpo de la request
+        if hasattr(request, 'data') and 'tenant_id' in request.data:
+            try:
+                return int(request.data['tenant_id'])
+            except (ValueError, TypeError):
+                pass
+        
+        # Para requests POST/PUT con JSON
+        if request.content_type == 'application/json':
+            try:
+                data = json.loads(request.body.decode('utf-8'))
+                if 'tenant_id' in data:
+                    return int(data['tenant_id'])
+            except (json.JSONDecodeError, ValueError, TypeError):
+                pass
+        
+        return None
+    
+    def _validate_tenant_id(self, tenant_id):
+        """Valida que el tenant_id sea válido"""
+        if not isinstance(tenant_id, int):
+            return False
+        
+        if tenant_id <= 0:
+            return False
+        
+        # Aquí puedes agregar validaciones adicionales
+        # como verificar que el tenant existe en la BD
+        
+        return True
     

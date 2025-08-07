@@ -1,2 +1,5 @@
-py manage.py clearcache
-py manage.py runserver --noreload
+@echo off
+echo Limpiando cache...
+"C:\Users\Marti\AppData\Local\Programs\Python\Python312\python.exe" manage.py clearcache
+echo Iniciando servidor...
+"C:\Users\Marti\AppData\Local\Programs\Python\Python312\python.exe" manage.py runserver --noreload

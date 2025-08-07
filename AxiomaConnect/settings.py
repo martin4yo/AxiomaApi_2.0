@@ -22,13 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY', default='django-insecure-qt#q5bj25-!+52ai*0kc$wkac$^^*jb!@n%9yoo2ret0^8w&ln')
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = config('DEBUG', default=True, cast=bool)
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
 
 # Application definition
 
@@ -46,13 +45,19 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
+    'drf_spectacular',
+    'silk',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
+    'silk.middleware.SilkyMiddleware',
     'AxiomaConnect.middlewares.LogRequestMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'AxiomaConnect.middlewares.DynamicCORSHeadersMiddleware', 
+    'AxiomaConnect.middlewares.DynamicCORSHeadersMiddleware',
+    'AxiomaConnect.middlewares.TenantValidationMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.gzip.GZipMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -71,6 +76,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://erp.axiomacloud.com",  # Dominio desde donde harás las peticiones
     "http://localhost:3000",  # Dominio desde donde harás las peticiones
     "http://127.0.0.1:3000",  # Dominio desde donde harás las peticiones
+    "http://localhost:5175",  # Nuevo origen habilitado
 ]
 
 CORS_ALLOW_METHODS = [
@@ -125,11 +131,11 @@ DATABASES = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('DB_NAME', default='axiomaconnect'),
-        'USER': config('DB_USER', default='root'),
-        'PASSWORD': config('DB_PASSWORD', default='Axioma2024!'),
-        'HOST': config('DB_HOST', default='localhost'),  # o la dirección de tu servidor MySQL
-        'PORT': config('DB_PORT', default='3306'),       # El puerto por defecto de MySQL
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST', default='localhost'),
+        'PORT': config('DB_PORT', default='3306'),
     }
 }
 
@@ -197,7 +203,8 @@ REST_FRAMEWORK = {
         'django_filters.rest_framework.DjangoFilterBackend',
         'rest_framework.filters.OrderingFilter',
     ],
-    'DEFAULT_ORDERING': ['id'],  # Orden predeterminado para todas las vistas
+    'DEFAULT_ORDERING': ['id'],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 
@@ -237,3 +244,36 @@ LOGGING = {
         },
     },
 }
+
+# DRF Spectacular settings
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'AxiomaAPI 2.0',
+    'DESCRIPTION': 'API REST para sistema ERP desarrollada con Django y DRF',
+    'VERSION': '2.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'COMPONENT_SPLIT_REQUEST': True,
+    'SCHEMA_PATH_PREFIX': r'/api/',
+}
+
+# Redis Cache Configuration
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': config('REDIS_URL', default='redis://localhost:6379/0'),
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        },
+        'KEY_PREFIX': 'axioma',
+        'TIMEOUT': 300,  # 5 minutos por defecto
+    }
+}
+
+# Session engine
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+SESSION_CACHE_ALIAS = 'default'
+
+# Silk configuration
+SILKY_PYTHON_PROFILER = config('SILKY_PYTHON_PROFILER', default=False, cast=bool)
+SILKY_PYTHON_PROFILER_BINARY = config('SILKY_PYTHON_PROFILER_BINARY', default=False, cast=bool)
+SILKY_AUTHENTICATION = True
+SILKY_AUTHORISATION = True
