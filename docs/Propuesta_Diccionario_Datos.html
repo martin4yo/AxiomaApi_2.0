@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuesta: Diccionario de Datos - Axioma ERP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        header {
+            border-bottom: 3px solid #2c3e50;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1em;
+        }
+
+        .problema {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .problema h2 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #34495e;
+            margin-top: 25px;
+            margin-bottom: 12px;
+            font-size: 1.4em;
+        }
+
+        h4 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .opcion {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .opcion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .opcion-titulo {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .badge-recomendado {
+            background: #28a745;
+            color: white;
+        }
+
+        .badge-opensource {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .badge-comercial {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .badge-hibrido {
+            background: #6f42c1;
+            color: white;
+        }
+
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 15px 0;
+        }
+
+        .pros, .cons {
+            padding: 15px;
+            border-radius: 4px;
+        }
+
+        .pros {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+        }
+
+        .cons {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+        }
+
+        .pros h4, .cons h4 {
+            margin-top: 0;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+
+        .pros h4 {
+            color: #155724;
+        }
+
+        .cons h4 {
+            color: #721c24;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        .code-block {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            margin: 15px 0;
+        }
+
+        .highlight {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .estructura-archivos {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            margin: 15px 0;
+            white-space: pre;
+        }
+
+        .comparacion {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .comparacion th, .comparacion td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #dee2e6;
+        }
+
+        .comparacion th {
+            background: #2c3e50;
+            color: white;
+            font-weight: bold;
+        }
+
+        .comparacion tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .si {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .no {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        .parcial {
+            color: #ffc107;
+            font-weight: bold;
+        }
+
+        .recomendacion-final {
+            background: #d1ecf1;
+            border: 2px solid #0c5460;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 6px;
+        }
+
+        .recomendacion-final h2 {
+            color: #0c5460;
+            margin-top: 0;
+            border-bottom: none;
+        }
+
+        .timeline {
+            margin: 20px 0;
+        }
+
+        .timeline-item {
+            margin: 15px 0;
+            padding-left: 30px;
+            border-left: 3px solid #2c3e50;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 5px;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: #2c3e50;
+        }
+
+        .timeline-item h4 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .costo {
+            display: inline-block;
+            padding: 5px 10px;
+            background: #e9ecef;
+            border-radius: 4px;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+
+        .herramientas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .herramienta {
+            background: white;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            border-radius: 4px;
+        }
+
+        .herramienta h4 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .pros-cons {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Propuesta: Sistema de Diccionario de Datos</h1>
+            <p class="subtitle">Axioma ERP - Gestión de Metadatos y Documentación Técnica</p>
+        </header>
+
+        <div class="problema">
+            <h2>Problemática Actual</h2>
+            <p><strong>Situación:</strong> Actualmente la documentación técnica del sistema (definiciones de tablas, campos, relaciones, reglas de negocio) está dispersa en archivos Word que son difíciles de versionar, buscar y mantener actualizados.</p>
+            <p><strong>Necesidad:</strong> Implementar un sistema profesional de diccionario de datos que sea:</p>
+            <ul>
+                <li>Versionable en Git (para control de cambios)</li>
+                <li>Colaborativo (que ambos socios puedan trabajar)</li>
+                <li>Sincronizado con las 2 bases de datos (PostgreSQL + MySQL)</li>
+                <li>Fácil de consultar y buscar</li>
+                <li>Que sirva como fuente de verdad para el desarrollo</li>
+            </ul>
+        </div>
+
+        <h2>Comparación Rápida de Opciones</h2>
+        <table class="comparacion">
+            <thead>
+                <tr>
+                    <th>Opción</th>
+                    <th>Costo</th>
+                    <th>Versionable</th>
+                    <th>Auto-generado</th>
+                    <th>Colaborativo</th>
+                    <th>Complejidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Prisma Schema</strong></td>
+                    <td class="si">Gratis</td>
+                    <td class="si">✓</td>
+                    <td class="si">✓</td>
+                    <td class="si">✓</td>
+                    <td>Baja</td>
+                </tr>
+                <tr>
+                    <td><strong>Django Models + Docstrings</strong></td>
+                    <td class="si">Gratis</td>
+                    <td class="si">✓</td>
+                    <td class="si">✓</td>
+                    <td class="si">✓</td>
+                    <td>Baja</td>
+                </tr>
+                <tr>
+                    <td><strong>Dataedo</strong></td>
+                    <td class="no">$500/año</td>
+                    <td class="parcial">Parcial</td>
+                    <td class="si">✓</td>
+                    <td class="parcial">Limitado</td>
+                    <td>Baja</td>
+                </tr>
+                <tr>
+                    <td><strong>SchemaSpy</strong></td>
+                    <td class="si">Gratis</td>
+                    <td class="si">✓</td>
+                    <td class="si">✓</td>
+                    <td class="si">✓</td>
+                    <td>Media</td>
+                </tr>
+                <tr>
+                    <td><strong>Markdown + MkDocs</strong></td>
+                    <td class="si">Gratis</td>
+                    <td class="si">✓</td>
+                    <td class="parcial">Parcial</td>
+                    <td class="si">✓</td>
+                    <td>Media</td>
+                </tr>
+                <tr>
+                    <td><strong>Solución Híbrida (Recomendada)</strong></td>
+                    <td class="si">Gratis</td>
+                    <td class="si">✓</td>
+                    <td class="si">✓</td>
+                    <td class="si">✓</td>
+                    <td>Media-Alta</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Opciones Detalladas</h2>
+
+        <!-- OPCIÓN 1 -->
+        <div class="opcion">
+            <div class="opcion-header">
+                <span class="opcion-titulo">Opción 1: Prisma Schema Enriquecido</span>
+                <span class="badge badge-opensource">OPEN SOURCE</span>
+            </div>
+
+            <p><strong>Descripción:</strong> Aprovechar el schema de Prisma (que ya usan en Node.js) como fuente de verdad, agregando comentarios ricos con metadatos de negocio.</p>
+
+            <div class="pros-cons">
+                <div class="pros">
+                    <h4>✓ Ventajas</h4>
+                    <ul>
+                        <li>Ya están usando Prisma</li>
+                        <li>Schema sirve como código Y documentación</li>
+                        <li>Genera TypeScript types automáticamente</li>
+                        <li>Versionable en Git</li>
+                        <li>Prisma Studio para visualización</li>
+                        <li>Herramientas de generación de docs</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h4>✗ Desventajas</h4>
+                    <ul>
+                        <li>Solo cubre PostgreSQL (Node.js)</li>
+                        <li>No documenta Django/MySQL directamente</li>
+                        <li>Requiere mantener comentarios actualizados</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h4>Ejemplo de implementación:</h4>
+            <div class="code-block">/// Módulos del sistema ERP
+/// @description Define módulos (Ventas, Compras, Producción, Contabilidad)
+/// @businessRule Código único alfanumérico por tenant
+model Modulo {
+  id     Int    @id @default(autoincrement())
+
+  /// Código único del módulo
+  /// @mask "LLNNNN" - 2 letras + 4 números
+  /// @example "VE0001", "CO0001"
+  codigo String @unique @db.VarChar(10)
+
+  nombre String @db.VarChar(100)
+
+  // Audit fields
+  createdAt DateTime @default(now())
+  disabled  Boolean  @default(false)
+
+  // Relations
+  entidades ModuloEntidad[]
+}</div>
+
+            <p class="costo">Costo: $0 (Open Source)</p>
+        </div>
+
+        <!-- OPCIÓN 2 -->
+        <div class="opcion">
+            <div class="opcion-header">
+                <span class="opcion-titulo">Opción 2: Django ORM con Docstrings</span>
+                <span class="badge badge-opensource">OPEN SOURCE</span>
+            </div>
+
+            <p><strong>Descripción:</strong> Enriquecer los modelos Django con docstrings detallados y usar django-extensions para generar documentación automática.</p>
+
+            <div class="pros-cons">
+                <div class="pros">
+                    <h4>✓ Ventajas</h4>
+                    <ul>
+                        <li>Ya están usando Django</li>
+                        <li>Docstrings en Python son estándar</li>
+                        <li>Genera diagramas ER automáticamente</li>
+                        <li>Exporta documentación en múltiples formatos</li>
+                        <li>Integración con Django Admin</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h4>✗ Desventajas</h4>
+                    <ul>
+                        <li>Solo cubre MySQL (Django)</li>
+                        <li>No documenta Node.js/PostgreSQL</li>
+                        <li>Requiere instalar paquetes adicionales</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h4>Herramientas complementarias:</h4>
+            <div class="herramientas">
+                <div class="herramienta">
+                    <h4>django-extensions</h4>
+                    <p>Genera diagramas ER y exporta schemas</p>
+                </div>
+                <div class="herramienta">
+                    <h4>sphinx-autoapi</h4>
+                    <p>Genera docs HTML desde docstrings</p>
+                </div>
+                <div class="herramienta">
+                    <h4>drf-spectacular</h4>
+                    <p>Ya lo tienen, documenta API REST</p>
+                </div>
+            </div>
+
+            <p class="costo">Costo: $0 (Open Source)</p>
+        </div>
+
+        <!-- OPCIÓN 3 -->
+        <div class="opcion">
+            <div class="opcion-header">
+                <span class="opcion-titulo">Opción 3: Dataedo</span>
+                <span class="badge badge-comercial">COMERCIAL</span>
+            </div>
+
+            <p><strong>Descripción:</strong> Herramienta comercial especializada en diccionarios de datos que se conecta directamente a las bases de datos.</p>
+
+            <div class="pros-cons">
+                <div class="pros">
+                    <h4>✓ Ventajas</h4>
+                    <ul>
+                        <li>Diseñado específicamente para esto</li>
+                        <li>Se conecta a ambas DBs (PostgreSQL + MySQL)</li>
+                        <li>UI profesional y navegable</li>
+                        <li>Exporta a PDF, HTML, Excel</li>
+                        <li>Búsqueda avanzada</li>
+                        <li>No requiere programación</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h4>✗ Desventajas</h4>
+                    <ul>
+                        <li>Costo anual por usuario (~$500/año)</li>
+                        <li>No es "code-first"</li>
+                        <li>Versionado limitado</li>
+                        <li>Dependencia de herramienta externa</li>
+                        <li>No genera código desde docs</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p class="costo">Costo: ~$500 USD/año por usuario</p>
+        </div>
+
+        <!-- OPCIÓN 4 -->
+        <div class="opcion">
+            <div class="opcion-header">
+                <span class="opcion-titulo">Opción 4: SchemaSpy</span>
+                <span class="badge badge-opensource">OPEN SOURCE</span>
+            </div>
+
+            <p><strong>Descripción:</strong> Herramienta Java que genera documentación HTML estática con diagramas interactivos directamente desde las bases de datos.</p>
+
+            <div class="pros-cons">
+                <div class="pros">
+                    <h4>✓ Ventajas</h4>
+                    <ul>
+                        <li>Completamente gratuito</li>
+                        <li>Soporta PostgreSQL y MySQL</li>
+                        <li>Genera HTML navegable con diagramas</li>
+                        <li>Identifica relaciones automáticamente</li>
+                        <li>Puede hostearse en GitHub Pages</li>
+                        <li>No requiere mantenimiento manual</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h4>✗ Desventajas</h4>
+                    <ul>
+                        <li>Requiere Java instalado</li>
+                        <li>Documentación básica (solo estructura)</li>
+                        <li>No incluye reglas de negocio automáticamente</li>
+                        <li>UI algo anticuada</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h4>Comando de ejemplo:</h4>
+            <div class="code-block">java -jar schemaspy.jar -t pgsql \
+  -db axiomadb -host localhost \
+  -u postgres -p password \
+  -o docs/postgresql-schema</div>
+
+            <p class="costo">Costo: $0 (Open Source)</p>
+        </div>
+
+        <!-- OPCIÓN 5 -->
+        <div class="opcion">
+            <div class="opcion-header">
+                <span class="opcion-titulo">Opción 5: Markdown + MkDocs</span>
+                <span class="badge badge-opensource">OPEN SOURCE</span>
+            </div>
+
+            <p><strong>Descripción:</strong> Crear documentación en archivos Markdown organizados y usar MkDocs para generar un sitio web estático navegable.</p>
+
+            <div class="pros-cons">
+                <div class="pros">
+                    <h4>✓ Ventajas</h4>
+                    <ul>
+                        <li>100% versionable en Git</li>
+                        <li>Fácil de editar (Markdown)</li>
+                        <li>MkDocs genera sitio profesional</li>
+                        <li>GitHub Pages gratis</li>
+                        <li>Búsqueda integrada</li>
+                        <li>Totalmente personalizable</li>
+                        <li>Soporta diagramas Mermaid</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h4>✗ Desventajas</h4>
+                    <ul>
+                        <li>Requiere mantenimiento manual</li>
+                        <li>No se auto-genera desde DBs</li>
+                        <li>Puede desincronizarse con el código</li>
+                        <li>Trabajo inicial considerable</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h4>Estructura propuesta:</h4>
+            <div class="estructura-archivos">docs/
+├── data-dictionary/
+│   ├── general/
+│   │   ├── modulo.md
+│   │   ├── mascara.md
+│   │   └── persona.md
+│   ├── entidades/
+│   │   ├── entidad.md
+│   │   └── ejecutivo.md
+│   └── productos/
+│       └── producto.md
+├── business-rules/
+└── api-reference/</div>
+
+            <p class="costo">Costo: $0 (Open Source)</p>
+        </div>
+
+        <!-- OPCIÓN 6 - RECOMENDADA -->
+        <div class="opcion">
+            <div class="opcion-header">
+                <span class="opcion-titulo">Opción 6: Solución Híbrida (RECOMENDADA)</span>
+                <span class="badge badge-recomendado">RECOMENDADA</span>
+            </div>
+
+            <p><strong>Descripción:</strong> Combinar lo mejor de todas las opciones: Schema as Code + Documentación generada + Sitio web navegable.</p>
+
+            <div class="highlight">
+                <strong>Enfoque integrado:</strong>
+                <ol>
+                    <li>Enriquecer Prisma schema (PostgreSQL) con comentarios detallados</li>
+                    <li>Agregar docstrings completos en Django models (MySQL)</li>
+                    <li>Script Python que lee ambos schemas y genera Markdown</li>
+                    <li>MkDocs + GitHub Pages para sitio web navegable</li>
+                    <li>CI/CD automático (GitHub Actions) para regenerar al hacer push</li>
+                </ol>
+            </div>
+
+            <div class="pros-cons">
+                <div class="pros">
+                    <h4>✓ Ventajas</h4>
+                    <ul>
+                        <li>Documentación sincronizada con código</li>
+                        <li>Cubre ambas bases de datos</li>
+                        <li>Generación automática</li>
+                        <li>Versionado completo en Git</li>
+                        <li>Sitio web profesional y navegable</li>
+                        <li>Búsqueda avanzada</li>
+                        <li>Colaboración fácil (GitHub)</li>
+                        <li>CI/CD automático</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h4>✗ Desventajas</h4>
+                    <ul>
+                        <li>Setup inicial más complejo</li>
+                        <li>Requiere escribir script de generación</li>
+                        <li>Necesita mantenimiento de comentarios en código</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h4>Arquitectura propuesta:</h4>
+            <div class="estructura-archivos">axioma-data-dictionary/          ← Nuevo repositorio
+├── .github/workflows/
+│   └── deploy.yml                ← Auto-deploy a GitHub Pages
+├── docs/
+│   ├── data-dictionary/          ← Generado automáticamente
+│   ├── business-rules/           ← Manual
+│   └── api-reference/            ← Manual
+├── schemas/
+│   ├── postgresql/
+│   │   └── schema.prisma         ← Copiado desde project/
+│   └── mysql/
+│       └── models_export.py      ← Copiado desde AxiomaApi_2.0/
+├── scripts/
+│   ├── generate-docs.py          ← Script de generación
+│   └── sync-schemas.sh           ← Sincroniza desde repos
+├── templates/
+│   └── table.md.j2               ← Template Jinja2
+├── mkdocs.yml
+└── README.md</div>
+
+            <h4>Flujo de trabajo:</h4>
+            <div class="code-block">1. Developer modifica Prisma schema o Django model
+2. Comitea cambios en project/ o AxiomaApi_2.0/
+3. En axioma-data-dictionary/ ejecuta: ./scripts/sync-schemas.sh
+4. Script copia schemas y ejecuta generate-docs.py
+5. generate-docs.py lee schemas y genera Markdown
+6. Git push a axioma-data-dictionary/
+7. GitHub Actions auto-deploy a GitHub Pages
+8. Documentación actualizada disponible en URL pública</div>
+
+            <p class="costo">Costo: $0 (Open Source)</p>
+        </div>
+
+        <!-- RECOMENDACIÓN FINAL -->
+        <div class="recomendacion-final">
+            <h2>Recomendación Final</h2>
+
+            <p><strong>Opción recomendada: Solución Híbrida (Opción 6)</strong></p>
+
+            <p>Esta opción ofrece el mejor balance entre:</p>
+            <ul>
+                <li><strong>Automatización:</strong> Generación automática desde código</li>
+                <li><strong>Profesionalismo:</strong> Sitio web moderno y navegable</li>
+                <li><strong>Versionado:</strong> Todo en Git, historial completo</li>
+                <li><strong>Colaboración:</strong> Ambos socios pueden trabajar fácilmente</li>
+                <li><strong>Sincronización:</strong> Documenta ambas bases de datos</li>
+                <li><strong>Costo:</strong> $0 - Completamente gratis</li>
+            </ul>
+
+            <h3>Plan de Implementación Sugerido</h3>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>Semana 1: Setup Inicial</h4>
+                    <ul>
+                        <li>Crear repositorio <code>axioma-data-dictionary</code></li>
+                        <li>Configurar estructura de carpetas</li>
+                        <li>Migrar AXIOMA_ERP_REFERENCE.md como base</li>
+                        <li>Configurar MkDocs + GitHub Pages</li>
+                        <li>Convertir Word docs a Markdown</li>
+                    </ul>
+                    <p><strong>Resultado:</strong> Sitio web básico funcionando</p>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>Semana 2-3: Enriquecimiento de Schemas</h4>
+                    <ul>
+                        <li>Agregar comentarios detallados en Prisma schema</li>
+                        <li>Agregar docstrings en Django models</li>
+                        <li>Desarrollar script de generación (Python)</li>
+                        <li>Crear templates Jinja2 para Markdown</li>
+                    </ul>
+                    <p><strong>Resultado:</strong> Generación automática funcionando</p>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>Semana 4: Automatización</h4>
+                    <ul>
+                        <li>Configurar GitHub Actions para CI/CD</li>
+                        <li>Script de sincronización entre repos</li>
+                        <li>Validaciones automáticas</li>
+                        <li>Documentación de uso para el equipo</li>
+                    </ul>
+                    <p><strong>Resultado:</strong> Sistema completo y automatizado</p>
+                </div>
+            </div>
+
+            <h3>Inversión de Tiempo Estimada</h3>
+            <ul>
+                <li><strong>Setup inicial:</strong> 8-12 horas</li>
+                <li><strong>Enriquecimiento de schemas:</strong> 20-30 horas (una sola vez)</li>
+                <li><strong>Mantenimiento mensual:</strong> 2-4 horas (solo actualizar comentarios al modificar código)</li>
+            </ul>
+
+            <h3>Alternativa Rápida (Si tienen poco tiempo)</h3>
+            <p>Si necesitan algo rápido y no pueden invertir tiempo en la solución híbrida:</p>
+            <ul>
+                <li><strong>Opción 4 (SchemaSpy):</strong> 2-3 horas de setup, auto-genera todo</li>
+                <li><strong>Limitación:</strong> Solo estructura, no incluye reglas de negocio</li>
+                <li><strong>Puede combinarse:</strong> SchemaSpy para estructura + Markdown para reglas de negocio</li>
+            </ul>
+        </div>
+
+        <h2>Nombres Propuestos para el Repositorio</h2>
+        <p>Como <code>axioma-docs</code> ya está en uso, opciones alternativas:</p>
+
+        <div class="herramientas">
+            <div class="herramienta">
+                <h4>axioma-data-dictionary</h4>
+                <p>Claro y descriptivo</p>
+            </div>
+            <div class="herramienta">
+                <h4>axioma-schema-docs</h4>
+                <p>Enfatiza schemas</p>
+            </div>
+            <div class="herramienta">
+                <h4>axioma-metadata</h4>
+                <p>Técnico y preciso</p>
+            </div>
+            <div class="herramienta">
+                <h4>axioma-reference</h4>
+                <p>Simple y directo</p>
+            </div>
+            <div class="herramienta">
+                <h4>axioma-db-docs</h4>
+                <p>Enfatiza base de datos</p>
+            </div>
+            <div class="herramienta">
+                <h4>axioma-technical-docs</h4>
+                <p>Abarca más que solo DB</p>
+            </div>
+        </div>
+
+        <h2>Preguntas para Evaluación</h2>
+        <div class="highlight">
+            <p>Para ayudar en la decisión, consideren:</p>
+            <ol>
+                <li>¿Cuánto tiempo pueden invertir en el setup inicial?</li>
+                <li>¿Prefieren una solución rápida o una más robusta a largo plazo?</li>
+                <li>¿Qué tan seguido modifican los schemas de las bases de datos?</li>
+                <li>¿Necesitan incluir reglas de negocio o solo estructura técnica?</li>
+                <li>¿Quieren que la documentación sea pública o privada?</li>
+                <li>¿Tienen presupuesto para herramientas comerciales (~$500/año)?</li>
+            </ol>
+        </div>
+
+        <h2>Próximos Pasos</h2>
+        <ol>
+            <li><strong>Revisar este documento</strong> y discutir entre socios</li>
+            <li><strong>Decidir qué opción implementar</strong> (o combinación de opciones)</li>
+            <li><strong>Definir nombre del repositorio</strong> (si aplica)</li>
+            <li><strong>Comunicar decisión</strong> para proceder con implementación</li>
+        </ol>
+
+        <div style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #ecf0f1; text-align: center; color: #7f8c8d;">
+            <p><strong>Documento generado:</strong> Diciembre 2025</p>
+            <p><strong>Para:</strong> Evaluación de soluciones de Diccionario de Datos - Axioma ERP</p>
+        </div>
+    </div>
+</body>
+</html>
