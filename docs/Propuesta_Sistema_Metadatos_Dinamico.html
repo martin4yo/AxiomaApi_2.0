@@ -1,0 +1,1727 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Diccionario de Datos Dinámico - Axioma ERP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        header {
+            border-bottom: 3px solid #2c3e50;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1em;
+        }
+
+        .objetivo {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .objetivo h2 {
+            color: white;
+            margin-bottom: 15px;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            padding-bottom: 10px;
+        }
+
+        .objetivo ul {
+            margin-left: 20px;
+        }
+
+        .objetivo li {
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #34495e;
+            margin-top: 25px;
+            margin-bottom: 12px;
+            font-size: 1.4em;
+        }
+
+        h4 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .diagram {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 6px;
+            padding: 30px;
+            margin: 25px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+
+        .tabla-meta {
+            background: white;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .tabla-meta h4 {
+            color: #3498db;
+            margin-top: 0;
+            font-size: 1.3em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .campo {
+            padding: 8px 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .campo:last-child {
+            border-bottom: none;
+        }
+
+        .campo-nombre {
+            font-weight: bold;
+            color: #2c3e50;
+            display: inline-block;
+            min-width: 200px;
+        }
+
+        .campo-tipo {
+            color: #e74c3c;
+            font-family: monospace;
+            display: inline-block;
+            min-width: 120px;
+        }
+
+        .campo-descripcion {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        .fk {
+            color: #9b59b6;
+            font-weight: bold;
+        }
+
+        .pk {
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .uk {
+            color: #f39c12;
+            font-weight: bold;
+        }
+
+        .ejemplo {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .ejemplo h4 {
+            color: #856404;
+            margin-top: 0;
+        }
+
+        .code-block {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 20px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            margin: 15px 0;
+        }
+
+        .ventajas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .ventaja-item {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 20px;
+            border-radius: 4px;
+        }
+
+        .ventaja-item h4 {
+            color: #155724;
+            margin-top: 0;
+        }
+
+        .desafio {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .desafio h4 {
+            color: #721c24;
+            margin-top: 0;
+        }
+
+        .flujo {
+            background: #e3f2fd;
+            border: 2px solid #2196f3;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 6px;
+        }
+
+        .flujo h3 {
+            color: #0d47a1;
+            margin-top: 0;
+        }
+
+        .step {
+            background: white;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #2196f3;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #dee2e6;
+        }
+
+        table th {
+            background: #2c3e50;
+            color: white;
+            font-weight: bold;
+        }
+
+        table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .arquitectura {
+            background: #f0f4f8;
+            border: 3px solid #4a90e2;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+
+        .arquitectura h2 {
+            color: #4a90e2;
+            margin-top: 0;
+            border-bottom: 2px solid #4a90e2;
+        }
+
+        .layer {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border-left: 5px solid #4a90e2;
+        }
+
+        .highlight {
+            background: #fffbdd;
+            padding: 3px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            margin: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #3498db;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -23px;
+            top: 25px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #3498db;
+            border: 3px solid white;
+        }
+
+        .tecnologia {
+            display: inline-block;
+            background: #6c757d;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            margin: 5px;
+        }
+
+        .recomendacion {
+            background: #d1ecf1;
+            border: 2px solid #0c5460;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 6px;
+        }
+
+        .recomendacion h2 {
+            color: #0c5460;
+            margin-top: 0;
+            border-bottom: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .ventajas {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sistema de Diccionario de Datos Dinámico</h1>
+            <p class="subtitle">Gestión de Modelo de Datos mediante Metadatos - Axioma ERP</p>
+        </header>
+
+        <div class="objetivo">
+            <h2>Objetivo del Sistema</h2>
+            <p><strong>Diseñar un sistema donde el modelo de datos del ERP se define en TABLAS DE METADATOS, y el diccionario de datos sea el motor que:</strong></p>
+            <ul>
+                <li>✓ <strong>Cree dinámicamente</strong> las tablas del ERP según definiciones en metadatos</li>
+                <li>✓ <strong>Administre relaciones</strong> entre tablas (FK) configuradas en metadatos</li>
+                <li>✓ <strong>Ejecute reglas de negocio</strong> definidas en metadatos (validaciones, cálculos, triggers)</li>
+                <li>✓ <strong>Soporte modelo Maestro-Detalle</strong> configurado dinámicamente</li>
+                <li>✓ <strong>Tablas de Lookup</strong> para selección única y múltiple</li>
+                <li>✓ <strong>CERO modificación de código</strong> al cambiar el modelo - todo por configuración</li>
+            </ul>
+            <p style="margin-top: 20px; font-size: 1.1em; border-top: 1px solid rgba(255,255,255,0.3); padding-top: 15px;">
+                <strong>Resultado:</strong> Un ERP donde el usuario de negocio puede modificar la estructura de datos sin necesidad de un desarrollador.
+            </p>
+        </div>
+
+        <h2>Arquitectura del Sistema de Metadatos</h2>
+
+        <div class="arquitectura">
+            <h2>Capas del Sistema</h2>
+
+            <div class="layer">
+                <h4>1. Capa de Metadatos (Tablas de Definición)</h4>
+                <p>Tablas que almacenan la definición del modelo de datos (DDL as Data)</p>
+            </div>
+
+            <div class="layer">
+                <h4>2. Motor de Diccionario de Datos</h4>
+                <p>Engine que lee metadatos y genera/modifica estructura dinámica</p>
+            </div>
+
+            <div class="layer">
+                <h4>3. Capa de Datos Dinámicos (Tablas Generadas)</h4>
+                <p>Tablas del ERP creadas automáticamente por el motor</p>
+            </div>
+
+            <div class="layer">
+                <h4>4. Motor de Reglas de Negocio</h4>
+                <p>Ejecuta validaciones y lógica configurada en metadatos</p>
+            </div>
+
+            <div class="layer">
+                <h4>5. API REST Dinámica</h4>
+                <p>Endpoints generados automáticamente según metadatos</p>
+            </div>
+        </div>
+
+        <h2>Diseño de Tablas de Metadatos</h2>
+
+        <p>El sistema se basa en un conjunto de <strong>tablas maestras de metadatos</strong> que definen TODO el modelo:</p>
+
+        <!-- TABLA 1: meta_tabla -->
+        <div class="tabla-meta">
+            <h4>meta_tabla - Definición de Tablas</h4>
+            <p>Registra cada tabla que existirá en el sistema ERP</p>
+
+            <div class="campo">
+                <span class="campo-nombre pk">id</span>
+                <span class="campo-tipo">BIGINT (PK)</span>
+                <span class="campo-descripcion">Identificador único de la tabla</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre uk">codigo_tabla</span>
+                <span class="campo-tipo">VARCHAR(50) (UK)</span>
+                <span class="campo-descripcion">Código único de la tabla (ej: "producto", "entidad")</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">nombre_tabla</span>
+                <span class="campo-tipo">VARCHAR(100)</span>
+                <span class="campo-descripcion">Nombre físico de la tabla en DB (ej: "tbl_producto")</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">descripcion</span>
+                <span class="campo-tipo">TEXT</span>
+                <span class="campo-descripcion">Descripción de negocio de la tabla</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre fk">id_modulo</span>
+                <span class="campo-tipo">BIGINT (FK)</span>
+                <span class="campo-descripcion">→ meta_modulo: Módulo al que pertenece</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">tipo_tabla</span>
+                <span class="campo-tipo">ENUM</span>
+                <span class="campo-descripcion">MAESTRA | DETALLE | LOOKUP | TRANSACCIONAL</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre fk">id_tabla_maestra</span>
+                <span class="campo-tipo">BIGINT (FK)</span>
+                <span class="campo-descripcion">→ meta_tabla: Si es DETALLE, referencia a su maestro</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">genera_api</span>
+                <span class="campo-tipo">BOOLEAN</span>
+                <span class="campo-descripcion">Si genera endpoints REST automáticamente</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">tiene_auditoria</span>
+                <span class="campo-tipo">BOOLEAN</span>
+                <span class="campo-descripcion">Si agrega campos created_at, updated_at, user_id</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">tiene_soft_delete</span>
+                <span class="campo-tipo">BOOLEAN</span>
+                <span class="campo-descripcion">Si agrega campo disabled para borrado lógico</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">activo</span>
+                <span class="campo-tipo">BOOLEAN</span>
+                <span class="campo-descripcion">Si la tabla está activa en el sistema</span>
+            </div>
+        </div>
+
+        <!-- TABLA 2: meta_campo -->
+        <div class="tabla-meta">
+            <h4>meta_campo - Definición de Campos</h4>
+            <p>Define cada columna de cada tabla del sistema</p>
+
+            <div class="campo">
+                <span class="campo-nombre pk">id</span>
+                <span class="campo-tipo">BIGINT (PK)</span>
+                <span class="campo-descripcion">Identificador único del campo</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre fk">id_tabla</span>
+                <span class="campo-tipo">BIGINT (FK)</span>
+                <span class="campo-descripcion">→ meta_tabla: Tabla a la que pertenece</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">nombre_campo</span>
+                <span class="campo-tipo">VARCHAR(50)</span>
+                <span class="campo-descripcion">Nombre físico de la columna</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">etiqueta</span>
+                <span class="campo-tipo">VARCHAR(100)</span>
+                <span class="campo-descripcion">Label para mostrar en UI</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">descripcion</span>
+                <span class="campo-tipo">TEXT</span>
+                <span class="campo-descripcion">Descripción de negocio del campo</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre fk">id_tipo_dato</span>
+                <span class="campo-tipo">BIGINT (FK)</span>
+                <span class="campo-descripcion">→ meta_tipo_dato: Tipo de dato (VARCHAR, INT, DATE, etc.)</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">longitud</span>
+                <span class="campo-tipo">INT</span>
+                <span class="campo-descripcion">Longitud del campo (para VARCHAR, DECIMAL, etc.)</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">precision</span>
+                <span class="campo-tipo">INT</span>
+                <span class="campo-descripcion">Precisión (para DECIMAL)</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">escala</span>
+                <span class="campo-tipo">INT</span>
+                <span class="campo-descripcion">Escala (para DECIMAL)</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">es_pk</span>
+                <span class="campo-tipo">BOOLEAN</span>
+                <span class="campo-descripcion">Si es Primary Key</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">es_fk</span>
+                <span class="campo-tipo">BOOLEAN</span>
+                <span class="campo-descripcion">Si es Foreign Key</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre fk">id_tabla_referencia</span>
+                <span class="campo-tipo">BIGINT (FK)</span>
+                <span class="campo-descripcion">→ meta_tabla: Si es FK, tabla referenciada</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre fk">id_campo_referencia</span>
+                <span class="campo-tipo">BIGINT (FK)</span>
+                <span class="campo-descripcion">→ meta_campo: Si es FK, campo referenciado</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">es_obligatorio</span>
+                <span class="campo-tipo">BOOLEAN</span>
+                <span class="campo-descripcion">NOT NULL</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">es_unico</span>
+                <span class="campo-tipo">BOOLEAN</span>
+                <span class="campo-descripcion">UNIQUE constraint</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">valor_default</span>
+                <span class="campo-tipo">TEXT</span>
+                <span class="campo-descripcion">Valor por defecto</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">orden</span>
+                <span class="campo-tipo">INT</span>
+                <span class="campo-descripcion">Orden de presentación en UI</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">visible_en_lista</span>
+                <span class="campo-tipo">BOOLEAN</span>
+                <span class="campo-descripcion">Si se muestra en grillas/listados</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">visible_en_formulario</span>
+                <span class="campo-tipo">BOOLEAN</span>
+                <span class="campo-descripcion">Si se muestra en formularios de edición</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">editable</span>
+                <span class="campo-tipo">BOOLEAN</span>
+                <span class="campo-descripcion">Si el usuario puede editarlo</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">activo</span>
+                <span class="campo-tipo">BOOLEAN</span>
+                <span class="campo-descripcion">Si el campo está activo</span>
+            </div>
+        </div>
+
+        <!-- TABLA 3: meta_tipo_dato -->
+        <div class="tabla-meta">
+            <h4>meta_tipo_dato - Tipos de Datos</h4>
+            <p>Catálogo de tipos de datos soportados</p>
+
+            <div class="campo">
+                <span class="campo-nombre pk">id</span>
+                <span class="campo-tipo">BIGINT (PK)</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre uk">codigo</span>
+                <span class="campo-tipo">VARCHAR(30) (UK)</span>
+                <span class="campo-descripcion">VARCHAR | INT | BIGINT | DECIMAL | DATE | DATETIME | BOOLEAN | TEXT | JSON</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">nombre</span>
+                <span class="campo-tipo">VARCHAR(50)</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">requiere_longitud</span>
+                <span class="campo-tipo">BOOLEAN</span>
+                <span class="campo-descripcion">Si necesita especificar longitud</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">requiere_precision</span>
+                <span class="campo-tipo">BOOLEAN</span>
+                <span class="campo-descripcion">Si necesita precisión (DECIMAL)</span>
+            </div>
+        </div>
+
+        <!-- TABLA 4: meta_relacion -->
+        <div class="tabla-meta">
+            <h4>meta_relacion - Relaciones entre Tablas</h4>
+            <p>Define todas las Foreign Keys y relaciones del sistema</p>
+
+            <div class="campo">
+                <span class="campo-nombre pk">id</span>
+                <span class="campo-tipo">BIGINT (PK)</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre fk">id_tabla_origen</span>
+                <span class="campo-tipo">BIGINT (FK)</span>
+                <span class="campo-descripcion">→ meta_tabla: Tabla que tiene la FK</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre fk">id_campo_origen</span>
+                <span class="campo-tipo">BIGINT (FK)</span>
+                <span class="campo-descripcion">→ meta_campo: Campo FK en tabla origen</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre fk">id_tabla_destino</span>
+                <span class="campo-tipo">BIGINT (FK)</span>
+                <span class="campo-descripcion">→ meta_tabla: Tabla referenciada</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre fk">id_campo_destino</span>
+                <span class="campo-tipo">BIGINT (FK)</span>
+                <span class="campo-descripcion">→ meta_campo: Campo PK referenciado</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">tipo_relacion</span>
+                <span class="campo-tipo">ENUM</span>
+                <span class="campo-descripcion">ONE_TO_ONE | ONE_TO_MANY | MANY_TO_MANY</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">on_delete</span>
+                <span class="campo-tipo">ENUM</span>
+                <span class="campo-descripcion">CASCADE | RESTRICT | SET_NULL | NO_ACTION</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">on_update</span>
+                <span class="campo-tipo">ENUM</span>
+                <span class="campo-descripcion">CASCADE | RESTRICT | SET_NULL | NO_ACTION</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">nombre_relacion</span>
+                <span class="campo-tipo">VARCHAR(100)</span>
+                <span class="campo-descripcion">Nombre descriptivo de la relación</span>
+            </div>
+        </div>
+
+        <!-- TABLA 5: meta_lookup -->
+        <div class="tabla-meta">
+            <h4>meta_lookup - Tablas de Selección (Lookup)</h4>
+            <p>Define qué tablas son de lookup y cómo se presentan</p>
+
+            <div class="campo">
+                <span class="campo-nombre pk">id</span>
+                <span class="campo-tipo">BIGINT (PK)</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre fk">id_tabla</span>
+                <span class="campo-tipo">BIGINT (FK)</span>
+                <span class="campo-descripcion">→ meta_tabla: Tabla que funciona como lookup</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre fk">id_campo_valor</span>
+                <span class="campo-tipo">BIGINT (FK)</span>
+                <span class="campo-descripcion">→ meta_campo: Campo que se guarda (ID)</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre fk">id_campo_display</span>
+                <span class="campo-tipo">BIGINT (FK)</span>
+                <span class="campo-descripcion">→ meta_campo: Campo que se muestra al usuario</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">permite_seleccion_multiple</span>
+                <span class="campo-tipo">BOOLEAN</span>
+                <span class="campo-descripcion">Si permite seleccionar múltiples valores</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">permite_busqueda</span>
+                <span class="campo-tipo">BOOLEAN</span>
+                <span class="campo-descripcion">Si el lookup tiene buscador</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">filtro_sql</span>
+                <span class="campo-tipo">TEXT</span>
+                <span class="campo-descripcion">Filtro WHERE para limitar opciones</span>
+            </div>
+        </div>
+
+        <!-- TABLA 6: meta_validacion -->
+        <div class="tabla-meta">
+            <h4>meta_validacion - Reglas de Validación</h4>
+            <p>Define reglas de negocio y validaciones por campo</p>
+
+            <div class="campo">
+                <span class="campo-nombre pk">id</span>
+                <span class="campo-tipo">BIGINT (PK)</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre fk">id_campo</span>
+                <span class="campo-tipo">BIGINT (FK)</span>
+                <span class="campo-descripcion">→ meta_campo: Campo a validar</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre fk">id_tipo_validacion</span>
+                <span class="campo-tipo">BIGINT (FK)</span>
+                <span class="campo-descripcion">→ meta_tipo_validacion: Tipo de validación</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">parametros</span>
+                <span class="campo-tipo">JSON</span>
+                <span class="campo-descripcion">Parámetros de la validación (min, max, regex, etc.)</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">mensaje_error</span>
+                <span class="campo-tipo">VARCHAR(200)</span>
+                <span class="campo-descripcion">Mensaje a mostrar si falla la validación</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">orden_ejecucion</span>
+                <span class="campo-tipo">INT</span>
+                <span class="campo-descripcion">Orden de ejecución de validaciones</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">activo</span>
+                <span class="campo-tipo">BOOLEAN</span>
+            </div>
+        </div>
+
+        <!-- TABLA 7: meta_tipo_validacion -->
+        <div class="tabla-meta">
+            <h4>meta_tipo_validacion - Tipos de Validaciones</h4>
+            <p>Catálogo de validaciones soportadas</p>
+
+            <div class="campo">
+                <span class="campo-nombre pk">id</span>
+                <span class="campo-tipo">BIGINT (PK)</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre uk">codigo</span>
+                <span class="campo-tipo">VARCHAR(50) (UK)</span>
+                <span class="campo-descripcion">REGEX | RANGO | LONGITUD_MIN | LONGITUD_MAX | MAYOR_QUE | MENOR_QUE | UNICO | SCRIPT_CUSTOM</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">nombre</span>
+                <span class="campo-tipo">VARCHAR(100)</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">requiere_parametros</span>
+                <span class="campo-tipo">BOOLEAN</span>
+            </div>
+        </div>
+
+        <!-- TABLA 8: meta_regla_negocio -->
+        <div class="tabla-meta">
+            <h4>meta_regla_negocio - Reglas de Negocio Complejas</h4>
+            <p>Define lógica de negocio que se ejecuta en eventos (triggers dinámicos)</p>
+
+            <div class="campo">
+                <span class="campo-nombre pk">id</span>
+                <span class="campo-tipo">BIGINT (PK)</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre fk">id_tabla</span>
+                <span class="campo-tipo">BIGINT (FK)</span>
+                <span class="campo-descripcion">→ meta_tabla: Tabla donde se aplica la regla</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">nombre_regla</span>
+                <span class="campo-tipo">VARCHAR(100)</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">descripcion</span>
+                <span class="campo-tipo">TEXT</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">evento</span>
+                <span class="campo-tipo">ENUM</span>
+                <span class="campo-descripcion">BEFORE_INSERT | AFTER_INSERT | BEFORE_UPDATE | AFTER_UPDATE | BEFORE_DELETE | AFTER_DELETE</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">tipo_regla</span>
+                <span class="campo-tipo">ENUM</span>
+                <span class="campo-descripcion">VALIDACION | CALCULO | ACTUALIZACION | NOTIFICACION</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">script_python</span>
+                <span class="campo-tipo">TEXT</span>
+                <span class="campo-descripcion">Código Python que se ejecuta</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">script_sql</span>
+                <span class="campo-tipo">TEXT</span>
+                <span class="campo-descripcion">Query SQL que se ejecuta</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">condicion</span>
+                <span class="campo-tipo">TEXT</span>
+                <span class="campo-descripcion">Condición para ejecutar la regla (expresión)</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">orden_ejecucion</span>
+                <span class="campo-tipo">INT</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">activo</span>
+                <span class="campo-tipo">BOOLEAN</span>
+            </div>
+        </div>
+
+        <!-- TABLA 9: meta_indice -->
+        <div class="tabla-meta">
+            <h4>meta_indice - Índices de Base de Datos</h4>
+            <p>Define índices para optimización de queries</p>
+
+            <div class="campo">
+                <span class="campo-nombre pk">id</span>
+                <span class="campo-tipo">BIGINT (PK)</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre fk">id_tabla</span>
+                <span class="campo-tipo">BIGINT (FK)</span>
+                <span class="campo-descripcion">→ meta_tabla: Tabla del índice</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">nombre_indice</span>
+                <span class="campo-tipo">VARCHAR(100)</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">tipo_indice</span>
+                <span class="campo-tipo">ENUM</span>
+                <span class="campo-descripcion">INDEX | UNIQUE | FULLTEXT</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">campos</span>
+                <span class="campo-tipo">JSON</span>
+                <span class="campo-descripcion">Array de IDs de campos que componen el índice</span>
+            </div>
+        </div>
+
+        <!-- TABLA 10: meta_modulo -->
+        <div class="tabla-meta">
+            <h4>meta_modulo - Módulos del Sistema</h4>
+            <p>Organiza las tablas por módulos funcionales</p>
+
+            <div class="campo">
+                <span class="campo-nombre pk">id</span>
+                <span class="campo-tipo">BIGINT (PK)</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre uk">codigo</span>
+                <span class="campo-tipo">VARCHAR(50) (UK)</span>
+                <span class="campo-descripcion">VENTAS | COMPRAS | PRODUCCION | CONTABILIDAD | etc.</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">nombre</span>
+                <span class="campo-tipo">VARCHAR(100)</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">descripcion</span>
+                <span class="campo-tipo">TEXT</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">icono</span>
+                <span class="campo-tipo">VARCHAR(50)</span>
+                <span class="campo-descripcion">Nombre del icono para UI</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">orden</span>
+                <span class="campo-tipo">INT</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">activo</span>
+                <span class="campo-tipo">BOOLEAN</span>
+            </div>
+        </div>
+
+        <h2>Ejemplo Práctico: Crear Tabla "Producto"</h2>
+
+        <div class="ejemplo">
+            <h4>Escenario: Usuario de negocio quiere agregar tabla de Productos</h4>
+            <p><strong>Sin código - Solo insertando registros en metadatos:</strong></p>
+        </div>
+
+        <div class="flujo">
+            <h3>Paso 1: Definir la Tabla</h3>
+            <div class="code-block">INSERT INTO meta_tabla (
+  codigo_tabla, nombre_tabla, descripcion, id_modulo,
+  tipo_tabla, genera_api, tiene_auditoria, tiene_soft_delete, activo
+) VALUES (
+  'producto', 'tbl_producto', 'Catálogo de productos del sistema',
+  (SELECT id FROM meta_modulo WHERE codigo = 'VENTAS'),
+  'MAESTRA', true, true, true, true
+);</div>
+        </div>
+
+        <div class="flujo">
+            <h3>Paso 2: Definir Campos</h3>
+            <div class="code-block">-- Campo: id (PK)
+INSERT INTO meta_campo (
+  id_tabla, nombre_campo, etiqueta, id_tipo_dato,
+  es_pk, es_obligatorio, orden, visible_en_lista, editable
+) VALUES (
+  (SELECT id FROM meta_tabla WHERE codigo_tabla = 'producto'),
+  'id', 'ID', (SELECT id FROM meta_tipo_dato WHERE codigo = 'BIGINT'),
+  true, true, 1, false, false
+);
+
+-- Campo: codigo (UK)
+INSERT INTO meta_campo (
+  id_tabla, nombre_campo, etiqueta, id_tipo_dato, longitud,
+  es_obligatorio, es_unico, orden, visible_en_lista, editable
+) VALUES (
+  (SELECT id FROM meta_tabla WHERE codigo_tabla = 'producto'),
+  'codigo', 'Código', (SELECT id FROM meta_tipo_dato WHERE codigo = 'VARCHAR'), 50,
+  true, true, 2, true, true
+);
+
+-- Campo: nombre
+INSERT INTO meta_campo (
+  id_tabla, nombre_campo, etiqueta, id_tipo_dato, longitud,
+  es_obligatorio, orden, visible_en_lista, editable
+) VALUES (
+  (SELECT id FROM meta_tabla WHERE codigo_tabla = 'producto'),
+  'nombre', 'Nombre del Producto', (SELECT id FROM meta_tipo_dato WHERE codigo = 'VARCHAR'), 200,
+  true, 3, true, true
+);
+
+-- Campo: precio
+INSERT INTO meta_campo (
+  id_tabla, nombre_campo, etiqueta, id_tipo_dato, precision, escala,
+  es_obligatorio, orden, visible_en_lista, editable
+) VALUES (
+  (SELECT id FROM meta_tabla WHERE codigo_tabla = 'producto'),
+  'precio', 'Precio', (SELECT id FROM meta_tipo_dato WHERE codigo = 'DECIMAL'), 10, 2,
+  true, 4, true, true
+);
+
+-- Campo: id_categoria (FK a lookup)
+INSERT INTO meta_campo (
+  id_tabla, nombre_campo, etiqueta, id_tipo_dato,
+  es_fk, id_tabla_referencia, es_obligatorio, orden, visible_en_lista, editable
+) VALUES (
+  (SELECT id FROM meta_tabla WHERE codigo_tabla = 'producto'),
+  'id_categoria', 'Categoría', (SELECT id FROM meta_tipo_dato WHERE codigo = 'BIGINT'),
+  true, (SELECT id FROM meta_tabla WHERE codigo_tabla = 'categoria'),
+  true, 5, true, true
+);</div>
+        </div>
+
+        <div class="flujo">
+            <h3>Paso 3: Definir Relación FK</h3>
+            <div class="code-block">INSERT INTO meta_relacion (
+  id_tabla_origen, id_campo_origen,
+  id_tabla_destino, id_campo_destino,
+  tipo_relacion, on_delete, nombre_relacion
+) VALUES (
+  (SELECT id FROM meta_tabla WHERE codigo_tabla = 'producto'),
+  (SELECT id FROM meta_campo WHERE nombre_campo = 'id_categoria'),
+  (SELECT id FROM meta_tabla WHERE codigo_tabla = 'categoria'),
+  (SELECT id FROM meta_campo WHERE nombre_campo = 'id' AND id_tabla = (SELECT id FROM meta_tabla WHERE codigo_tabla = 'categoria')),
+  'ONE_TO_MANY', 'RESTRICT', 'producto_categoria'
+);</div>
+        </div>
+
+        <div class="flujo">
+            <h3>Paso 4: Configurar Lookup para Categoría</h3>
+            <div class="code-block">INSERT INTO meta_lookup (
+  id_tabla, id_campo_valor, id_campo_display,
+  permite_seleccion_multiple, permite_busqueda
+) VALUES (
+  (SELECT id FROM meta_tabla WHERE codigo_tabla = 'categoria'),
+  (SELECT id FROM meta_campo WHERE nombre_campo = 'id' AND id_tabla = (SELECT id FROM meta_tabla WHERE codigo_tabla = 'categoria')),
+  (SELECT id FROM meta_campo WHERE nombre_campo = 'nombre' AND id_tabla = (SELECT id FROM meta_tabla WHERE codigo_tabla = 'categoria')),
+  false, true
+);</div>
+        </div>
+
+        <div class="flujo">
+            <h3>Paso 5: Agregar Validación al Código</h3>
+            <div class="code-block">INSERT INTO meta_validacion (
+  id_campo, id_tipo_validacion, parametros, mensaje_error
+) VALUES (
+  (SELECT id FROM meta_campo WHERE nombre_campo = 'codigo' AND id_tabla = (SELECT id FROM meta_tabla WHERE codigo_tabla = 'producto')),
+  (SELECT id FROM meta_tipo_validacion WHERE codigo = 'REGEX'),
+  '{"pattern": "^[A-Z]{2}[0-9]{4}$"}',
+  'El código debe tener formato: 2 letras mayúsculas + 4 números (ej: PR0001)'
+);</div>
+        </div>
+
+        <div class="flujo">
+            <h3>Paso 6: Motor Ejecuta Generación</h3>
+            <div class="code-block">-- El motor lee los metadatos y ejecuta automáticamente:
+
+CREATE TABLE tbl_producto (
+  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  codigo VARCHAR(50) NOT NULL UNIQUE,
+  nombre VARCHAR(200) NOT NULL,
+  precio DECIMAL(10,2) NOT NULL,
+  id_categoria BIGINT NOT NULL,
+  created_at DATETIME DEFAULT NOW(),
+  updated_at DATETIME DEFAULT NOW() ON UPDATE NOW(),
+  disabled BOOLEAN DEFAULT FALSE,
+  user_id BIGINT,
+  FOREIGN KEY (id_categoria) REFERENCES tbl_categoria(id) ON DELETE RESTRICT,
+  INDEX idx_producto_codigo (codigo),
+  INDEX idx_producto_categoria (id_categoria)
+);
+
+-- También genera automáticamente:
+-- - Endpoints REST: GET/POST/PUT/DELETE /api/productos/
+-- - Validaciones en backend según meta_validacion
+-- - Formularios dinámicos en frontend
+-- - Filtros y búsquedas en UI</div>
+        </div>
+
+        <h2>Motor de Diccionario de Datos</h2>
+
+        <p>El motor es un componente del backend que:</p>
+
+        <div class="ventajas">
+            <div class="ventaja-item">
+                <h4>1. Lee Metadatos</h4>
+                <p>Consulta las tablas meta_* al inicio y detecta cambios</p>
+            </div>
+
+            <div class="ventaja-item">
+                <h4>2. Genera DDL</h4>
+                <p>Construye CREATE TABLE, ALTER TABLE dinámicamente</p>
+            </div>
+
+            <div class="ventaja-item">
+                <h4>3. Ejecuta Migraciones</h4>
+                <p>Aplica cambios en la base de datos automáticamente</p>
+            </div>
+
+            <div class="ventaja-item">
+                <h4>4. Genera API REST</h4>
+                <p>Crea endpoints automáticamente para cada tabla con genera_api=true</p>
+            </div>
+
+            <div class="ventaja-item">
+                <h4>5. Ejecuta Validaciones</h4>
+                <p>Aplica reglas de meta_validacion antes de INSERT/UPDATE</p>
+            </div>
+
+            <div class="ventaja-item">
+                <h4>6. Ejecuta Reglas de Negocio</h4>
+                <p>Ejecuta scripts de meta_regla_negocio según eventos</p>
+            </div>
+        </div>
+
+        <h3>Arquitectura del Motor</h3>
+
+        <div class="diagram">┌─────────────────────────────────────────────────────────────┐
+│                    MOTOR DE METADATOS                       │
+│                                                             │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │  1. METADATA READER                                  │  │
+│  │     - Lee tablas meta_*                              │  │
+│  │     - Cachea en memoria (Redis)                      │  │
+│  │     - Detecta cambios (polling o triggers)           │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                           ↓                                 │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │  2. DDL GENERATOR                                    │  │
+│  │     - Genera CREATE TABLE desde meta_tabla           │  │
+│  │     - Genera ALTER TABLE para cambios                │  │
+│  │     - Genera FOREIGN KEY constraints                 │  │
+│  │     - Genera INDEX según meta_indice                 │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                           ↓                                 │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │  3. MIGRATION EXECUTOR                               │  │
+│  │     - Ejecuta DDL en base de datos                   │  │
+│  │     - Maneja rollback si falla                       │  │
+│  │     - Registra historial de migraciones              │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                           ↓                                 │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │  4. API GENERATOR                                    │  │
+│  │     - Genera endpoints REST dinámicamente            │  │
+│  │     - CRUD automático: GET, POST, PUT, DELETE        │  │
+│  │     - Filtros y paginación según meta_campo          │  │
+│  │     - Serializers/Deserializers dinámicos            │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                           ↓                                 │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │  5. VALIDATION ENGINE                                │  │
+│  │     - Lee meta_validacion                            │  │
+│  │     - Ejecuta validaciones antes de save             │  │
+│  │     - Retorna errores estructurados                  │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                           ↓                                 │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │  6. BUSINESS RULES ENGINE                            │  │
+│  │     - Lee meta_regla_negocio                         │  │
+│  │     - Ejecuta scripts Python/SQL en eventos          │  │
+│  │     - Sandbox seguro para ejecución                  │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘</div>
+
+        <h2>Implementación Técnica</h2>
+
+        <h3>Stack Tecnológico Propuesto</h3>
+
+        <div style="margin: 20px 0;">
+            <span class="tecnologia">Python 3.12</span>
+            <span class="tecnologia">Django 5.1</span>
+            <span class="tecnologia">Django REST Framework</span>
+            <span class="tecnologia">PostgreSQL / MySQL</span>
+            <span class="tecnologia">Redis (Cache)</span>
+            <span class="tecnologia">Celery (Async)</span>
+        </div>
+
+        <h3>Componentes del Sistema</h3>
+
+        <div class="code-block"># Estructura del proyecto
+axioma-metadata-engine/
+├── metadata_engine/
+│   ├── readers/
+│   │   ├── metadata_reader.py      # Lee tablas meta_*
+│   │   └── cache_manager.py        # Cachea metadatos en Redis
+│   ├── generators/
+│   │   ├── ddl_generator.py        # Genera SQL DDL
+│   │   ├── api_generator.py        # Genera endpoints REST
+│   │   └── form_generator.py       # Genera schemas de UI
+│   ├── executors/
+│   │   ├── migration_executor.py   # Ejecuta migraciones
+│   │   └── rule_executor.py        # Ejecuta reglas de negocio
+│   ├── validators/
+│   │   └── validation_engine.py    # Motor de validaciones
+│   ├── models/
+│   │   ├── meta_tabla.py          # Modelo Django de meta_tabla
+│   │   ├── meta_campo.py
+│   │   ├── meta_relacion.py
+│   │   └── ...                    # Todos los modelos meta_*
+│   └── api/
+│       ├── dynamic_viewset.py     # ViewSet dinámico genérico
+│       └── dynamic_router.py      # Router que genera URLs dinámicas
+├── dynamic_tables/                 # Tablas generadas dinámicamente
+│   └── models.py                  # Modelos generados en runtime
+└── manage.py</div>
+
+        <h3>Código Ejemplo: DDL Generator</h3>
+
+        <div class="code-block"># ddl_generator.py
+class DDLGenerator:
+    def generate_create_table(self, meta_tabla_id):
+        """Genera CREATE TABLE desde metadatos"""
+        tabla = MetaTabla.objects.get(id=meta_tabla_id)
+        campos = MetaCampo.objects.filter(id_tabla=tabla, activo=True)
+
+        sql = f"CREATE TABLE {tabla.nombre_tabla} (\n"
+
+        # Generar definición de campos
+        field_defs = []
+        for campo in campos:
+            field_def = f"  {campo.nombre_campo} {self._get_field_type(campo)}"
+
+            if campo.es_pk:
+                field_def += " AUTO_INCREMENT PRIMARY KEY"
+            elif campo.es_obligatorio:
+                field_def += " NOT NULL"
+
+            if campo.es_unico and not campo.es_pk:
+                field_def += " UNIQUE"
+
+            if campo.valor_default:
+                field_def += f" DEFAULT {campo.valor_default}"
+
+            field_defs.append(field_def)
+
+        # Agregar campos de auditoría si aplica
+        if tabla.tiene_auditoria:
+            field_defs.append("  created_at DATETIME DEFAULT NOW()")
+            field_defs.append("  updated_at DATETIME DEFAULT NOW() ON UPDATE NOW()")
+            field_defs.append("  user_id BIGINT")
+
+        if tabla.tiene_soft_delete:
+            field_defs.append("  disabled BOOLEAN DEFAULT FALSE")
+
+        sql += ",\n".join(field_defs)
+
+        # Agregar Foreign Keys
+        relaciones = MetaRelacion.objects.filter(id_tabla_origen=tabla)
+        for rel in relaciones:
+            fk_sql = f"\n  FOREIGN KEY ({rel.id_campo_origen.nombre_campo}) "
+            fk_sql += f"REFERENCES {rel.id_tabla_destino.nombre_tabla}({rel.id_campo_destino.nombre_campo})"
+            fk_sql += f" ON DELETE {rel.on_delete}"
+            sql += "," + fk_sql
+
+        sql += "\n);"
+
+        return sql
+
+    def _get_field_type(self, campo):
+        """Convierte tipo de dato meta a SQL"""
+        tipo = campo.id_tipo_dato.codigo
+
+        if tipo == 'VARCHAR':
+            return f"VARCHAR({campo.longitud})"
+        elif tipo == 'DECIMAL':
+            return f"DECIMAL({campo.precision},{campo.escala})"
+        elif tipo == 'BIGINT':
+            return "BIGINT"
+        elif tipo == 'INT':
+            return "INT"
+        elif tipo == 'DATE':
+            return "DATE"
+        elif tipo == 'DATETIME':
+            return "DATETIME"
+        elif tipo == 'BOOLEAN':
+            return "BOOLEAN"
+        elif tipo == 'TEXT':
+            return "TEXT"
+        elif tipo == 'JSON':
+            return "JSON"
+        else:
+            return "VARCHAR(255)"  # Default</div>
+
+        <h3>Código Ejemplo: API Generator</h3>
+
+        <div class="code-block"># dynamic_viewset.py
+from rest_framework import viewsets
+from rest_framework.response import Response
+
+class DynamicViewSet(viewsets.ModelViewSet):
+    """ViewSet genérico que funciona para cualquier tabla"""
+
+    def __init__(self, meta_tabla, **kwargs):
+        super().__init__(**kwargs)
+        self.meta_tabla = meta_tabla
+        self.model = self._get_dynamic_model()
+        self.serializer_class = self._get_dynamic_serializer()
+
+    def _get_dynamic_model(self):
+        """Obtiene/genera modelo Django dinámicamente"""
+        from django.apps import apps
+        model_name = self.meta_tabla.codigo_tabla.title()
+
+        try:
+            # Intenta obtener modelo si ya existe
+            return apps.get_model('dynamic_tables', model_name)
+        except LookupError:
+            # Genera modelo dinámicamente
+            return self._generate_model()
+
+    def _generate_model(self):
+        """Genera clase de modelo Django en runtime"""
+        from django.db import models
+
+        attrs = {
+            '__module__': 'dynamic_tables.models',
+            'Meta': type('Meta', (), {
+                'db_table': self.meta_tabla.nombre_tabla,
+                'managed': False  # No hacer migraciones
+            })
+        }
+
+        # Agregar campos según meta_campo
+        campos = MetaCampo.objects.filter(
+            id_tabla=self.meta_tabla,
+            activo=True
+        )
+
+        for campo in campos:
+            field = self._get_django_field(campo)
+            attrs[campo.nombre_campo] = field
+
+        model_class = type(
+            self.meta_tabla.codigo_tabla.title(),
+            (models.Model,),
+            attrs
+        )
+
+        return model_class
+
+    def _get_django_field(self, campo):
+        """Convierte meta_campo a Django field"""
+        from django.db import models
+
+        tipo = campo.id_tipo_dato.codigo
+        kwargs = {
+            'null': not campo.es_obligatorio,
+            'blank': not campo.es_obligatorio,
+            'unique': campo.es_unico,
+        }
+
+        if campo.valor_default:
+            kwargs['default'] = campo.valor_default
+
+        if tipo == 'VARCHAR':
+            return models.CharField(max_length=campo.longitud, **kwargs)
+        elif tipo == 'BIGINT':
+            if campo.es_fk:
+                return models.ForeignKey(
+                    campo.id_tabla_referencia.codigo_tabla.title(),
+                    on_delete=models.CASCADE,
+                    **kwargs
+                )
+            return models.BigIntegerField(**kwargs)
+        elif tipo == 'DECIMAL':
+            return models.DecimalField(
+                max_digits=campo.precision,
+                decimal_places=campo.escala,
+                **kwargs
+            )
+        elif tipo == 'DATE':
+            return models.DateField(**kwargs)
+        elif tipo == 'DATETIME':
+            return models.DateTimeField(**kwargs)
+        elif tipo == 'BOOLEAN':
+            return models.BooleanField(**kwargs)
+        elif tipo == 'TEXT':
+            return models.TextField(**kwargs)
+        elif tipo == 'JSON':
+            return models.JSONField(**kwargs)
+        else:
+            return models.CharField(max_length=255, **kwargs)</div>
+
+        <h3>Código Ejemplo: Validation Engine</h3>
+
+        <div class="code-block"># validation_engine.py
+import re
+import json
+
+class ValidationEngine:
+    def validate_field(self, campo_id, valor):
+        """Ejecuta todas las validaciones de un campo"""
+        validaciones = MetaValidacion.objects.filter(
+            id_campo_id=campo_id,
+            activo=True
+        ).order_by('orden_ejecucion')
+
+        errores = []
+
+        for validacion in validaciones:
+            if not self._ejecutar_validacion(validacion, valor):
+                errores.append(validacion.mensaje_error)
+
+        return errores
+
+    def _ejecutar_validacion(self, validacion, valor):
+        """Ejecuta una validación específica"""
+        tipo = validacion.id_tipo_validacion.codigo
+        params = json.loads(validacion.parametros) if validacion.parametros else {}
+
+        if tipo == 'REGEX':
+            pattern = params.get('pattern')
+            return bool(re.match(pattern, str(valor)))
+
+        elif tipo == 'LONGITUD_MIN':
+            min_len = params.get('min')
+            return len(str(valor)) >= min_len
+
+        elif tipo == 'LONGITUD_MAX':
+            max_len = params.get('max')
+            return len(str(valor)) <= max_len
+
+        elif tipo == 'MAYOR_QUE':
+            minimo = params.get('valor')
+            return float(valor) > minimo
+
+        elif tipo == 'MENOR_QUE':
+            maximo = params.get('valor')
+            return float(valor) < maximo
+
+        elif tipo == 'RANGO':
+            min_val = params.get('min')
+            max_val = params.get('max')
+            return min_val <= float(valor) <= max_val
+
+        elif tipo == 'UNICO':
+            # Verificar unicidad en la tabla
+            campo = validacion.id_campo
+            tabla = campo.id_tabla
+            model = get_dynamic_model(tabla)
+            return not model.objects.filter(**{campo.nombre_campo: valor}).exists()
+
+        elif tipo == 'SCRIPT_CUSTOM':
+            # Ejecutar script Python custom en sandbox
+            script = params.get('script')
+            return self._ejecutar_script_validacion(script, valor)
+
+        return True
+
+    def _ejecutar_script_validacion(self, script, valor):
+        """Ejecuta script Python en sandbox seguro"""
+        # Usar RestrictedPython o similar para sandbox
+        safe_globals = {
+            '__builtins__': {
+                'len': len,
+                'str': str,
+                'int': int,
+                'float': float,
+            },
+            'valor': valor
+        }
+
+        try:
+            exec(script, safe_globals)
+            return safe_globals.get('resultado', True)
+        except Exception:
+            return False</div>
+
+        <h2>Ventajas del Sistema</h2>
+
+        <div class="ventajas">
+            <div class="ventaja-item">
+                <h4>✓ Cero Código para Cambios</h4>
+                <p>El usuario de negocio puede agregar tablas, campos, relaciones sin desarrollador</p>
+            </div>
+
+            <div class="ventaja-item">
+                <h4>✓ Modelo Maestro-Detalle Automático</h4>
+                <p>Solo configurando id_tabla_maestra en meta_tabla</p>
+            </div>
+
+            <div class="ventaja-item">
+                <h4>✓ Lookups Dinámicos</h4>
+                <p>Selección simple/múltiple configurada en meta_lookup</p>
+            </div>
+
+            <div class="ventaja-item">
+                <h4>✓ API REST Automática</h4>
+                <p>Endpoints generados sin escribir ViewSets manualmente</p>
+            </div>
+
+            <div class="ventaja-item">
+                <h4>✓ Validaciones Configurables</h4>
+                <p>Reglas de negocio sin código hardcodeado</p>
+            </div>
+
+            <div class="ventaja-item">
+                <h4>✓ Migraciones Automáticas</h4>
+                <p>Cambios en metadatos → migraciones automáticas</p>
+            </div>
+
+            <div class="ventaja-item">
+                <h4>✓ Documentación Auto-generada</h4>
+                <p>El diccionario de datos ES la documentación</p>
+            </div>
+
+            <div class="ventaja-item">
+                <h4>✓ Frontend Dinámico</h4>
+                <p>Formularios y grillas generadas desde metadatos</p>
+            </div>
+
+            <div class="ventaja-item">
+                <h4>✓ Auditoría Completa</h4>
+                <p>Historial de cambios en metadatos = historial de cambios en modelo</p>
+            </div>
+        </div>
+
+        <h2>Desafíos y Consideraciones</h2>
+
+        <div class="desafio">
+            <h4>⚠️ 1. Performance</h4>
+            <p><strong>Problema:</strong> Generar modelos dinámicamente puede ser lento</p>
+            <p><strong>Solución:</strong> Cache agresivo en Redis de metadatos y modelos generados</p>
+        </div>
+
+        <div class="desafio">
+            <h4>⚠️ 2. Complejidad de Queries</h4>
+            <p><strong>Problema:</strong> Joins complejos difíciles de optimizar dinámicamente</p>
+            <p><strong>Solución:</strong> Permitir definir "vistas materializadas" en metadatos para queries complejas</p>
+        </div>
+
+        <div class="desafio">
+            <h4>⚠️ 3. Seguridad en Scripts Custom</h4>
+            <p><strong>Problema:</strong> Ejecutar código Python arbitrario es peligroso</p>
+            <p><strong>Solución:</strong> Sandbox con RestrictedPython y whitelist de funciones permitidas</p>
+        </div>
+
+        <div class="desafio">
+            <h4>⚠️ 4. Debugging</h4>
+            <p><strong>Problema:</strong> Errores en sistema dinámico son más difíciles de debuggear</p>
+            <p><strong>Solución:</strong> Logging exhaustivo + UI de administración de metadatos con preview de SQL generado</p>
+        </div>
+
+        <div class="desafio">
+            <h4>⚠️ 5. Migraciones Conflictivas</h4>
+            <p><strong>Problema:</strong> Cambios en metadatos pueden generar migraciones incompatibles</p>
+            <p><strong>Solución:</strong> Sistema de versionado de metadatos + preview de cambios antes de aplicar</p>
+        </div>
+
+        <h2>Comparación con Sistemas Existentes</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Sistema</th>
+                    <th>Approach</th>
+                    <th>Pro</th>
+                    <th>Contra</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Odoo</strong></td>
+                    <td>Modelos dinámicos via Python (models.Model)</td>
+                    <td>Muy flexible, gran ecosistema</td>
+                    <td>Requiere programación Python para cambios</td>
+                </tr>
+                <tr>
+                    <td><strong>Salesforce</strong></td>
+                    <td>Custom Objects vía UI</td>
+                    <td>100% sin código, UI excelente</td>
+                    <td>Propietario, costoso, limitado</td>
+                </tr>
+                <tr>
+                    <td><strong>Microsoft Dynamics</strong></td>
+                    <td>Entities configurables</td>
+                    <td>Potente, integrado con Office</td>
+                    <td>Propietario, muy costoso, curva de aprendizaje</td>
+                </tr>
+                <tr>
+                    <td><strong>Airtable</strong></td>
+                    <td>Bases configurables tipo spreadsheet</td>
+                    <td>Muy fácil de usar, rápido</td>
+                    <td>No es ERP, limitado para lógica compleja</td>
+                </tr>
+                <tr>
+                    <td><strong>Axioma (propuesto)</strong></td>
+                    <td>Metadatos en tablas relacionales</td>
+                    <td>Open source, control total, flexible</td>
+                    <td>Complejidad de implementación inicial</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Plan de Implementación</h2>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <h4>Fase 1: Tablas de Metadatos (2-3 semanas)</h4>
+                <ul>
+                    <li>Crear todas las tablas meta_* en la base de datos</li>
+                    <li>Desarrollar modelos Django para metadatos</li>
+                    <li>Crear UI básica para administrar metadatos</li>
+                    <li>Poblar con tablas existentes del sistema</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <h4>Fase 2: Motor de Metadatos - Lector (1-2 semanas)</h4>
+                <ul>
+                    <li>Desarrollar MetadataReader</li>
+                    <li>Implementar cache en Redis</li>
+                    <li>Sistema de detección de cambios</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <h4>Fase 3: Generador DDL (2 semanas)</h4>
+                <ul>
+                    <li>Desarrollar DDLGenerator</li>
+                    <li>Generar CREATE TABLE desde metadatos</li>
+                    <li>Generar ALTER TABLE para cambios</li>
+                    <li>Manejo de Foreign Keys</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <h4>Fase 4: Ejecutor de Migraciones (1-2 semanas)</h4>
+                <ul>
+                    <li>Desarrollar MigrationExecutor</li>
+                    <li>Sistema de rollback</li>
+                    <li>Historial de migraciones</li>
+                    <li>Preview de cambios antes de aplicar</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <h4>Fase 5: Generador de API (2-3 semanas)</h4>
+                <ul>
+                    <li>Desarrollar DynamicViewSet</li>
+                    <li>Generador de serializers dinámicos</li>
+                    <li>Router automático de URLs</li>
+                    <li>Filtros y paginación dinámica</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <h4>Fase 6: Motor de Validaciones (1-2 semanas)</h4>
+                <ul>
+                    <li>Desarrollar ValidationEngine</li>
+                    <li>Implementar tipos de validaciones básicas</li>
+                    <li>Sandbox para scripts custom</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <h4>Fase 7: Motor de Reglas de Negocio (2-3 semanas)</h4>
+                <ul>
+                    <li>Desarrollar BusinessRulesEngine</li>
+                    <li>Sistema de eventos (triggers)</li>
+                    <li>Ejecutor de scripts Python/SQL seguros</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <h4>Fase 8: UI de Administración (3-4 semanas)</h4>
+                <ul>
+                    <li>Interfaz para gestionar metadatos</li>
+                    <li>Preview de cambios</li>
+                    <li>Editor visual de relaciones</li>
+                    <li>Generador de formularios dinámicos</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <h4>Fase 9: Testing y Optimización (2-3 semanas)</h4>
+                <ul>
+                    <li>Tests unitarios y de integración</li>
+                    <li>Optimización de performance</li>
+                    <li>Manejo de edge cases</li>
+                    <li>Documentación</li>
+                </ul>
+            </div>
+        </div>
+
+        <p style="margin: 20px 0; padding: 15px; background: #f0f4f8; border-left: 4px solid #3498db;">
+            <strong>Tiempo total estimado:</strong> 16-24 semanas (4-6 meses) con 1-2 desarrolladores full-time
+        </p>
+
+        <div class="recomendacion">
+            <h2>Recomendación Final</h2>
+
+            <p><strong>Este es un proyecto EXTREMADAMENTE ambicioso</strong> que esencialmente significa construir un framework de bajo código (low-code) desde cero.</p>
+
+            <h3>¿Vale la pena?</h3>
+
+            <h4 style="color: #27ae60;">✓ SÍ, si:</h4>
+            <ul>
+                <li>El ERP tendrá <strong>decenas de módulos</strong> con cientos de tablas</li>
+                <li>Los requerimientos de negocio <strong>cambian constantemente</strong></li>
+                <li>Quieren <strong>vender el ERP como producto configurable</strong> a múltiples clientes</li>
+                <li>Tienen <strong>6+ meses para desarrollo</strong> antes de necesitar producción</li>
+                <li>El equipo técnico es <strong>altamente capacitado</strong></li>
+            </ul>
+
+            <h4 style="color: #e74c3c;">✗ NO, si:</h4>
+            <ul>
+                <li>El ERP es para <strong>un solo cliente</strong> (ustedes mismos)</li>
+                <li>El modelo de datos es <strong>relativamente estable</strong></li>
+                <li>Necesitan <strong>salir a producción pronto</strong> (< 3 meses)</li>
+                <li>El equipo de desarrollo es <strong>pequeño</strong> (1-2 personas)</li>
+            </ul>
+
+            <h3>Alternativa Pragmática</h3>
+
+            <p>Si el proyecto completo es demasiado, pueden implementar un <strong>enfoque híbrido</strong>:</p>
+
+            <ol>
+                <li><strong>Corto plazo:</strong> Desarrollar el ERP de forma tradicional (Django models estáticos)</li>
+                <li><strong>Paralelamente:</strong> Implementar solo las tablas meta_* y el MetadataReader</li>
+                <li><strong>Usar metadatos para:</strong>
+                    <ul>
+                        <li>Generar documentación automática (lo que pedían originalmente)</li>
+                        <li>Generar formularios dinámicos en frontend</li>
+                        <li>Validaciones configurables</li>
+                    </ul>
+                </li>
+                <li><strong>Mediano plazo:</strong> Ir migrando gradualmente a generación dinámica de tablas nuevas</li>
+            </ol>
+
+            <p style="margin-top: 20px; padding: 15px; background: #fff3cd; border-left: 4px solid #ffc107;">
+                <strong>Mi recomendación honesta:</strong> Empiecen con el diccionario de datos tradicional (propuesta anterior) y si el proyecto crece mucho, evalúen migrar a este sistema dinámico en el futuro. No intenten resolver un problema que quizás no tienen todavía.
+            </p>
+        </div>
+
+        <div style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #ecf0f1; text-align: center; color: #7f8c8d;">
+            <p><strong>Documento generado:</strong> Diciembre 2025</p>
+            <p><strong>Para:</strong> Evaluación de Sistema de Metadatos Dinámico - Axioma ERP</p>
+            <p><em>Esta propuesta describe un sistema de diccionario de datos dinámico donde el modelo de datos se define completamente en tablas de metadatos, permitiendo crear, modificar y gestionar el esquema de base de datos sin tocar código.</em></p>
+        </div>
+    </div>
+</body>
+</html>
