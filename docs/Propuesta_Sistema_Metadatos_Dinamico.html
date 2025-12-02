@@ -2361,6 +2361,606 @@ export const FormBuilder = () => {
             <strong>Tiempo total actualizado:</strong> 22-30 semanas (5.5-7.5 meses) con 2 desarrolladores full-time (1 backend + 1 frontend)
         </p>
 
+        <h2>Sistema de Ayuda Contextual + Integración con IA</h2>
+
+        <p>Una de las ventajas más poderosas de tener un diccionario de datos completo es que puede servir como base para:</p>
+
+        <div class="ventajas">
+            <div class="ventaja-item">
+                <h4>✓ Ayuda Contextual Automática</h4>
+                <p>Tooltips y ayudas en cada campo basadas en la descripción de metadatos</p>
+            </div>
+
+            <div class="ventaja-item">
+                <h4>✓ Asistente IA Entrenado</h4>
+                <p>Widget de IA que conoce todo el modelo de datos y puede ayudar a los usuarios</p>
+            </div>
+
+            <div class="ventaja-item">
+                <h4>✓ Documentación Auto-generada</h4>
+                <p>Manuales de usuario generados desde metadatos</p>
+            </div>
+        </div>
+
+        <h3>1. Sistema de Ayuda Contextual en UI</h3>
+
+        <p>Cada campo automáticamente muestra ayuda contextual basada en sus metadatos:</p>
+
+        <div class="ejemplo">
+            <h4>Ejemplo Visual: Campo con Ayuda Contextual</h4>
+            <p>Al hacer hover o click en el icono de ayuda de un campo:</p>
+            <div class="code-block" style="background: white; color: #333; border: 2px solid #ddd;">
+┌─────────────────────────────────────────────────┐
+│ Código del Producto:  [PR0001_____] ⓘ         │
+│                                                 │
+│ ┌─────────────────────────────────────────────┐│
+│ │ 📘 Ayuda: Código del Producto              ││
+│ │                                             ││
+│ │ Código único que identifica el producto en ││
+│ │ el sistema. Debe seguir el formato:        ││
+│ │ - 2 letras mayúsculas (código de categoría)││
+│ │ - 4 números consecutivos                   ││
+│ │                                             ││
+│ │ Ejemplo: PR0001, EL0042, AC0123            ││
+│ │                                             ││
+│ │ ⚠️ Este código no puede modificarse una vez ││
+│ │    creado el producto.                     ││
+│ │                                             ││
+│ │ 🔗 Relacionado con: Categoría de Producto  ││
+│ └─────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────┘</div>
+        </div>
+
+        <h4>Código: Campo con Tooltip de Ayuda</h4>
+
+        <div class="code-block">// DynamicField.tsx (actualizado)
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { HelpCircle } from 'lucide-react';
+
+export const DynamicField: React.FC&lt;DynamicFieldProps&gt; = ({ campo, form }) => {
+  const { register, formState: { errors } } = form;
+
+  return (
+    &lt;div className="form-field"&gt;
+      &lt;label className="flex items-center gap-2 text-sm font-medium mb-1"&gt;
+        {campo.etiqueta}
+        {campo.es_obligatorio && &lt;span className="text-red-500"&gt;*&lt;/span&gt;}
+
+        {/* Icono de ayuda con tooltip */}
+        {campo.descripcion && (
+          &lt;TooltipProvider&gt;
+            &lt;Tooltip&gt;
+              &lt;TooltipTrigger&gt;
+                &lt;HelpCircle className="w-4 h-4 text-gray-400 hover:text-blue-600" /&gt;
+              &lt;/TooltipTrigger&gt;
+              &lt;TooltipContent className="max-w-sm"&gt;
+                &lt;div className="space-y-2"&gt;
+                  &lt;p className="font-semibold"&gt;{campo.etiqueta}&lt;/p&gt;
+                  &lt;p&gt;{campo.descripcion}&lt;/p&gt;
+
+                  {/* Mostrar validaciones como ayuda */}
+                  {campo.validaciones?.length > 0 && (
+                    &lt;div className="mt-2 pt-2 border-t"&gt;
+                      &lt;p className="text-xs font-semibold"&gt;Validaciones:&lt;/p&gt;
+                      &lt;ul className="text-xs list-disc pl-4"&gt;
+                        {campo.validaciones.map((v, i) => (
+                          &lt;li key={i}&gt;{v.mensaje}&lt;/li&gt;
+                        ))}
+                      &lt;/ul&gt;
+                    &lt;/div&gt;
+                  )}
+
+                  {/* Mostrar relación FK si existe */}
+                  {campo.es_fk && campo.lookup && (
+                    &lt;div className="mt-2 pt-2 border-t"&gt;
+                      &lt;p className="text-xs"&gt;
+                        🔗 Relacionado con: {campo.lookup.tabla_referencia}
+                      &lt;/p&gt;
+                    &lt;/div&gt;
+                  )}
+
+                  {/* Mostrar ejemplos si existen en metadatos */}
+                  {campo.ejemplos && (
+                    &lt;div className="mt-2 pt-2 border-t"&gt;
+                      &lt;p className="text-xs font-semibold"&gt;Ejemplos:&lt;/p&gt;
+                      &lt;p className="text-xs text-gray-600"&gt;{campo.ejemplos}&lt;/p&gt;
+                    &lt;/div&gt;
+                  )}
+                &lt;/div&gt;
+              &lt;/TooltipContent&gt;
+            &lt;/Tooltip&gt;
+          &lt;/TooltipProvider&gt;
+        )}
+      &lt;/label&gt;
+
+      {/* Campo de input */}
+      {renderField()}
+
+      {/* Error de validación */}
+      {errors[campo.nombre_campo] && (
+        &lt;p className="text-red-500 text-sm mt-1"&gt;
+          {errors[campo.nombre_campo]?.message as string}
+        &lt;/p&gt;
+      )}
+    &lt;/div&gt;
+  );
+};</div>
+
+        <h3>2. Widget de IA Asistente (ChatBot Integrado)</h3>
+
+        <p>Un asistente de IA que tiene acceso al diccionario de datos completo y puede ayudar a los usuarios:</p>
+
+        <div class="arquitectura">
+            <h2>Capacidades del Asistente IA</h2>
+
+            <div class="layer">
+                <h4>Conocimiento del Modelo de Datos</h4>
+                <p>El bot tiene acceso a:</p>
+                <ul>
+                    <li>Todas las tablas (meta_tabla) con sus descripciones</li>
+                    <li>Todos los campos (meta_campo) con descripciones y ejemplos</li>
+                    <li>Relaciones entre tablas (meta_relacion)</li>
+                    <li>Validaciones y reglas de negocio (meta_validacion, meta_regla_negocio)</li>
+                </ul>
+            </div>
+
+            <div class="layer">
+                <h4>Casos de Uso del Asistente</h4>
+                <ul>
+                    <li>🤔 <strong>"¿Qué datos necesito para crear un producto?"</strong> → Lista campos obligatorios</li>
+                    <li>🔍 <strong>"¿Qué significa el campo StockMinimo?"</strong> → Explica desde metadatos</li>
+                    <li>📊 <strong>"¿Cómo están relacionadas las tablas Producto y Categoría?"</strong> → Muestra diagrama</li>
+                    <li>✏️ <strong>"Ayúdame a completar este formulario"</strong> → Guía paso a paso</li>
+                    <li>⚠️ <strong>"¿Por qué me da error este código?"</strong> → Explica validaciones</li>
+                    <li>📈 <strong>"Genera un reporte de productos por categoría"</strong> → Crea query</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="ejemplo">
+            <h4>Ejemplo de Conversación con el Asistente</h4>
+            <div class="code-block" style="background: white; color: #333; border: 2px solid #ddd;">
+┌─────────────────────────────────────────────────────────┐
+│ 💬 Asistente Axioma ERP                                 │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│ 👤 Usuario:                                             │
+│ ¿Qué campos necesito llenar para crear un producto?    │
+│                                                         │
+│ 🤖 Asistente:                                           │
+│ Para crear un Producto necesitas completar:            │
+│                                                         │
+│ Campos obligatorios:                                    │
+│ • Código (formato: 2 letras + 4 números, ej: PR0001)   │
+│ • Nombre (máximo 200 caracteres)                       │
+│ • Precio (debe ser mayor a 0)                          │
+│ • Categoría (seleccionar de la lista)                  │
+│                                                         │
+│ Campos opcionales:                                      │
+│ • Descripción                                           │
+│ • Stock Mínimo                                          │
+│ • Stock Máximo                                          │
+│                                                         │
+│ ¿Quieres que te ayude a completar el formulario?       │
+│                                                         │
+│ 👤 Usuario:                                             │
+│ Sí, ayúdame                                             │
+│                                                         │
+│ 🤖 Asistente:                                           │
+│ Perfecto. Comencemos:                                   │
+│                                                         │
+│ 1️⃣ ¿Cuál es el código del producto?                    │
+│    Recuerda: 2 letras (categoría) + 4 números          │
+│    Ejemplo: PR0001 para Productos, EL0001 para         │
+│    Electrónicos                                         │
+│                                                         │
+│ [Campo de texto: ________]                              │
+│                                                         │
+└─────────────────────────────────────────────────────────┘</div>
+        </div>
+
+        <h3>3. Implementación del Widget de IA</h3>
+
+        <h4>Backend: Endpoint para IA</h4>
+
+        <div class="code-block">// api/ai_assistant.py
+from openai import OpenAI
+import json
+
+class AIAssistantService:
+    def __init__(self):
+        self.client = OpenAI(api_key=settings.OPENAI_API_KEY)
+        self.knowledge_base = self._build_knowledge_base()
+
+    def _build_knowledge_base(self):
+        """Construye knowledge base desde metadatos"""
+        knowledge = {
+            "tablas": {},
+            "relaciones": [],
+            "validaciones": {}
+        }
+
+        # Obtener todas las tablas
+        tablas = MetaTabla.objects.filter(activo=True)
+        for tabla in tablas:
+            campos = MetaCampo.objects.filter(id_tabla=tabla, activo=True)
+
+            knowledge["tablas"][tabla.codigo_tabla] = {
+                "nombre": tabla.nombre_display,
+                "descripcion": tabla.descripcion,
+                "tipo": tabla.tipo_tabla,
+                "campos": [
+                    {
+                        "nombre": c.nombre_campo,
+                        "etiqueta": c.etiqueta,
+                        "descripcion": c.descripcion,
+                        "tipo_dato": c.id_tipo_dato.codigo,
+                        "obligatorio": c.es_obligatorio,
+                        "ejemplos": c.ejemplos,
+                        "validaciones": [
+                            {
+                                "tipo": v.id_tipo_validacion.codigo,
+                                "mensaje": v.mensaje_error,
+                                "parametros": json.loads(v.parametros)
+                            }
+                            for v in MetaValidacion.objects.filter(
+                                id_campo=c,
+                                activo=True
+                            )
+                        ]
+                    }
+                    for c in campos
+                ]
+            }
+
+        # Obtener relaciones
+        relaciones = MetaRelacion.objects.all()
+        for rel in relaciones:
+            knowledge["relaciones"].append({
+                "desde": rel.id_tabla_origen.codigo_tabla,
+                "hacia": rel.id_tabla_destino.codigo_tabla,
+                "campo": rel.id_campo_origen.nombre_campo,
+                "tipo": rel.tipo_relacion
+            })
+
+        return knowledge
+
+    def chat(self, mensaje_usuario, contexto=None):
+        """Procesa pregunta del usuario usando IA"""
+
+        # System prompt con conocimiento del sistema
+        system_prompt = f"""
+Eres un asistente experto del ERP Axioma. Tienes acceso completo
+al diccionario de datos del sistema.
+
+CONOCIMIENTO DEL SISTEMA:
+{json.dumps(self.knowledge_base, indent=2, ensure_ascii=False)}
+
+REGLAS:
+1. Responde SOLO basándote en el conocimiento del sistema
+2. Si preguntan por un campo, explica: descripción, tipo, validaciones y ejemplos
+3. Si preguntan cómo crear un registro, lista los campos obligatorios
+4. Si preguntan por relaciones, explica las FKs involucradas
+5. Sé conciso pero completo
+6. Usa emojis para mejor UX
+7. Si no sabes algo, admítelo
+"""
+
+        # Contexto adicional (formulario actual, etc.)
+        context_prompt = ""
+        if contexto:
+            context_prompt = f"\n\nCONTEXTO ACTUAL:\n{json.dumps(contexto, indent=2)}"
+
+        # Llamar a OpenAI
+        response = self.client.chat.completions.create(
+            model="gpt-4",
+            messages=[
+                {"role": "system", "content": system_prompt + context_prompt},
+                {"role": "user", "content": mensaje_usuario}
+            ],
+            temperature=0.7,
+            max_tokens=500
+        )
+
+        return response.choices[0].message.content
+
+
+# View
+class AIAssistantView(APIView):
+    def post(self, request):
+        mensaje = request.data.get('mensaje')
+        contexto = request.data.get('contexto')  # Formulario actual, etc.
+
+        assistant = AIAssistantService()
+        respuesta = assistant.chat(mensaje, contexto)
+
+        return Response({
+            'respuesta': respuesta
+        })</div>
+
+        <h4>Frontend: Widget de Chat IA</h4>
+
+        <div class="code-block">// AIAssistant.tsx
+import { useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
+import { Bot, Send, X } from 'lucide-react';
+
+interface Message {
+  role: 'user' | 'assistant';
+  content: string;
+}
+
+export const AIAssistant = ({ contexto }: { contexto?: any }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [messages, setMessages] = useState&lt;Message[]&gt;([
+    {
+      role: 'assistant',
+      content: '👋 Hola! Soy el asistente de Axioma ERP. ¿En qué puedo ayudarte?'
+    }
+  ]);
+  const [input, setInput] = useState('');
+
+  const chatMutation = useMutation({
+    mutationFn: async (mensaje: string) => {
+      const response = await fetch('/api/ai-assistant/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ mensaje, contexto })
+      });
+      return response.json();
+    },
+    onSuccess: (data) => {
+      setMessages(prev => [
+        ...prev,
+        { role: 'assistant', content: data.respuesta }
+      ]);
+    }
+  });
+
+  const handleSend = () => {
+    if (!input.trim()) return;
+
+    // Agregar mensaje del usuario
+    setMessages(prev => [...prev, { role: 'user', content: input }]);
+
+    // Enviar a backend
+    chatMutation.mutate(input);
+
+    setInput('');
+  };
+
+  return (
+    &lt;&gt;
+      {/* Botón flotante */}
+      {!isOpen && (
+        &lt;button
+          onClick={() => setIsOpen(true)}
+          className="fixed bottom-4 right-4 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700"
+        &gt;
+          &lt;Bot className="w-6 h-6" /&gt;
+        &lt;/button&gt;
+      )}
+
+      {/* Ventana de chat */}
+      {isOpen && (
+        &lt;div className="fixed bottom-4 right-4 w-96 h-[500px] bg-white rounded-lg shadow-2xl flex flex-col"&gt;
+          {/* Header */}
+          &lt;div className="bg-blue-600 text-white p-4 rounded-t-lg flex justify-between items-center"&gt;
+            &lt;div className="flex items-center gap-2"&gt;
+              &lt;Bot className="w-5 h-5" /&gt;
+              &lt;span className="font-semibold"&gt;Asistente Axioma ERP&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;button onClick={() => setIsOpen(false)}&gt;
+              &lt;X className="w-5 h-5" /&gt;
+            &lt;/button&gt;
+          &lt;/div&gt;
+
+          {/* Mensajes */}
+          &lt;div className="flex-1 overflow-y-auto p-4 space-y-4"&gt;
+            {messages.map((msg, idx) => (
+              &lt;div
+                key={idx}
+                className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+              &gt;
+                &lt;div
+                  className={`max-w-[80%] p-3 rounded-lg ${
+                    msg.role === 'user'
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-gray-100 text-gray-800'
+                  }`}
+                &gt;
+                  {msg.content}
+                &lt;/div&gt;
+              &lt;/div&gt;
+            ))}
+
+            {chatMutation.isPending && (
+              &lt;div className="flex justify-start"&gt;
+                &lt;div className="bg-gray-100 p-3 rounded-lg"&gt;
+                  &lt;div className="flex gap-1"&gt;
+                    &lt;div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" /&gt;
+                    &lt;div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-100" /&gt;
+                    &lt;div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-200" /&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            )}
+          &lt;/div&gt;
+
+          {/* Input */}
+          &lt;div className="p-4 border-t"&gt;
+            &lt;div className="flex gap-2"&gt;
+              &lt;input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+                placeholder="Escribe tu pregunta..."
+                className="flex-1 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+              /&gt;
+              &lt;button
+                onClick={handleSend}
+                disabled={!input.trim() || chatMutation.isPending}
+                className="bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 disabled:opacity-50"
+              &gt;
+                &lt;Send className="w-5 h-5" /&gt;
+              &lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      )}
+    &lt;/&gt;
+  );
+};</div>
+
+        <h3>4. Sugerencias Inteligentes Basadas en Metadatos</h3>
+
+        <p>El sistema puede ofrecer sugerencias automáticas mientras el usuario completa formularios:</p>
+
+        <div class="code-block">// SmartSuggestions.tsx
+export const DynamicField = ({ campo, form }) => {
+  const [suggestions, setSuggestions] = useState([]);
+
+  // Obtener sugerencias basadas en:
+  // 1. Valores recientes del usuario
+  // 2. Valores más comunes en la tabla
+  // 3. Reglas de negocio (ej: si categoria=X, sugerir precio en rango Y)
+  const { data: sugerencias } = useQuery({
+    queryKey: ['suggestions', campo.nombre_campo],
+    queryFn: async () => {
+      const response = await fetch(
+        `/api/metadata/suggestions/${campo.id_tabla}/${campo.nombre_campo}`
+      );
+      return response.json();
+    },
+    enabled: campo.tipo_componente === 'text' // Solo para campos de texto
+  });
+
+  return (
+    &lt;div&gt;
+      &lt;input
+        {...register(campo.nombre_campo)}
+        list={`suggestions-${campo.nombre_campo}`}
+      /&gt;
+
+      {/* Datalist con sugerencias */}
+      {sugerencias && (
+        &lt;datalist id={`suggestions-${campo.nombre_campo}`}&gt;
+          {sugerencias.map((s, i) => (
+            &lt;option key={i} value={s.valor}&gt;
+              {s.descripcion}
+            &lt;/option&gt;
+          ))}
+        &lt;/datalist&gt;
+      )}
+    &lt;/div&gt;
+  );
+};</div>
+
+        <h3>5. Tabla Adicional de Metadatos: Ayuda Contextual</h3>
+
+        <p>Para soportar esto completamente, agregar una tabla adicional:</p>
+
+        <div class="tabla-meta">
+            <h4>meta_ayuda - Ayuda Contextual Extendida</h4>
+            <p>Información adicional de ayuda más allá de la descripción básica</p>
+
+            <div class="campo">
+                <span class="campo-nombre pk">id</span>
+                <span class="campo-tipo">BIGINT (PK)</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre fk">id_campo</span>
+                <span class="campo-tipo">BIGINT (FK)</span>
+                <span class="campo-descripcion">→ meta_campo: Campo asociado</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">tipo_ayuda</span>
+                <span class="campo-tipo">ENUM</span>
+                <span class="campo-descripcion">TOOLTIP | EJEMPLO | VIDEO | LINK_EXTERNO | FAQ</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">contenido</span>
+                <span class="campo-tipo">TEXT</span>
+                <span class="campo-descripcion">Contenido de la ayuda (HTML, URL, etc.)</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">ejemplos</span>
+                <span class="campo-tipo">JSON</span>
+                <span class="campo-descripcion">Array de ejemplos: [{"valor": "PR0001", "descripcion": "Producto común"}]</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">url_video</span>
+                <span class="campo-tipo">VARCHAR(500)</span>
+                <span class="campo-descripcion">URL de video tutorial (YouTube, Vimeo, etc.)</span>
+            </div>
+            <div class="campo">
+                <span class="campo-nombre">orden</span>
+                <span class="campo-tipo">INT</span>
+                <span class="campo-descripcion">Orden de presentación si hay múltiples ayudas</span>
+            </div>
+        </div>
+
+        <h3>6. Ventajas de Este Enfoque</h3>
+
+        <div class="ventajas">
+            <div class="ventaja-item">
+                <h4>✓ Onboarding Simplificado</h4>
+                <p>Nuevos usuarios aprenden el sistema sin necesidad de capacitación externa</p>
+            </div>
+
+            <div class="ventaja-item">
+                <h4>✓ Reducción de Errores</h4>
+                <p>Los usuarios entienden qué poner en cada campo antes de cometer errores</p>
+            </div>
+
+            <div class="ventaja-item">
+                <h4>✓ Documentación Siempre Actualizada</h4>
+                <p>La ayuda se actualiza automáticamente al cambiar metadatos</p>
+            </div>
+
+            <div class="ventaja-item">
+                <h4>✓ Soporte 24/7</h4>
+                <p>El asistente IA está disponible siempre, sin necesidad de soporte humano</p>
+            </div>
+
+            <div class="ventaja-item">
+                <h4>✓ Contexto Inteligente</h4>
+                <p>El asistente conoce el formulario actual y puede dar ayuda específica</p>
+            </div>
+
+            <div class="ventaja-item">
+                <h4>✓ Generación de Reportes</h4>
+                <p>El asistente puede generar queries SQL basándose en el conocimiento del modelo</p>
+            </div>
+        </div>
+
+        <h3>7. Actualización del Plan de Implementación</h3>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <h4>Fase 11 (Nueva): Sistema de Ayuda + IA (2-3 semanas)</h4>
+                <ul>
+                    <li>Crear tabla meta_ayuda</li>
+                    <li>Implementar tooltips contextuales en DynamicField</li>
+                    <li>Desarrollar AIAssistantService (backend)</li>
+                    <li>Construir knowledge base desde metadatos</li>
+                    <li>Desarrollar widget de chat IA (frontend)</li>
+                    <li>Integrar OpenAI API o alternativa (Claude, Llama)</li>
+                    <li>Sistema de sugerencias inteligentes</li>
+                </ul>
+            </div>
+        </div>
+
+        <p style="margin: 20px 0; padding: 15px; background: #e3f2fd; border-left: 4px solid #2196f3;">
+            <strong>Tiempo total final:</strong> 24-33 semanas (6-8 meses) con 2 desarrolladores full-time
+        </p>
+
+        <p style="margin: 20px 0; padding: 15px; background: #fff3cd; border-left: 4px solid #ffc107;">
+            <strong>Costo adicional:</strong> Integración con OpenAI requiere API key con costo por uso (~$0.002 por 1K tokens). Estimado: $50-200/mes según uso.
+            <br><strong>Alternativa gratuita:</strong> Usar modelos open-source como Llama 3 hosteados localmente (requiere GPU).
+        </p>
+
         <h2>Desafíos y Consideraciones</h2>
 
         <div class="desafio">
